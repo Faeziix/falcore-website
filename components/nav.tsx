@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 import MagneticButton from "./magnetic-button";
 
@@ -31,7 +31,7 @@ export default function Nav() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         <a
-          href="#"
+          href="/"
           className="text-xl font-bold tracking-tighter text-foreground"
         >
           FALCORE

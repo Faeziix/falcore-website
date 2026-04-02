@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { springTransition } from "@/lib/motion";
 
 type Direction = "up" | "left" | "right";

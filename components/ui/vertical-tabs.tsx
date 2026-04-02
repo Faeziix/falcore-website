@@ -10,24 +10,25 @@ import { HugeiconsIcon } from "@hugeicons/react";
 const SERVICES = [
   {
     id: "01",
-    title: "Web Design",
+    title: "Web Design & Development",
     description:
-      "Creating beautiful, functional, and user-centric digital experiences.",
+      "Modern, fast-loading websites built with real code — not templates. Designed to turn visitors into customers.",
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200",
   },
   {
     id: "02",
-    title: "Framer Development",
-    description: "Building high-performance, animated websites with Framer.",
+    title: "Conversion Optimization",
+    description:
+      "Data-driven tweaks to your site that increase leads, calls, and bookings. Every element earns its place.",
     image:
       "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1200",
   },
   {
     id: "03",
-    title: "Branding",
+    title: "AI Automations",
     description:
-      "Defining your brand's visual identity and voice for a lasting impression.",
+      "Chatbots, lead capture, and workflow automations that save you hours and never miss a customer.",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
   },
@@ -85,7 +86,7 @@ export function VerticalTabs() {
   };
 
   return (
-    <section className="w-full bg-background py-8 md:py-16 lg:py-24">
+    <section id="services" className="w-full bg-background py-8 md:py-16 lg:py-24">
       <div className="w-full px-4 md:px-8 lg:px-12 xl:px-20 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Content */}

@@ -37,7 +37,9 @@ export function WaveCTA() {
         </p>
 
         <a
-          href="#"
+          href="https://calendly.com/amirfaezansari/30min"
+          target="_blank"
+          rel="noopener noreferrer"
           className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98]"
         >
           <span className="relative z-10">Book a Free Call</span>

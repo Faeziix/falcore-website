@@ -1,0 +1,16 @@
+# Falcore
+
+> Falcore is a web design agency that builds high-performance websites for local businesses. Clean design, fast load times, and real results — delivered fast.
+
+## Services
+- Web Design & Development: custom-coded websites optimized for speed and conversions
+- Conversion Rate Optimization: data-driven improvements to increase leads and bookings
+- AI Automations: chatbots, lead capture, and workflow automation
+
+## Process
+Discovery call > Design mockups > Development > SEO setup > Launch > Ongoing support
+
+## Contact
+- Email: hello@falcorewebdesign.com
+- Book a call: https://calendly.com/amirfaezansari/30min
+- Website: https://falcoretech.com
