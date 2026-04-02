@@ -34,7 +34,7 @@ export default function Nav() {
           href="#"
           className="text-xl font-bold tracking-tighter text-foreground"
         >
-          ATLAS
+          FALCORE
         </a>
 
         <div className="hidden md:flex items-center gap-8">
