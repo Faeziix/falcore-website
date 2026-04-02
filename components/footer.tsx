@@ -18,7 +18,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <span className="text-xl font-bold tracking-tighter text-foreground">ATLAS</span>
+            <span className="text-xl font-bold tracking-tighter text-foreground">FALCORE</span>
             <p className="text-foreground/50 text-sm mt-3 leading-relaxed">
               Web design for local businesses.
             </p>
@@ -58,7 +58,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground/70">Get in Touch</h4>
-            <p className="text-sm text-foreground/40">hello@atlaswebdesign.com</p>
+            <p className="text-sm text-foreground/40">hello@falcorewebdesign.com</p>
             <a
               href="#contact"
               className="text-sm text-primary hover:text-primary/80 transition-colors mt-2 inline-block"
@@ -70,7 +70,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-6 flex flex-col sm:flex-row justify-between gap-4">
           <p className="text-sm text-foreground/30">
-            &copy; 2026 Atlas. All rights reserved.
+            &copy; 2026 Falcore. All rights reserved.
           </p>
           <p className="text-sm text-foreground/30">Built with care.</p>
         </div>

@@ -71,7 +71,7 @@ export default function Hero() {
             variants={fadeInUp}
             className="text-lg text-muted-foreground leading-relaxed max-w-lg mt-6"
           >
-            Atlas designs and builds fast, modern websites for businesses that
+            Falcore designs and builds fast, modern websites for businesses that
             want to be taken seriously online. No templates. No filler. Just
             clean design that turns visitors into customers.
           </motion.p>

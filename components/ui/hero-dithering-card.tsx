@@ -49,7 +49,7 @@ export function HeroSection() {
         </h1>
 
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-          Atlas builds websites that look sharp, load fast, and turn
+          Falcore builds websites that look sharp, load fast, and turn
           visitors into paying customers. Let&apos;s talk about yours.
         </p>
 

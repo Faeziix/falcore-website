@@ -5,7 +5,7 @@ import ScrollReveal from "./scroll-reveal";
 const testimonials = [
   {
     quote:
-      "We needed a site that matched the quality of our brand. Atlas delivered something we are genuinely proud to show our clients. The process was smooth and the result speaks for itself.",
+      "We needed a site that matched the quality of our brand. Falcore delivered something we are genuinely proud to show our clients. The process was smooth and the result speaks for itself.",
     name: "Rashid Al Maktoum",
     role: "Managing Director, Gulf EPCO",
     location: "Dubai, UAE",

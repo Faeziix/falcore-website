@@ -13,9 +13,9 @@ const sourceCodePro = Source_Code_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Atlas | Web Design for Local Businesses",
+  title: "Falcore | Web Design for Local Businesses",
   description:
-    "Atlas builds high-performance websites for local businesses. Clean design, fast load times, and real results.",
+    "Falcore builds high-performance websites for local businesses. Clean design, fast load times, and real results.",
 };
 
 export default function RootLayout({
