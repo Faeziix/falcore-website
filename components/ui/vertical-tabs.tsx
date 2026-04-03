@@ -1,231 +1,153 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
-import { ArrowLeft01Icon, ArrowRight01Icon } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import { motion, useReducedMotion } from "motion/react";
+import { Check } from "lucide-react";
 
-// Change Here
 const SERVICES = [
   {
-    id: "01",
-    title: "Web Design & Development",
+    title: "Web Design",
     description:
-      "Modern, fast-loading websites built with real code — not templates. Designed to turn visitors into customers.",
-    image:
-      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200",
+      "Designs built around your brand and your customers — not a template with your logo slapped on.",
+    image: "/services/web-design.jpg",
+    bullets: [
+      "Custom UI/UX tailored to your brand",
+      "Mobile-first responsive layouts",
+      "Conversion-focused page structures",
+      "Brand identity integration",
+      "Rapid turnaround — designs in days, not weeks",
+    ],
   },
   {
-    id: "02",
-    title: "Conversion Optimization",
+    title: "Custom Web Applications",
     description:
-      "Data-driven tweaks to your site that increase leads, calls, and bookings. Every element earns its place.",
-    image:
-      "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1200",
+      "If your business needs it built, we build it. Full-stack, production-grade, and built to scale.",
+    image: "/services/web-dev.jpg",
+    bullets: [
+      "Client portals & membership platforms",
+      "Internal dashboards & admin panels",
+      "Headless CMS implementation",
+      "Booking & scheduling systems",
+      "Custom tools built for your workflow",
+    ],
   },
   {
-    id: "03",
-    title: "AI Automations",
+    title: "AI Enablement",
     description:
-      "Chatbots, lead capture, and workflow automations that save you hours and never miss a customer.",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200",
+      "Put AI to work inside your business — integrated into how you already operate.",
+    image: "/services/ai-enablement.jpg",
+    bullets: [
+      "AI-powered workflow automation",
+      "Custom chatbots & virtual assistants",
+      "Intelligent data processing",
+      "AI integration into existing tools",
+      "Smarter decision-making pipelines",
+    ],
+  },
+  {
+    title: "Systems & Automations",
+    description:
+      "Eliminate the manual work slowing your team down. We wire everything together.",
+    image: "/services/system-automation.jpg",
+    bullets: [
+      "CRM setup & configuration",
+      "Workflow automation across tools",
+      "Third-party integrations",
+      "Process optimization & mapping",
+      "Scalable operational infrastructure",
+    ],
   },
 ];
 
-const AUTO_PLAY_DURATION = 5000;
-
-export function VerticalTabs() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const handleNext = useCallback(() => {
-    setDirection(1);
-    setActiveIndex((prev) => (prev + 1) % SERVICES.length);
-  }, []);
-
-  const handlePrev = useCallback(() => {
-    setDirection(-1);
-    setActiveIndex((prev) => (prev - 1 + SERVICES.length) % SERVICES.length);
-  }, []);
-
-  const handleTabClick = (index: number) => {
-    if (index === activeIndex) return;
-    setDirection(index > activeIndex ? 1 : -1);
-    setActiveIndex(index);
-    setIsPaused(false);
-  };
-
-  useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
-      handleNext();
-    }, AUTO_PLAY_DURATION);
-
-    return () => clearInterval(interval);
-  }, [activeIndex, isPaused, handleNext]);
-
-  const variants = {
-    enter: (direction: number) => ({
-      y: direction > 0 ? "-100%" : "100%",
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      y: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      y: direction > 0 ? "100%" : "-100%",
-      opacity: 0,
-    }),
-  };
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: (typeof SERVICES)[number];
+  index: number;
+}) {
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="services" className="w-full bg-background py-8 md:py-16 lg:py-24">
-      <div className="w-full px-4 md:px-8 lg:px-12 xl:px-20 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Content */}
-          <div className="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-4">
-            <div className="space-y-1 mb-12">
-              <h2 className="tracking-tighter text-balance text-3xl font-medium md:text-4xl lg:text-5xl text-foreground">
-                How I can help you
-              </h2>
-              <span className="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.3em] block ml-0.5">
-                (SERVICES)
-              </span>
-            </div>
+    <motion.div
+      initial={shouldReduceMotion ? {} : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group flex flex-col bg-card border border-border/50 overflow-hidden transition-colors duration-500 hover:border-primary/20"
+    >
+      {/* Image area */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-muted/10">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
+      </div>
 
-            <div className="flex flex-col space-y-0">
-              {SERVICES.map((service, index) => {
-                const isActive = activeIndex === index;
-                return (
-                  <button
-                    key={service.id}
-                    onClick={() => handleTabClick(index)}
-                    className={cn(
-                      "group relative flex items-start gap-4 py-6 md:py-8 text-left transition-all duration-500 border-t border-border/50 first:border-0",
-                      isActive
-                        ? "text-foreground"
-                        : "text-muted-foreground/60 hover:text-foreground"
-                    )}
-                  >
-                    <div className="absolute left-[-16px] md:left-[-24px] top-0 bottom-0 w-[2px] bg-muted">
-                      {isActive && (
-                        <motion.div
-                          key={`progress-${index}-${isPaused}`}
-                          className="absolute top-0 left-0 w-full bg-foreground origin-top"
-                          initial={{ height: "0%" }}
-                          animate={
-                            isPaused ? { height: "0%" } : { height: "100%" }
-                          }
-                          transition={{
-                            duration: AUTO_PLAY_DURATION / 1000,
-                            ease: "linear",
-                          }}
-                        />
-                      )}
-                    </div>
+      {/* Content */}
+      <div className="flex flex-col flex-1 p-6 md:p-10">
+        <h3 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground">
+          {service.title}
+        </h3>
 
-                    <span className="text-[9px] md:text-[10px] font-medium mt-1 tabular-nums opacity-50">
-                      /{service.id}
-                    </span>
+        <p className="text-muted-foreground text-base md:text-lg leading-relaxed mt-4">
+          {service.description}
+        </p>
 
-                    <div className="flex flex-col gap-2 flex-1">
-                      <span
-                        className={cn(
-                          "text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight transition-colors duration-500",
-                          isActive ? "text-foreground" : ""
-                        )}
-                      >
-                        {service.title}
-                      </span>
+        {/* Bullet points */}
+        <ul className="mt-8 space-y-4 flex-1">
+          {service.bullets.map((bullet) => (
+            <li key={bullet} className="flex items-start gap-3">
+              <Check
+                className="size-5 text-primary mt-0.5 shrink-0"
+                strokeWidth={2}
+                aria-hidden
+              />
+              <span className="text-base text-foreground/80">{bullet}</span>
+            </li>
+          ))}
+        </ul>
 
-                      <div
-                        className="grid transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]"
-                        style={{
-                          gridTemplateRows: isActive ? "1fr" : "0fr",
-                          opacity: isActive ? 1 : 0,
-                        }}
-                      >
-                        <div className="overflow-hidden">
-                          <p className="text-muted-foreground text-sm md:text-base font-normal leading-relaxed max-w-sm pb-2">
-                            {service.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+        {/* CTA */}
+        <a
+          href="#contact"
+          className="mt-10 inline-flex items-center justify-center h-12 px-6 text-base font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-all duration-300 active:scale-[0.98] w-full"
+        >
+          Book a Call
+        </a>
+      </div>
+    </motion.div>
+  );
+}
 
-          <div className="lg:col-span-7 flex flex-col justify-end h-full order-1 lg:order-2">
-            <div
-              className="relative group/gallery"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              <div className="relative aspect-4/5 md:aspect-4/3 lg:aspect-16/11 rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-muted/30 border border-border/40">
-                <AnimatePresence
-                  initial={false}
-                  custom={direction}
-                  mode="popLayout"
-                >
-                  <motion.div
-                    key={activeIndex}
-                    custom={direction}
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      y: { type: "spring", stiffness: 260, damping: 32 },
-                      opacity: { duration: 0.4 },
-                    }}
-                    className="absolute inset-0 w-full h-full cursor-pointer"
-                    onClick={handleNext}
-                  >
-                    <img
-                      src={SERVICES[activeIndex].image}
-                      alt={SERVICES[activeIndex].title}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 m-0! p-0! block"
-                    />
+export function VerticalTabs() {
+  return (
+    <section id="services" className="py-24 md:py-32">
+      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-8">
+        {/* Header — centered */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-foreground text-balance">
+            Services that power your business
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg mt-5 max-w-2xl mx-auto leading-relaxed">
+            From design to deployment to the systems running behind the
+            scenes — I handle the technical side so you don&apos;t have to.
+          </p>
+        </motion.div>
 
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-60" />
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 flex gap-2 md:gap-3 z-20">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePrev();
-                    }}
-                    className="w-10 h-10 md:w-12 md:h-12 bg-background/80 backdrop-blur-md border border-border/50 flex items-center justify-center text-foreground hover:bg-background transition-all active:scale-90"
-                    aria-label="Previous"
-                  >
-                    <HugeiconsIcon icon={ArrowLeft01Icon} size={20} />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNext();
-                    }}
-                    className="w-10 h-10 md:w-12 md:h-12 bg-background/80 backdrop-blur-md border border-border/50 flex items-center justify-center text-foreground hover:bg-background transition-all active:scale-90"
-                    aria-label="Next"
-                  >
-                    <HugeiconsIcon icon={ArrowRight01Icon} size={20} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* 2x2 Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {SERVICES.map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
+          ))}
         </div>
       </div>
     </section>

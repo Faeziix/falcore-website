@@ -3,38 +3,38 @@
 import {
   PaintBrushIcon,
   CodeIcon,
-  MagnifyingGlassIcon,
-  LifebuoyIcon,
+  RobotIcon,
+  GearSixIcon,
 } from "@phosphor-icons/react";
 import ScrollReveal from "./scroll-reveal";
 
 const services = [
   {
     icon: PaintBrushIcon,
-    title: "Website Design",
+    title: "Web Design",
     description:
-      "Custom designs that reflect your brand and speak to your customers. No cookie-cutter templates.",
+      "Designs built around your brand and your customers — not a template with your logo slapped on. Every page is intentional.",
     span: "md:col-span-2 md:row-span-2",
   },
   {
     icon: CodeIcon,
-    title: "Development",
+    title: "Custom Web Applications",
     description:
-      "Fast, responsive, and built with modern technology. Your site will work on every device.",
+      "Client portals, membership platforms, internal dashboards, booking systems — if your business needs it built, we build it.",
     span: "",
   },
   {
-    icon: MagnifyingGlassIcon,
-    title: "SEO Basics",
+    icon: RobotIcon,
+    title: "AI Enablement",
     description:
-      "On-page optimization so local customers can actually find you on Google.",
+      "Put AI to work inside your business. Smarter workflows, automated responses, and tools that learn — integrated into how you already operate.",
     span: "",
   },
   {
-    icon: LifebuoyIcon,
-    title: "Ongoing Support",
+    icon: GearSixIcon,
+    title: "Systems & Automations",
     description:
-      "Updates, fixes, and improvements whenever you need them. You focus on your business.",
+      "CRM setup, workflow automation, and tool integrations that eliminate the manual work slowing your team down.",
     span: "md:col-span-2",
   },
 ];
@@ -48,8 +48,8 @@ export default function Services() {
             What we build
           </h2>
           <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-            Everything your business needs to stand out online, handled from
-            start to finish.
+            From design to deployment to the systems that run behind the
+            scenes — we handle the technical side so you don&apos;t have to.
           </p>
         </ScrollReveal>
 

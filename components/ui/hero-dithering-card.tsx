@@ -49,8 +49,9 @@ export function HeroSection() {
         </h1>
 
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-          Falcore builds websites that look sharp, load fast, and turn
-          visitors into paying customers. Let&apos;s talk about yours.
+          Falcore is the technical arm your business is missing. From
+          websites to custom platforms to the systems that run behind the
+          scenes — we solve the problems that slow you down.
         </p>
 
         <div className="flex gap-4 flex-wrap justify-center">
