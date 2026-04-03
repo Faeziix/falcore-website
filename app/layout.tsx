@@ -16,27 +16,41 @@ const sourceCodePro = Source_Code_Pro({
 export const metadata: Metadata = {
   metadataBase: new URL("https://falcoretech.com"),
   title: {
-    default: "Falcore | Web Design for Local Businesses",
+    default:
+      "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
     template: "%s | Falcore",
   },
   description:
-    "Falcore builds high-performance websites for local businesses. Custom design, fast load times, SEO setup included. Book a free 15-minute call.",
+    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Falcore | Web Design for Local Businesses",
+    title: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
     description:
-      "Falcore builds high-performance websites for local businesses. Custom design, fast load times, SEO setup included.",
+      "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
     url: "https://falcoretech.com",
     siteName: "Falcore",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Falcore — Web Design, Custom Apps & AI Systems",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Falcore | Web Design for Local Businesses",
+    title: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
     description:
-      "Falcore builds high-performance websites for local businesses. Custom design, fast load times, SEO setup included.",
+      "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
+    images: ["/og-image.png"],
   },
 };
 

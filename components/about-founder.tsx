@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 export default function AboutFounder() {
@@ -19,10 +20,13 @@ export default function AboutFounder() {
           >
             <div className="relative max-w-md mx-auto">
               <div className="relative aspect-[3/4] overflow-hidden border border-border/50">
-                <img
-                  src="/Professional Portrait.PNG"
-                  alt="Faez — Founder of Falcore"
+                <Image
+                  src="/professional-portrait.png"
+                  alt="Faez Ansari — Founder of Falcore, full-stack developer and systems builder"
+                  width={600}
+                  height={800}
                   className="w-full h-full object-cover"
+                  sizes="(max-width: 1024px) 100vw, 448px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
               </div>
@@ -51,22 +55,25 @@ export default function AboutFounder() {
 
             <div className="space-y-5 text-muted-foreground text-base md:text-lg leading-relaxed">
               <p>
-                I&apos;m the technical person your business has been looking for.
-                A full-stack developer and systems builder who solves the
-                problems that slow companies down.
+                I&apos;m a full-stack developer and systems builder based in the
+                US — the technical person your business has been looking for. I
+                work with Next.js, TypeScript, headless CMS platforms, and
+                automation tools to solve the problems that slow companies down.
               </p>
               <p>
-                At my previous agency, I built 13+ client websites and created
-                the internal tools that kept the operation running — proposal
-                generators, client portals, membership platforms, project
-                tracking systems. If it needed to be built, I built it.
+                At XMA Agency, I built 13+ client websites for automotive,
+                luxury, and rental businesses — and created the internal tools
+                that kept the operation running: a proposal generator that sent
+                quotes automatically after sales calls, a custom membership
+                platform on Next.js, and a client-facing project tracker used
+                across every active account.
               </p>
               <p>
-                Today, I bring that same approach to every business I work with.
-                Whether it&apos;s a website that actually converts, a custom
-                dashboard your team needs, or the automations that eliminate
-                hours of manual work — I find the fastest, most efficient
-                solution and ship it.
+                Today, I bring that same approach to every business I work with
+                through Falcore. Whether it&apos;s a website that actually
+                converts, a custom dashboard your team needs, CRM setup, or the
+                AI-powered automations that eliminate hours of manual work — I
+                find the fastest, most efficient solution and ship it.
               </p>
             </div>
 

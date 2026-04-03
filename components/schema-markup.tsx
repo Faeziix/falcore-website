@@ -5,15 +5,18 @@
  * page render, including the homepage.
  *
  * Types used:
- *   - Organization        (Google: sitelinks, knowledge panel)
- *   - WebSite             (Google: sitelinks search box)
- *   - Service × 3        (Google: general rich results / entity understanding)
- *   - Review × 2         (Google: review snippets — star ratings require
- *                          AggregateRating; individual reviews provide
- *                          entity credibility and GEO/LLM signals)
+ *   - ProfessionalService  (Google: knowledge panel, local entity)
+ *   - WebSite              (Google: sitelinks search box)
+ *   - WebPage              (connects site + org to this page)
+ *   - Person               (founder entity for GEO / knowledge graph)
+ *   - Service × 4          (one per service offered)
+ *   - BreadcrumbList       (sitelinks / breadcrumb rich result)
+ *   - Organization w/ reviews (review snippets + LLM entity signals)
  */
 
 const BASE_URL = "https://falcoretech.com";
+
+// ─── Organization ────────────────────────────────────────────────────────────
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -22,22 +25,28 @@ const organizationSchema = {
   name: "Falcore",
   alternateName: "Falcore Web Design",
   url: BASE_URL,
-  logo: `${BASE_URL}/favicon.ico`,
+  logo: {
+    "@type": "ImageObject",
+    url: `${BASE_URL}/logo.png`,
+    width: 512,
+    height: 512,
+  },
+  image: `${BASE_URL}/logo.png`,
   description:
-    "Falcore builds high-performance websites for local businesses. Clean design, fast load times, and real results — delivered in 48 hours.",
-  slogan: "Web design for local businesses.",
-  email: "hello@falcorewebdesign.com",
+    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies.",
+  slogan: "The technical arm your business is missing.",
+  email: "hello@falcoretech.com",
+  foundingDate: "2024",
   areaServed: {
     "@type": "Country",
-    name: "Worldwide",
+    name: "United States",
   },
-  serviceType: [
-    "Web Design",
-    "Web Development",
-    "Conversion Rate Optimisation",
-    "AI Automation",
+  sameAs: [
+    "https://www.linkedin.com/company/falcoretech",
   ],
 };
+
+// ─── WebSite ─────────────────────────────────────────────────────────────────
 
 const webSiteSchema = {
   "@context": "https://schema.org",
@@ -46,60 +55,160 @@ const webSiteSchema = {
   url: BASE_URL,
   name: "Falcore",
   description:
-    "High-performance websites for local businesses. Fast delivery, clean design, real results.",
+    "Websites, custom web applications, AI systems, and business automations for US companies.",
   publisher: {
     "@id": `${BASE_URL}/#organization`,
   },
 };
 
+// ─── WebPage ─────────────────────────────────────────────────────────────────
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${BASE_URL}/#webpage`,
+  url: BASE_URL,
+  name: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
+  description:
+    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
+  isPartOf: {
+    "@id": `${BASE_URL}/#website`,
+  },
+  about: {
+    "@id": `${BASE_URL}/#organization`,
+  },
+  breadcrumb: {
+    "@id": `${BASE_URL}/#breadcrumb`,
+  },
+};
+
+// ─── BreadcrumbList ───────────────────────────────────────────────────────────
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${BASE_URL}/#breadcrumb`,
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: BASE_URL,
+    },
+  ],
+};
+
+// ─── Person (founder) ─────────────────────────────────────────────────────────
+
+const founderSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${BASE_URL}/#founder`,
+  name: "Faez Ansari",
+  jobTitle: "Founder & Full-Stack Developer",
+  worksFor: {
+    "@id": `${BASE_URL}/#organization`,
+  },
+  url: `${BASE_URL}/#about`,
+  sameAs: [
+    "https://www.linkedin.com/in/faezansari",
+  ],
+  knowsAbout: [
+    "Next.js",
+    "TypeScript",
+    "Web Design",
+    "CRM Implementation",
+    "AI Integration",
+    "Business Automation",
+  ],
+  description:
+    "Full-stack developer and systems builder with 13+ client projects. Built proposal generators, membership platforms, and client-facing project tracking tools. Founded Falcore to bring technical solutions to US businesses.",
+};
+
+// ─── Services ─────────────────────────────────────────────────────────────────
+
 const webDesignServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${BASE_URL}/#service-web-design`,
-  name: "Web Design & Development",
+  name: "Web Design",
   description:
-    "Modern, fast-loading websites built with real code — not templates. Designed to turn visitors into customers.",
+    "Designs built around your brand and your customers — not a template with your logo slapped on. Every page is intentional.",
   provider: {
     "@id": `${BASE_URL}/#organization`,
   },
-  serviceType: "Web Design and Development",
+  serviceType: "Web Design",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
   url: `${BASE_URL}/#services`,
 };
 
-const croServiceSchema = {
+const webAppServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `${BASE_URL}/#service-cro`,
-  name: "Conversion Optimisation",
+  "@id": `${BASE_URL}/#service-web-applications`,
+  name: "Custom Web Applications",
   description:
-    "Data-driven tweaks to your site that increase leads, calls, and bookings. Every element earns its place.",
+    "Client portals, membership platforms, internal dashboards, booking systems — if your business needs it built, we build it.",
   provider: {
     "@id": `${BASE_URL}/#organization`,
   },
-  serviceType: "Conversion Rate Optimisation",
+  serviceType: "Custom Web Application Development",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
   url: `${BASE_URL}/#services`,
 };
 
-const aiAutomationsServiceSchema = {
+const aiEnablementServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `${BASE_URL}/#service-ai-automations`,
-  name: "AI Automations",
+  "@id": `${BASE_URL}/#service-ai-enablement`,
+  name: "AI Enablement",
   description:
-    "Chatbots, lead capture, and workflow automations that save you hours and never miss a customer.",
+    "Put AI to work inside your business. Smarter workflows, automated responses, and tools that learn — integrated into how you already operate.",
   provider: {
     "@id": `${BASE_URL}/#organization`,
   },
-  serviceType: "AI Automation and Business Process Automation",
+  serviceType: "AI Integration and Automation",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
   url: `${BASE_URL}/#services`,
 };
 
-// Individual Review blocks — no AggregateRating because only 2 reviews exist.
-// These still improve entity understanding for Google and LLM citation systems.
-// Add AggregateRating once you have 5+ reviews.
+const systemsServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${BASE_URL}/#service-systems-automations`,
+  name: "Systems & Automations",
+  description:
+    "CRM setup, workflow automation, and tool integrations that eliminate the manual work slowing your team down.",
+  provider: {
+    "@id": `${BASE_URL}/#organization`,
+  },
+  serviceType: "Business Process Automation",
+  areaServed: {
+    "@type": "Country",
+    name: "United States",
+  },
+  url: `${BASE_URL}/#services`,
+};
+
+// ─── Organization with reviews ────────────────────────────────────────────────
+//
+// Reviews use a separate block that references the same @id as the org so
+// JSON-LD processors merge them into one node — keeping @type consistent.
+// Individual reviews (no AggregateRating) improve entity understanding for
+// Google and LLM citation systems. Add AggregateRating once you have 5+ reviews.
+
 const reviewsSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
   "@id": `${BASE_URL}/#organization`,
   review: [
     {
@@ -109,12 +218,16 @@ const reviewsSchema = {
         name: "Rashid Al Maktoum",
         jobTitle: "Managing Director",
       },
+      itemReviewed: {
+        "@id": `${BASE_URL}/#organization`,
+      },
       reviewBody:
         "We needed a site that matched the quality of our brand. Falcore delivered something we are genuinely proud to show our clients. The process was smooth and the result speaks for itself.",
       reviewRating: {
         "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
+        ratingValue: 5,
+        bestRating: 5,
+        worstRating: 1,
       },
     },
     {
@@ -124,23 +237,33 @@ const reviewsSchema = {
         name: "Karim Haddad",
         jobTitle: "Founder",
       },
+      itemReviewed: {
+        "@id": `${BASE_URL}/#organization`,
+      },
       reviewBody:
         "Fast turnaround, zero hassle. Our online bookings jumped within the first month of launching.",
       reviewRating: {
         "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
+        ratingValue: 5,
+        bestRating: 5,
+        worstRating: 1,
       },
     },
   ],
 };
 
+// ─── Schema list ──────────────────────────────────────────────────────────────
+
 const schemas = [
   organizationSchema,
   webSiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+  founderSchema,
   webDesignServiceSchema,
-  croServiceSchema,
-  aiAutomationsServiceSchema,
+  webAppServiceSchema,
+  aiEnablementServiceSchema,
+  systemsServiceSchema,
   reviewsSchema,
 ];
 

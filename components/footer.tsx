@@ -2,7 +2,7 @@ const footerLinks = {
   navigation: [
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
-    { label: "Process", href: "#process" },
+    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
 };
@@ -15,7 +15,7 @@ export default function Footer() {
           <div>
             <span className="text-xl font-bold tracking-tighter text-foreground">FALCORE</span>
             <p className="text-foreground/50 text-sm mt-3 leading-relaxed">
-              Web design for local businesses.
+              The technical arm your business is missing.
             </p>
           </div>
 
@@ -38,10 +38,10 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-semibold mb-4 text-foreground/70">Get in Touch</h4>
             <a
-              href="mailto:hello@falcorewebdesign.com"
+              href="mailto:hello@falcoretech.com"
               className="text-sm text-foreground/40 hover:text-foreground/80 transition-colors"
             >
-              hello@falcorewebdesign.com
+              hello@falcoretech.com
             </a>
             <a
               href="#contact"
@@ -56,7 +56,12 @@ export default function Footer() {
           <p className="text-sm text-foreground/30">
             &copy; 2026 Falcore. All rights reserved.
           </p>
-          <p className="text-sm text-foreground/30">Built with care.</p>
+          <a
+            href="/privacy"
+            className="text-sm text-foreground/30 hover:text-foreground/50 transition-colors"
+          >
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>

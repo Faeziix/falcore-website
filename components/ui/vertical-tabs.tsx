@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
 
@@ -77,10 +78,12 @@ function ServiceCard({
     >
       {/* Image area */}
       <div className="relative aspect-[16/10] overflow-hidden bg-muted/10">
-        <img
+        <Image
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 50vw"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
