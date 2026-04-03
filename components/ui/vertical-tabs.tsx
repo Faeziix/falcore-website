@@ -5,32 +5,6 @@ import { Check } from "lucide-react";
 
 const SERVICES = [
   {
-    title: "Web Design",
-    description:
-      "Designs built around your brand and your customers — not a template with your logo slapped on.",
-    image: "/services/web-design.jpg",
-    bullets: [
-      "Custom UI/UX tailored to your brand",
-      "Mobile-first responsive layouts",
-      "Conversion-focused page structures",
-      "Brand identity integration",
-      "Rapid turnaround — designs in days, not weeks",
-    ],
-  },
-  {
-    title: "Custom Web Applications",
-    description:
-      "If your business needs it built, we build it. Full-stack, production-grade, and built to scale.",
-    image: "/services/web-dev.jpg",
-    bullets: [
-      "Client portals & membership platforms",
-      "Internal dashboards & admin panels",
-      "Headless CMS implementation",
-      "Booking & scheduling systems",
-      "Custom tools built for your workflow",
-    ],
-  },
-  {
     title: "AI Enablement",
     description:
       "Put AI to work inside your business — integrated into how you already operate.",
@@ -54,6 +28,32 @@ const SERVICES = [
       "Third-party integrations",
       "Process optimization & mapping",
       "Scalable operational infrastructure",
+    ],
+  },
+  {
+    title: "Web Design",
+    description:
+      "Designs built around your brand and your customers — not a template with your logo slapped on.",
+    image: "/services/web-design.jpg",
+    bullets: [
+      "Custom UI/UX tailored to your brand",
+      "Mobile-first responsive layouts",
+      "Conversion-focused page structures",
+      "Brand identity integration",
+      "Rapid turnaround — designs in days, not weeks",
+    ],
+  },
+  {
+    title: "Custom Web Applications",
+    description:
+      "If your business needs it built, we build it. Full-stack, production-grade, and built to scale.",
+    image: "/services/web-dev.jpg",
+    bullets: [
+      "Client portals & membership platforms",
+      "Internal dashboards & admin panels",
+      "Headless CMS implementation",
+      "Booking & scheduling systems",
+      "Custom tools built for your workflow",
     ],
   },
 ];

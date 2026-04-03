@@ -45,7 +45,7 @@ export function HeroSection() {
 
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-foreground mb-8 leading-[1.05]">
           Your business, <br />
-          <span className="text-foreground/80">online and thriving.</span>
+          <span className="text-foreground/80">future-proof and thriving.</span>
         </h1>
 
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
