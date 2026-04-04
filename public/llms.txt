@@ -1,11 +1,15 @@
 # Falcore
 
-> Falcore is a web design agency that builds high-performance websites for local businesses. Clean design, fast load times, and real results — delivered fast.
+> Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. The technical arm your business is missing.
 
 ## Services
-- Web Design & Development: custom-coded websites optimized for speed and conversions
-- Conversion Rate Optimization: data-driven improvements to increase leads and bookings
-- AI Automations: chatbots, lead capture, and workflow automation
+- AI Enablement: AI-powered workflow automation, custom chatbots, intelligent data processing, and AI integration into existing tools
+- Systems & Automations: CRM setup, workflow automation across tools, third-party integrations, and scalable operational infrastructure
+- Web Design: custom UI/UX tailored to your brand, mobile-first responsive layouts, and conversion-focused page structures
+- Custom Web Applications: client portals, membership platforms, internal dashboards, booking systems, and custom tools built for your workflow
+
+## About
+Founded by Faez Ansari, a full-stack developer and systems builder with 13+ client projects and 5+ internal tools built. Falcore works with Next.js, TypeScript, headless CMS platforms, and automation tools.
 
 ## Process
 Discovery call > Design mockups > Development > SEO setup > Launch > Ongoing support

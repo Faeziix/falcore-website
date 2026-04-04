@@ -68,9 +68,10 @@ const webPageSchema = {
   "@type": "WebPage",
   "@id": `${BASE_URL}/#webpage`,
   url: BASE_URL,
-  name: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
+  name: "Falcore | Web Design, Custom Apps & AI for US Businesses",
   description:
-    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
+    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 30-minute call.",
+  dateModified: "2026-04-04",
   isPartOf: {
     "@id": `${BASE_URL}/#website`,
   },

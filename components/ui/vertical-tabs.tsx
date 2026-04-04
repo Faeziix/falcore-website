@@ -10,6 +10,7 @@ const SERVICES = [
     description:
       "Put AI to work inside your business — integrated into how you already operate.",
     image: "/services/ai-enablement.jpg",
+    imageAlt: "AI-powered workflow automation dashboard for business operations",
     bullets: [
       "AI-powered workflow automation",
       "Custom chatbots & virtual assistants",
@@ -23,6 +24,7 @@ const SERVICES = [
     description:
       "Eliminate the manual work slowing your team down. We wire everything together.",
     image: "/services/system-automation.jpg",
+    imageAlt: "CRM and business process automation system integration",
     bullets: [
       "CRM setup & configuration",
       "Workflow automation across tools",
@@ -36,6 +38,7 @@ const SERVICES = [
     description:
       "Designs built around your brand and your customers — not a template with your logo slapped on.",
     image: "/services/web-design.jpg",
+    imageAlt: "Custom website design with brand-focused UI and responsive layout",
     bullets: [
       "Custom UI/UX tailored to your brand",
       "Mobile-first responsive layouts",
@@ -49,6 +52,7 @@ const SERVICES = [
     description:
       "If your business needs it built, we build it. Full-stack, production-grade, and built to scale.",
     image: "/services/web-dev.jpg",
+    imageAlt: "Full-stack web application with client portal and dashboard interface",
     bullets: [
       "Client portals & membership platforms",
       "Internal dashboards & admin panels",
@@ -80,7 +84,7 @@ function ServiceCard({
       <div className="relative aspect-[16/10] overflow-hidden bg-muted/10">
         <Image
           src={service.image}
-          alt={service.title}
+          alt={service.imageAlt}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"

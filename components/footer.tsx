@@ -20,7 +20,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground/70">Navigate</h4>
+            <span className="text-sm font-semibold mb-4 text-foreground/70 block">Navigate</span>
             <ul className="flex flex-col gap-2.5">
               {footerLinks.navigation.map((link) => (
                 <li key={link.href}>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold mb-4 text-foreground/70">Get in Touch</h4>
+            <span className="text-sm font-semibold mb-4 text-foreground/70 block">Get in Touch</span>
             <a
               href="mailto:hello@falcoretech.com"
               className="text-sm text-foreground/40 hover:text-foreground/80 transition-colors"

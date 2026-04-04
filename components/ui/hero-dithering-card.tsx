@@ -43,9 +43,8 @@ export function HeroSection() {
           Now Accepting Projects
         </div>
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-foreground mb-8 leading-[1.05]">
-          Your business, <br />
-          <span className="text-foreground/80">future-proof and thriving.</span>
+        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-foreground mb-8 leading-[1.05]">
+          Future Proof Your Business
         </h1>
 
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
@@ -57,14 +56,14 @@ export function HeroSection() {
         <div className="flex gap-4 flex-wrap justify-center">
           <a
             href="#contact"
-            className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98]"
+            className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-8 md:px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98] w-full sm:w-auto"
           >
             <span className="relative z-10">Book a Free Call</span>
             <ArrowRight className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
           <a
             href="#work"
-            className="inline-flex h-14 items-center justify-center px-12 text-base font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all duration-300 active:scale-[0.98]"
+            className="inline-flex h-14 items-center justify-center px-8 md:px-12 text-base font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all duration-300 active:scale-[0.98] w-full sm:w-auto"
           >
             See Our Work
           </a>

@@ -5,6 +5,7 @@ import BrowserChrome from "./BrowserChrome";
 import BrowserTabBar from "./BrowserTabBar";
 import BrowserAddressBar from "./BrowserAddressBar";
 import BrowserContent from "./BrowserContent";
+import HorizontalScrollGallery from "./HorizontalScrollGallery";
 import ScrollReveal from "@/components/scroll-reveal";
 
 export interface ShowcaseWebsite {
@@ -12,6 +13,11 @@ export interface ShowcaseWebsite {
   title: string;
   externalUrl: string;
   thumbnailUrl: string;
+  mobileThumbnailUrl: string;
+  width: number;
+  height: number;
+  mobileWidth: number;
+  mobileHeight: number;
 }
 
 interface BrowserShowcaseClientProps {
@@ -35,32 +41,40 @@ const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
 
   return (
     <div className="w-full">
-      <ScrollReveal>
-        <div className="mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter">
-            Selected work
-          </h2>
-          <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-            A look at recent projects we have shipped.
-          </p>
-        </div>
-      </ScrollReveal>
+      {/* Mobile: horizontal scroll gallery (heading is inside the sticky area) */}
+      <div className="md:hidden">
+        <HorizontalScrollGallery websites={websites} />
+      </div>
 
-      <ScrollReveal delay={0.15}>
-        <BrowserChrome>
-          <BrowserTabBar
-            websites={websites}
-            activeIndex={activeIndex}
-            onTabChange={handleTabChange}
-          />
-          <BrowserAddressBar url={activeWebsite.externalUrl} />
-          <BrowserContent
-            websites={websites}
-            activeIndex={activeIndex}
-            onContentClick={handleVisit}
-          />
-        </BrowserChrome>
-      </ScrollReveal>
+      {/* Desktop: heading + tabbed browser mockup */}
+      <div className="hidden md:block">
+        <ScrollReveal>
+          <div className="mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter">
+              Selected work
+            </h2>
+            <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
+              A look at recent projects we have shipped.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.15}>
+          <BrowserChrome>
+            <BrowserTabBar
+              websites={websites}
+              activeIndex={activeIndex}
+              onTabChange={handleTabChange}
+            />
+            <BrowserAddressBar url={activeWebsite.externalUrl} />
+            <BrowserContent
+              websites={websites}
+              activeIndex={activeIndex}
+              onContentClick={handleVisit}
+            />
+          </BrowserChrome>
+        </ScrollReveal>
+      </div>
     </div>
   );
 };

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://falcoretech.com"),
   title: {
     default:
-      "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
+      "Falcore | Web Design, Custom Apps & AI for US Businesses",
     template: "%s | Falcore",
   },
   description:

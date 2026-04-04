@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 import type { ShowcaseWebsite } from "./BrowserShowcaseClient";
 
@@ -22,9 +22,22 @@ const BrowserContent = ({
       role="tabpanel"
       id={`panel-${activeWebsite.id}`}
       aria-labelledby={`tab-${activeWebsite.id}`}
-      onClick={onContentClick}
       className="relative aspect-[9/20] md:aspect-video bg-background overflow-hidden rounded-b-xl cursor-pointer group"
     >
+      <a
+        href={activeWebsite.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => {
+          e.preventDefault();
+          onContentClick?.();
+        }}
+        className="absolute inset-0 z-20"
+        aria-label={`Visit ${activeWebsite.title}`}
+      >
+        <span className="sr-only">Visit {activeWebsite.title}</span>
+      </a>
+
       <motion.div
         className="absolute inset-0 bg-transparent group-hover:bg-black/20 transition-colors duration-300 z-10 pointer-events-none"
         aria-hidden="true"

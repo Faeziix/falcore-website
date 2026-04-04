@@ -32,7 +32,7 @@ export function WaveCTA() {
         </h2>
 
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-          No commitment. No jargon. Just a 15-minute call to see if we are a
+          No commitment. No jargon. Just a 30-minute call to see if we are a
           good fit.
         </p>
 
@@ -40,7 +40,7 @@ export function WaveCTA() {
           href="https://calendly.com/amirfaezansari/30min"
           target="_blank"
           rel="noopener noreferrer nofollow"
-          className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98]"
+          className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-8 md:px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98] w-full sm:w-auto"
         >
           <span className="relative z-10">Book a Free Call</span>
           <ArrowRight className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />

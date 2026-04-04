@@ -9,7 +9,7 @@ export default function AboutFounder() {
   return (
     <section id="about" className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Image */}
           <motion.div
             initial={shouldReduceMotion ? {} : { opacity: 0, x: -20 }}
