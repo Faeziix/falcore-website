@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" width="220" height="40" role="img" aria-labelledby="wd-title">
+  <title id="wd-title">Falcore</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@700&amp;display=swap');
+    .wordmark { font-family: 'Oxanium', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: 0.08em; }
+  </style>
+  <text x="0" y="30" class="wordmark" fill="#1f1f1f">FALCORE</text>
+</svg>

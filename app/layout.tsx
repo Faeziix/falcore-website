@@ -52,6 +52,7 @@ export const metadata: Metadata = {
       "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
     images: ["/og-image.png"],
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({

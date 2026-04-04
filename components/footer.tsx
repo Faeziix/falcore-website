@@ -1,3 +1,5 @@
+import Logo from "./logo";
+
 const footerLinks = {
   navigation: [
     { label: "Services", href: "#services" },
@@ -13,7 +15,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           <div>
-            <span className="text-xl font-bold tracking-tighter text-foreground">FALCORE</span>
+            <Logo size="md" />
             <p className="text-foreground/50 text-sm mt-3 leading-relaxed">
               The technical arm your business is missing.
             </p>

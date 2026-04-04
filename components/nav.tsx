@@ -8,6 +8,7 @@ import {
   useMotionValueEvent,
 } from "motion/react";
 import MagneticButton from "./magnetic-button";
+import Logo from "./logo";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -180,12 +181,7 @@ export default function Nav() {
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-          <a
-            href="/"
-            className="text-xl font-bold tracking-tighter text-foreground"
-          >
-            FALCORE
-          </a>
+          <Logo size="lg" />
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
