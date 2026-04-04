@@ -23,7 +23,7 @@ function ProjectCard({ website }: { website: ShowcaseWebsite }) {
       rel="noopener noreferrer"
       className="block w-[90vw] flex-shrink-0 border border-border bg-card overflow-hidden group max-w-xs"
     >
-      <div className="relative aspect-9/16 bg-muted/10 overflow-hidden">
+      <div className="relative aspect-3/4 bg-muted/10 overflow-hidden">
         <Image
           src={website.mobileThumbnailUrl}
           alt={`Screenshot of ${website.title}`}

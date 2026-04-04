@@ -4,7 +4,7 @@ const desktopScreenshot = (url: string) =>
   `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&type=png&viewport.width=1280&viewport.height=800&waitForTimeout=3000`;
 
 const mobileScreenshot = (url: string) =>
-  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&type=png&viewport.width=390&viewport.height=844&viewport.isMobile=true&viewport.deviceScaleFactor=2&waitForTimeout=3000`;
+  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url&type=png&viewport.width=390&viewport.height=520&viewport.isMobile=true&viewport.deviceScaleFactor=2&waitForTimeout=3000`;
 
 const websites = [
   {
@@ -16,7 +16,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
   {
     id: "xma-car-rental",
@@ -27,7 +27,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
   {
     id: "convoflow",
@@ -38,7 +38,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
   {
     id: "timeless-touch",
@@ -49,7 +49,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
   {
     id: "ebox-pro",
@@ -60,7 +60,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
   {
     id: "uptown",
@@ -71,7 +71,7 @@ const websites = [
     width: 1280,
     height: 800,
     mobileWidth: 390,
-    mobileHeight: 844,
+    mobileHeight: 520,
   },
 ];
 
