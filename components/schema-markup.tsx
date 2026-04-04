@@ -1,3 +1,5 @@
+import { FAQ_ITEMS } from "@/lib/data/faq";
+
 /**
  * Falcore — Schema.org structured data (JSON-LD)
  *
@@ -143,7 +145,7 @@ const webDesignServiceSchema = {
     "@type": "Country",
     name: "United States",
   },
-  url: `${BASE_URL}/#services`,
+  url: `${BASE_URL}/services/web-design`,
 };
 
 const webAppServiceSchema = {
@@ -161,7 +163,7 @@ const webAppServiceSchema = {
     "@type": "Country",
     name: "United States",
   },
-  url: `${BASE_URL}/#services`,
+  url: `${BASE_URL}/services/custom-web-applications`,
 };
 
 const aiEnablementServiceSchema = {
@@ -179,7 +181,7 @@ const aiEnablementServiceSchema = {
     "@type": "Country",
     name: "United States",
   },
-  url: `${BASE_URL}/#services`,
+  url: `${BASE_URL}/services/ai-enablement`,
 };
 
 const systemsServiceSchema = {
@@ -197,7 +199,22 @@ const systemsServiceSchema = {
     "@type": "Country",
     name: "United States",
   },
-  url: `${BASE_URL}/#services`,
+  url: `${BASE_URL}/services/systems-automations`,
+};
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 // ─── Organization with reviews ────────────────────────────────────────────────
@@ -265,6 +282,7 @@ const schemas = [
   webAppServiceSchema,
   aiEnablementServiceSchema,
   systemsServiceSchema,
+  faqSchema,
   reviewsSchema,
 ];
 

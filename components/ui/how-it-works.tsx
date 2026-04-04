@@ -53,10 +53,13 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="process" className="py-16 md:py-32">
+    <section id="process" className="py-24 md:py-32">
       <div className="mx-auto w-full max-w-[1400px] space-y-8 px-6 lg:px-8">
         <AnimatedContainer className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-wide text-balance md:text-4xl lg:text-5xl">
+          <span className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-[0.3em] block mb-3">
+            Our Process
+          </span>
+          <h2 className="text-3xl font-medium tracking-tight text-balance md:text-4xl lg:text-5xl">
             How it works
           </h2>
           <p className="text-muted-foreground mt-4 text-sm tracking-wide text-balance md:text-base">

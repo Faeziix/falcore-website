@@ -7,6 +7,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import Link from "next/link";
 
 interface MagneticButtonProps {
   children: React.ReactNode;
@@ -75,9 +76,9 @@ export default function MagneticButton({
       onClick={onClick}
     >
       {href ? (
-        <a href={href} className="block">
+        <Link href={href} className="block">
           {children}
-        </a>
+        </Link>
       ) : (
         children
       )}

@@ -7,14 +7,15 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "motion/react";
+import Link from "next/link";
 import MagneticButton from "./magnetic-button";
 import Logo from "./logo";
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 // --- Animated Hamburger Icon ---
@@ -186,15 +187,15 @@ export default function Nav() {
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <MagneticButton href="#contact" variant="primary" size="sm">
+            <MagneticButton href="/contact" variant="primary" size="sm">
               Book a Call
             </MagneticButton>
           </div>
@@ -231,7 +232,7 @@ export default function Nav() {
             <div className="px-6 flex flex-col gap-2 mt-8">
               {links.map((link, i) => (
                 <motion.div key={link.href} variants={linkVariants}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={closeMenu}
                     className="group flex items-center gap-4 py-3"
@@ -251,7 +252,7 @@ export default function Nav() {
                     >
                       &rarr;
                     </motion.span>
-                  </a>
+                  </Link>
                   {/* Separator */}
                   {i < links.length - 1 && (
                     <div className="h-px bg-border/40 ml-10" />
@@ -263,7 +264,7 @@ export default function Nav() {
             {/* CTA at bottom */}
             <motion.div variants={ctaVariants} className="px-6 mt-12">
               <MagneticButton
-                href="#contact"
+                href="/contact"
                 variant="primary"
                 size="md"
                 onClick={closeMenu}

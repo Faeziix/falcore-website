@@ -23,8 +23,8 @@ export function HeroSection() {
       >
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen">
           <Dithering
-            colorBack="#00000000"
-            colorFront="#E53935"
+            colorBack="#061e29"
+            colorFront="#4682b4"
             shape="warp"
             type="4x4"
             speed={isHovered ? 0.6 : 0.2}

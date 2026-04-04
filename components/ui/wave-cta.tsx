@@ -10,7 +10,7 @@ export function WaveCTABackground() {
         shape="wave"
         type="8x8"
         colorBack="#00000000"
-        colorFront="#e53935"
+        colorFront="#4682b4"
         pxSize={3}
         speed={0.6}
         width={1400}

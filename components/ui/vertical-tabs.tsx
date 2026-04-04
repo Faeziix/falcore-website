@@ -3,65 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
-
-const SERVICES = [
-  {
-    title: "AI Enablement",
-    description:
-      "Put AI to work inside your business — integrated into how you already operate.",
-    image: "/services/ai-enablement.jpg",
-    imageAlt: "AI-powered workflow automation dashboard for business operations",
-    bullets: [
-      "AI-powered workflow automation",
-      "Custom chatbots & virtual assistants",
-      "Intelligent data processing",
-      "AI integration into existing tools",
-      "Smarter decision-making pipelines",
-    ],
-  },
-  {
-    title: "Systems & Automations",
-    description:
-      "Eliminate the manual work slowing your team down. We wire everything together.",
-    image: "/services/system-automation.jpg",
-    imageAlt: "CRM and business process automation system integration",
-    bullets: [
-      "CRM setup & configuration",
-      "Workflow automation across tools",
-      "Third-party integrations",
-      "Process optimization & mapping",
-      "Scalable operational infrastructure",
-    ],
-  },
-  {
-    title: "Web Design",
-    description:
-      "Designs built around your brand and your customers — not a template with your logo slapped on.",
-    image: "/services/web-design.jpg",
-    imageAlt: "Custom website design with brand-focused UI and responsive layout",
-    bullets: [
-      "Custom UI/UX tailored to your brand",
-      "Mobile-first responsive layouts",
-      "Conversion-focused page structures",
-      "Brand identity integration",
-      "Rapid turnaround — designs in days, not weeks",
-    ],
-  },
-  {
-    title: "Custom Web Applications",
-    description:
-      "If your business needs it built, we build it. Full-stack, production-grade, and built to scale.",
-    image: "/services/web-dev.jpg",
-    imageAlt: "Full-stack web application with client portal and dashboard interface",
-    bullets: [
-      "Client portals & membership platforms",
-      "Internal dashboards & admin panels",
-      "Headless CMS implementation",
-      "Booking & scheduling systems",
-      "Custom tools built for your workflow",
-    ],
-  },
-];
+import { SERVICES } from "@/lib/data/services";
 
 function ServiceCard({
   service,
@@ -108,7 +50,7 @@ function ServiceCard({
           {service.bullets.map((bullet) => (
             <li key={bullet} className="flex items-start gap-3">
               <Check
-                className="size-5 text-primary mt-0.5 shrink-0"
+                className="size-5 text-accent mt-0.5 shrink-0"
                 strokeWidth={2}
                 aria-hidden
               />
