@@ -50,10 +50,9 @@ const technologies = [
   "PostgreSQL",
   "Vercel",
   "Headless CMS",
-  "OpenAI",
-  "Make / Zapier",
+  "N8N",
+  "Openclaw",
   "HubSpot",
-  "REST / GraphQL",
 ];
 
 export default function AboutPage() {
