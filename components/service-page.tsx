@@ -82,7 +82,7 @@ export default function ServicePage({ service }: { service: Service }) {
               className="flex items-start gap-3 border border-border/50 p-6"
             >
               <Check
-                className="size-5 text-primary mt-0.5 shrink-0"
+                className="size-5 text-accent mt-0.5 shrink-0"
                 strokeWidth={2}
                 aria-hidden
               />
@@ -112,7 +112,7 @@ export default function ServicePage({ service }: { service: Service }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {service.useCases.map((useCase, i) => (
             <div key={i} className="border border-border/50 p-8">
-              <span className="font-mono text-xs text-primary/60 tabular-nums block mb-4">
+              <span className="font-mono text-xs text-accent/60 tabular-nums block mb-4">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="text-lg font-medium text-foreground mb-3">

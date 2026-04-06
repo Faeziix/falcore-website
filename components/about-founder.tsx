@@ -32,7 +32,7 @@ export default function AboutFounder() {
               </div>
 
               {/* Accent line */}
-              <div className="absolute -bottom-3 -right-3 w-20 h-20 border-r-2 border-b-2 border-primary/30" />
+              <div className="absolute -bottom-3 -right-3 w-20 h-20 border-r-2 border-b-2 border-accent/30" />
             </div>
           </motion.div>
 

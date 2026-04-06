@@ -2,7 +2,7 @@ export const FAQ_ITEMS = [
   {
     question: "What types of businesses do you work with?",
     answer:
-      "We work with small and mid-sized US businesses across industries — from automotive and hospitality to professional services and e-commerce. If you need a website, custom application, or automation that actually works, we can help.",
+      "We work with small and mid-sized US businesses across industries — from automotive and hospitality to professional services. If you need a website, custom application, or automation that actually works, we can help.",
   },
   {
     question: "How long does a typical project take?",
@@ -25,14 +25,9 @@ export const FAQ_ITEMS = [
       "Absolutely. We can redesign, rebuild, or optimize what you already have. If a full rebuild makes more sense, we will tell you upfront and explain why.",
   },
   {
-    question: "What technologies do you use?",
-    answer:
-      "We build with Next.js, React, TypeScript, and Tailwind CSS for web projects. For automations, we use tools like Make, Zapier, and custom API integrations. For AI, we integrate OpenAI, custom LLM pipelines, and workflow automation platforms.",
-  },
-  {
     question: "How do we get started?",
     answer:
-      "Book a free 30-minute discovery call. We will talk about your business, what you need, and whether we are a good fit. No pressure, no jargon — just a conversation.",
+      "Book a free 30-minute discovery call. We will talk about your business, what you need, and whether we are a good fit.",
   },
   {
     question: "Do you handle hosting and domains?",

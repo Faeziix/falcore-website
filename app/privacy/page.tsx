@@ -87,10 +87,10 @@ export default function PrivacyPage() {
                 If you have any questions about this privacy policy, contact us
                 at{" "}
                 <a
-                  href="mailto:hello@falcoretech.com"
-                  className="text-primary hover:text-primary/80 transition-colors"
+                  href="mailto:contact@falcoretech.com"
+                  className="text-accent hover:text-accent/80 transition-colors"
                 >
-                  hello@falcoretech.com
+                  contact@falcoretech.com
                 </a>
                 .
               </p>

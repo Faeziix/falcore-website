@@ -62,7 +62,7 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="border border-border/50 p-6">
                   <Mail
-                    className="size-5 text-primary mb-4"
+                    className="size-5 text-accent mb-4"
                     strokeWidth={1.5}
                     aria-hidden
                   />
@@ -70,16 +70,16 @@ export default function ContactPage() {
                     Email
                   </h3>
                   <a
-                    href="mailto:hello@falcoretech.com"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    href="mailto:contact@falcoretech.com"
+                    className="text-sm text-muted-foreground hover:text-accent transition-colors"
                   >
-                    hello@falcoretech.com
+                    contact@falcoretech.com
                   </a>
                 </div>
 
                 <div className="border border-border/50 p-6">
                   <MapPin
-                    className="size-5 text-primary mb-4"
+                    className="size-5 text-accent mb-4"
                     strokeWidth={1.5}
                     aria-hidden
                   />
@@ -93,7 +93,7 @@ export default function ContactPage() {
 
                 <div className="border border-border/50 p-6 sm:col-span-2">
                   <Clock
-                    className="size-5 text-primary mb-4"
+                    className="size-5 text-accent mb-4"
                     strokeWidth={1.5}
                     aria-hidden
                   />
@@ -116,7 +116,7 @@ export default function ContactPage() {
 
               <div className="space-y-8">
                 <div className="flex gap-4">
-                  <span className="font-mono text-xs text-primary/60 tabular-nums mt-1 shrink-0">
+                  <span className="font-mono text-xs text-accent/60 tabular-nums mt-1 shrink-0">
                     01
                   </span>
                   <div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
                 <div className="h-px bg-border/30" />
 
                 <div className="flex gap-4">
-                  <span className="font-mono text-xs text-primary/60 tabular-nums mt-1 shrink-0">
+                  <span className="font-mono text-xs text-accent/60 tabular-nums mt-1 shrink-0">
                     02
                   </span>
                   <div>
@@ -150,7 +150,7 @@ export default function ContactPage() {
                 <div className="h-px bg-border/30" />
 
                 <div className="flex gap-4">
-                  <span className="font-mono text-xs text-primary/60 tabular-nums mt-1 shrink-0">
+                  <span className="font-mono text-xs text-accent/60 tabular-nums mt-1 shrink-0">
                     03
                   </span>
                   <div>

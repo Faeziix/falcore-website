@@ -46,7 +46,7 @@ export default function Process() {
           {steps.map((step, i) => (
             <ScrollReveal key={step.number} delay={i * 0.12}>
               <div className="bg-background p-8 lg:p-6 xl:p-8 h-full">
-                <span className="text-5xl font-bold text-primary/15 font-mono">
+                <span className="text-5xl font-bold text-accent/15 font-mono">
                   {step.number}
                 </span>
                 <h3 className="text-lg font-semibold mt-4">{step.title}</h3>

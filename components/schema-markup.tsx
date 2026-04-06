@@ -37,8 +37,8 @@ const organizationSchema = {
   description:
     "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies.",
   slogan: "The technical arm your business is missing.",
-  email: "hello@falcoretech.com",
-  foundingDate: "2024",
+  email: "contact@falcoretech.com",
+  foundingDate: "2026",
   areaServed: {
     "@type": "Country",
     name: "United States",

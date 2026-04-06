@@ -23,8 +23,8 @@ export function HeroSection() {
       >
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen">
           <Dithering
-            colorBack="#061e29"
-            colorFront="#4682b4"
+            colorBack="#000000"
+            colorFront="#E53935"
             shape="warp"
             type="4x4"
             speed={isHovered ? 0.6 : 0.2}
@@ -35,10 +35,10 @@ export function HeroSection() {
       </Suspense>
 
       <div className="relative z-10 px-6 max-w-4xl mx-auto text-center flex flex-col items-center">
-        <div className="mb-8 inline-flex items-center gap-2 border border-primary/10 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary backdrop-blur-sm">
+        <div className="mb-8 inline-flex items-center gap-2 border border-accent/10 bg-accent/5 px-4 py-1.5 text-sm font-medium text-accent backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
           </span>
           Now Accepting Projects
         </div>

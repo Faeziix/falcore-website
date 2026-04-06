@@ -61,7 +61,7 @@ export default function Services() {
                 <div
                   className={`bg-card border border-border p-8 hover:border-foreground/20 transition-colors h-full ${service.span}`}
                 >
-                  <Icon size={32} weight="light" className="text-primary" />
+                  <Icon size={32} weight="light" className="text-accent" />
                   <h3 className="text-xl font-semibold tracking-tight mt-4">
                     {service.title}
                   </h3>

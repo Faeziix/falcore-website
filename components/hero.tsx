@@ -10,7 +10,7 @@ function FloatingShapes() {
       <motion.div
         animate={{ y: [0, -14, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-8 right-0 w-64 h-64 border border-primary/20 bg-primary/5"
+        className="absolute top-8 right-0 w-64 h-64 border border-accent/20 bg-accent/5"
       />
       <motion.div
         animate={{ y: [0, 10, 0] }}
@@ -30,7 +30,7 @@ function FloatingShapes() {
           ease: "easeInOut",
           delay: 1,
         }}
-        className="absolute bottom-16 right-8 w-32 h-32 bg-primary/10 border border-primary/15"
+        className="absolute bottom-16 right-8 w-32 h-32 bg-accent/10 border border-accent/15"
       />
       <motion.div
         animate={{ y: [0, 12, 0] }}
@@ -45,7 +45,7 @@ function FloatingShapes() {
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-32 right-40 w-3 h-3 rounded-full bg-primary"
+        className="absolute bottom-32 right-40 w-3 h-3 rounded-full bg-accent"
       />
     </div>
   );

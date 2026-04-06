@@ -93,7 +93,7 @@ export default function AboutPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
               </div>
-              <div className="absolute -bottom-3 -right-3 w-20 h-20 border-r-2 border-b-2 border-primary/30" />
+              <div className="absolute -bottom-3 -right-3 w-20 h-20 border-r-2 border-b-2 border-accent/30" />
             </div>
 
             {/* Bio */}
@@ -199,7 +199,7 @@ export default function AboutPage() {
               {technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="px-4 py-2 text-sm font-mono text-muted-foreground border border-border/50 hover:border-primary/30 hover:text-foreground transition-colors"
+                  className="px-4 py-2 text-sm font-mono text-muted-foreground border border-border/50 hover:border-accent/30 hover:text-foreground transition-colors"
                 >
                   {tech}
                 </span>

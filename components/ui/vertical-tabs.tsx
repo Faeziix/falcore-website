@@ -20,7 +20,7 @@ function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group flex flex-col bg-card border border-border/50 overflow-hidden transition-colors duration-500 hover:border-primary/20"
+      className="group flex flex-col bg-card border border-border/50 overflow-hidden transition-colors duration-500 hover:border-accent/20"
     >
       {/* Image area */}
       <div className="relative aspect-[16/10] overflow-hidden bg-muted/10">

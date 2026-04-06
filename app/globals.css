@@ -6,6 +6,7 @@
   --input: #505050;
   --muted: #b8b8b8;
   --accent: #4682b4;
+  --accent-hover: #36648b;
   --border: #505050;
   --radius: 0px;
   --chart-1: #b71c1c;
@@ -53,6 +54,7 @@
   --input: #4a4a4a;
   --muted: #252525;
   --accent: #64b5f6;
+  --accent-hover: #90caf9;
   --border: #4a4a4a;
   --radius: 0px;
   --chart-1: #e53935;
@@ -100,6 +102,7 @@
   --color-input: var(--input);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
   --color-border: var(--border);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);

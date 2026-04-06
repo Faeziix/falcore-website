@@ -226,7 +226,7 @@ export default function Nav() {
             {/* Accent line */}
             <motion.div
               variants={accentLineVariants}
-              className="absolute top-16 left-6 right-6 h-px bg-primary origin-left"
+              className="absolute top-16 left-6 right-6 h-px bg-accent origin-left"
             />
 
             <div className="px-6 flex flex-col gap-2 mt-8">
@@ -238,16 +238,16 @@ export default function Nav() {
                     className="group flex items-center gap-4 py-3"
                   >
                     {/* Index number */}
-                    <span className="font-mono text-xs text-primary/60 tabular-nums w-6">
+                    <span className="font-mono text-xs text-accent/60 tabular-nums w-6">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {/* Link label */}
-                    <span className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors duration-200">
+                    <span className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground group-hover:text-accent transition-colors duration-200">
                       {link.label}
                     </span>
                     {/* Hover arrow */}
                     <motion.span
-                      className="text-primary text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-auto"
+                      className="text-accent text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-auto"
                       aria-hidden="true"
                     >
                       &rarr;

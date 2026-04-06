@@ -33,7 +33,7 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <ScrollReveal key={t.name} delay={i * 0.1}>
               <div className="bg-card border border-border p-8 lg:p-10 h-full flex flex-col">
-                <span className="text-6xl font-serif text-primary/20 leading-none select-none">
+                <span className="text-6xl font-serif text-accent/20 leading-none select-none">
                   &ldquo;
                 </span>
                 <p className="text-lg leading-relaxed text-foreground mt-2 flex-1">

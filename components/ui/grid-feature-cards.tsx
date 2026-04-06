@@ -18,18 +18,18 @@ export function FeatureCard({ feature, className, ...props }: FeatureCardPorps) 
     return (
         <div className={cn('relative overflow-hidden p-6', className)} {...props}>
             <div className="pointer-events-none absolute top-0 left-1/2 -mt-2 -ml-20 h-full w-full [mask-image:linear-gradient(white,transparent)]">
-                <div className="from-primary/5 to-primary/1 absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] opacity-100">
+                <div className="from-accent/5 to-accent/1 absolute inset-0 bg-gradient-to-r [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] opacity-100">
                     <GridPattern
                         width={20}
                         height={20}
                         x="-12"
                         y="4"
                         squares={p}
-                        className="fill-primary/5 stroke-border absolute inset-0 h-full w-full mix-blend-overlay"
+                        className="fill-accent/5 stroke-border absolute inset-0 h-full w-full mix-blend-overlay"
                     />
                 </div>
             </div>
-            <feature.icon className="text-primary size-6" strokeWidth={1} aria-hidden />
+            <feature.icon className="text-accent size-6" strokeWidth={1} aria-hidden />
             <h3 className="mt-10 text-sm md:text-base">{feature.title}</h3>
             <p className="text-muted-foreground relative z-20 mt-2 text-xs font-light">{feature.description}</p>
         </div>

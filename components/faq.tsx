@@ -22,7 +22,7 @@ function AccordionItem({
     <div className="border-b border-border/30">
       <button
         onClick={onToggle}
-        className="flex w-full items-center justify-between py-6 text-left text-foreground transition-colors hover:text-primary"
+        className="flex w-full items-center justify-between py-6 text-left text-foreground transition-colors hover:text-accent"
         aria-expanded={isOpen}
       >
         <span className="text-base md:text-lg font-medium pr-4">

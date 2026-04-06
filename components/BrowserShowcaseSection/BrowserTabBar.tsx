@@ -139,7 +139,7 @@ const BrowserTabBar = ({
             {isActive && (
               <motion.div
                 layoutId="activeTabIndicator"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
               />
             )}

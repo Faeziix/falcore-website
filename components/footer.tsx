@@ -63,14 +63,14 @@ export default function Footer() {
           <div>
             <span className="text-sm font-semibold mb-4 text-foreground/70 block">Get in Touch</span>
             <a
-              href="mailto:hello@falcoretech.com"
+              href="mailto:contact@falcoretech.com"
               className="text-sm text-foreground/40 hover:text-foreground/80 transition-colors"
             >
-              hello@falcoretech.com
+              contact@falcoretech.com
             </a>
             <Link
               href="/contact"
-              className="text-sm text-primary hover:text-primary/80 transition-colors mt-2 inline-block"
+              className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block"
             >
               Book a Call
             </Link>
