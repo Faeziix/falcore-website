@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet Faez Ansari, the founder of Falcore — a full-stack developer and systems builder helping US businesses with web design, custom apps, and AI-powered automation.",
+    "Meet Faez Ansari, the founder of Falcore — a developer and systems builder based in the UAE, helping US businesses with web design, custom apps, and automation.",
   alternates: {
     canonical: "/about",
   },
@@ -109,59 +109,27 @@ export default function AboutPage() {
 
               <div className="space-y-5 text-muted-foreground text-base md:text-lg leading-relaxed">
                 <p>
-                  I&apos;m a full-stack developer and systems builder based in
-                  the US. I started Falcore after years of building websites,
-                  internal tools, and automation systems for businesses that
-                  needed technical help but didn&apos;t have a technical team.
+                  I&apos;m a developer and systems builder based in the UAE,
+                  working with businesses across the US. I started Falcore after
+                  years of building websites, internal tools, and automation
+                  systems for companies that needed technical help but
+                  didn&apos;t have a technical team.
                 </p>
                 <p>
-                  At XMA Agency, I built 13+ client websites for automotive,
-                  luxury, and rental businesses — and created the internal tools
-                  that kept the operation running: a proposal generator that
-                  automated quotes after sales calls, a custom membership
-                  platform on Next.js, and a client-facing project tracker used
-                  across every active account.
-                </p>
-                <p>
-                  That experience taught me what small and mid-sized businesses
+                  My background is in agencies — building client websites,
+                  creating the internal tools that keep operations running, and
+                  connecting the systems that teams rely on every day. That
+                  experience taught me what small and mid-sized businesses
                   actually need: someone who understands the problem, builds the
-                  right solution, and ships it fast. No bloated teams, no
-                  unnecessary meetings, no six-month timelines for a website.
+                  right solution, and ships it fast.
                 </p>
                 <p>
                   Today, every Falcore project gets my direct attention — from
                   the first call to launch day and beyond. Whether it&apos;s a
                   website that converts, a custom dashboard your team needs, or
-                  the AI-powered automation that eliminates hours of manual work,
-                  I find the fastest, most efficient path and ship it.
+                  the automation that eliminates hours of manual work, I find the
+                  fastest path and ship it.
                 </p>
-              </div>
-
-              <div className="pt-4 flex flex-wrap gap-x-8 gap-y-4 border-t border-border/30">
-                <div>
-                  <span className="text-2xl md:text-3xl font-medium text-foreground">
-                    13+
-                  </span>
-                  <span className="block text-sm text-muted-foreground mt-1">
-                    Client Projects
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl md:text-3xl font-medium text-foreground">
-                    5+
-                  </span>
-                  <span className="block text-sm text-muted-foreground mt-1">
-                    Internal Tools Built
-                  </span>
-                </div>
-                <div>
-                  <span className="text-2xl md:text-3xl font-medium text-foreground">
-                    Full-Stack
-                  </span>
-                  <span className="block text-sm text-muted-foreground mt-1">
-                    End-to-End Delivery
-                  </span>
-                </div>
               </div>
             </div>
           </div>

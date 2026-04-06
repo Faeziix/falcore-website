@@ -55,53 +55,24 @@ export default function AboutFounder() {
 
             <div className="space-y-5 text-muted-foreground text-base md:text-lg leading-relaxed">
               <p>
-                I&apos;m a full-stack developer and systems builder based in the
-                US — the technical person your business has been looking for. I
-                work with Next.js, TypeScript, headless CMS platforms, and
-                automation tools to solve the problems that slow companies down.
+                I&apos;m a developer and systems builder based in the UAE,
+                working with businesses across the US — the technical person your
+                business has been looking for.
               </p>
               <p>
-                At XMA Agency, I built 13+ client websites for automotive,
-                luxury, and rental businesses — and created the internal tools
-                that kept the operation running: a proposal generator that sent
-                quotes automatically after sales calls, a custom membership
-                platform on Next.js, and a client-facing project tracker used
-                across every active account.
+                My background is in agencies — building client websites, creating
+                the tools that keep operations running, and connecting the
+                systems that teams rely on every day. That taught me what growing
+                businesses actually need: someone who gets the problem, builds
+                the right solution, and ships it fast.
               </p>
               <p>
                 Today, I bring that same approach to every business I work with
                 through Falcore. Whether it&apos;s a website that actually
-                converts, a custom dashboard your team needs, CRM setup, or the
-                AI-powered automations that eliminate hours of manual work — I
-                find the fastest, most efficient solution and ship it.
+                converts, a custom dashboard your team needs, or the automation
+                that eliminates hours of manual work — I find the fastest
+                solution and ship it.
               </p>
-            </div>
-
-            <div className="pt-4 flex flex-wrap gap-x-8 gap-y-4 border-t border-border/30">
-              <div>
-                <span className="text-2xl md:text-3xl font-medium text-foreground">
-                  13+
-                </span>
-                <span className="block text-sm text-muted-foreground mt-1">
-                  Client Projects
-                </span>
-              </div>
-              <div>
-                <span className="text-2xl md:text-3xl font-medium text-foreground">
-                  5+
-                </span>
-                <span className="block text-sm text-muted-foreground mt-1">
-                  Internal Tools Built
-                </span>
-              </div>
-              <div>
-                <span className="text-2xl md:text-3xl font-medium text-foreground">
-                  Full-Stack
-                </span>
-                <span className="block text-sm text-muted-foreground mt-1">
-                  End-to-End Delivery
-                </span>
-              </div>
             </div>
           </motion.div>
         </div>
