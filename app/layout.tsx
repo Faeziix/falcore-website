@@ -67,6 +67,13 @@ export default function RootLayout({
     >
       <head>
         <SchemaMarkup />
+        <script
+          id="vtag-ai-js"
+          async
+          src="https://r2.leadsy.ai/tag.js"
+          data-pid="7VqVCQaJDcNf2Yve"
+          data-version="062024"
+        />
       </head>
       <body>{children}</body>
     </html>
