@@ -17,7 +17,7 @@
 
 ## Case studies (`app/work/`)
 
-See `case-studies.md`. Shared frame in `app/work/_components/`: `CaseStudyLayout` (nav, `<main data-case-study>` with the study's font class, `NextCaseStudy`, `PageClosing`), `CaseStudyHero` (client name in its own face, headline, facts row incl. optional Team, hero media), `CaseStudyChapter` (title, intro under it, one visual; tones paper/raised/hangar), `CaseStudyFigure` (next/image at q90, optional viewfinder), `CaseStudyOutcomes`, `NextCaseStudy`, `CaseStudyIndexList` (the `/work` list). Each study's bespoke sections and signature moment live in `app/work/<slug>/_components/`.
+See `case-studies.md`. Shared frame in `app/work/_components/`: `CaseStudyLayout` (nav, `<main data-case-study>` with the study's font class, `NextCaseStudy`, `PageClosing`), `CaseStudyHero` (client name in its own face, headline, facts row incl. optional Team, hero media), `LiveSiteLink` (the hero's live-site fact: hostname that only breaks before its domain, e.g. `corpofino-web` / `.vercel.app`, never mid-word), `CaseStudyChapter` (title, intro under it, one visual; tones paper/raised/hangar), `CaseStudyFigure` (next/image at q90, optional viewfinder), `CaseStudyOutcomes`, `NextCaseStudy`, `CaseStudyIndexList` (the `/work` list). Each study's bespoke sections and signature moment live in `app/work/<slug>/_components/`.
 
 ## Primitives (shared, `components/ui/`)
 

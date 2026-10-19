@@ -60,6 +60,19 @@ A theme file defines its palette primitives first (`--diamaria-palette-*`) and m
 - Motion: the hero owns the load moment. Chapters don't fade in on scroll. The signature moment may animate or respond to the visitor.
 - No `overflow: hidden` on ancestors of sticky elements; use `overflow-clip`.
 
+## Phones and tablets
+
+The shared frame is tuned for 320px phones up to 1024px tablets (checked in Chromium with touch emulation and in Firefox at 320, 375, 390, 414, 667×375, 768 and 1024):
+
+- Spacing. Chapters and the next-study card use `py-16 sm:py-20 md:section-spacing` (64px, then 80px, then the site's `--section-space` from 768px), not `section-spacing` alone, which left about 190px of empty paper between chapters on a phone. Heading-to-media is `mt-10 md:mt-14 lg:mt-20`; intros sit `mt-4` under the title on phones. `<main>` starts at `pt-28 md:pt-32`.
+- Facts row. Below `sm` each fact is a hairline row with the label in a 5.5rem column and the value beside it, closed by a bottom rule. From `sm` it is two columns; from `md` one row when there are four facts, or three columns (then one row from `lg`) when a study has five (Team and Live site).
+- Live site hostnames break only before the domain (`LiveSiteLink`), never at a hyphen or mid-word. The link has a 44px tap area (`-my-3 py-3`, so the row height doesn't change).
+- `/work` rows show the cover first on phones and tablets, then the name, headline and services; from `lg` the text sits left of the cover.
+- The "All work" back link has a 44px tap area (`min-h-11 -my-3`, so the layout doesn't move).
+- Short headings (chapter titles, client names, outcome statements, next-study name) use `text-balance`, because Firefox has no `text-wrap: pretty`.
+- The nav's Work panel splits 6/6 columns below `lg` (5 + 6 from `lg`), so study names don't wrap at 768px. The mobile sheet's study links are 48px tall.
+- The site header shows its desktop links only from `lg`. At 768px the logo ran into "Services", so tablets get the menu sheet.
+
 ## The seven studies
 
 | Study | Theme | Signature moment (component) |
@@ -69,10 +82,21 @@ A theme file defines its palette primitives first (`--diamaria-palette-*`) and m
 | `xma-agency` | XMA Media: cream, ink, electric violet, Manrope 800 caps (the agency's main site since the October 2026 rebuild; slug kept) | "Three companies, one kit": tabs switch one browser frame between xmamedia.ai, xma.ae and xmaboost.com, which share one kit (`_components/one-kit/`). Closes with "Where it started", the earlier xma.ae I built. Team fact credits a second developer |
 | `convoflow` | Off-white, ConvoFlow pink, Geist | "Send a lead through": one lead travels ad → follow-up → call/WhatsApp/email → qualified → booked on a button press (`lead-flow-signature/`) |
 | `timeless-touch-ceramics` | Stone, gold, Geist light | "Bookmatch": two mirrored halves of a stone scan open like slab doors onto the live site (`bookmatch-reveal.tsx`). Team fact credits a second developer |
-| `sanaa-ouahmane` | White, crimson, display serif stand-in (IvyOra isn't web-licensed) | "A passage that sharpens as you read": her words resolve from blur line by line (`sharpening-excerpt.tsx`). Only her real photography, never AI-extended portraits |
+| `sanaa-ouahmane` | White, crimson, display serif stand-in (IvyOra isn't web-licensed) | "A passage that sharpens as you read": her words resolve from blur line by line (`sharpening-excerpt.tsx`). The reveal window is measured in the area below the fixed nav (`--nav-height`), so in 667×375 landscape the whole passage is visible when the last word sharpens. The last two words share a `whitespace-nowrap` group, so Firefox (no `text-wrap: pretty`) never leaves one word alone on the last line. Palette swatch labels are 13px and show from `xl`, where 'Crimson' fits its 10% band. Only her real photography, never AI-extended portraits |
 | `corpofino` | Cream, five skin-tone bands, Manrope 300 | "Five skins": department bands widen to show their treatment imagery, and a toggle flips the strip to Arabic RTL (`department-swatch-strip.tsx`) |
 
-Studies with wide UI screenshots show a phone-specific crop below `md` (local `ArtDirectedFigure`/`ScreenPairFigure`/`ResponsiveScreenshot` components), because a 3200px desktop capture is unreadable at 414px. If a new study needs this, promote one of them into `CaseStudyFigure` as a `narrowImage` prop instead of writing a fifth copy.
+Studies with wide UI screenshots show a phone-specific crop below `md` (local `ArtDirectedFigure`/`ScreenPairFigure`/`ResponsiveScreenshot` components), because a 3200px desktop capture is unreadable at 414px. If a new study needs this, promote one of them into `CaseStudyFigure` as a `narrowImage` prop instead of writing another copy. There are now six local versions; XMA's `ResponsiveCapture` (phone, optional tablet and desktop images, CVA `phoneFit` handset/crop) is the most complete starting point.
+
+Per-study phone notes:
+
+- DiaMaria: the loupe moves on a tap (pointerup within 10px), never on a scroll swipe. Below `md` its frame is `aspect-[4/5]`, capped at `min(72svh,44rem)`. Below `sm` the catalogue chapter shows a real phone capture of the Olympic grid.
+- XMA Media: every screenshot chapter has a real 414px phone capture below `md`; "Where it started" also has a tablet crop (`md` to `xl`). The three-site frame switches to the desktop browser from `sm`, and the phone frame width (`--xma-agency-phone-frame-width`) is sized from `100svh` so tabs and phone fit one screen.
+- ConvoFlow: the signature has four layouts: `wide` from `xl`, `compact` from `lg`, `landscape` below `lg` on screens at most 32rem tall, and `upright` otherwise. Channel cards are sized in `cqw` inside an `@container` frame.
+- Timeless Touch: real phone captures below `md`/`lg` (`ResponsiveScreenshot` `desktopFrom`). The bookmatch uses the wide crop from `sm` with a height cap up to `md`, so it opens in phone landscape.
+- Sanaa Ouahmane: `ArtDirectedFigure` switches to the wide capture at `sm`, since portrait crops were several screens tall in landscape. Editor sheets stack below `lg`.
+- Corpofino: the department strip is a vertical accordion below `lg` and five bands from `lg`. The RTL chapter shows the phone pair up to `lg`.
+
+The operating-system study does this in three steps (`_lib/art-direction.ts`): the phone crop below `md`, the tablet crop from `md` to `lg`, the desktop capture from `lg`. Portrait phone crops are capped at `sm:max-w-md` so phone landscape doesn't stretch them. Its citation numbers (source markers and inline chips) are 13px like the captions.
 
 Light-weight or bold client faces override the shared `font-medium` titles with a scoped rule in their theme file (`[data-case-study="<slug>"] article :is(h1,h2) { font-weight: … }`).
 
