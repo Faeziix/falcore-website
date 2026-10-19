@@ -1,6 +1,6 @@
 # XMA Launchpad Screenshots
 
-The homepage Launchpad section (`app/_components/launchpad/`) shows four screenshots from `public/work/company-os/`: `knowledge-assistant.webp` (a seeded Assistant conversation at `/assistant/<id>`, citing a meeting, a production room, onboarding answers, the Brain, a WhatsApp digest and a PDF; no live AI call), `generate.webp` (the Studio Generate page from a screenshot the user supplied, client name blurred), `pipeline.webp` and `meetings.webp`. All but the Generate shot use **invented demo data only** (captured 2026-10-19).
+The homepage Launchpad section (`app/_components/launchpad/`) shows four screenshots from `public/work/company-os/`: `knowledge-assistant.webp` (a seeded Assistant conversation at `/assistant/<id>`, citing a meeting, a production room, onboarding answers, the Brain, a WhatsApp digest and a PDF; no live AI call), `v2/studio-director.webp` (a seeded Studio brief with the AI director's three-shot edit), `pipeline.webp` and `meetings.webp`. All four use **invented demo data only** (captured 2026-10-19). The old `generate.webp` was removed: it showed a real client's logo, products and AI spend. More demo captures for the case study live in `public/work/company-os/v2/`.
 
 Launchpad changes fast. Re-shoot when the screens drift. Never capture from a running Launchpad dev server (:3000, :3100): those point at production copies with real client data.
 

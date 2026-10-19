@@ -8,6 +8,7 @@ export type LaunchpadFeature = {
 
 export const LAUNCHPAD_SHOWCASE = {
   title: "A company operating system",
+  caseStudyPath: "/work/company-operating-system",
   summary:
     "One platform that runs a Dubai creative agency: CRM, project management, an AI studio and finance, all working from a shared knowledge base that AI agents act on.",
   features: [
@@ -23,9 +24,9 @@ export const LAUNCHPAD_SHOWCASE = {
       id: "studio",
       name: "AI studio",
       summary:
-        "Images and video from 20-plus AI models in one place, with the spend tracked for every client.",
-      screenshot: "/work/company-os/generate.webp",
-      screenshotAlt: "AI studio showing a grid of generated images and videos (client names blurred)",
+        "Ad films planned shot by shot. Ask the AI director for a change and it edits the shots, and you can undo it.",
+      screenshot: "/work/company-os/v2/studio-director.webp",
+      screenshotAlt: "AI studio with a 12-shot skincare film and the AI director summarising the three shots it changed",
     },
     {
       id: "pipeline",
