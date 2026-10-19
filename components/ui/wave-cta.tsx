@@ -1,6 +1,8 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { BOOKING_URL, externalLinkProps } from "@/lib/site-config";
 import { InteractiveDitheringBackground } from "@/components/ui/interactive-dithering";
 
 export function WaveCTABackground() {
@@ -15,25 +17,21 @@ export function WaveCTA() {
   return (
     <section id="contact" className="relative z-10 py-24 md:py-32 w-full flex justify-center items-center px-4 md:px-6">
       <div className="relative z-10 px-6 max-w-3xl mx-auto text-center flex flex-col items-center">
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground mb-6 leading-[1.05]">
-          Let&apos;s build something <br />
-          <span className="text-foreground/80">your customers will remember.</span>
+        <h2 className="text-display-lg font-medium text-foreground mb-6">
+          Tell me what&apos;s eating your team&apos;s week.
         </h2>
 
-        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-10 leading-relaxed">
-          No commitment. No jargon. Just a 30-minute call to see if we are a
-          good fit.
+        <p className="text-foreground-soft text-lead max-w-2xl mb-10">
+          A free 30-minute call to talk through what&apos;s slowing your
+          business down and whether I&apos;m the right person to fix it.
         </p>
 
-        <a
-          href="https://calendly.com/amirfaezansari/30min"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          className="group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden bg-primary px-8 md:px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98] w-full sm:w-auto"
-        >
-          <span className="relative z-10">Book a Free Call</span>
-          <ArrowRight className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
-        </a>
+        <Button asChild size="lg" width="fullOnMobile">
+          <a href={BOOKING_URL} {...externalLinkProps}>
+            Book a free call
+            <ArrowUpRight aria-hidden className="size-4.5" />
+          </a>
+        </Button>
       </div>
     </section>
   );
