@@ -23,9 +23,22 @@ export const KEYBOARD_LARGE_STEP_SHARE_OF_STAGE = 0.1;
 
 export const POINTER_FOLLOW_SMOOTHING = 0.22;
 
-export function clampToStage(point: StagePoint): StagePoint {
+export type VisibleStageBounds = { left: number; right: number; top: number; bottom: number };
+
+export const WHOLE_STAGE: VisibleStageBounds = { left: 0, right: 1, top: 0, bottom: 1 };
+
+export function measureVisibleStageBounds(stageBounds: DOMRect, frameBounds: DOMRect): VisibleStageBounds {
   return {
-    x: Math.min(1, Math.max(0, point.x)),
-    y: Math.min(1, Math.max(0, point.y)),
+    left: Math.max(0, (frameBounds.left - stageBounds.left) / stageBounds.width),
+    right: Math.min(1, (frameBounds.right - stageBounds.left) / stageBounds.width),
+    top: Math.max(0, (frameBounds.top - stageBounds.top) / stageBounds.height),
+    bottom: Math.min(1, (frameBounds.bottom - stageBounds.top) / stageBounds.height),
+  };
+}
+
+export function clampToVisibleStage(point: StagePoint, bounds: VisibleStageBounds): StagePoint {
+  return {
+    x: Math.min(bounds.right, Math.max(bounds.left, point.x)),
+    y: Math.min(bounds.bottom, Math.max(bounds.top, point.y)),
   };
 }

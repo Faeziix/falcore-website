@@ -24,7 +24,7 @@
   --diamaria-loupe-rim: var(--diamaria-palette-graphite);
   --diamaria-loupe-label: var(--diamaria-palette-graphite);
   --diamaria-label-tracking: 0.2em;
-  --diamaria-chapter-space: clamp(4.5rem, 8vw, 7.5rem);
+  --diamaria-chapter-space: clamp(4rem, 8vw, 7.5rem);
 }
 
 [data-case-study="diamaria"] article {

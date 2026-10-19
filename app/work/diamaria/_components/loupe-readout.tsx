@@ -6,7 +6,7 @@ export const loupeReadoutLabel = {
 };
 
 const readoutLabelVariants = cva(
-  "pointer-events-none absolute left-1/2 -translate-x-1/2 text-[0.625rem] leading-none whitespace-nowrap text-(--diamaria-loupe-label) uppercase tracking-(--diamaria-label-tracking)",
+  "pointer-events-none absolute left-1/2 -translate-x-1/2 text-[0.8125rem] leading-none whitespace-nowrap md:[@media(pointer:fine)]:text-[0.625rem] text-(--diamaria-loupe-label) uppercase tracking-(--diamaria-label-tracking)",
   {
     variants: {
       side: {

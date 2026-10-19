@@ -20,8 +20,8 @@ function crossfadeClassName(isActive: boolean) {
 
 export function FamilySiteFrame({ sites, activeSite, panelId, labelledById }: FamilySiteFrameProps) {
   return (
-    <div role="tabpanel" id={panelId} aria-labelledby={labelledById} className="mt-10 lg:mt-12">
-      <div className="hidden border border-(--xma-agency-frame) md:block">
+    <div role="tabpanel" id={panelId} aria-labelledby={labelledById} className="mt-5 sm:mt-10 lg:mt-12">
+      <div className="hidden border border-(--xma-agency-frame) sm:block">
         <div className="flex h-10 items-center bg-(--xma-agency-frame) px-4">
           <span className="mx-auto text-sm text-(--xma-agency-frame-text)">{activeSite.address}</span>
         </div>
@@ -34,14 +34,14 @@ export function FamilySiteFrame({ sites, activeSite, panelId, labelledById }: Fa
               aria-hidden={site.id !== activeSite.id}
               fill
               quality={CAPTURE_QUALITY}
-              sizes="(min-width: 1400px) 1336px, 96vw"
+              sizes="(min-width: 1400px) 1336px, (min-width: 640px) 96vw, 1px"
               className={crossfadeClassName(site.id === activeSite.id)}
             />
           ))}
         </div>
       </div>
 
-      <div className="mx-auto max-w-xs border-[6px] border-(--xma-agency-frame) md:hidden">
+      <div className="mx-auto w-(--xma-agency-phone-frame-width) max-w-full border-[6px] border-(--xma-agency-frame) sm:hidden">
         <div className="relative aspect-[828/1792] bg-case-paper-raised">
           {sites.map((site) => (
             <Image
@@ -51,7 +51,7 @@ export function FamilySiteFrame({ sites, activeSite, panelId, labelledById }: Fa
               aria-hidden={site.id !== activeSite.id}
               fill
               quality={CAPTURE_QUALITY}
-              sizes="(max-width: 767px) 80vw, 1px"
+              sizes="(max-width: 639px) 320px, 1px"
               className={crossfadeClassName(site.id === activeSite.id)}
             />
           ))}

@@ -25,14 +25,14 @@ export function ArtDirectedFigure({
         sizes={phoneSizes}
         frame={frame}
         isPriority={isPriority}
-        className="md:hidden"
+        className="sm:hidden"
       />
       <CaseStudyFigure
         image={wideImage}
         sizes={wideSizes}
         frame={frame}
         isPriority={isPriority}
-        className="hidden md:block"
+        className="hidden sm:block"
       />
     </>
   );

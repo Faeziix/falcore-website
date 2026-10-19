@@ -43,7 +43,8 @@ export function ScreenshotChapter({
       <div className="grid lg:grid-cols-12 lg:gap-8">
         <ArtDirectedFigure
           image={chapter.image}
-          narrowImage={chapter.narrowImage}
+          tabletImage={chapter.tabletImage}
+          phoneImage={chapter.phoneImage}
           sizes={sizesForPlacement[placement]}
           className={screenshotPlacementVariants({ placement })}
         />

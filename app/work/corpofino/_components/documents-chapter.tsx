@@ -1,8 +1,7 @@
 import { CaseStudyChapter } from "@/app/work/_components/case-study-chapter";
-import { CaseStudyFigure } from "@/app/work/_components/case-study-figure";
 import { CHAPTER_COPY } from "../_lib/case-study-content";
-import { treatmentPageFrame } from "../_lib/case-study-images";
-import { CONTAINER_WIDE_IMAGE_SIZES } from "../_lib/image-sizes";
+import { treatmentPageFrame, treatmentPagePhoneFrame } from "../_lib/case-study-images";
+import { ArtDirectedFigure } from "./art-directed-figure";
 
 export function DocumentsChapter() {
   return (
@@ -11,7 +10,7 @@ export function DocumentsChapter() {
       title={CHAPTER_COPY.documents.title}
       intro={CHAPTER_COPY.documents.intro}
     >
-      <CaseStudyFigure image={treatmentPageFrame} sizes={CONTAINER_WIDE_IMAGE_SIZES} frame="hairline" />
+      <ArtDirectedFigure desktopImage={treatmentPageFrame} phoneImage={treatmentPagePhoneFrame} />
     </CaseStudyChapter>
   );
 }

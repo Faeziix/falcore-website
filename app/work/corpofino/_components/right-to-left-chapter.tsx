@@ -17,11 +17,11 @@ export function RightToLeftChapter() {
       intro={CHAPTER_COPY.rightToLeft.intro}
     >
       <figure>
-        <div className="hidden gap-4 md:grid lg:grid-cols-2 lg:gap-5">
+        <div className="hidden grid-cols-2 gap-5 xl:grid">
           <CaseStudyFigure image={englishHomeFrame} sizes={CONTAINER_HALF_IMAGE_SIZES} frame="hairline" />
           <CaseStudyFigure image={arabicHomeFrame} sizes={CONTAINER_HALF_IMAGE_SIZES} frame="hairline" />
         </div>
-        <div className="grid grid-cols-2 gap-2 md:hidden">
+        <div className="grid grid-cols-2 gap-2 sm:max-w-xl sm:gap-3 xl:hidden">
           <CaseStudyFigure image={englishHomePhoneFrame} sizes={PHONE_PAIR_IMAGE_SIZES} frame="hairline" />
           <CaseStudyFigure image={arabicHomePhoneFrame} sizes={PHONE_PAIR_IMAGE_SIZES} frame="hairline" />
         </div>

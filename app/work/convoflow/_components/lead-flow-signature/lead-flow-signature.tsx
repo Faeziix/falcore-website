@@ -36,11 +36,20 @@ export function LeadFlowSignature() {
           <li key={step}>{step}</li>
         ))}
       </ol>
-      <div aria-hidden className="px-4 pt-14 pb-12 sm:px-8 lg:pt-16 lg:pb-16">
+      <div
+        aria-hidden
+        className="px-4 pt-10 pb-10 sm:px-8 sm:pt-14 sm:pb-12 lg:pt-16 lg:pb-16 [@media(orientation:landscape)_and_(max-height:32rem)_and_(max-width:63.98rem)]:py-8"
+      >
         <div className="hidden xl:block">
           <LeadFlowDiagram key={`wide-${runCount}`} layoutName="wide" phase={phase} />
         </div>
-        <div className="xl:hidden">
+        <div className="hidden lg:block xl:hidden">
+          <LeadFlowDiagram key={`compact-${runCount}`} layoutName="compact" phase={phase} />
+        </div>
+        <div className="hidden [@media(orientation:landscape)_and_(max-height:32rem)_and_(max-width:63.98rem)]:block">
+          <LeadFlowDiagram key={`landscape-${runCount}`} layoutName="landscape" phase={phase} />
+        </div>
+        <div className="lg:hidden [@media(orientation:landscape)_and_(max-height:32rem)_and_(max-width:63.98rem)]:hidden">
           <LeadFlowDiagram key={`upright-${runCount}`} layoutName="upright" phase={phase} />
         </div>
       </div>

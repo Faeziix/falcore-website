@@ -55,7 +55,7 @@ export function CaseStudyFigure({
     <figure className={className}>
       {hasViewfinder ? <ViewfinderFrame>{picture}</ViewfinderFrame> : picture}
       {caption ? (
-        <figcaption className="mt-4 max-w-xl text-sm text-case-ink-soft">{caption}</figcaption>
+        <figcaption className="mt-3 max-w-xl text-sm text-case-ink-soft md:mt-4">{caption}</figcaption>
       ) : null}
     </figure>
   );

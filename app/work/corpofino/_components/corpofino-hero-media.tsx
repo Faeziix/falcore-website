@@ -1,16 +1,10 @@
-import { CaseStudyFigure } from "@/app/work/_components/case-study-figure";
-import { skinCareDepartmentFrame } from "../_lib/case-study-images";
-import { CONTAINER_WIDE_IMAGE_SIZES } from "../_lib/image-sizes";
+import { skinCareDepartmentFrame, skinCareDepartmentPhoneFrame } from "../_lib/case-study-images";
+import { ArtDirectedFigure } from "./art-directed-figure";
 
 export function CorpofinoHeroMedia() {
   return (
     <div className="page-container">
-      <CaseStudyFigure
-        image={skinCareDepartmentFrame}
-        sizes={CONTAINER_WIDE_IMAGE_SIZES}
-        frame="hairline"
-        isPriority
-      />
+      <ArtDirectedFigure desktopImage={skinCareDepartmentFrame} phoneImage={skinCareDepartmentPhoneFrame} isPriority />
     </div>
   );
 }

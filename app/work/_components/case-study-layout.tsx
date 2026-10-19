@@ -16,7 +16,7 @@ export function CaseStudyLayout({
   return (
     <>
       <SiteNavigation surface="solid" />
-      <main data-case-study={slug} className={cn("bg-case-paper pt-32 text-case-ink", fontClassName)}>
+      <main data-case-study={slug} className={cn("bg-case-paper pt-28 text-case-ink md:pt-32", fontClassName)}>
         <article>{children}</article>
         <NextCaseStudy currentSlug={slug} />
       </main>

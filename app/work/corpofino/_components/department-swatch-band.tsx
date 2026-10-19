@@ -10,7 +10,7 @@ import {
 import { OPEN_SWATCH_BAND_IMAGE_SIZES } from "../_lib/image-sizes";
 
 const swatchBandVariants = cva(
-  "relative grid min-w-0 grid-cols-[minmax(0,1fr)_auto] px-5 py-5 [grid-template-areas:'name_count'_'panel_panel'] sm:px-6 lg:grid-cols-1 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:p-6 lg:[grid-template-areas:'name'_'panel'_'count']",
+  "relative grid min-w-0 grid-cols-[minmax(0,1fr)_auto] px-5 py-5 [grid-template-areas:'name_count'_'panel_panel'] sm:px-6 lg:grid-cols-1 lg:grid-rows-[auto_minmax(0,1fr)_auto] lg:px-4 lg:py-6 lg:[grid-template-areas:'name'_'panel'_'count']",
   {
     variants: {
       tone: {
@@ -70,7 +70,7 @@ export function DepartmentSwatchBand({
           aria-controls={panelId}
           onClick={(event) => onOpen(event.currentTarget)}
           onFocus={(event) => onOpen(event.currentTarget)}
-          className="text-start font-case-display text-[clamp(1.25rem,0.9vw+0.9rem,1.75rem)] leading-[1.12] font-normal tracking-[-0.02em] after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-8 focus-visible:after:outline-current"
+          className="text-start font-case-display text-[clamp(1.25rem,0.9vw+0.9rem,1.75rem)] lg:text-[length:clamp(1.0625rem,2.3vw_-_0.375rem,1.75rem)] leading-[1.12] font-normal tracking-[-0.02em] after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-8 focus-visible:after:outline-current"
         >
           {departmentName(swatch, language)}
         </button>
@@ -80,7 +80,7 @@ export function DepartmentSwatchBand({
       </p>
       <div id={panelId} aria-hidden={!isOpen} className={treatmentPanelVariants({ isOpen })}>
         <div className="relative min-h-0 overflow-clip">
-          <div className="relative mt-5 aspect-[3/4] w-full sm:max-w-md lg:absolute lg:inset-x-0 lg:inset-y-6 lg:mt-0 lg:aspect-auto lg:max-w-none">
+          <div className="relative mt-5 aspect-[3/4] w-full max-w-[min(100%,60svh)] sm:max-w-[min(28rem,60svh)] lg:absolute lg:inset-x-0 lg:inset-y-6 lg:mt-0 lg:aspect-auto lg:max-w-none">
             <Image
               src={swatch.treatmentWall.src}
               alt={swatch.treatmentWall.alt}

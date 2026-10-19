@@ -21,6 +21,14 @@ function readRestingState(container: HTMLElement) {
   };
 }
 
+function readFixedHeaderHeightInPixels() {
+  const rootStyle = getComputedStyle(document.documentElement);
+  const navHeight = rootStyle.getPropertyValue("--nav-height").trim();
+  const navHeightValue = Number.parseFloat(navHeight) || 0;
+  if (navHeight.endsWith("rem")) return navHeightValue * (Number.parseFloat(rootStyle.fontSize) || 16);
+  return navHeightValue;
+}
+
 export function SharpeningExcerpt({ text, className }: { text: string; className?: string }) {
   const containerRef = useRef<HTMLParagraphElement>(null);
   const wordRefs = useRef<HTMLSpanElement[]>([]);
@@ -34,6 +42,7 @@ export function SharpeningExcerpt({ text, className }: { text: string; className
     const restingState = readRestingState(container);
     let measuredWords: MeasuredWord[] = [];
     let lineHeightInPixels = 0;
+    let fixedHeaderHeightInPixels = 0;
     let containerWidth = 1;
     let pendingFrame = 0;
     let isNearViewport = false;
@@ -41,6 +50,7 @@ export function SharpeningExcerpt({ text, className }: { text: string; className
     function measureWords() {
       if (!container) return;
       lineHeightInPixels = Number.parseFloat(getComputedStyle(container).lineHeight) || 0;
+      fixedHeaderHeightInPixels = readFixedHeaderHeightInPixels();
       containerWidth = container.clientWidth || 1;
       measuredWords = wordElements.map((element) => ({
         element,
@@ -52,9 +62,10 @@ export function SharpeningExcerpt({ text, className }: { text: string; className
     function paintWords() {
       pendingFrame = 0;
       if (!container) return;
-      const viewportHeight = window.innerHeight;
-      const revealStart = viewportHeight * excerptRevealWindow.startsAtViewportFraction;
-      const revealEnd = viewportHeight * excerptRevealWindow.endsAtViewportFraction;
+      const visibleHeightBelowHeader = window.innerHeight - fixedHeaderHeightInPixels;
+      const revealStart =
+        fixedHeaderHeightInPixels + visibleHeightBelowHeader * excerptRevealWindow.startsAtViewportFraction;
+      const revealEnd = fixedHeaderHeightInPixels + visibleHeightBelowHeader * excerptRevealWindow.endsAtViewportFraction;
       const containerTop = container.getBoundingClientRect().top;
 
       for (const word of measuredWords) {
@@ -103,21 +114,37 @@ export function SharpeningExcerpt({ text, className }: { text: string; className
     };
   }, []);
 
+  const closingPairStart = Math.max(0, words.length - 2);
+
+  function renderWord(word: string, wordPosition: number) {
+    return (
+      <span
+        key={`${word}-${wordPosition}`}
+        ref={(element) => {
+          if (element) wordRefs.current[wordPosition] = element;
+        }}
+        className="inline-block"
+      >
+        {word}
+      </span>
+    );
+  }
+
   return (
     <p ref={containerRef} className={className} style={{ position: "relative" }}>
-      {words.map((word, wordPosition) => (
+      {words.slice(0, closingPairStart).map((word, wordPosition) => (
         <span key={`${word}-${wordPosition}`}>
-          <span
-            ref={(element) => {
-              if (element) wordRefs.current[wordPosition] = element;
-            }}
-            className="inline-block"
-          >
-            {word}
-          </span>
-          {wordPosition < words.length - 1 ? " " : null}
+          {renderWord(word, wordPosition)}{" "}
         </span>
       ))}
+      <span className="whitespace-nowrap">
+        {words.slice(closingPairStart).map((word, offset) => (
+          <span key={`${word}-${closingPairStart + offset}`}>
+            {offset > 0 ? " " : null}
+            {renderWord(word, closingPairStart + offset)}
+          </span>
+        ))}
+      </span>
     </p>
   );
 }

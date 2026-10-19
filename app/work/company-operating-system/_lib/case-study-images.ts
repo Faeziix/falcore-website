@@ -114,3 +114,58 @@ export const meetingActionItemsNarrowImage: CaseStudyImage = {
   width: 1020,
   height: 599,
 };
+
+const PHONE_PROJECT_CROP_SIZE = { width: 1232, height: 1078 };
+
+export const clientKnowledgeRecordPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/client-knowledge-record-phone.webp",
+  alt: "The Brand section of a demo client's knowledge record for Northline Dental: the trading name, what the business does and its website, each marked confirmed by a teammate with a date and a history link.",
+  width: 876,
+  height: 932,
+};
+
+export const assistantApprovalCardsPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/assistant-approval-cards-phone.webp",
+  alt: "Four tasks the assistant wants to create from a sales call, each with an owner and a day, and each on its own card with Approve and Deny buttons.",
+  width: 1250,
+  height: 768,
+};
+
+export const projectTimelinePhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/project-timeline-phone.webp",
+  alt: "A demo December campaign on a timeline: script, filming and delivery task bars across the weeks of October and November, chained by dependency arrows, with a today line.",
+  ...PHONE_PROJECT_CROP_SIZE,
+};
+
+export const projectGanttPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/project-gantt-phone.webp",
+  alt: "The same project as a Gantt chart: start and due dates, the task blocking each one, and coloured bars joined by dependency lines.",
+  ...PHONE_PROJECT_CROP_SIZE,
+};
+
+export const projectBoardPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/project-board-phone.webp",
+  alt: "The same project as a board: planning and scripting columns of task cards with owners and due dates, finished tasks struck through.",
+  ...PHONE_PROJECT_CROP_SIZE,
+};
+
+export const sharedWhatsAppThreadPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/whatsapp-thread-phone.webp",
+  alt: "A WhatsApp thread with a demo lead in the shared inbox: a reply proposing a call with a reaction and read ticks, then the lead's photo of the room to film in.",
+  width: 1384,
+  height: 1374,
+};
+
+export const studioDirectorTabletImage: CaseStudyImage = {
+  src: "/work/company-operating-system/studio-director-tablet.webp",
+  alt: studioDirectorImage.alt,
+  width: 2500,
+  height: 1300,
+};
+
+export const clientApprovalRoundPhoneImage: CaseStudyImage = {
+  src: "/work/company-operating-system/studio-client-approval-round-phone.webp",
+  alt: "What the client sees when reviewing the video's shot list: a tally of approved, changed and waiting shots, and shot cards with the preview still, voiceover and on-screen text, each with Approve, Request changes and Comment.",
+  width: 1478,
+  height: 1008,
+};

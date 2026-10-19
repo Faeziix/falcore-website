@@ -11,7 +11,7 @@ export type LeadFlowNodeKind = "endpoint" | "engine" | "channel";
 
 export type LeadFlowPoint = { x: number; y: number };
 
-export type LeadFlowLayoutName = "wide" | "upright";
+export type LeadFlowLayoutName = "wide" | "compact" | "landscape" | "upright";
 
 export type LeadFlowLayout = {
   width: number;
@@ -103,6 +103,34 @@ export const leadFlowLayouts: Record<LeadFlowLayoutName, LeadFlowLayout> = {
       booked: { x: 922, y: 200 },
     },
   },
+  compact: {
+    width: 1000,
+    height: 400,
+    direction: "horizontal",
+    positions: {
+      ad: { x: 76, y: 200 },
+      engine: { x: 280, y: 200 },
+      phone: { x: 500, y: 70 },
+      whatsapp: { x: 500, y: 200 },
+      email: { x: 500, y: 330 },
+      qualified: { x: 720, y: 200 },
+      booked: { x: 924, y: 200 },
+    },
+  },
+  landscape: {
+    width: 1000,
+    height: 480,
+    direction: "horizontal",
+    positions: {
+      ad: { x: 90, y: 240 },
+      engine: { x: 295, y: 240 },
+      phone: { x: 500, y: 75 },
+      whatsapp: { x: 500, y: 240 },
+      email: { x: 500, y: 405 },
+      qualified: { x: 705, y: 240 },
+      booked: { x: 910, y: 240 },
+    },
+  },
   upright: {
     width: 360,
     height: 780,
@@ -110,9 +138,9 @@ export const leadFlowLayouts: Record<LeadFlowLayoutName, LeadFlowLayout> = {
     positions: {
       ad: { x: 180, y: 50 },
       engine: { x: 180, y: 215 },
-      phone: { x: 62, y: 395 },
+      phone: { x: 56, y: 395 },
       whatsapp: { x: 180, y: 395 },
-      email: { x: 298, y: 395 },
+      email: { x: 304, y: 395 },
       qualified: { x: 180, y: 570 },
       booked: { x: 180, y: 730 },
     },

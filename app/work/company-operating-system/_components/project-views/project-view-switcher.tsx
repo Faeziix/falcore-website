@@ -5,12 +5,13 @@ import Image from "next/image";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import type { ProjectView } from "../../_lib/case-study-chapters";
-import { containedScreenshotSizes, narrowCropSizes } from "../../_lib/screenshot-sizes";
+import { artDirectedRenditions } from "../../_lib/art-direction";
+import { containedScreenshotSizes } from "../../_lib/screenshot-sizes";
 
 const SCREENSHOT_QUALITY = 90;
 
 const viewTabVariants = cva(
-  "relative -mb-px border-b-2 pb-3 text-base transition-colors duration-300 ease-out-expo sm:text-lg",
+  "relative -mb-px min-w-11 border-b-2 pt-1.5 pb-3 text-base transition-colors duration-300 ease-out-expo sm:text-lg",
   {
     variants: {
       isSelected: {
@@ -111,26 +112,18 @@ export function ProjectViewSwitcher({ views }: { views: ProjectView[] }) {
               aria-hidden={!isSelected}
               className={viewPictureVariants({ isSelected })}
             >
-              {view.narrowImage ? (
+              {artDirectedRenditions(view, containedScreenshotSizes).map((rendition) => (
                 <Image
-                  src={view.narrowImage.src}
-                  alt={isSelected ? view.narrowImage.alt : ""}
-                  width={view.narrowImage.width}
-                  height={view.narrowImage.height}
-                  sizes={narrowCropSizes}
+                  key={rendition.key}
+                  src={rendition.image.src}
+                  alt={isSelected ? rendition.image.alt : ""}
+                  width={rendition.image.width}
+                  height={rendition.image.height}
+                  sizes={rendition.sizes}
                   quality={SCREENSHOT_QUALITY}
-                  className="h-auto w-full md:hidden"
+                  className={cn("h-auto w-full", rendition.visibilityClassName)}
                 />
-              ) : null}
-              <Image
-                src={view.image.src}
-                alt={isSelected ? view.image.alt : ""}
-                width={view.image.width}
-                height={view.image.height}
-                sizes={containedScreenshotSizes}
-                quality={SCREENSHOT_QUALITY}
-                className={cn("h-auto w-full", view.narrowImage && "hidden md:block")}
-              />
+              ))}
             </div>
           );
         })}

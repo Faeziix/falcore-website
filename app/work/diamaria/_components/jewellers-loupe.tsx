@@ -41,7 +41,7 @@ export function JewellersLoupe({ instructionId }: { instructionId: string }) {
   const { stageRef, stageHandlers, lensHandlers } = useLoupePosition();
 
   return (
-    <div className="relative h-[min(72svh,44rem)] w-full overflow-clip bg-(--diamaria-sweep) [container-type:size] md:aspect-[3200/2133] md:h-auto md:max-h-[100svh]">
+    <div className="relative aspect-[4/5] max-h-[min(72svh,44rem)] w-full overflow-clip bg-(--diamaria-sweep) [container-type:size] md:aspect-[3200/2133] md:max-h-[100svh]">
       <div
         ref={stageRef}
         style={stageStyle}
@@ -52,7 +52,7 @@ export function JewellersLoupe({ instructionId }: { instructionId: string }) {
           src={emeraldCutRawShoot.src}
           alt={emeraldCutRawShoot.alt}
           fill
-          sizes="(min-width: 768px) 100vw, 230vw"
+          sizes="(min-width: 768px) 100vw, 190vw"
           quality={PHOTOGRAPH_QUALITY}
           className="object-cover select-none"
           draggable={false}

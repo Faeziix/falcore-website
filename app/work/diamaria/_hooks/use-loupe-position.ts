@@ -8,11 +8,17 @@ import {
   POINTER_FOLLOW_SMOOTHING,
   RAW_FRAME_ASPECT_RATIO,
   RING_CENTRE_IN_RAW_FRAME,
-  clampToStage,
+  WHOLE_STAGE,
+  clampToVisibleStage,
+  measureVisibleStageBounds,
   type StagePoint,
+  type VisibleStageBounds,
 } from "../_lib/loupe-geometry";
 
 const SETTLED_DISTANCE = 0.0005;
+const TAP_MOVEMENT_TOLERANCE_PIXELS = 10;
+
+type PendingTap = { pointerId: number; clientX: number; clientY: number };
 
 const arrowKeyDirections: Record<string, StagePoint> = {
   ArrowLeft: { x: -1, y: 0 },
@@ -27,6 +33,7 @@ export function useLoupePosition() {
   const targetPointRef = useRef<StagePoint>(RING_CENTRE_IN_RAW_FRAME);
   const animationFrameRef = useRef<number | null>(null);
   const isDraggingLensRef = useRef(false);
+  const pendingTapRef = useRef<PendingTap | null>(null);
 
   const paintPoint = useCallback((point: StagePoint) => {
     const stage = stageRef.current;
@@ -51,23 +58,38 @@ export function useLoupePosition() {
     animationFrameRef.current = requestAnimationFrame(glideOneFrame);
   }, [paintPoint]);
 
+  const readVisibleStageBounds = useCallback((): VisibleStageBounds => {
+    const stage = stageRef.current;
+    const frame = stage?.parentElement;
+    if (!stage || !frame) return WHOLE_STAGE;
+    return measureVisibleStageBounds(stage.getBoundingClientRect(), frame.getBoundingClientRect());
+  }, []);
+
   const glideTo = useCallback(
     (point: StagePoint) => {
-      targetPointRef.current = clampToStage(point);
+      targetPointRef.current = clampToVisibleStage(point, readVisibleStageBounds());
       if (animationFrameRef.current === null) startGlide();
     },
-    [startGlide]
+    [readVisibleStageBounds, startGlide]
   );
 
   const jumpTo = useCallback(
     (point: StagePoint) => {
-      const clampedPoint = clampToStage(point);
+      const clampedPoint = clampToVisibleStage(point, readVisibleStageBounds());
       targetPointRef.current = clampedPoint;
       currentPointRef.current = clampedPoint;
       paintPoint(clampedPoint);
     },
-    [paintPoint]
+    [paintPoint, readVisibleStageBounds]
   );
+
+  useEffect(() => {
+    const frame = stageRef.current?.parentElement;
+    if (!frame) return;
+    const keepLensInsideResizedFrame = new ResizeObserver(() => jumpTo(targetPointRef.current));
+    keepLensInsideResizedFrame.observe(frame);
+    return () => keepLensInsideResizedFrame.disconnect();
+  }, [jumpTo]);
 
   const stagePointFromPointer = useCallback((event: PointerEvent<HTMLElement>): StagePoint | null => {
     const stage = stageRef.current;
@@ -102,14 +124,27 @@ export function useLoupePosition() {
     [glideTo]
   );
 
-  const handleStagePointerDown = useCallback(
+  const handleStagePointerDown = useCallback((event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "mouse" || isDraggingLensRef.current) return;
+    pendingTapRef.current = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY };
+  }, []);
+
+  const handleStagePointerUp = useCallback(
     (event: PointerEvent<HTMLDivElement>) => {
-      if (event.pointerType === "mouse" || isDraggingLensRef.current) return;
+      const pendingTap = pendingTapRef.current;
+      pendingTapRef.current = null;
+      if (!pendingTap || pendingTap.pointerId !== event.pointerId) return;
+      const movedDistance = Math.hypot(event.clientX - pendingTap.clientX, event.clientY - pendingTap.clientY);
+      if (movedDistance > TAP_MOVEMENT_TOLERANCE_PIXELS) return;
       const point = stagePointFromPointer(event);
       if (point) glideTo(point);
     },
     [glideTo, stagePointFromPointer]
   );
+
+  const handleStagePointerCancel = useCallback(() => {
+    pendingTapRef.current = null;
+  }, []);
 
   const handleLensPointerDown = useCallback((event: PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === "mouse") return;
@@ -154,6 +189,8 @@ export function useLoupePosition() {
       onPointerMove: handleStagePointerMove,
       onPointerLeave: handleStagePointerLeave,
       onPointerDown: handleStagePointerDown,
+      onPointerUp: handleStagePointerUp,
+      onPointerCancel: handleStagePointerCancel,
     },
     lensHandlers: {
       onPointerDown: handleLensPointerDown,

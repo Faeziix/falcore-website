@@ -28,17 +28,22 @@ const nodeIcons: Record<Exclude<LeadFlowNodeId, "engine">, LucideIcon> = {
   booked: CalendarCheck,
 };
 
+const SIDE_BY_SIDE_CARD = "items-center gap-3 px-3 py-3";
+const STACKED_CARD = "flex-col items-center gap-2 px-3 py-3 text-center";
+
 const nodeCardVariants = cva(
   "relative flex border bg-(--convoflow-node-surface) text-case-ink",
   {
     variants: {
       kind: {
-        endpoint: "items-center gap-3 px-3 py-3",
-        engine: "items-center gap-3 px-3.5 py-3.5",
-        channel: "flex-col items-center gap-2 px-2 py-3 text-center",
+        endpoint: "",
+        engine: "",
+        channel: "flex-col items-center gap-2 py-3 text-center",
       },
       layoutName: {
         wide: "",
+        compact: "",
+        landscape: "",
         upright: "",
       },
       phase: {
@@ -48,15 +53,41 @@ const nodeCardVariants = cva(
       },
     },
     compoundVariants: [
+      { kind: "endpoint", layoutName: ["wide", "upright"], className: SIDE_BY_SIDE_CARD },
+      { kind: "engine", layoutName: ["wide", "upright"], className: "items-center gap-3 px-3.5 py-3.5" },
+      { kind: ["endpoint", "engine"], layoutName: "compact", className: STACKED_CARD },
       { kind: "endpoint", layoutName: "wide", className: "w-[10.5rem]" },
       { kind: "engine", layoutName: "wide", className: "w-[12rem]" },
-      { kind: "channel", layoutName: "wide", className: "w-[7.5rem]" },
+      { kind: "channel", layoutName: "wide", className: "w-[7.5rem] px-2" },
+      { kind: "endpoint", layoutName: "compact", className: "w-[8.5rem]" },
+      { kind: "engine", layoutName: "compact", className: "w-[9.25rem]" },
+      { kind: "channel", layoutName: "compact", className: "w-[7rem] px-2" },
       { kind: "endpoint", layoutName: "upright", className: "w-[12.5rem]" },
       { kind: "engine", layoutName: "upright", className: "w-[13.5rem]" },
-      { kind: "channel", layoutName: "upright", className: "w-[6.25rem]" },
+      { kind: "channel", layoutName: "upright", className: "w-[min(6.25rem,30cqw)] px-1.5" },
+      { layoutName: "landscape", className: "w-[min(6.25rem,17cqw)] flex-col items-center gap-1.5 px-1.5 py-2 text-center" },
     ],
   }
 );
+
+const nodeLabelVariants = cva("block font-medium tracking-[-0.01em]", {
+  variants: {
+    kind: {
+      endpoint: "text-[0.9375rem]",
+      engine: "text-[0.9375rem]",
+      channel: "text-sm",
+    },
+    layoutName: {
+      wide: "",
+      compact: "",
+      landscape: "text-[0.8125rem] @min-[40rem]:text-sm",
+      upright: "",
+    },
+  },
+  compoundVariants: [
+    { kind: "channel", layoutName: "upright", className: "text-[0.8125rem] @min-[18rem]:text-sm" },
+  ],
+});
 
 const arrivalTickVariants = cva(
   "absolute -top-2 -right-2 grid size-5 place-items-center bg-(--convoflow-tick) text-(--convoflow-tick-ink)",
@@ -112,17 +143,10 @@ export function LeadFlowNodeCard({
       className="absolute -translate-x-1/2 -translate-y-1/2"
       style={positionWithinLayout(layout.positions[node.id], layout)}
     >
-      <div style={arrivalTiming} className={nodeCardVariants({ kind: node.kind, layoutName, phase })}>
+      <div style={arrivalTiming} className={cn(nodeCardVariants({ kind: node.kind, layoutName, phase }))}>
         <LeadFlowNodeIcon nodeId={node.id} />
         <span className="min-w-0 leading-tight">
-          <span
-            className={cn(
-              "block font-medium tracking-[-0.01em]",
-              node.kind === "channel" ? "text-sm" : "text-[0.9375rem]"
-            )}
-          >
-            {node.label}
-          </span>
+          <span className={cn(nodeLabelVariants({ kind: node.kind, layoutName }))}>{node.label}</span>
           {node.detail ? (
             <span className="mt-1 block text-[0.8125rem] text-case-ink-soft">{node.detail}</span>
           ) : null}

@@ -14,7 +14,7 @@ export function SelfEditingChapter() {
       <figure>
         <ul
           aria-label="Her five pages and their sections"
-          className="grid grid-cols-2 items-start gap-3 sm:gap-4 lg:grid-cols-5"
+          className="grid grid-cols-1 items-start gap-3 sm:gap-4 lg:grid-cols-5"
         >
           {editorPages.map((page) => (
             <EditorPageSheet key={page.path} page={page} />

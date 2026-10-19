@@ -37,6 +37,13 @@ export const eliteNeroProductPageImage: CaseStudyImage = {
   height: 1960,
 };
 
+export const eliteNeroProductPhoneImage: CaseStudyImage = {
+  src: `${IMAGE_DIRECTORY}/product-elite-nero-phone-title.jpg`,
+  alt: "The Elite Nero product page on a phone: the charcoal marble-look tile, its tags, product codes 105 and 6078, and a Contact Us to Buy button.",
+  width: 828,
+  height: 1120,
+};
+
 export const productListingImage: CaseStudyImage = {
   src: `${IMAGE_DIRECTORY}/products-desktop-0.jpg`,
   alt: "The products page showing 345 products, a catalogue filter with a count beside each option, a sort menu and room-scene product cards.",
@@ -45,10 +52,10 @@ export const productListingImage: CaseStudyImage = {
 };
 
 export const productListingPhoneImage: CaseStudyImage = {
-  src: `${IMAGE_DIRECTORY}/products-filters-phone-crop.jpg`,
-  alt: "The catalogue filter with a count beside each option, next to the total of 345 products and the first product card.",
-  width: 1280,
-  height: 920,
+  src: `${IMAGE_DIRECTORY}/products-filters-sheet-phone.jpg`,
+  alt: "The filters sheet on a phone: eleven catalogues, each with a count of its products beside it, above the closed Product Type, Design Style and Finish filters.",
+  width: 828,
+  height: 1240,
 };
 
 export const similarSurfacesImage: CaseStudyImage = {
@@ -59,10 +66,10 @@ export const similarSurfacesImage: CaseStudyImage = {
 };
 
 export const similarSurfacesPhoneImage: CaseStudyImage = {
-  src: `${IMAGE_DIRECTORY}/similar-surfaces-phone-crop.jpg`,
-  alt: "Two similar-surface cards, Dulce Bianco and Lava Blue bookmatch, both marble-look and glossy.",
-  width: 1280,
-  height: 805,
+  src: `${IMAGE_DIRECTORY}/similar-surfaces-phone-cards.jpg`,
+  alt: "Similar Products under the Alma bookmatch slab on a phone: Ariston Slab and Alpha Satvario, both marble-look and glossy, with arrows to see more.",
+  width: 828,
+  height: 880,
 };
 
 export const galleryRowsMobileImage: CaseStudyImage = {

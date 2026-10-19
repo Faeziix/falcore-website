@@ -27,7 +27,7 @@ export function PaletteSpendStrip() {
             <span
               className={
                 swatch.isLabelVisible
-                  ? "hidden truncate font-(family-name:--sanaa-ouahmane-label-family) text-[0.625rem] tracking-(--sanaa-ouahmane-label-tracking) uppercase md:block"
+                  ? "hidden truncate font-(family-name:--sanaa-ouahmane-label-family) text-[0.8125rem] tracking-(--sanaa-ouahmane-label-tracking) uppercase xl:block"
                   : "sr-only"
               }
             >

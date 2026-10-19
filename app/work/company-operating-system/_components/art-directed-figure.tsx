@@ -1,15 +1,13 @@
 import { CaseStudyFigure } from "@/app/work/_components/case-study-figure";
 import { cn } from "@/lib/utils";
-import type { ArtDirectedImage } from "../_lib/case-study-chapters";
-import { narrowCropSizes } from "../_lib/screenshot-sizes";
+import { artDirectedRenditions, type ArtDirectedImage } from "../_lib/art-direction";
 
 export function ArtDirectedFigure({
-  image,
-  narrowImage,
   sizes,
   caption,
   isPriority = false,
   className,
+  ...artDirectedImage
 }: ArtDirectedImage & {
   sizes: string;
   caption?: string;
@@ -18,23 +16,17 @@ export function ArtDirectedFigure({
 }) {
   return (
     <>
-      {narrowImage ? (
+      {artDirectedRenditions(artDirectedImage, sizes).map((rendition) => (
         <CaseStudyFigure
-          image={narrowImage}
-          sizes={narrowCropSizes}
+          key={rendition.key}
+          image={rendition.image}
+          sizes={rendition.sizes}
           caption={caption}
           frame="hairline"
-          className={cn("md:hidden", className)}
+          isPriority={isPriority}
+          className={cn(rendition.visibilityClassName, className)}
         />
-      ) : null}
-      <CaseStudyFigure
-        image={image}
-        sizes={sizes}
-        caption={caption}
-        frame="hairline"
-        isPriority={isPriority}
-        className={cn(narrowImage && "hidden md:block", className)}
-      />
+      ))}
     </>
   );
 }

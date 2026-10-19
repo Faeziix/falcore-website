@@ -12,7 +12,7 @@ const chapterSectionVariants = cva("py-(--diamaria-chapter-space) text-case-ink"
   defaultVariants: { tone: "paper" },
 });
 
-const chapterMediaVariants = cva("mt-14 lg:mt-24", {
+const chapterMediaVariants = cva("mt-10 md:mt-14 lg:mt-24", {
   variants: {
     width: {
       contained: "page-container",
@@ -41,7 +41,7 @@ export function DiaMariaChapter({ id, title, intro, tone, width, children, class
           <h2 id={headingId} className="font-case-display text-display-md tracking-[-0.01em] text-case-ink">
             {title}
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-balance text-[1.0625rem] leading-[1.75] text-case-ink-soft">
+          <p className="mx-auto mt-4 max-w-xl md:mt-6 text-balance text-[1.0625rem] leading-[1.75] text-case-ink-soft">
             {intro}
           </p>
         </div>

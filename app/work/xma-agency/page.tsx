@@ -11,6 +11,7 @@ import { WhereItStartedChapter } from "./_components/where-it-started-chapter";
 import { filmsChapter, marketsChapter } from "./_lib/case-study-chapters";
 import {
   filmsByProductDesktop,
+  filmsByProductPhone,
   marketPageDesktop,
   marketPagePhone,
   mediaHomeDesktop,
@@ -38,7 +39,7 @@ export default function XmaAgencyCaseStudyPage() {
           />
         }
       />
-      <CaptureChapter chapter={filmsChapter} desktop={filmsByProductDesktop} />
+      <CaptureChapter chapter={filmsChapter} desktop={filmsByProductDesktop} phone={filmsByProductPhone} />
       <CaptureChapter chapter={marketsChapter} desktop={marketPageDesktop} phone={marketPagePhone} tone="raised" />
       <CallToAdsChapter />
       <OneKitChapter />

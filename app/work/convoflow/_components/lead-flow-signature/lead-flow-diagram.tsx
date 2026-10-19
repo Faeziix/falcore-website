@@ -9,10 +9,12 @@ import type { LeadFlowPhase } from "../../_lib/lead-flow-geometry";
 import { LeadFlowNodeCard } from "./lead-flow-node";
 import { LeadFlowWire } from "./lead-flow-wire";
 
-const diagramFrameVariants = cva("relative w-full", {
+const diagramFrameVariants = cva("@container relative w-full", {
   variants: {
     layoutName: {
       wide: "aspect-[1000/400]",
+      compact: "aspect-[1000/400]",
+      landscape: "aspect-[1000/480]",
       upright: "mx-auto aspect-[360/780] max-w-[24rem]",
     },
   },

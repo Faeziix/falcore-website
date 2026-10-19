@@ -110,6 +110,13 @@ export const olympicCollectionPieces = diaMariaImage(
   1010
 );
 
+export const olympicCollectionPiecesOnPhone = diaMariaImage(
+  "site-collection-olympic-grid-mobile-pieces.webp",
+  "The Olympic collection page on a phone: four five-ring pendants in a two-by-two grid on the same white ground, each with its name and metal",
+  828,
+  1446
+);
+
 export const pinkRadiantProductPageDesktop = diaMariaImage(
   "site-product-pink-radiant-desktop-gallery.webp",
   "A product page on diamaria.com: the pink radiant ring beside its name, Price on request, Enquire and Book an appointment",

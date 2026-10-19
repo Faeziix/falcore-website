@@ -1,30 +1,32 @@
-import type { CaseStudyImage } from "@/app/work/_lib/case-study-types";
+import type { ArtDirectedImage } from "./art-direction";
 import {
   assistantApprovalCardsImage,
+  assistantApprovalCardsPhoneImage,
   clientApprovalRoundImage,
+  clientApprovalRoundPhoneImage,
   meetingActionItemsNarrowImage,
   meetingNotesImage,
   projectBoardImage,
   projectBoardNarrowImage,
+  projectBoardPhoneImage,
   projectGanttImage,
   projectGanttNarrowImage,
+  projectGanttPhoneImage,
   projectTimelineImage,
   projectTimelineNarrowImage,
+  projectTimelinePhoneImage,
   sharedWhatsAppInboxImage,
   sharedWhatsAppInboxNarrowImage,
+  sharedWhatsAppThreadPhoneImage,
   studioDirectorImage,
   studioDirectorNarrowImage,
+  studioDirectorTabletImage,
 } from "./case-study-images";
 
 export type ChapterCopy = {
   id: string;
   title: string;
   intro: string;
-};
-
-export type ArtDirectedImage = {
-  image: CaseStudyImage;
-  narrowImage?: CaseStudyImage;
 };
 
 export type ScreenshotChapterContent = ChapterCopy & ArtDirectedImage;
@@ -47,6 +49,7 @@ export const approvalChapter: ScreenshotChapterContent = {
   intro:
     "The assistant reads freely, then puts every change it wants to make on a card you approve or deny. It can take more than 140 actions across the system, but only the ones the person asking is allowed to.",
   image: assistantApprovalCardsImage,
+  phoneImage: assistantApprovalCardsPhoneImage,
 };
 
 export const projectViewsChapter: ChapterCopy = {
@@ -61,10 +64,23 @@ export const projectViews: ProjectView[] = [
     id: "timeline",
     label: "Timeline",
     image: projectTimelineImage,
-    narrowImage: projectTimelineNarrowImage,
+    tabletImage: projectTimelineNarrowImage,
+    phoneImage: projectTimelinePhoneImage,
   },
-  { id: "gantt", label: "Gantt", image: projectGanttImage, narrowImage: projectGanttNarrowImage },
-  { id: "board", label: "Board", image: projectBoardImage, narrowImage: projectBoardNarrowImage },
+  {
+    id: "gantt",
+    label: "Gantt",
+    image: projectGanttImage,
+    tabletImage: projectGanttNarrowImage,
+    phoneImage: projectGanttPhoneImage,
+  },
+  {
+    id: "board",
+    label: "Board",
+    image: projectBoardImage,
+    tabletImage: projectBoardNarrowImage,
+    phoneImage: projectBoardPhoneImage,
+  },
 ];
 
 export const meetingsChapter: ScreenshotChapterContent = {
@@ -73,7 +89,7 @@ export const meetingsChapter: ScreenshotChapterContent = {
   intro:
     "Every recorded call becomes a summary, decisions and action items with owners, and is matched to its client automatically.",
   image: meetingNotesImage,
-  narrowImage: meetingActionItemsNarrowImage,
+  phoneImage: meetingActionItemsNarrowImage,
 };
 
 export const inboxChapter: ScreenshotChapterContent = {
@@ -82,17 +98,22 @@ export const inboxChapter: ScreenshotChapterContent = {
   intro:
     "The company's WhatsApp number is a shared inbox for the whole sales team. A message from a new number becomes a lead on its own.",
   image: sharedWhatsAppInboxImage,
-  narrowImage: sharedWhatsAppInboxNarrowImage,
+  tabletImage: sharedWhatsAppInboxNarrowImage,
+  phoneImage: sharedWhatsAppThreadPhoneImage,
 };
 
 export const studioChapter: ChapterCopy & {
   director: ArtDirectedImage;
-  clientRoundImage: CaseStudyImage;
+  clientRound: ArtDirectedImage;
 } = {
   id: "a-film-studio-with-a-director",
   title: "A film studio with a director you can talk to",
   intro:
     "Producers ask the director for changes in plain words, and it edits the shot list with one undo for all of it. Then the client approves the shot list one shot at a time.",
-  director: { image: studioDirectorImage, narrowImage: studioDirectorNarrowImage },
-  clientRoundImage: clientApprovalRoundImage,
+  director: {
+    image: studioDirectorImage,
+    tabletImage: studioDirectorTabletImage,
+    phoneImage: studioDirectorNarrowImage,
+  },
+  clientRound: { image: clientApprovalRoundImage, phoneImage: clientApprovalRoundPhoneImage },
 };

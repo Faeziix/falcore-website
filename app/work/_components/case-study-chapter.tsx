@@ -13,7 +13,7 @@ const caseStudyChapterVariants = cva("", {
   defaultVariants: { tone: "paper" },
 });
 
-const chapterTitleVariants = cva("max-w-4xl text-display-lg font-medium", {
+const chapterTitleVariants = cva("max-w-4xl text-balance text-display-lg font-medium", {
   variants: {
     tone: {
       paper: "font-case-display text-case-ink",
@@ -24,7 +24,7 @@ const chapterTitleVariants = cva("max-w-4xl text-display-lg font-medium", {
   defaultVariants: { tone: "paper" },
 });
 
-const chapterIntroVariants = cva("mt-6 max-w-2xl text-balance text-lead", {
+const chapterIntroVariants = cva("mt-4 max-w-2xl text-balance text-lead md:mt-6", {
   variants: {
     tone: {
       paper: "text-case-ink-soft",
@@ -35,7 +35,7 @@ const chapterIntroVariants = cva("mt-6 max-w-2xl text-balance text-lead", {
   defaultVariants: { tone: "paper" },
 });
 
-const chapterRuleVariants = cva("border-t pt-8", {
+const chapterRuleVariants = cva("border-t pt-6 md:pt-8", {
   variants: {
     tone: {
       paper: "border-case-rule",
@@ -45,6 +45,8 @@ const chapterRuleVariants = cva("border-t pt-8", {
   },
   defaultVariants: { tone: "paper" },
 });
+
+const CHAPTER_MEDIA_OFFSET_CLASS_NAME = "mt-10 md:mt-14 lg:mt-20";
 
 type CaseStudyChapterProps = VariantProps<typeof caseStudyChapterVariants> & {
   id: string;
@@ -70,7 +72,7 @@ export function CaseStudyChapter({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn(caseStudyChapterVariants({ tone }), "section-spacing", className)}
+      className={cn(caseStudyChapterVariants({ tone }), "py-16 sm:py-20 md:section-spacing", className)}
     >
       <div className="page-container">
         <div className={chapterRuleVariants({ tone })}>
@@ -79,9 +81,9 @@ export function CaseStudyChapter({
           </h2>
           <p className={chapterIntroVariants({ tone })}>{intro}</p>
         </div>
-        {children && !isMediaFullBleed ? <div className="mt-14 lg:mt-20">{children}</div> : null}
+        {children && !isMediaFullBleed ? <div className={CHAPTER_MEDIA_OFFSET_CLASS_NAME}>{children}</div> : null}
       </div>
-      {children && isMediaFullBleed ? <div className="mt-14 lg:mt-20">{children}</div> : null}
+      {children && isMediaFullBleed ? <div className={CHAPTER_MEDIA_OFFSET_CLASS_NAME}>{children}</div> : null}
     </section>
   );
 }

@@ -25,7 +25,7 @@ const sourceRowVariants = cva(
 );
 
 const citationMarkerVariants = cva(
-  "ml-auto grid size-7 shrink-0 place-items-center rounded-[6px] font-(family-name:--company-operating-system-mono-family) text-xs tabular-nums transition-[background-color,color,border-color] duration-500 ease-out-expo",
+  "ml-auto grid size-7 shrink-0 place-items-center rounded-[6px] font-(family-name:--company-operating-system-mono-family) text-[0.8125rem] tabular-nums transition-[background-color,color,border-color] duration-500 ease-out-expo",
   {
     variants: {
       state: {
@@ -65,6 +65,7 @@ type SourceRowProps = {
   restrictionLabel?: string;
   isRestrictionRevealed?: boolean;
   connectorEmphasis?: ConnectorEmphasis;
+  className?: string;
 };
 
 export function SourceRow({
@@ -77,11 +78,12 @@ export function SourceRow({
   restrictionLabel,
   isRestrictionRevealed = false,
   connectorEmphasis,
+  className,
 }: SourceRowProps) {
   const isRestricted = state === "restricted";
 
   return (
-    <li className={sourceRowVariants({ state })}>
+    <li className={cn(sourceRowVariants({ state }), className)}>
       <span className="grid size-9 shrink-0 place-items-center rounded-[8px] bg-(--company-operating-system-card-active) text-case-ink-soft">
         {isRestricted && isRestrictionRevealed ? (
           <Lock aria-hidden strokeWidth={1.75} className="size-4" />
@@ -89,8 +91,8 @@ export function SourceRow({
           <SourceKindIcon kind={kind} className="size-4" />
         )}
       </span>
-      <span className="min-w-0">
-        <span className="flex items-center gap-1.5 text-xs text-case-ink-soft">
+      <span className="min-w-0 flex-1">
+        <span className="flex items-center gap-1.5 text-[0.8125rem] text-case-ink-soft">
           {kindLabel}
           {hasReadTicks ? (
             <CheckCheck aria-label="Read" strokeWidth={2} className="size-3.5 text-case-accent" />
@@ -101,7 +103,7 @@ export function SourceRow({
         </span>
         <span
           className={cn(
-            "mt-0.5 block truncate text-[0.9375rem] transition-colors duration-500 ease-out-expo",
+            "mt-0.5 block text-[0.9375rem] leading-snug text-balance transition-colors duration-500 ease-out-expo sm:truncate",
             isRestricted ? "text-case-ink-soft" : "text-case-ink"
           )}
         >

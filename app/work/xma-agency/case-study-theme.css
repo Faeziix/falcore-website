@@ -27,6 +27,8 @@
   --xma-agency-tone-boost: var(--xma-agency-palette-boost);
   --xma-agency-highlight: var(--xma-agency-palette-lime);
 
+  --xma-agency-phone-frame-width: clamp(11.5rem, calc((100svh - 15rem) * 828 / 1792), 20rem);
+
   --xma-agency-display-weight: 800;
   --xma-agency-display-tracking: -0.045em;
   --xma-agency-statement-weight: 700;

@@ -21,7 +21,7 @@ const revealVariants = cva(
 );
 
 const inlineCitationVariants = cva(
-  "ml-1 inline-grid h-[1.35em] min-w-[1.35em] translate-y-[-0.1em] place-items-center rounded-[5px] px-1 align-middle font-(family-name:--company-operating-system-mono-family) text-[0.6875rem] tabular-nums transition-colors duration-500 ease-out-expo",
+  "ml-1 inline-grid h-[1.35em] min-w-[1.35em] translate-y-[-0.1em] place-items-center rounded-[5px] px-1 align-middle font-(family-name:--company-operating-system-mono-family) text-[0.8125rem] tabular-nums transition-colors duration-500 ease-out-expo",
   {
     variants: {
       isLit: {

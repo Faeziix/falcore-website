@@ -11,11 +11,25 @@ export const skinCareDepartmentFrame: CaseStudyImage = {
   height: 1532,
 };
 
+export const skinCareDepartmentPhoneFrame: CaseStudyImage = {
+  src: `${CORPOFINO_IMAGE_ROOT}/department-hero-skin-care-en-mobile.webp`,
+  alt: "The Skin Care department page on a phone: the title “Skin Care”, a short description and the treatment count on a full blush field, above a close-up of a cheekbone with a single drop of serum.",
+  width: 828,
+  height: 1600,
+};
+
 export const treatmentPageFrame: CaseStudyImage = {
   src: `${CORPOFINO_IMAGE_ROOT}/service-page-booking-panel-en-desktop-band.webp`,
   alt: "The Moroccan Bath with Herbs treatment page: a large title and description on a linen field, with a “Book this treatment” panel holding a Call to book button and a link to the price list.",
   width: 2880,
   height: 1184,
+};
+
+export const treatmentPagePhoneFrame: CaseStudyImage = {
+  src: `${CORPOFINO_IMAGE_ROOT}/service-page-booking-panel-en-mobile.webp`,
+  alt: "The Moroccan Bath with Herbs treatment page on a phone: a large title and description on a linen field, then a “Book this treatment” panel with a Call to book button and a link to the price list.",
+  width: 828,
+  height: 1730,
 };
 
 export const priceMenuFrame: CaseStudyImage = {

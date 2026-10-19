@@ -16,9 +16,9 @@ export function CaseStudyOutcomes({
         {outcomes.map((outcome) => (
           <li
             key={outcome.statement}
-            className="grid gap-3 border-t border-case-rule py-8 lg:grid-cols-12 lg:gap-8"
+            className="grid gap-2.5 border-t border-case-rule py-6 md:gap-3 md:py-8 lg:grid-cols-12 lg:gap-8"
           >
-            <p className="font-case-display text-display-sm text-case-ink lg:col-span-6">
+            <p className="text-balance font-case-display text-display-sm text-case-ink lg:col-span-6">
               {outcome.statement}
             </p>
             <p className="max-w-xl text-case-ink-soft lg:col-span-5 lg:col-start-8">

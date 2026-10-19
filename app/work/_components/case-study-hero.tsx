@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { cva } from "class-variance-authority";
 import { textLinkVariants } from "@/components/ui/text-link";
-import { externalLinkProps } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { CASE_STUDY_INDEX_PATH } from "../_lib/case-study-index";
 import type { CaseStudySummary } from "../_lib/case-study-types";
+import { LiveSiteLink } from "./live-site-link";
 
 const heroRevealDelayMilliseconds = {
   backLink: 0,
@@ -15,21 +15,32 @@ const heroRevealDelayMilliseconds = {
   media: 520,
 };
 
+const FACT_COUNT_THAT_FITS_ONE_TABLET_ROW = 4;
+
 function revealDelay(milliseconds: number) {
   return { animationDelay: `${milliseconds}ms` };
 }
 
+const factsRowVariants = cva(
+  "mt-10 grid animate-rise-in sm:grid-cols-2 sm:gap-x-6 sm:gap-y-6 md:mt-12",
+  {
+    variants: {
+      tabletLayout: {
+        oneRow: "md:grid-cols-none md:auto-cols-fr md:grid-flow-col",
+        threeColumns: "md:grid-cols-3 lg:grid-cols-none lg:auto-cols-fr lg:grid-flow-col",
+      },
+    },
+    defaultVariants: { tabletLayout: "oneRow" },
+  }
+);
+
 function CaseStudyFact({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="border-t border-case-rule pt-4">
+    <div className="grid grid-cols-[5.5rem_minmax(0,1fr)] items-baseline gap-x-4 border-t border-case-rule py-3.5 last:border-b sm:block sm:pt-4 sm:pb-0 sm:last:border-b-0">
       <dt className="text-sm text-case-ink-soft">{label}</dt>
-      <dd className="mt-1.5 text-case-ink">{children}</dd>
+      <dd className="text-case-ink sm:mt-1.5">{children}</dd>
     </div>
   );
-}
-
-function liveSiteLabel(liveUrl: string) {
-  return new URL(liveUrl).hostname.replace(/^www\./, "");
 }
 
 export function CaseStudyHero({
@@ -41,6 +52,8 @@ export function CaseStudyHero({
   media?: ReactNode;
   clientNameClassName?: string;
 }) {
+  const factCount = 3 + Number(Boolean(caseStudy.team)) + Number(Boolean(caseStudy.liveUrl));
+
   return (
     <header>
       <div className="page-container">
@@ -51,7 +64,7 @@ export function CaseStudyHero({
             tone: "muted",
             size: "sm",
             underline: "hover",
-            className: "text-case-ink-soft hover:text-case-ink animate-rise-in",
+            className: "-my-3 min-h-11 text-case-ink-soft hover:text-case-ink animate-rise-in",
           })}
         >
           All work
@@ -60,7 +73,7 @@ export function CaseStudyHero({
           <h1
             style={revealDelay(heroRevealDelayMilliseconds.clientName)}
             className={cn(
-              "mt-8 font-case-display text-display-xl font-medium text-case-ink animate-mask-rise",
+              "mt-6 text-balance font-case-display text-display-xl font-medium text-case-ink animate-mask-rise md:mt-8",
               clientNameClassName
             )}
           >
@@ -69,13 +82,15 @@ export function CaseStudyHero({
         </div>
         <p
           style={revealDelay(heroRevealDelayMilliseconds.headline)}
-          className="mt-6 max-w-3xl text-balance text-lead text-case-ink-soft animate-rise-in"
+          className="mt-5 max-w-3xl text-balance text-lead text-case-ink-soft animate-rise-in md:mt-6"
         >
           {caseStudy.headline}
         </p>
         <dl
           style={revealDelay(heroRevealDelayMilliseconds.facts)}
-          className="mt-12 grid grid-cols-2 gap-x-6 gap-y-6 animate-rise-in md:auto-cols-fr md:grid-flow-col"
+          className={factsRowVariants({
+            tabletLayout: factCount > FACT_COUNT_THAT_FITS_ONE_TABLET_ROW ? "threeColumns" : "oneRow",
+          })}
         >
           <CaseStudyFact label="Year">{caseStudy.year}</CaseStudyFact>
           <CaseStudyFact label="What I did">{caseStudy.services.join(", ")}</CaseStudyFact>
@@ -83,14 +98,7 @@ export function CaseStudyHero({
           {caseStudy.team ? <CaseStudyFact label="Team">{caseStudy.team}</CaseStudyFact> : null}
           {caseStudy.liveUrl ? (
             <CaseStudyFact label="Live site">
-              <a
-                href={caseStudy.liveUrl}
-                {...externalLinkProps}
-                className="inline-flex items-center gap-1.5 underline decoration-case-rule underline-offset-[0.3em] transition-colors hover:decoration-current"
-              >
-                {liveSiteLabel(caseStudy.liveUrl)}
-                <ArrowUpRight aria-hidden className="size-4" />
-              </a>
+              <LiveSiteLink liveUrl={caseStudy.liveUrl} />
             </CaseStudyFact>
           ) : null}
         </dl>
@@ -98,7 +106,7 @@ export function CaseStudyHero({
       {media ? (
         <div
           style={revealDelay(heroRevealDelayMilliseconds.media)}
-          className="mt-16 animate-rise-in lg:mt-24"
+          className="mt-12 animate-rise-in md:mt-16 lg:mt-24"
         >
           {media}
         </div>

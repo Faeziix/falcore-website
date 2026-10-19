@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import type { StripLanguage } from "../_lib/department-swatches";
 
 const languageOptionVariants = cva(
-  "h-10 min-w-24 px-4 text-sm transition-colors duration-200 focus-visible:-outline-offset-4 focus-visible:outline-current",
+  "h-11 min-w-24 px-4 text-sm transition-colors duration-200 focus-visible:-outline-offset-4 focus-visible:outline-current",
   {
     variants: {
       isSelected: {

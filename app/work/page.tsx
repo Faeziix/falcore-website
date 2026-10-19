@@ -15,12 +15,12 @@ export default function WorkIndexPage() {
   return (
     <>
       <SiteNavigation />
-      <main className="pt-32">
-        <div className="page-container pb-[var(--section-space)]">
+      <main className="pt-28 md:pt-32">
+        <div className="page-container pb-16 sm:pb-20 md:pb-(--section-space)">
           <h1 className="max-w-5xl text-display-xl font-medium text-foreground animate-rise-in">
             Work
           </h1>
-          <p className="mt-6 max-w-2xl text-balance text-lead text-foreground-soft animate-rise-in [animation-delay:120ms]">
+          <p className="mt-5 max-w-2xl text-balance text-lead text-foreground-soft animate-rise-in [animation-delay:120ms]">
             Websites, apps and AI systems I designed and built, and what they changed for each business.
           </p>
           <CaseStudyIndexList />
