@@ -5,20 +5,16 @@ import BrowserChrome from "./BrowserChrome";
 import BrowserTabBar from "./BrowserTabBar";
 import BrowserAddressBar from "./BrowserAddressBar";
 import BrowserContent from "./BrowserContent";
-import HorizontalScrollGallery from "./HorizontalScrollGallery";
+import MobileShowcaseCarousel from "./MobileShowcaseCarousel";
 import ScrollReveal from "@/components/scroll-reveal";
+import { SectionHeading } from "@/components/ui/section-heading";
 
-export interface ShowcaseWebsite {
-  id: string;
-  title: string;
-  externalUrl: string;
-  thumbnailUrl: string;
-  mobileThumbnailUrl: string;
-  width: number;
-  height: number;
-  mobileWidth: number;
-  mobileHeight: number;
-}
+export type { ShowcaseWebsite } from "@/lib/data/showcase-websites";
+import {
+  SHOWCASE_SECTION_INTRO,
+  SHOWCASE_SECTION_TITLE,
+  type ShowcaseWebsite,
+} from "@/lib/data/showcase-websites";
 
 interface BrowserShowcaseClientProps {
   websites: ShowcaseWebsite[];
@@ -43,20 +39,17 @@ const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
     <div className="w-full">
       {/* Mobile: horizontal scroll gallery (heading is inside the sticky area) */}
       <div className="md:hidden">
-        <HorizontalScrollGallery websites={websites} />
+        <MobileShowcaseCarousel websites={websites} />
       </div>
 
       {/* Desktop: heading + tabbed browser mockup */}
       <div className="hidden md:block">
         <ScrollReveal>
-          <div className="mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tighter">
-              Selected work
-            </h2>
-            <p className="text-muted-foreground text-lg mt-4 max-w-2xl">
-              A look at recent projects we have shipped.
-            </p>
-          </div>
+          <SectionHeading
+            title={SHOWCASE_SECTION_TITLE}
+            intro={SHOWCASE_SECTION_INTRO}
+            className="mb-14"
+          />
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>

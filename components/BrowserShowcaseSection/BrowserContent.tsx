@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 import type { ShowcaseWebsite } from "./BrowserShowcaseClient";
 
@@ -77,11 +78,13 @@ const BrowserContent = ({
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <img
+                <Image
                   src={website.thumbnailUrl}
                   alt={`Screenshot of ${website.title}`}
-                  className="w-full h-full object-cover object-top"
-                  loading="lazy"
+                  fill
+                  sizes="(max-width: 1400px) 100vw, 1400px"
+                  className="object-cover object-top"
+                  priority={index === 0}
                 />
               </motion.div>
             ) : (
