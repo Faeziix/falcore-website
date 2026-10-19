@@ -12,7 +12,7 @@ export type ShowcaseWebsite = {
 };
 
 export const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
-export const MOBILE_VIEWPORT = { width: 390, height: 520 };
+export const MOBILE_VIEWPORT = { width: 414, height: 736 };
 
 export const SHOWCASE_SECTION_TITLE = "Selected websites";
 export const SHOWCASE_SECTION_INTRO = "Recent sites I designed and built.";
@@ -32,6 +32,7 @@ type ShowcaseEntry = {
   summary: string;
   externalUrl: string;
   screenshotVersion?: number;
+  mobileScreenshotVersion?: number;
 };
 
 const showcaseEntries: ShowcaseEntry[] = [
@@ -40,18 +41,21 @@ const showcaseEntries: ShowcaseEntry[] = [
     title: "DiaMaria",
     summary: "Bespoke diamond jewellery, Dubai",
     externalUrl: "https://www.diamaria.com",
+    mobileScreenshotVersion: 2,
   },
   {
     id: "xma",
     title: "XMA Agency",
     summary: "Growth agency for UAE businesses",
     externalUrl: "https://www.xma.ae",
+    mobileScreenshotVersion: 2,
   },
   {
     id: "convoflow",
     title: "ConvoFlow",
     summary: "AI lead qualification and booking",
     externalUrl: "https://www.convoflow.ae",
+    mobileScreenshotVersion: 2,
   },
   {
     id: "timeless-touch",
@@ -59,6 +63,7 @@ const showcaseEntries: ShowcaseEntry[] = [
     summary: "Porcelain surfaces manufacturer, Dubai",
     externalUrl: "https://www.timelesstouchceramics.com",
     screenshotVersion: 2,
+    mobileScreenshotVersion: 3,
   },
   {
     id: "sanaa",
@@ -66,20 +71,26 @@ const showcaseEntries: ShowcaseEntry[] = [
     summary: "Author site for the book Inner Armor",
     externalUrl: "https://www.sanaaouahmane.com",
     screenshotVersion: 2,
+    mobileScreenshotVersion: 3,
   },
   {
     id: "corpofino",
     title: "Corpofino",
     summary: "Women’s spa and slimming lounge, Abu Dhabi",
     externalUrl: "https://corpofino-web.vercel.app/en",
+    mobileScreenshotVersion: 2,
   },
 ];
 
 export const SHOWCASE_WEBSITES: ShowcaseWebsite[] = showcaseEntries.map(
-  ({ screenshotVersion = 1, ...entry }) => ({
+  ({
+    screenshotVersion = 1,
+    mobileScreenshotVersion = screenshotVersion,
+    ...entry
+  }) => ({
     ...entry,
     thumbnailUrl: screenshotPath(entry.id, screenshotVersion, "desktop"),
-    mobileThumbnailUrl: screenshotPath(entry.id, screenshotVersion, "mobile"),
+    mobileThumbnailUrl: screenshotPath(entry.id, mobileScreenshotVersion, "mobile"),
     width: DESKTOP_VIEWPORT.width,
     height: DESKTOP_VIEWPORT.height,
     mobileWidth: MOBILE_VIEWPORT.width,

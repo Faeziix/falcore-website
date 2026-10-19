@@ -5,13 +5,14 @@
 - Data: `lib/data/showcase-websites.ts` (`SHOWCASE_WEBSITES`). The order there is the order on the site.
 - Current order: DiaMaria, XMA Agency, ConvoFlow, Timeless Touch Ceramics, Sanaa Ouahmane, Corpofino.
 - Removed on request: XMA Car Rental, eBox Pro, Uptown Car Rental. Don't add them back.
-- Screenshots are static files in `public/showcase/<id>-v<screenshotVersion>-desktop.jpg` (1280×800 viewport) and `-mobile.jpg` (390×520 viewport), both captured at 2x. Nothing is fetched live (the old microlink.io URLs are gone, along with their `next.config.ts` remote pattern).
+- Screenshots are static files in `public/showcase/<id>-v<screenshotVersion>-desktop.jpg` (1280×800 viewport) and `-mobile.jpg` (414×736 viewport, 9:16), both captured at 2x. The mobile carousel cards are 9:16 too (`aspect-9/16`), so the whole phone screenshot shows uncropped. Nothing is fetched live (the old microlink.io URLs are gone, along with their `next.config.ts` remote pattern).
 
 ### Refreshing screenshots
 
 ```bash
 bun run scripts/capture-showcase-screenshots.ts          # every site
 bun run scripts/capture-showcase-screenshots.ts xma sanaa  # only these ids
+bun run scripts/capture-showcase-screenshots.ts --mobile-only  # phone shots only, desktop untouched
 ```
 
 The script opens each URL in headless Chromium (Playwright) and waits 6s for intro animations. It clicks away cookie banners (Decline/Accept/…) before shooting. Check the output visually afterwards; some sites fade their header in late.
@@ -23,7 +24,7 @@ The script opens each URL in headless Chromium (Playwright) and waits 6s for int
 
 ### Replacing a site's screenshot
 
-Bump that entry's `screenshotVersion` (it defaults to 1), run the capture script with its id, and delete the old `-v<n>` files. Don't overwrite a screenshot in place: `next/image` caches by URL and would keep serving the old image.
+Bump that entry's `screenshotVersion` (it defaults to 1), run the capture script with its id, and delete the old `-v<n>` files. To replace only the phone shot, bump `mobileScreenshotVersion` instead (it defaults to `screenshotVersion`) and run with `--mobile-only`. Don't overwrite a screenshot in place: `next/image` caches by URL and would keep serving the old image.
 
 Live URLs: Sanaa is on `www.sanaaouahmane.com`. Corpofino has no custom domain yet, so it uses its Vercel URL (`corpofino-web.vercel.app/en`). Swap it when the domain goes live, then re-capture.
 

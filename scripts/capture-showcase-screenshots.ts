@@ -51,7 +51,12 @@ async function captureScreenshot(browser: Browser, target: CaptureTarget) {
   console.log(`captured ${path.relative(PUBLIC_DIRECTORY, target.outputPath)}`);
 }
 
-const requestedIds = new Set(process.argv.slice(2));
+const MOBILE_ONLY_FLAG = "--mobile-only";
+const commandLineArguments = process.argv.slice(2);
+const isMobileOnly = commandLineArguments.includes(MOBILE_ONLY_FLAG);
+const requestedIds = new Set(
+  commandLineArguments.filter((argument) => argument !== MOBILE_ONLY_FLAG)
+);
 const websitesToCapture = SHOWCASE_WEBSITES.filter(
   (website) => requestedIds.size === 0 || requestedIds.has(website.id)
 );
@@ -60,12 +65,14 @@ await mkdir(path.join(PUBLIC_DIRECTORY, "showcase"), { recursive: true });
 const browser = await chromium.launch();
 
 for (const website of websitesToCapture) {
-  await captureScreenshot(browser, {
-    url: website.externalUrl,
-    outputPath: path.join(PUBLIC_DIRECTORY, website.thumbnailUrl),
-    viewport: DESKTOP_VIEWPORT,
-    isMobile: false,
-  });
+  if (!isMobileOnly) {
+    await captureScreenshot(browser, {
+      url: website.externalUrl,
+      outputPath: path.join(PUBLIC_DIRECTORY, website.thumbnailUrl),
+      viewport: DESKTOP_VIEWPORT,
+      isMobile: false,
+    });
+  }
   await captureScreenshot(browser, {
     url: website.externalUrl,
     outputPath: path.join(PUBLIC_DIRECTORY, website.mobileThumbnailUrl),
