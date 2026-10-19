@@ -15,12 +15,14 @@
 
 ## Preferences & Rules
 - Never use HyperFrames. Generate video with Kling at 720p (`scripts/generate-service-loops.ts`, see `docs/service-loops.md`).
-- Copy speaks to non-technical business owners: plain language, outcomes first, "I" not "we" (solo practitioner). Results may cite portfolio outcomes, anonymised, except XMA Launchpad, which is named.
+- Never name "XMA Launchpad" (or "Launchpad") anywhere on the site: copy, alt text, anchors, image paths or text inside screenshots. Describe it as a company operating system: CRM, project management, an AI studio and finance, on an AI knowledge base that agents act on.
+- Copy speaks to non-technical business owners: plain language, outcomes first, "I" not "we" (solo practitioner). Results may cite portfolio outcomes, anonymised.
 - Follow `docs/ui-conventions.md` for layout, type, colour roles and motion.
 - Read `docs/` before changing anything, and update it afterwards.
 - Colours come from tokens in `app/globals.css`, including shader colours, which are read with `readCssColorToken()`.
 
 ## Learnings & Corrections
+- ❌ Product screenshots exported at 1600px / q82 and served at next/image's default q75; the user said the quality was low → ✅ Export large UI screenshots at their full 2× capture size (q90) and pass `quality={90}` (allowed in `next.config.ts` `images.qualities`). Size the source for the displayed width × 2.
 - ❌ Homepage redesign (2026-10-19) packed every section with copy, figures, bullets, tabs and side notes; the user called it "messy, super unprofessional… so much content… very overwhelming" → ✅ One idea per section, at most a sentence or two of copy, big quiet imagery, generous whitespace. Cut before adding. Never use stale product screenshots; XMA Launchpad changes fast, so recapture from the current system.
 - ❌ Rewrote `app/globals.css` wholesale and wiped tokens another session had just added → ✅ Edit shared files (`globals.css`, `page.tsx`, `docs/`) with targeted edits only, and re-read them right before editing.
 - ❌ `cn()` silently dropped custom `text-display-*` sizes next to a text colour → ✅ Register custom font sizes in the `extendTailwindMerge` config in `lib/utils.ts`.

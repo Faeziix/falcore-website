@@ -32,7 +32,7 @@ Built with `class-variance-authority`, shadcn-style (`asChild` via `radix-ui` Sl
 | `LiveOperationsPanel` | `app/_components/hero/live-operations-panel.tsx` | **Unused** since the hero illustration was removed. Kept until the user decides whether to delete it. Scenarios in `app/_lib/operation-scenarios.ts` |
 | `SystemGraph`, `SystemNodeChip`, `OperationsLog` | `app/_components/hero/` | **Unused**, pieces of the removed panel. Playback timing in `use-scenario-playback.ts` |
 | `ServicesSection`, `ServiceTile` | `app/_components/services/` | 2×2 grid of service video loops; each tile (loop, title, one line) links to its service page |
-| `LaunchpadSection`, `LaunchpadShowcase`, `LaunchpadFeatureButton` | `app/_components/launchpad/` | Flagship case study: one large current screenshot plus four feature buttons that swap it. Data in `app/_lib/launchpad-showcase.ts`, screenshots in `public/work/launchpad/v2/` (demo data only) |
+| `LaunchpadSection`, `LaunchpadShowcase`, `LaunchpadFeatureButton` | `app/_components/launchpad/` | Flagship case study: one large current screenshot with four feature buttons beside it (knowledge base first) that swap it. Data in `app/_lib/launchpad-showcase.ts`, screenshots in `public/work/company-os/` (demo data except the user-supplied Generate shot). Never shows the product name |
 | `ProcessSection` | `app/_components/process/` | 5-step timeline drawn on scroll, one short line per step. Data in `app/_lib/process-steps.ts` |
 
 ## Service pages (`app/services/_components/`)

@@ -17,7 +17,7 @@ export function LaunchpadFeatureButton({
       aria-controls="launchpad-screenshot"
       onClick={() => onSelect(feature.id)}
       className={cn(
-        "group flex flex-col items-start justify-start border-t pt-5 text-left transition-colors duration-500",
+        "group flex flex-col items-start justify-start border-l-2 py-1 pl-5 text-left transition-colors duration-500",
         isActive ? "border-primary" : "border-border"
       )}
     >

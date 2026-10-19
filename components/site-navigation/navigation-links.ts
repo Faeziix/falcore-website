@@ -9,14 +9,14 @@ export type NavigationLink = {
 export const SERVICES_NAVIGATION_LABEL = "Services";
 
 export const PAGE_NAVIGATION_LINKS: NavigationLink[] = [
-  { id: "work", label: "Work", href: "/#launchpad" },
+  { id: "work", label: "Work", href: "/#operating-system" },
   { id: "about", label: "About", href: "/about" },
   { id: "contact", label: "Contact", href: "/contact" },
 ];
 
 export const NAVIGATION_LINK_BY_HOME_SECTION_ID: Record<string, NavigationLinkId> = {
   services: "services",
-  launchpad: "work",
+  "operating-system": "work",
   work: "work",
 };
 

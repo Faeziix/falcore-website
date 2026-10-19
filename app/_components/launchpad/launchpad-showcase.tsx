@@ -11,10 +11,25 @@ export function LaunchpadShowcase() {
   const [activeFeatureId, setActiveFeatureId] = useState(features[0].id);
 
   return (
-    <div>
+    <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <div
+        role="group"
+        aria-label="Platform features"
+        className="order-2 flex flex-col gap-7 lg:order-1 lg:col-span-4"
+      >
+        {features.map((feature) => (
+          <LaunchpadFeatureButton
+            key={feature.id}
+            feature={feature}
+            isActive={feature.id === activeFeatureId}
+            onSelect={setActiveFeatureId}
+          />
+        ))}
+      </div>
+
       <div
         id="launchpad-screenshot"
-        className="relative aspect-[16/10] overflow-clip border border-border bg-surface"
+        className="relative order-1 aspect-video overflow-clip border border-border bg-surface lg:order-2 lg:col-span-8"
       >
         {features.map((feature) => {
           const isActive = feature.id === activeFeatureId;
@@ -25,7 +40,8 @@ export function LaunchpadShowcase() {
               alt={isActive ? feature.screenshotAlt : ""}
               aria-hidden={!isActive}
               fill
-              sizes="(max-width: 1400px) 100vw, 1400px"
+              quality={90}
+              sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 66vw, 920px"
               className={cn(
                 "object-cover object-top transition-opacity duration-700 ease-out-expo",
                 isActive ? "opacity-100" : "opacity-0"
@@ -33,21 +49,6 @@ export function LaunchpadShowcase() {
             />
           );
         })}
-      </div>
-
-      <div
-        role="group"
-        aria-label="Launchpad features"
-        className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10"
-      >
-        {features.map((feature) => (
-          <LaunchpadFeatureButton
-            key={feature.id}
-            feature={feature}
-            isActive={feature.id === activeFeatureId}
-            onSelect={setActiveFeatureId}
-          />
-        ))}
       </div>
     </div>
   );

@@ -7,41 +7,41 @@ export type LaunchpadFeature = {
 };
 
 export const LAUNCHPAD_SHOWCASE = {
-  name: "XMA Launchpad",
+  title: "A company operating system",
   summary:
-    "The system that runs a Dubai creative agency, from the first enquiry to the finished video.",
+    "One platform that runs a Dubai creative agency: CRM, project management, an AI studio and finance, all working from a shared knowledge base that AI agents act on.",
   features: [
+    {
+      id: "knowledge",
+      name: "AI knowledge base",
+      summary:
+        "Calls, meetings, chats and client files become one memory. Ask it anything, or let AI agents act on it, with a source for every answer.",
+      screenshot: "/work/company-os/knowledge-assistant.webp",
+      screenshotAlt: "AI assistant answering a question with sources from meetings, chat rooms, onboarding and the client record",
+    },
     {
       id: "studio",
       name: "AI studio",
       summary:
         "Images and video from 20-plus AI models in one place, with the spend tracked for every client.",
-      screenshot: "/work/launchpad/v3/generate.webp",
-      screenshotAlt: "Launchpad studio showing a grid of generated images and videos (client names blurred)",
+      screenshot: "/work/company-os/generate.webp",
+      screenshotAlt: "AI studio showing a grid of generated images and videos (client names blurred)",
     },
     {
       id: "pipeline",
-      name: "Sales pipeline",
+      name: "CRM",
       summary:
         "Leads from ads, websites and WhatsApp on one board, answered from one shared inbox.",
-      screenshot: "/work/launchpad/v2/pipeline.webp",
-      screenshotAlt: "Launchpad sales pipeline board with leads grouped by stage",
+      screenshot: "/work/company-os/pipeline.webp",
+      screenshotAlt: "CRM pipeline board with leads grouped by stage",
     },
     {
       id: "meetings",
       name: "Self-writing meeting notes",
       summary:
         "Calls are recorded and summarised, and the to-dos are filed to the right client.",
-      screenshot: "/work/launchpad/v2/meetings.webp",
-      screenshotAlt: "Launchpad meeting page with a summary and action items",
-    },
-    {
-      id: "knowledge",
-      name: "Company knowledge base",
-      summary:
-        "Everything the agency has learned, kept as one memory the whole team can ask questions of.",
-      screenshot: "/work/launchpad/v3/knowledge.webp",
-      screenshotAlt: "Launchpad company knowledge base",
+      screenshot: "/work/company-os/meetings.webp",
+      screenshotAlt: "Meeting page with a summary and action items",
     },
   ] satisfies LaunchpadFeature[],
 };

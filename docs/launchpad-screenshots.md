@@ -1,6 +1,6 @@
 # XMA Launchpad Screenshots
 
-The homepage Launchpad section (`app/_components/launchpad/`) shows four screenshots from `public/work/launchpad/v2/`: `studio.webp`, `pipeline.webp`, `meetings.webp` and `brain.webp`. They were captured on 2026-10-19 from the current app, with **invented demo data only**.
+The homepage Launchpad section (`app/_components/launchpad/`) shows four screenshots from `public/work/company-os/`: `knowledge-assistant.webp` (a seeded Assistant conversation at `/assistant/<id>`, citing a meeting, a production room, onboarding answers, the Brain, a WhatsApp digest and a PDF; no live AI call), `generate.webp` (the Studio Generate page from a screenshot the user supplied, client name blurred), `pipeline.webp` and `meetings.webp`. All but the Generate shot use **invented demo data only** (captured 2026-10-19).
 
 Launchpad changes fast. Re-shoot when the screens drift. Never capture from a running Launchpad dev server (:3000, :3100): those point at production copies with real client data.
 
@@ -19,4 +19,5 @@ The capture script hides the hard-coded XMA wordmark and logo, and checks every 
 
 - Never screenshot Vault, finance/admin or staff-usage pages.
 - Before publishing, check every image for real client, staff or money data.
-- Save replacements to a new folder (`v3/`), not over the old files, because `next/image` caches by URL.
+- Save replacements under a new file name or folder, not over the old files, because `next/image` caches by URL.
+- **Quality:** export at full 2× capture resolution, pre-cropped to the 16:9 frame (`magick in.png -gravity north -crop 3200x1800+0+0 +repage -quality 90 out.webp`). The component passes `quality={90}`, which `next.config.ts` allows via `images.qualities: [75, 90]`. A 1600px export looked soft on retina screens, because the frame is about 920 CSS px wide (1,840 device px).

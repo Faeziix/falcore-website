@@ -51,7 +51,7 @@ export function HeroSection() {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" width="fullOnMobile">
-                <a href="#launchpad">See my work</a>
+                <a href="#operating-system">See my work</a>
               </Button>
             </div>
 
