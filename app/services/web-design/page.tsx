@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteNavigation } from "@/components/site-navigation";
-import Footer from "@/components/footer";
+import { PageClosing } from "@/components/page-closing";
+import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
 import ServicePage from "../_components/service-page";
 import { getServiceBySlug } from "@/lib/data/services";
 import type { Metadata } from "next";
@@ -21,8 +22,11 @@ export default function WebDesignPage() {
   return (
     <>
       <SiteNavigation />
-      <main className="pt-32 pb-24">
-        <ServicePage service={service} />
+      <main className="pt-32">
+        <ServicePage
+          service={service}
+          examples={<BrowserShowcaseSection spacing="followsSection" />}
+        />
 
         <script
           type="application/ld+json"
@@ -48,7 +52,7 @@ export default function WebDesignPage() {
           }}
         />
       </main>
-      <Footer />
+      <PageClosing />
     </>
   );
 }

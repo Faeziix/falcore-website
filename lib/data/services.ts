@@ -1,12 +1,34 @@
 import type { LoopingVideoSources } from "@/components/ui/looping-video";
 
+export type InclusionIconName =
+  | "automatedWorkflow"
+  | "chatAssistant"
+  | "dataSorting"
+  | "aiInsideTools"
+  | "decisionBranch"
+  | "crmRecord"
+  | "toolLoop"
+  | "integrationHub"
+  | "processShortcut"
+  | "stackedInfrastructure"
+  | "brandedInterface"
+  | "responsiveScreens"
+  | "conversionPage"
+  | "brandMark"
+  | "stopwatch"
+  | "memberPortal"
+  | "adminDashboard"
+  | "headlessContent"
+  | "bookingCalendar"
+  | "fittedTool";
+
 type ServiceEntry = {
   slug: string;
   title: string;
   description: string;
   longDescription: string;
   loopLabel: string;
-  bullets: string[];
+  inclusions: { label: string; icon: InclusionIconName }[];
   useCases: { title: string; description: string }[];
   metaTitle: string;
   metaDescription: string;
@@ -34,12 +56,12 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Most businesses know AI can help — they just do not know where to start. We identify the repetitive, time-consuming parts of your operation and build AI-powered solutions that handle them. From customer-facing chatbots to internal workflow automation, we integrate AI into the tools you already use so your team works faster without changing how they work.",
     loopLabel:
       "Scattered points of information being sorted into neat channels inside a glass slab",
-    bullets: [
-      "AI-powered workflow automation",
-      "Custom chatbots & virtual assistants",
-      "Intelligent data processing",
-      "AI integration into existing tools",
-      "Smarter decision-making pipelines",
+    inclusions: [
+      { label: "AI-powered workflow automation", icon: "automatedWorkflow" },
+      { label: "Custom chatbots & virtual assistants", icon: "chatAssistant" },
+      { label: "Intelligent data processing", icon: "dataSorting" },
+      { label: "AI integration into existing tools", icon: "aiInsideTools" },
+      { label: "Smarter decision-making pipelines", icon: "decisionBranch" },
     ],
     useCases: [
       {
@@ -71,12 +93,12 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Your team should not be copying data between spreadsheets, sending follow-up emails manually, or toggling between six different tools to complete one task. We map your workflows, identify the bottlenecks, and build automations that connect your CRM, email, scheduling, invoicing, and project management tools into one streamlined system.",
     loopLabel:
       "A precision machine moving blocks steadily around a conveyor loop",
-    bullets: [
-      "CRM setup & configuration",
-      "Workflow automation across tools",
-      "Third-party integrations",
-      "Process optimization & mapping",
-      "Scalable operational infrastructure",
+    inclusions: [
+      { label: "CRM setup & configuration", icon: "crmRecord" },
+      { label: "Workflow automation across tools", icon: "toolLoop" },
+      { label: "Third-party integrations", icon: "integrationHub" },
+      { label: "Process optimization & mapping", icon: "processShortcut" },
+      { label: "Scalable operational infrastructure", icon: "stackedInfrastructure" },
     ],
     useCases: [
       {
@@ -108,12 +130,12 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "A good website is not just something that looks nice — it is a tool that earns trust, communicates value, and moves visitors toward action. We design every page with intention: clear messaging, intuitive navigation, and a visual identity that matches the quality of your business. No templates, no page builders, no compromise.",
     loopLabel:
       "Layout blocks arranging themselves on a tablet, surrounded by wireframe sketches",
-    bullets: [
-      "Custom UI/UX tailored to your brand",
-      "Mobile-first responsive layouts",
-      "Conversion-focused page structures",
-      "Brand identity integration",
-      "Rapid turnaround — designs in days, not weeks",
+    inclusions: [
+      { label: "Custom UI/UX tailored to your brand", icon: "brandedInterface" },
+      { label: "Mobile-first responsive layouts", icon: "responsiveScreens" },
+      { label: "Conversion-focused page structures", icon: "conversionPage" },
+      { label: "Brand identity integration", icon: "brandMark" },
+      { label: "Rapid turnaround — designs in days, not weeks", icon: "stopwatch" },
     ],
     useCases: [
       {
@@ -145,12 +167,12 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Off-the-shelf software does not always fit. When your business needs a tool that does not exist — a client portal, an internal dashboard, a booking system, a membership platform — we build it from scratch. Every application is full-stack, production-grade, and designed around how your team actually works.",
     loopLabel:
       "A control console showing a live dashboard of charts",
-    bullets: [
-      "Client portals & membership platforms",
-      "Internal dashboards & admin panels",
-      "Headless CMS implementation",
-      "Booking & scheduling systems",
-      "Custom tools built for your workflow",
+    inclusions: [
+      { label: "Client portals & membership platforms", icon: "memberPortal" },
+      { label: "Internal dashboards & admin panels", icon: "adminDashboard" },
+      { label: "Headless CMS implementation", icon: "headlessContent" },
+      { label: "Booking & scheduling systems", icon: "bookingCalendar" },
+      { label: "Custom tools built for your workflow", icon: "fittedTool" },
     ],
     useCases: [
       {

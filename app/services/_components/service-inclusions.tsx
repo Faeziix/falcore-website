@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import type { Service } from "@/lib/data/services";
+import { InclusionsGrid } from "./inclusions-grid";
 
 export function ServiceInclusions({ service }: { service: Service }) {
   return (
@@ -9,17 +10,7 @@ export function ServiceInclusions({ service }: { service: Service }) {
         title="What’s included"
         intro="Everything you get at launch, and you own all of it."
       />
-      <ul className="mt-12 grid border-t border-l border-border sm:grid-cols-2 lg:grid-cols-3">
-        {service.bullets.map((bullet) => (
-          <li
-            key={bullet}
-            className="flex gap-4 border-r border-b border-border p-6 text-foreground-soft lg:p-8"
-          >
-            <span aria-hidden className="mt-[0.7em] h-px w-4 shrink-0 bg-accent" />
-            {bullet}
-          </li>
-        ))}
-      </ul>
+      <InclusionsGrid inclusions={service.inclusions} />
     </section>
   );
 }

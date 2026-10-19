@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { SiteNavigation } from "@/components/site-navigation";
-import Footer from "@/components/footer";
+import { PageClosing } from "@/components/page-closing";
 import ServicePage from "../_components/service-page";
 import { getServiceBySlug } from "@/lib/data/services";
 import type { Metadata } from "next";
@@ -21,7 +21,7 @@ export default function AIEnablementPage() {
   return (
     <>
       <SiteNavigation />
-      <main className="pt-32 pb-24">
+      <main className="pt-32">
         <ServicePage service={service} />
 
         <script
@@ -48,7 +48,7 @@ export default function AIEnablementPage() {
           }}
         />
       </main>
-      <Footer />
+      <PageClosing />
     </>
   );
 }
