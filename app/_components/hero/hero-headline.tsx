@@ -8,7 +8,7 @@ export function HeroHeadline() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <h1 className="font-display text-display-xl font-medium text-foreground">
+    <h1 className="font-display text-display-hero-mobile font-medium sm:text-display-xl text-foreground">
       {HEADLINE_LINES.map((line, index) => (
         <span key={line} className="block overflow-clip pb-[0.06em]">
           <motion.span

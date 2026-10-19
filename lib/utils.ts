@@ -4,7 +4,7 @@ import { extendTailwindMerge } from "tailwind-merge";
 const mergeTailwindClasses = extendTailwindMerge({
   extend: {
     theme: {
-      text: ["display-xl", "display-lg", "display-md", "display-sm", "lead"],
+      text: ["display-xl", "display-hero-mobile", "display-lg", "display-md", "display-sm", "lead"],
     },
   },
 });

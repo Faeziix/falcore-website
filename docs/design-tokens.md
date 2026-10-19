@@ -30,7 +30,7 @@ Two layers:
 | Body and UI | Instrument Sans | `font-sans` |
 | Data (timestamps, step numbers) | Source Code Pro | `font-mono`: only where the content really is data |
 
-Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles), `text-display-md` (sub-features), `text-display-sm`, plus `text-lead` for intro paragraphs. These are registered with `tailwind-merge` in `lib/utils.ts`; add any new custom size there too, or `cn()` will drop it.
+Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles), `text-display-md` (sub-features), `text-display-sm`, plus `text-lead` for intro paragraphs. Below `sm` the homepage hero headline uses `text-display-hero-mobile` (`clamp(2.125rem, 11vw, 3.25rem)`), sized so its longest line, "The technical arm" (about 7.85em wide), nearly fills a phone's width; it meets `text-display-xl` at 640px, so there is no jump at the breakpoint. These are registered with `tailwind-merge` in `lib/utils.ts`; add any new custom size there too, or `cn()` will drop it.
 
 ## Layout and motion tokens
 
