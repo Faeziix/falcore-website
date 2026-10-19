@@ -1,4 +1,5 @@
 import { SectionHeading } from "@/components/ui/section-heading";
+import { SectionCallToAction } from "@/components/section-call-to-action";
 import { LAUNCHPAD_SHOWCASE } from "@/app/_lib/launchpad-showcase";
 import { LaunchpadShowcase } from "./launchpad-showcase";
 
@@ -14,6 +15,10 @@ export function LaunchpadSection() {
         <div className="mt-14 lg:mt-20">
           <LaunchpadShowcase />
         </div>
+        <SectionCallToAction
+          prompt="Want a system like this running your business?"
+          className="mt-14 lg:mt-20"
+        />
       </div>
     </section>
   );

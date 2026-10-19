@@ -63,6 +63,14 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - Every animation respects `prefers-reduced-motion` (`useReducedMotion`; videos show their poster).
 - Animate transform and opacity only. Reach for `ease-out-expo`.
 
+## Calls to action
+
+The only conversion goal is a booking. Every CTA is "Book a free call" via `BookCallButton`, never a competing action like "Contact us" or "Get a quote". The only secondary button is the hero's outline "See my work", which jumps down the page.
+
+- Homepage placement: the hero, the end of the operating-system section ("Want a system like this running your business?"), the end of the process section ("Step one is a free 30-minute call."), under the founder bio, and the closing `WaveCTA`. The nav button is always there too.
+- A mid-page CTA is a `SectionCallToAction`: one short question or statement and the button, no extra copy, no hairline. It goes after the section's visual, never inside the heading.
+- Don't put CTAs in two sections in a row unless one is the founder bio's button. Services tiles already link to their pages, and the FAQ leads straight into the closing CTA, so neither gets its own.
+
 ## Primitives
 
 Use `Button` / `buttonVariants` and `TextLink` / `textLinkVariants` (CVA, shadcn-style `asChild`). The booking URL and external-link props live in `lib/site-config.ts`. Never hardcode the Calendly URL.

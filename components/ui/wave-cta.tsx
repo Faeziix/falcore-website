@@ -1,8 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { BOOKING_URL, externalLinkProps } from "@/lib/site-config";
+import { BookCallButton } from "@/components/book-call-button";
 import { InteractiveDitheringBackground } from "@/components/ui/interactive-dithering";
 
 export function WaveCTABackground() {
@@ -26,12 +24,7 @@ export function WaveCTA() {
           business down and whether I&apos;m the right person to fix it.
         </p>
 
-        <Button asChild size="lg" width="fullOnMobile">
-          <a href={BOOKING_URL} {...externalLinkProps}>
-            Book a free call
-            <ArrowUpRight aria-hidden className="size-4.5" />
-          </a>
-        </Button>
+        <BookCallButton size="lg" width="fullOnMobile" />
       </div>
     </section>
   );

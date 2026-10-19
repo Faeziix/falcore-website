@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ActiveLinkTick } from "./active-link-tick";
-import { BookCallButton } from "./book-call-button";
+import { BookCallButton } from "@/components/book-call-button";
 import {
   PAGE_NAVIGATION_LINKS,
   SERVICES_MENU_PANEL_ID,

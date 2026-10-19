@@ -10,7 +10,9 @@
 | `ClientLogoSection` | `components/ClientLogoSection/` | Client logo marquee (two rows, original colours). See `portfolio-and-logos.md` |
 | `SiteNavigation` | `components/site-navigation/` | Fixed top bar on every page: services panel, active-link tick, mobile sheet. See `ui-conventions.md` → Navigation |
 | `MagneticButton` | `components/magnetic-button.tsx` | **Legacy**, only used by the unused `hero.tsx`/`cta.tsx`. Don't use in new work |
-| `Footer`, `FAQ`, `AboutFounder` | `components/` | Page chrome and sections. |
+| `Footer`, `FAQ`, `AboutFounder` | `components/` | Page chrome and sections. `AboutFounder` ends with a `BookCallButton` under the bio |
+| `BookCallButton` | `components/book-call-button.tsx` | The one "Book a free call" button: `Button` + `BOOKING_URL` (new tab, `ArrowUpRight`). Takes `variant`, `size`, `width`, `className`. Used by the nav, hero, mid-page CTAs and `WaveCTA`. Use it for every booking button instead of rebuilding the anchor |
+| `SectionCallToAction` | `components/section-call-to-action.tsx` | A section's closing booking row: one short `prompt` line on the left, `BookCallButton` on the right (stacked, full-width button on phones). Used at the end of the homepage's operating-system and process sections |
 
 ## Primitives (shared, `components/ui/`)
 

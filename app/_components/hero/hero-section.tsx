@@ -1,10 +1,9 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { InteractiveDitheringBackground } from "@/components/ui/interactive-dithering";
-import { BOOKING_URL, externalLinkProps } from "@/lib/site-config";
+import { BookCallButton } from "@/components/book-call-button";
 import { HeroHeadline } from "./hero-headline";
 
 const supportingContentDelaySeconds = 0.55;
@@ -44,12 +43,7 @@ export function HeroSection() {
 
           <div className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" width="fullOnMobile">
-                <a href={BOOKING_URL} {...externalLinkProps}>
-                  Book a free call
-                  <ArrowUpRight aria-hidden className="size-4.5" />
-                </a>
-              </Button>
+              <BookCallButton size="lg" width="fullOnMobile" />
               <Button asChild size="lg" variant="outline" width="fullOnMobile">
                 <a href="#operating-system">See my work</a>
               </Button>

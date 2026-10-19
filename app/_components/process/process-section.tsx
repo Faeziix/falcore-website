@@ -1,4 +1,5 @@
 import { SectionHeading } from "@/components/ui/section-heading";
+import { SectionCallToAction } from "@/components/section-call-to-action";
 import { ProcessTimeline } from "./process-timeline";
 
 export function ProcessSection() {
@@ -13,6 +14,10 @@ export function ProcessSection() {
         <div className="mt-16 lg:mt-20">
           <ProcessTimeline />
         </div>
+        <SectionCallToAction
+          prompt="Step one is a free 30-minute call."
+          className="mt-16 lg:mt-20"
+        />
       </div>
     </section>
   );

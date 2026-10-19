@@ -49,6 +49,7 @@
 - ❌ The services menu opened on click only → ✅ The user wants nav menus to open on hover, with hover intent and a close delay. Click stays as the fallback for touch and keyboard.
 - ❌ Turbopack's watcher sometimes misses a `globals.css` written by a script, and keeps serving the old CSS chunk → ✅ After scripted CSS edits, check the served chunk (`curl` the page's CSS link). If it's stale, make a real edit with the Edit tool. Don't restart the shared dev server.
 - ❌ Service inclusion icons redrew via `whileHover`, so leaving the cell early froze the icon half drawn; the user said the animation shouldn't depend on how long they hover → ✅ Hover-triggered draw animations are one-shot: start on pointer enter, always play to the end, and ignore re-entry until finished (`useIconRedraw` in `app/services/_components/`).
+- ❌ The calm homepage had booking buttons only in the hero and the closing CTA; the user said it "lacks in CTAs" → ✅ Restraint applies to copy, not to the path to booking. Close key sections with a `SectionCallToAction` (one short line + `BookCallButton`) and put a button under the founder bio. Placement rules are in `docs/ui-conventions.md` → Calls to action.
 
 ## Component Registry
 See `docs/components.md`.

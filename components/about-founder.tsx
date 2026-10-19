@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BookCallButton } from "@/components/book-call-button";
 
 export default function AboutFounder() {
   return (
@@ -24,6 +25,7 @@ export default function AboutFounder() {
               builds the right thing and ships it fast. When you work with
               Falcore, you work with me.
             </p>
+            <BookCallButton width="fullOnMobile" className="mt-9" />
           </div>
         </div>
       </div>

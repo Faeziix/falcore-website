@@ -10,7 +10,7 @@ import { SERVICES } from "@/lib/data/services";
 import { CONTACT_EMAIL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { ActiveLinkTick } from "./active-link-tick";
-import { BookCallButton } from "./book-call-button";
+import { BookCallButton } from "@/components/book-call-button";
 import {
   MOBILE_NAVIGATION_SHEET_ID,
   PAGE_NAVIGATION_LINKS,
