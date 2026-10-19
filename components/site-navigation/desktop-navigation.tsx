@@ -9,7 +9,10 @@ import {
   PAGE_NAVIGATION_LINKS,
   SERVICES_MENU_PANEL_ID,
   SERVICES_NAVIGATION_LABEL,
+  WORK_MENU_PANEL_ID,
+  WORK_NAVIGATION_LABEL,
 } from "./navigation-links";
+import type { MenuTriggerHandlers } from "./use-menu-hover";
 import type { ActiveNavigationLink } from "./use-active-navigation-link";
 
 const desktopItemClassName =
@@ -34,56 +37,72 @@ function HoverUnderline({ isHeldOpen = false }: { isHeldOpen?: boolean }) {
   );
 }
 
-export type ServicesTriggerHandlers = {
-  onPointerEnter: (event: React.PointerEvent) => void;
-  onPointerDown: (event: React.PointerEvent) => void;
-  onClick: () => void;
+export type DesktopMenuTrigger = {
+  label: string;
+  panelId: string;
+  isOpen: boolean;
+  isActive: boolean;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  triggerHandlers: MenuTriggerHandlers;
 };
+
+function MenuTriggerItem({ label, panelId, isOpen, isActive, triggerRef, triggerHandlers }: DesktopMenuTrigger) {
+  return (
+    <li onPointerEnter={triggerHandlers.onPointerEnter} className="relative flex">
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        onPointerDown={triggerHandlers.onPointerDown}
+        onClick={triggerHandlers.onClick}
+        className={cn(desktopItemClassName, itemToneClassName(isActive || isOpen))}
+      >
+        {label}
+        <ChevronDown
+          aria-hidden
+          className={cn(
+            "size-3.5 transition-transform duration-300 ease-out-expo",
+            isOpen && "rotate-180"
+          )}
+        />
+        {!isActive && <HoverUnderline isHeldOpen={isOpen} />}
+      </button>
+      {isActive && <ActiveLinkTick layoutGroup="desktop" className={underLabelPositionClassName} />}
+    </li>
+  );
+}
 
 type DesktopNavigationProps = {
   activeNavigationLink: ActiveNavigationLink;
-  isServicesMenuOpen: boolean;
-  servicesTriggerRef: React.RefObject<HTMLButtonElement | null>;
-  servicesTriggerHandlers: ServicesTriggerHandlers;
+  servicesMenu: Omit<DesktopMenuTrigger, "label" | "panelId" | "isActive">;
+  workMenu: Omit<DesktopMenuTrigger, "label" | "panelId" | "isActive">;
   onPageLinkPointerEnter: (event: React.PointerEvent) => void;
   onNavigate: () => void;
 };
 
 export function DesktopNavigation({
   activeNavigationLink: { activeLinkId, ariaCurrentValue },
-  isServicesMenuOpen,
-  servicesTriggerRef,
-  servicesTriggerHandlers,
+  servicesMenu,
+  workMenu,
   onPageLinkPointerEnter,
   onNavigate,
 }: DesktopNavigationProps) {
-  const isServicesActive = activeLinkId === "services";
-
   return (
     <div className="hidden h-full items-center justify-between gap-10 md:flex lg:col-span-7 lg:col-start-6 lg:justify-end">
       <ul className="flex h-full items-stretch gap-8">
-        <li onPointerEnter={servicesTriggerHandlers.onPointerEnter} className="relative flex">
-          <button
-            ref={servicesTriggerRef}
-            type="button"
-            aria-expanded={isServicesMenuOpen}
-            aria-controls={SERVICES_MENU_PANEL_ID}
-            onPointerDown={servicesTriggerHandlers.onPointerDown}
-            onClick={servicesTriggerHandlers.onClick}
-            className={cn(desktopItemClassName, itemToneClassName(isServicesActive || isServicesMenuOpen))}
-          >
-            {SERVICES_NAVIGATION_LABEL}
-            <ChevronDown
-              aria-hidden
-              className={cn(
-                "size-3.5 transition-transform duration-300 ease-out-expo",
-                isServicesMenuOpen && "rotate-180"
-              )}
-            />
-            {!isServicesActive && <HoverUnderline isHeldOpen={isServicesMenuOpen} />}
-          </button>
-          {isServicesActive && <ActiveLinkTick layoutGroup="desktop" className={underLabelPositionClassName} />}
-        </li>
+        <MenuTriggerItem
+          label={SERVICES_NAVIGATION_LABEL}
+          panelId={SERVICES_MENU_PANEL_ID}
+          isActive={activeLinkId === "services"}
+          {...servicesMenu}
+        />
+        <MenuTriggerItem
+          label={WORK_NAVIGATION_LABEL}
+          panelId={WORK_MENU_PANEL_ID}
+          isActive={activeLinkId === "work"}
+          {...workMenu}
+        />
 
         {PAGE_NAVIGATION_LINKS.map((link) => {
           const isActive = activeLinkId === link.id;

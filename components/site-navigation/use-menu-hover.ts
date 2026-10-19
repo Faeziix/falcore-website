@@ -1,30 +1,31 @@
 "use client";
 
 import { useRef } from "react";
-import type { ServicesTriggerHandlers } from "./desktop-navigation";
 import { useHoverIntent } from "./use-navigation-chrome-state";
 
-type ServicesMenuHoverOptions = {
-  openServicesMenu: () => void;
-  closeServicesMenu: () => void;
-  toggleServicesMenu: () => void;
+export type MenuTriggerHandlers = {
+  onPointerEnter: (event: React.PointerEvent) => void;
+  onPointerDown: (event: React.PointerEvent) => void;
+  onClick: () => void;
 };
 
-function isMousePointer(event: React.PointerEvent) {
+type MenuHoverOptions = {
+  openMenu: () => void;
+  closeMenu: () => void;
+  toggleMenu: () => void;
+};
+
+export function isMousePointer(event: React.PointerEvent) {
   return event.pointerType === "mouse";
 }
 
-export function useServicesMenuHover({
-  openServicesMenu,
-  closeServicesMenu,
-  toggleServicesMenu,
-}: ServicesMenuHoverOptions) {
-  const servicesHoverIntent = useHoverIntent({ onOpen: openServicesMenu, onClose: closeServicesMenu });
+export function useMenuHover({ openMenu, closeMenu, toggleMenu }: MenuHoverOptions) {
+  const menuHoverIntent = useHoverIntent({ onOpen: openMenu, onClose: closeMenu });
   const lastTriggerPointerType = useRef<string | null>(null);
 
-  const servicesTriggerHandlers: ServicesTriggerHandlers = {
+  const triggerHandlers: MenuTriggerHandlers = {
     onPointerEnter: (event) => {
-      if (isMousePointer(event)) servicesHoverIntent.openAfterHoverIntent();
+      if (isMousePointer(event)) menuHoverIntent.openAfterHoverIntent();
     },
     onPointerDown: (event) => {
       lastTriggerPointerType.current = event.pointerType;
@@ -33,26 +34,18 @@ export function useServicesMenuHover({
       const wasMouseClick = lastTriggerPointerType.current === "mouse";
       lastTriggerPointerType.current = null;
       if (wasMouseClick) {
-        servicesHoverIntent.openNow();
+        menuHoverIntent.openNow();
         return;
       }
-      servicesHoverIntent.cancelPending();
-      toggleServicesMenu();
+      menuHoverIntent.cancelPending();
+      toggleMenu();
     },
   };
 
   return {
-    servicesTriggerHandlers,
-    closeServicesWhenPageLinkHovered: (event: React.PointerEvent) => {
-      if (isMousePointer(event)) servicesHoverIntent.closeNow();
-    },
-    headerPointerHandlers: {
-      onPointerEnter: (event: React.PointerEvent) => {
-        if (isMousePointer(event)) servicesHoverIntent.cancelPending();
-      },
-      onPointerLeave: (event: React.PointerEvent) => {
-        if (isMousePointer(event)) servicesHoverIntent.closeAfterPointerLeaves();
-      },
-    },
+    triggerHandlers,
+    closeNow: menuHoverIntent.closeNow,
+    cancelPending: menuHoverIntent.cancelPending,
+    closeAfterPointerLeaves: menuHoverIntent.closeAfterPointerLeaves,
   };
 }

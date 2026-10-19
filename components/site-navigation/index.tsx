@@ -10,27 +10,36 @@ import { MobileMenuToggle } from "./mobile-menu-toggle";
 import { MobileNavigationSheet } from "./mobile-navigation-sheet";
 import { ServicesMenuPanel } from "./services-menu-panel";
 import { useActiveNavigationLink } from "./use-active-navigation-link";
-import { useServicesMenuHover } from "./use-services-menu-hover";
+import { isMousePointer, useMenuHover, type MenuTriggerHandlers } from "./use-menu-hover";
+import { WorkMenuPanel } from "./work-menu-panel";
 import {
   useDismissibleLayer,
   useDocumentScrollLock,
   useScrollDrivenBarState,
 } from "./use-navigation-chrome-state";
 
-type OpenMenu = "services" | "mobile" | null;
+type OpenMenu = "services" | "work" | "mobile" | null;
+type DropdownMenu = "services" | "work";
 
-function navigationBarSurfaceClassName(isMenuOpen: boolean, hasScrolled: boolean) {
-  if (isMenuOpen) return "border-border bg-background";
+type NavigationBarSurface = "transparentAtTop" | "solid";
+
+function navigationBarSurfaceClassName(
+  surface: NavigationBarSurface,
+  isMenuOpen: boolean,
+  hasScrolled: boolean
+) {
+  if (isMenuOpen || surface === "solid") return "border-border bg-background";
   if (hasScrolled) return "border-border bg-background/85 backdrop-blur-md";
   return "border-transparent bg-transparent";
 }
 
-export function SiteNavigation() {
+export function SiteNavigation({ surface = "transparentAtTop" }: { surface?: NavigationBarSurface }) {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<OpenMenu>(null);
   const [pathnameWhenMenuStateSet, setPathnameWhenMenuStateSet] = useState(pathname);
   const headerRef = useRef<HTMLElement>(null);
   const servicesTriggerRef = useRef<HTMLButtonElement>(null);
+  const workTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
 
   const { hasScrolled } = useScrollDrivenBarState();
@@ -45,18 +54,60 @@ export function SiteNavigation() {
   const toggleMenu = (menu: Exclude<OpenMenu, null>) =>
     setOpenMenu((currentMenu) => (currentMenu === menu ? null : menu));
 
-  const { servicesTriggerHandlers, closeServicesWhenPageLinkHovered, headerPointerHandlers } =
-    useServicesMenuHover({
-      openServicesMenu: () => setOpenMenu("services"),
-      closeServicesMenu: () => setOpenMenu((currentMenu) => (currentMenu === "services" ? null : currentMenu)),
-      toggleServicesMenu: () => toggleMenu("services"),
-    });
+  const closeDropdownMenu = (menu: DropdownMenu) =>
+    setOpenMenu((currentMenu) => (currentMenu === menu ? null : currentMenu));
+
+  const servicesMenuHover = useMenuHover({
+    openMenu: () => setOpenMenu("services"),
+    closeMenu: () => closeDropdownMenu("services"),
+    toggleMenu: () => toggleMenu("services"),
+  });
+  const workMenuHover = useMenuHover({
+    openMenu: () => setOpenMenu("work"),
+    closeMenu: () => closeDropdownMenu("work"),
+    toggleMenu: () => toggleMenu("work"),
+  });
+
+  function triggerHandlersCancellingOtherMenu(
+    triggerHandlers: MenuTriggerHandlers,
+    otherMenuHover: ReturnType<typeof useMenuHover>
+  ): MenuTriggerHandlers {
+    return {
+      ...triggerHandlers,
+      onPointerEnter: (event) => {
+        if (isMousePointer(event)) otherMenuHover.cancelPending();
+        triggerHandlers.onPointerEnter(event);
+      },
+    };
+  }
+
+  const headerPointerHandlers = {
+    onPointerEnter: (event: React.PointerEvent) => {
+      if (!isMousePointer(event)) return;
+      servicesMenuHover.cancelPending();
+      workMenuHover.cancelPending();
+    },
+    onPointerLeave: (event: React.PointerEvent) => {
+      if (!isMousePointer(event)) return;
+      servicesMenuHover.closeAfterPointerLeaves();
+      workMenuHover.closeAfterPointerLeaves();
+    },
+  };
+
+  function closeDropdownMenusWhenPageLinkHovered(event: React.PointerEvent) {
+    if (!isMousePointer(event)) return;
+    servicesMenuHover.closeNow();
+    workMenuHover.closeNow();
+  }
+
+  const triggerRefForOpenMenu =
+    openMenu === "mobile" ? mobileToggleRef : openMenu === "work" ? workTriggerRef : servicesTriggerRef;
 
   useDocumentScrollLock(openMenu === "mobile");
   useDismissibleLayer({
     isOpen: openMenu !== null,
     layerRef: headerRef,
-    triggerRef: openMenu === "mobile" ? mobileToggleRef : servicesTriggerRef,
+    triggerRef: triggerRefForOpenMenu,
     onDismiss: closeMenus,
   });
 
@@ -70,7 +121,7 @@ export function SiteNavigation() {
         <div
           className={cn(
             "border-b transition-[background-color,border-color] duration-300",
-            navigationBarSurfaceClassName(openMenu !== null, hasScrolled)
+            navigationBarSurfaceClassName(surface, openMenu !== null, hasScrolled)
           )}
         >
           <nav
@@ -80,10 +131,23 @@ export function SiteNavigation() {
             <Logo size="lg" className="-ml-2 lg:col-span-3" />
             <DesktopNavigation
               activeNavigationLink={activeNavigationLink}
-              isServicesMenuOpen={openMenu === "services"}
-              servicesTriggerRef={servicesTriggerRef}
-              servicesTriggerHandlers={servicesTriggerHandlers}
-              onPageLinkPointerEnter={closeServicesWhenPageLinkHovered}
+              servicesMenu={{
+                isOpen: openMenu === "services",
+                triggerRef: servicesTriggerRef,
+                triggerHandlers: triggerHandlersCancellingOtherMenu(
+                  servicesMenuHover.triggerHandlers,
+                  workMenuHover
+                ),
+              }}
+              workMenu={{
+                isOpen: openMenu === "work",
+                triggerRef: workTriggerRef,
+                triggerHandlers: triggerHandlersCancellingOtherMenu(
+                  workMenuHover.triggerHandlers,
+                  servicesMenuHover
+                ),
+              }}
+              onPageLinkPointerEnter={closeDropdownMenusWhenPageLinkHovered}
               onNavigate={closeMenus}
             />
             <MobileMenuToggle
@@ -95,6 +159,7 @@ export function SiteNavigation() {
         </div>
 
         <ServicesMenuPanel isOpen={openMenu === "services"} onNavigate={closeMenus} />
+        <WorkMenuPanel isOpen={openMenu === "work"} onNavigate={closeMenus} />
         <MobileNavigationSheet
           isOpen={openMenu === "mobile"}
           activeNavigationLink={activeNavigationLink}

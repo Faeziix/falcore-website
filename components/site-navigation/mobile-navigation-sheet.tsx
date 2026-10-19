@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { TextLink } from "@/components/ui/text-link";
+import { CASE_STUDIES, caseStudyPath } from "@/app/work/_lib/case-study-index";
 import { SERVICES } from "@/lib/data/services";
 import { CONTACT_EMAIL } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -15,17 +16,38 @@ import {
   MOBILE_NAVIGATION_SHEET_ID,
   PAGE_NAVIGATION_LINKS,
   SERVICES_NAVIGATION_LABEL,
+  WORK_INDEX_LINK,
+  WORK_NAVIGATION_LABEL,
 } from "./navigation-links";
 import { easeOutExpo, revealFromBarVariants, settleIntoPlaceVariants } from "./navigation-motion";
 import type { ActiveNavigationLink } from "./use-active-navigation-link";
 
 const MOBILE_SERVICES_LIST_ID = "mobile-navigation-services";
+const MOBILE_WORK_LIST_ID = "mobile-navigation-work";
 const mobileRowClassName =
   "flex w-full items-center justify-between py-5 font-display text-display-sm font-medium";
 
-const servicesListExpandTransition = { duration: 0.25, ease: easeOutExpo };
+const disclosureListExpandTransition = { duration: 0.25, ease: easeOutExpo };
 
-function MobileServicesDisclosure({ isActive, onNavigate }: { isActive: boolean; onNavigate: () => void }) {
+type DisclosureLink = { href: string; label: string };
+
+type MobileMenuDisclosureProps = {
+  label: string;
+  listId: string;
+  links: DisclosureLink[];
+  isActive: boolean;
+  shouldFocusOnOpen?: boolean;
+  onNavigate: () => void;
+};
+
+function MobileMenuDisclosure({
+  label,
+  listId,
+  links,
+  isActive,
+  shouldFocusOnOpen = false,
+  onNavigate,
+}: MobileMenuDisclosureProps) {
   const pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(isActive);
 
@@ -33,13 +55,13 @@ function MobileServicesDisclosure({ isActive, onNavigate }: { isActive: boolean;
     <motion.li variants={settleIntoPlaceVariants} className="relative border-b border-border">
       <button
         type="button"
-        autoFocus
+        autoFocus={shouldFocusOnOpen}
         aria-expanded={isExpanded}
-        aria-controls={MOBILE_SERVICES_LIST_ID}
+        aria-controls={listId}
         onClick={() => setIsExpanded((wasExpanded) => !wasExpanded)}
         className={cn(mobileRowClassName, isActive ? "text-foreground" : "text-foreground-soft")}
       >
-        {SERVICES_NAVIGATION_LABEL}
+        {label}
         <ChevronDown
           aria-hidden
           className={cn(
@@ -51,33 +73,32 @@ function MobileServicesDisclosure({ isActive, onNavigate }: { isActive: boolean;
       <AnimatePresence initial={false}>
         {isExpanded && (
           <motion.div
-            id={MOBILE_SERVICES_LIST_ID}
+            id={listId}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0, transition: { duration: 0.18, ease: "easeOut" } }}
-            transition={servicesListExpandTransition}
+            transition={disclosureListExpandTransition}
             className="overflow-clip"
           >
             <ul className="flex flex-col pb-5">
-            {SERVICES.map((service) => {
-              const servicePath = `/services/${service.slug}`;
-              const isCurrentPage = pathname === servicePath;
-              return (
-                <li key={service.slug}>
-                  <Link
-                    href={servicePath}
-                    onClick={onNavigate}
-                    aria-current={isCurrentPage ? "page" : undefined}
-                    className={cn(
-                      "block py-2.5 text-lg",
-                      isCurrentPage ? "text-accent" : "text-muted-foreground hover:text-foreground"
-                    )}
-                  >
-                    {service.title}
-                  </Link>
-                </li>
-              );
-            })}
+              {links.map((link) => {
+                const isCurrentPage = pathname === link.href;
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={onNavigate}
+                      aria-current={isCurrentPage ? "page" : undefined}
+                      className={cn(
+                        "block py-2.5 text-lg",
+                        isCurrentPage ? "text-accent" : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </motion.div>
         )}
@@ -86,6 +107,19 @@ function MobileServicesDisclosure({ isActive, onNavigate }: { isActive: boolean;
     </motion.li>
   );
 }
+
+const SERVICE_DISCLOSURE_LINKS: DisclosureLink[] = SERVICES.map((service) => ({
+  href: `/services/${service.slug}`,
+  label: service.title,
+}));
+
+const WORK_DISCLOSURE_LINKS: DisclosureLink[] = [
+  ...CASE_STUDIES.map((caseStudy) => ({
+    href: caseStudyPath(caseStudy.slug),
+    label: caseStudy.clientName,
+  })),
+  WORK_INDEX_LINK,
+];
 
 type MobileNavigationSheetProps = {
   isOpen: boolean;
@@ -119,7 +153,21 @@ export function MobileNavigationSheet({
             className="page-container flex flex-1 flex-col pt-2 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
           >
             <ul className="flex flex-col">
-              <MobileServicesDisclosure isActive={activeLinkId === "services"} onNavigate={onNavigate} />
+              <MobileMenuDisclosure
+                label={SERVICES_NAVIGATION_LABEL}
+                listId={MOBILE_SERVICES_LIST_ID}
+                links={SERVICE_DISCLOSURE_LINKS}
+                isActive={activeLinkId === "services"}
+                shouldFocusOnOpen
+                onNavigate={onNavigate}
+              />
+              <MobileMenuDisclosure
+                label={WORK_NAVIGATION_LABEL}
+                listId={MOBILE_WORK_LIST_ID}
+                links={WORK_DISCLOSURE_LINKS}
+                isActive={activeLinkId === "work"}
+                onNavigate={onNavigate}
+              />
               {PAGE_NAVIGATION_LINKS.map((link) => {
                 const isActive = activeLinkId === link.id;
                 return (
