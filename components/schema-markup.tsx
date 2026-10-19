@@ -4,8 +4,8 @@ import { SITE_URL } from "@/lib/site-config";
 /**
  * Falcore — Schema.org structured data (JSON-LD)
  *
- * Blocks injected at the root layout level so they are present on every
- * page render, including the homepage.
+ * Site-wide blocks are injected by the root layout. WebPage, the homepage
+ * breadcrumb and the homepage FAQPage render on the homepage only.
  *
  * Types used:
  *   - ProfessionalService  (Google: knowledge panel, local entity)
@@ -14,7 +14,8 @@ import { SITE_URL } from "@/lib/site-config";
  *   - Person               (founder entity for GEO / knowledge graph)
  *   - Service × 4          (one per service offered)
  *   - BreadcrumbList       (sitelinks / breadcrumb rich result)
- *   - Organization w/ reviews (review snippets + LLM entity signals)
+ *
+ * No Review blocks: add reviews only from real clients who agreed to be quoted.
  */
 
 const BASE_URL = SITE_URL;
@@ -218,59 +219,6 @@ const faqSchema = {
   })),
 };
 
-// ─── Organization with reviews ────────────────────────────────────────────────
-//
-// Reviews use a separate block that references the same @id as the org so
-// JSON-LD processors merge them into one node — keeping @type consistent.
-// Individual reviews (no AggregateRating) improve entity understanding for
-// Google and LLM citation systems. Add AggregateRating once you have 5+ reviews.
-
-const reviewsSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${BASE_URL}/#organization`,
-  review: [
-    {
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: "Rashid Al Maktoum",
-        jobTitle: "Managing Director",
-      },
-      itemReviewed: {
-        "@id": `${BASE_URL}/#organization`,
-      },
-      reviewBody:
-        "We needed a site that matched the quality of our brand. Falcore delivered something we are genuinely proud to show our clients. The process was smooth and the result speaks for itself.",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: 5,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    },
-    {
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: "Karim Haddad",
-        jobTitle: "Founder",
-      },
-      itemReviewed: {
-        "@id": `${BASE_URL}/#organization`,
-      },
-      reviewBody:
-        "Fast turnaround, zero hassle. Our online bookings jumped within the first month of launching.",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: 5,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    },
-  ],
-};
-
 // ─── Schema list ──────────────────────────────────────────────────────────────
 
 const siteWideSchemas = [
@@ -281,7 +229,6 @@ const siteWideSchemas = [
   webAppServiceSchema,
   aiEnablementServiceSchema,
   systemsServiceSchema,
-  reviewsSchema,
 ];
 
 const homepageSchemas = [webPageSchema, breadcrumbSchema, faqSchema];

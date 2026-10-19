@@ -81,5 +81,8 @@
 
 - ❌ (2026-10-19) Service pages had generic "How businesses use this" rows, "we" copy and no proof → ✅ Each page has "Built and running": real examples from shipped work, linked to case studies. Operating-system examples claim only my share (knowledge base, cited assistant, meeting recording/linking/tasks, approval-gated assistant, WhatsApp reply handling, Meta conversion feedback). The other developer led sequences, campaigns, lead scoring, proposal timers, lead research, sales scripts and meeting notes: check `git log --format='%an' -- <path>` in the operating-system repo before crediting a feature.
 
+- ❌ (2026-10-19) The site-wide JSON-LD carried three 5-star reviews from invented people, and the unused `testimonials.tsx` held the same quotes → ✅ Removed both. Never publish reviews, testimonials or ratings unless they come from real clients who agreed to be quoted. The homepage FAQ is now in "I" voice with no invented timelines.
+- ❌ The shared dev server (port 3001) sometimes stops picking up edits and keeps serving old HTML, even after a real Edit-tool change → ✅ Don't restart it. Verify server components in isolation by rendering them with `renderToStaticMarkup` in a small Bun script, and tell the user the dev server needs a manual restart to show the change.
+
 ## Component Registry
 See `docs/components.md`.
