@@ -8,21 +8,11 @@ const hiddenBehindBar = "inset(0 0 100% 0)";
 export function revealFromBarVariants({
   revealSeconds,
   exitSeconds,
-  prefersReducedMotion,
 }: {
   revealSeconds: number;
   exitSeconds: number;
-  prefersReducedMotion: boolean;
 }): Variants {
   const staggerTiming = { staggerChildren: 0.04, delayChildren: 0.06 };
-
-  if (prefersReducedMotion) {
-    return {
-      hidden: { opacity: 0 },
-      shown: { opacity: 1, transition: { duration: revealSeconds, ...staggerTiming } },
-      exit: { opacity: 0, transition: { duration: exitSeconds } },
-    };
-  }
 
   return {
     hidden: { clipPath: hiddenBehindBar, opacity: 1 },

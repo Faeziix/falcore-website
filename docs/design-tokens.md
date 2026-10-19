@@ -37,7 +37,7 @@ Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles
 - `page-container` utility: max width `--page-max-width` (1400px) with `--page-gutter`.
 - `section-spacing` utility: vertical `--section-space`.
 - `hairline-grid` utility: 64px line grid in `--border` (structural, not decorative).
-- Easing: `ease-out-expo`, `ease-in-out-quart` (in TS: `easeOutExpo` from `lib/motion.ts`). Keyframes: `animate-signal-pulse` (live indicators only); `animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe` and `animate-film-settle` (service hero load; always behind `motion-safe:`).
+- Easing: `ease-out-expo`, `ease-in-out-quart` (in TS: `easeOutExpo` from `lib/motion.ts`). Keyframes: `animate-signal-pulse` (live indicators only); `animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe` and `animate-film-settle` (service hero load).
 - Viewfinder: `--viewfinder-reveal-delay` (200ms), `--viewfinder-film-lag` (160ms), `--viewfinder-lock-travel` (14px, how far out the corners start), `--viewfinder-focus-travel` (3px, how far they tighten on hover).
 
 ## Effect tokens

@@ -1,7 +1,7 @@
 "use client";
 
 import { cva, type VariantProps } from "class-variance-authority";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { easeOutExpo } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -31,15 +31,12 @@ export function PlottedLine({
   delaySeconds?: number;
   className?: string;
 }) {
-  const prefersReducedMotion = useReducedMotion();
   const isHorizontal = orientation === "horizontal";
   const drawVariants: Variants = {
     unplotted: isHorizontal ? { scaleX: 0 } : { scaleY: 0 },
     plotted: {
       ...(isHorizontal ? { scaleX: 1 } : { scaleY: 1 }),
-      transition: prefersReducedMotion
-        ? { duration: 0 }
-        : { duration: plottedLineDrawSeconds, delay: delaySeconds, ease: easeOutExpo },
+      transition: { duration: plottedLineDrawSeconds, delay: delaySeconds, ease: easeOutExpo },
     },
   };
 

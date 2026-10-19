@@ -1,14 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { PROCESS_STEPS } from "@/app/_lib/process-steps";
 import { useMediaQuery } from "@/lib/hooks/use-media-query";
 import { ProcessTimelineStep } from "./process-timeline-step";
 
 export function ProcessTimeline() {
   const timelineReference = useRef<HTMLOListElement>(null);
-  const prefersReducedMotion = useReducedMotion();
   const isHorizontalLayout = useMediaQuery("(min-width: 768px)");
   const { scrollYProgress } = useScroll({
     target: timelineReference,
@@ -30,13 +29,7 @@ export function ProcessTimeline() {
       >
         <motion.div
           className="size-full origin-top bg-primary md:origin-left"
-          style={
-            prefersReducedMotion
-              ? undefined
-              : isHorizontalLayout
-                ? { scaleX: drawnProgress }
-                : { scaleY: drawnProgress }
-          }
+          style={isHorizontalLayout ? { scaleX: drawnProgress } : { scaleY: drawnProgress }}
         />
       </div>
 
@@ -47,7 +40,6 @@ export function ProcessTimeline() {
           stepIndex={stepIndex}
           stepCount={PROCESS_STEPS.length}
           timelineDrawProgress={drawnProgress}
-          prefersReducedMotion={Boolean(prefersReducedMotion)}
         />
       ))}
     </ol>

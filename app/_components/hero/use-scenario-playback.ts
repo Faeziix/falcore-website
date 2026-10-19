@@ -9,22 +9,18 @@ const START_DELAY_MS = 900;
 
 export function useScenarioPlayback({
   isPlaying,
-  prefersReducedMotion,
 }: {
   isPlaying: boolean;
-  prefersReducedMotion: boolean;
 }) {
   const [scenarioIndex, setScenarioIndex] = useState(0);
-  const [completedStepCount, setCompletedStepCount] = useState(
-    prefersReducedMotion ? OPERATION_SCENARIOS[0].steps.length : 0
-  );
+  const [completedStepCount, setCompletedStepCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
 
   const scenario = OPERATION_SCENARIOS[scenarioIndex];
   const isScenarioComplete = completedStepCount >= scenario.steps.length;
 
   useEffect(() => {
-    if (!isPlaying || prefersReducedMotion) return;
+    if (!isPlaying) return;
 
     const delay = !hasStarted
       ? START_DELAY_MS
@@ -45,7 +41,6 @@ export function useScenarioPlayback({
     return () => window.clearTimeout(timer);
   }, [
     isPlaying,
-    prefersReducedMotion,
     hasStarted,
     isScenarioComplete,
     completedStepCount,
@@ -55,11 +50,9 @@ export function useScenarioPlayback({
     (index: number) => {
       setHasStarted(true);
       setScenarioIndex(index);
-      setCompletedStepCount(
-        prefersReducedMotion ? OPERATION_SCENARIOS[index].steps.length : 1
-      );
+      setCompletedStepCount(1);
     },
-    [prefersReducedMotion]
+    []
   );
 
   return {

@@ -14,7 +14,7 @@ const viewfinderCornerVariants = cva(
     variants: {
       reveal: {
         none: "",
-        onLoad: "motion-safe:animate-viewfinder-lock",
+        onLoad: "animate-viewfinder-lock",
       },
     },
     defaultVariants: { reveal: "none" },
@@ -25,7 +25,7 @@ const viewfinderScreenVariants = cva("relative size-full overflow-clip bg-surfac
   variants: {
     reveal: {
       none: "",
-      onLoad: "motion-safe:animate-film-wipe",
+      onLoad: "animate-film-wipe",
     },
   },
   defaultVariants: { reveal: "none" },
@@ -35,7 +35,7 @@ const viewfinderFilmVariants = cva("size-full", {
   variants: {
     reveal: {
       none: "",
-      onLoad: "motion-safe:animate-film-settle",
+      onLoad: "animate-film-settle",
     },
   },
   defaultVariants: { reveal: "none" },

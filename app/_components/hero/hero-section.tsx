@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { InteractiveDitheringBackground } from "@/components/ui/interactive-dithering";
 import { BookCallButton } from "@/components/book-call-button";
@@ -9,15 +9,11 @@ import { HeroHeadline } from "./hero-headline";
 const supportingContentDelaySeconds = 0.55;
 
 export function HeroSection() {
-  const prefersReducedMotion = useReducedMotion();
-  const riseIn = (delay: number) =>
-    prefersReducedMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
-        };
+  const riseIn = (delay: number) => ({
+    initial: { opacity: 0, y: 24 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
+  });
 
   return (
     <section className="relative isolate overflow-clip pt-[calc(var(--nav-height)+clamp(3rem,7vw,6rem))] pb-[clamp(4rem,8vw,7rem)]">

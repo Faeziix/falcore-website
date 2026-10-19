@@ -47,7 +47,6 @@ The user rejected a dense version of this page as messy and overwhelming. One id
   - Hover: a 1px `foreground-soft` underline, in the same spot as the active one, draws in from the left (`scaleX`, 300ms, `ease-out-expo`) and retracts to the right on leave. It stays drawn under "Services" while its panel is open. Press: links and the Services trigger scale to 0.97. That's all: the user wants simple, satisfying micro-interactions and "vehemently" rejected a dithered hover band as overdesigned.
   - The bar is fixed to the top and always visible. It never hides on scroll: the user asked for it to stay put.
   - The mobile Services list expands with height and opacity (250ms, closing in 180ms).
-  - Under reduced motion, clip and translate effects become plain fades.
   - Rejected on purpose: a nav entrance on page load (the hero owns the load moment), a magnetic CTA, and a scroll-progress bar.
 - Don't add numbered markers, "→" arrows or magnetic or spring gimmicks to the nav. The old `components/nav.tsx` had all three and was replaced.
 
@@ -56,7 +55,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - One orchestrated load moment: the hero headline lines rise from a mask, then the intro and buttons. Sections do not fade up on scroll.
 - Motion answers a person's action or shows a state change: the Launchpad screenshot crossfading when a feature is picked, the process line drawing, each process icon's red signal stroke drawing in as the line reaches it, and a process icon redrawing itself on hover.
 - Service pages. Text never fades in on scroll; only hairlines draw.
-  - Load: "All services" rises in, the title's words rise from a mask (70ms apart), then the intro and the booking button. The `ViewfinderFrame` corners close in from 14px outside the frame and lock on, then the film wipes in from the left while settling from 1.12 scale (`reveal="onLoad"`). It's all CSS keyframes (`animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe`, `animate-film-settle`) behind `motion-safe:`, so the hero stays a server component and reduced motion shows everything at once. The delays live in `heroRevealDelayMilliseconds` and the `--viewfinder-*` variables.
+  - Load: "All services" rises in, the title's words rise from a mask (70ms apart), then the intro and the booking button. The `ViewfinderFrame` corners close in from 14px outside the frame and lock on, then the film wipes in from the left while settling from 1.12 scale (`reveal="onLoad"`). It's all CSS keyframes (`animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe`, `animate-film-settle`), so the hero stays a server component. The delays live in `heroRevealDelayMilliseconds` and the `--viewfinder-*` variables.
   - Scroll: the "What's included" grid and "How businesses use this" rows are plotted like a blueprint. Each hairline draws once from the left or top as the list enters view (`PlottedLine`), staggered cell by cell. Each inclusion's icon then draws its outline and, 0.35s later, its red signal stroke (`pathLength`).
   - Hover: the viewfinder corners tighten 3px and brighten, like a camera focusing. An inclusion cell tints to `surface/60`, its text brightens and its icon redraws (outline, then signal). The redraw is one-shot: it starts on pointer enter and always plays to the end, however briefly the pointer stays, and it won't restart until it has finished (`useIconRedraw` in `app/services/_components/`). Never tie a draw animation to hover state, because leaving early would freeze it half drawn. A use-case row draws a steel line along its top edge from the left (it retracts to the right), the same gesture as the nav underline, and its description brightens.
 
@@ -64,7 +63,8 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 
 - Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `app/_components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
 - Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close.
-- Every animation respects `prefers-reduced-motion` (`useReducedMotion`; service scenes show their resting frame).
+- The site does not honour `prefers-reduced-motion` (the user's decision, 2026-10-19): every visitor gets the full motion. Don't add `useReducedMotion`, `motion-safe:`/`motion-reduce:` variants or reduced-motion media queries.
+- Anything that starts hidden in `initial` must always have an `animate` that reveals it. The server HTML carries the hidden state, and nothing else will undo it.
 - Animate transform and opacity only. Reach for `ease-out-expo`.
 
 ## Calls to action

@@ -1,6 +1,5 @@
 export const ditheringTuning = {
   maxDevicePixelRatio: 2,
-  reducedMotionFrozenTime: 8,
   pointerFollowRate: 18,
   presenceFollowRate: 6,
   timeScaleFollowRate: 2,

@@ -13,7 +13,7 @@ export function ServiceTitleReveal({ title }: { title: string }) {
               style={{
                 animationDelay: `${firstWordDelayMilliseconds + index * wordStaggerMilliseconds}ms`,
               }}
-              className="inline-block motion-safe:animate-mask-rise"
+              className="inline-block animate-mask-rise"
             >
               {word}
             </span>

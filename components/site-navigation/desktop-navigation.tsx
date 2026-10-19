@@ -25,7 +25,7 @@ function HoverUnderline({ isHeldOpen = false }: { isHeldOpen?: boolean }) {
     <span
       aria-hidden
       className={cn(
-        "pointer-events-none absolute h-px origin-right bg-foreground-soft transition-transform duration-300 ease-out-expo motion-reduce:transition-none",
+        "pointer-events-none absolute h-px origin-right bg-foreground-soft transition-transform duration-300 ease-out-expo",
         "group-hover/nav-item:origin-left group-hover/nav-item:scale-x-100",
         underLabelPositionClassName,
         isHeldOpen ? "origin-left scale-x-100" : "scale-x-0"
@@ -76,7 +76,7 @@ export function DesktopNavigation({
             <ChevronDown
               aria-hidden
               className={cn(
-                "size-3.5 transition-transform duration-300 ease-out-expo motion-reduce:transition-none",
+                "size-3.5 transition-transform duration-300 ease-out-expo",
                 isServicesMenuOpen && "rotate-180"
               )}
             />

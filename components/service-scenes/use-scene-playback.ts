@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 
 export function useScenePlayback(isActive: boolean) {
   const sceneReference = useRef<HTMLDivElement>(null);
   const isNearViewport = useInView(sceneReference, { margin: "120px 0px" });
-  const prefersReducedMotion = useReducedMotion();
-  return { sceneReference, isPlaying: isNearViewport && isActive && !prefersReducedMotion };
+  return { sceneReference, isPlaying: isNearViewport && isActive };
 }
 
 export function useSceneBeat(isPlaying: boolean, beatDurationMilliseconds: number, beatCount: number, restingBeat: number) {

@@ -27,7 +27,7 @@ export function ServiceHero({ service }: { service: Service }) {
             tone: "muted",
             size: "sm",
             underline: "hover",
-            className: "motion-safe:animate-rise-in",
+            className: "animate-rise-in",
           })}
         >
           All services
@@ -35,13 +35,13 @@ export function ServiceHero({ service }: { service: Service }) {
         <ServiceTitleReveal title={service.title} />
         <p
           style={revealDelay(heroRevealDelayMilliseconds.intro)}
-          className="mt-6 text-lead text-foreground-soft motion-safe:animate-rise-in"
+          className="mt-6 text-lead text-foreground-soft animate-rise-in"
         >
           {service.longDescription}
         </p>
         <div
           style={revealDelay(heroRevealDelayMilliseconds.bookingButton)}
-          className="mt-9 motion-safe:animate-rise-in"
+          className="mt-9 animate-rise-in"
         >
           <BookCallButton size="lg" width="fullOnMobile" />
         </div>

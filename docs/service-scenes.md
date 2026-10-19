@@ -8,7 +8,7 @@ Each service is illustrated by an animated object scene, built in code. They app
 - One crafted scene per service, made of a few real-looking parts: raised, softly shaded objects, thin connector wires with small nodes, a mono status chip with a loader, and one falcon-red live signal. Steel blue (`accent`) appears only for a human approval moment.
 - **Square, never rounded.** The site has no rounded corners, so the scenes have none either: square tiles, chips, LEDs, avatars and swatches, a square 2×2 loader, sharp orthogonal wire elbows, straight-segment chart lines, square line caps.
 - **Fully animated.** Every part of a scene takes part in one choreographed story loop of about 10 s. A single moving detail is not enough.
-- Complete at rest: the server render and reduced motion show a full, representative frame.
+- Complete at rest: the server render shows a full, representative frame.
 
 | Service | Story |
 |---|---|
@@ -28,7 +28,7 @@ Each service is illustrated by an animated object scene, built in code. They app
 | `scene-units.ts` | `SCENE_WIDTH`/`SCENE_HEIGHT` and `sceneUnits(n)` (`calc(n * var(--scene-unit))`, where the unit is 1/640 of the stage width), so scenes scale with their tile. `sceneStroke(n)` sets an SVG line width that `SceneStage` thickens on small stages (`--scene-stroke-boost`: 1.15 under 720px, 1.6 under 560px, 2.2 under 400px), so lines stay at least 1px in the nav panel and on phones |
 | `scene-parts.tsx` | `SceneObject` (square raised object, `isLive` gives a red edge), `raisedObjectStyle()`, `SceneChip`, `SceneLabel`, `SceneLed`, `SceneBar` |
 | `scene-loader.tsx` | `SceneLoader`: square 2×2 loader |
-| `use-scene-playback.ts` | `useScenePlayback(isActive)` (plays only near the viewport, when active and without reduced motion) and `useSceneBeat()` (story step index; resets to the start when playback stops) |
+| `use-scene-playback.ts` | `useScenePlayback(isActive)` (plays only near the viewport and when active) and `useSceneBeat()` (story step index; resets to the start when playback stops) |
 | `ai-enablement/`, `systems-automations/`, `web-design/`, `custom-web-applications/` | One folder per scene: a story/layout data file, small part components and scene-local hooks |
 
 Rules:

@@ -40,7 +40,6 @@ Files:
 
 Rules:
 - Pointer state lives in plain objects updated per frame, not React state.
-- `prefers-reduced-motion` renders a single static frame with no smoke.
 - The canvas wrapper is `pointer-events-none`. Listeners sit on `window`, so smoke follows the cursor over the hero text and panels.
 - Device pixel ratio is capped at 2.
 

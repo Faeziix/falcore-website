@@ -4,7 +4,6 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import { useReducedMotion } from "motion/react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -89,7 +88,6 @@ function Carousel({
   ...props
 }: React.ComponentProps<"div"> & { opts?: CarouselOptions }) {
   const [viewportRef, api] = useEmblaCarousel({ ...calmSwipeOptions, ...opts });
-  const prefersReducedMotion = useReducedMotion() ?? false;
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [snapCount, setSnapCount] = React.useState(0);
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
@@ -113,16 +111,16 @@ function Carousel({
   }, [api]);
 
   const scrollTo = React.useCallback(
-    (index: number) => api?.scrollTo(index, prefersReducedMotion),
-    [api, prefersReducedMotion]
+    (index: number) => api?.scrollTo(index),
+    [api]
   );
   const scrollPrev = React.useCallback(
-    () => api?.scrollPrev(prefersReducedMotion),
-    [api, prefersReducedMotion]
+    () => api?.scrollPrev(),
+    [api]
   );
   const scrollNext = React.useCallback(
-    () => api?.scrollNext(prefersReducedMotion),
-    [api, prefersReducedMotion]
+    () => api?.scrollNext(),
+    [api]
   );
 
   const handleArrowKeys = (event: React.KeyboardEvent<HTMLDivElement>) => {

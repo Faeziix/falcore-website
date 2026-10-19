@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { FAQ_ITEMS } from "@/lib/data/faq";
@@ -19,7 +19,6 @@ function AccordionItem({
   isOpen: boolean;
   onToggle: () => void;
 }) {
-  const prefersReducedMotion = useReducedMotion();
 
   return (
     <div className="border-b border-border">
@@ -48,9 +47,9 @@ function AccordionItem({
             id={`${itemId}-answer`}
             role="region"
             aria-labelledby={`${itemId}-trigger`}
-            initial={prefersReducedMotion ? { opacity: 1 } : { height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={prefersReducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-clip"
           >

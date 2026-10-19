@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { TextLink } from "@/components/ui/text-link";
 import { SERVICES } from "@/lib/data/services";
@@ -43,7 +43,7 @@ function MobileServicesDisclosure({ isActive, onNavigate }: { isActive: boolean;
         <ChevronDown
           aria-hidden
           className={cn(
-            "size-5 text-muted-foreground transition-transform duration-300 ease-out-expo motion-reduce:transition-none",
+            "size-5 text-muted-foreground transition-transform duration-300 ease-out-expo",
             isExpanded && "rotate-180"
           )}
         />
@@ -98,11 +98,9 @@ export function MobileNavigationSheet({
   activeNavigationLink: { activeLinkId, ariaCurrentValue },
   onNavigate,
 }: MobileNavigationSheetProps) {
-  const prefersReducedMotion = useReducedMotion() ?? false;
   const sheetVariants = revealFromBarVariants({
     revealSeconds: 0.3,
     exitSeconds: 0.18,
-    prefersReducedMotion,
   });
 
   return (

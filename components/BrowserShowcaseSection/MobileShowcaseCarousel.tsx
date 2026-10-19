@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback } from "react";
-import { useReducedMotion } from "motion/react";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import {
@@ -29,8 +28,6 @@ const clamp = (value: number, min: number, max: number) =>
   Math.min(max, Math.max(min, value));
 
 function useCardFocusTween() {
-  const prefersReducedMotion = useReducedMotion();
-
   const applyCardFocus = useCallback(
     (api: LoadedCarouselApi, slideDistancesInCards: number[]) => {
       api.slideNodes().forEach((slide, slideIndex) => {
@@ -41,13 +38,11 @@ function useCardFocusTween() {
         );
         const parallaxLayer = slide.querySelector<HTMLElement>("[data-parallax-layer]");
         if (parallaxLayer) {
-          parallaxLayer.style.transform = prefersReducedMotion
-            ? ""
-            : `translate3d(${distance * -SCREENSHOT_PARALLAX_SHIFT_PERCENT}%, 0, 0)`;
+          parallaxLayer.style.transform = `translate3d(${distance * -SCREENSHOT_PARALLAX_SHIFT_PERCENT}%, 0, 0)`;
         }
       });
     },
-    [prefersReducedMotion]
+    []
   );
 
   useCarouselScrollTween(applyCardFocus);
@@ -92,7 +87,7 @@ function ProjectCard({
         <ArrowUpRightIcon
           aria-hidden
           weight="bold"
-          className="mt-1 size-4 shrink-0 text-muted-foreground transition-[color,translate] duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground group-focus-visible:text-foreground group-active:text-foreground motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+          className="mt-1 size-4 shrink-0 text-muted-foreground transition-[color,translate] duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground group-focus-visible:text-foreground group-active:text-foreground"
         />
       </div>
     </a>
@@ -138,7 +133,7 @@ function PositionSegments({ websites }: { websites: ShowcaseWebsite[] }) {
           >
             <span
               className={cn(
-                "block w-full transition-[height,background-color] duration-300 ease-out-expo motion-reduce:transition-none",
+                "block w-full transition-[height,background-color] duration-300 ease-out-expo",
                 isCurrent ? "h-0.5 bg-foreground" : "h-px bg-border-strong"
               )}
             />

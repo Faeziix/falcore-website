@@ -1,30 +1,15 @@
 "use client";
 
 import { useEffect, type RefObject } from "react";
-import { createDitheringRenderer, type DitheringFrame } from "./create-dithering-renderer";
+import { createDitheringRenderer } from "./create-dithering-renderer";
 import { createPointerField } from "./create-pointer-field";
 import { ditheringPresets, ditheringTuning, type DitheringPresetName } from "./dithering-tuning";
 import { readCssColorToken } from "./read-css-color-token";
 
 const maxFrameDeltaSeconds = 0.1;
 
-const stillFrame: DitheringFrame = {
-  time: ditheringTuning.reducedMotionFrozenTime,
-  deltaSeconds: 0,
-  stroke: {
-    strokeStartX: 0,
-    strokeStartY: 0,
-    strokeEndX: 0,
-    strokeEndY: 0,
-    pointerVelocityX: 0,
-    pointerVelocityY: 0,
-    smokeEmission: 0,
-  },
-};
-
 export function useInteractiveDithering(
   canvasRef: RefObject<HTMLCanvasElement | null>,
-  isMotionReduced: boolean,
   presetName: DitheringPresetName,
 ) {
   useEffect(() => {
@@ -44,16 +29,8 @@ export function useInteractiveDithering(
 
     const resizeObserver = new ResizeObserver(([entry]) => {
       renderer.resize(entry.contentRect.width, entry.contentRect.height);
-      if (isMotionReduced) renderer.render(stillFrame);
     });
     resizeObserver.observe(canvas);
-
-    if (isMotionReduced) {
-      return () => {
-        resizeObserver.disconnect();
-        renderer.dispose();
-      };
-    }
 
     const pointerField = createPointerField(canvas);
     let animationFrameId = 0;
@@ -98,5 +75,5 @@ export function useInteractiveDithering(
       pointerField.dispose();
       renderer.dispose();
     };
-  }, [canvasRef, isMotionReduced, presetName]);
+  }, [canvasRef, presetName]);
 }

@@ -12,7 +12,6 @@ type ProcessTimelineStepProps = {
   stepIndex: number;
   stepCount: number;
   timelineDrawProgress: MotionValue<number>;
-  prefersReducedMotion: boolean;
 };
 
 export function ProcessTimelineStep({
@@ -20,7 +19,6 @@ export function ProcessTimelineStep({
   stepIndex,
   stepCount,
   timelineDrawProgress,
-  prefersReducedMotion,
 }: ProcessTimelineStepProps) {
   const lineReachesStepAt = stepIndex / stepCount;
   const scrollLinkedSignalProgress = useTransform(
@@ -33,7 +31,7 @@ export function ProcessTimelineStep({
   const signalDrawProgress = useTransform(
     [scrollLinkedSignalProgress, signalReplayProgress],
     ([scrollProgress, replayProgress]: number[]) =>
-      prefersReducedMotion ? 1 : Math.min(scrollProgress, replayProgress)
+      Math.min(scrollProgress, replayProgress)
   );
 
   return (
@@ -44,7 +42,7 @@ export function ProcessTimelineStep({
       />
       <div
         className="w-fit"
-        onPointerEnter={prefersReducedMotion ? undefined : redrawIcon}
+        onPointerEnter={redrawIcon}
       >
         <ProcessStepIcon
           iconName={step.iconName}

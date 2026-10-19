@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 import { OPERATION_SCENARIOS } from "@/app/_lib/operation-scenarios";
 import { SystemGraph } from "./system-graph";
@@ -11,11 +11,9 @@ import { useScenarioPlayback } from "./use-scenario-playback";
 export function LiveOperationsPanel() {
   const panelReference = useRef<HTMLDivElement>(null);
   const isPanelVisible = useInView(panelReference, { amount: 0.3 });
-  const prefersReducedMotion = useReducedMotion() ?? false;
   const { scenario, scenarioIndex, completedStepCount, selectScenario } =
     useScenarioPlayback({
       isPlaying: isPanelVisible,
-      prefersReducedMotion,
     });
 
   return (
@@ -59,14 +57,14 @@ export function LiveOperationsPanel() {
         <SystemGraph
           scenario={scenario}
           completedStepCount={completedStepCount}
-          shouldAnimate={!prefersReducedMotion}
+          shouldAnimate
         />
       </div>
 
       <OperationsLog
         scenario={scenario}
         completedStepCount={completedStepCount}
-        shouldAnimate={!prefersReducedMotion}
+        shouldAnimate
       />
 
       <figcaption className="border-t border-border px-4 py-3 text-xs text-muted-foreground sm:px-5">

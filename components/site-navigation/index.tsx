@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { LayoutGroup, MotionConfig } from "motion/react";
+import { LayoutGroup } from "motion/react";
 import Logo from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { DesktopNavigation } from "./desktop-navigation";
@@ -61,48 +61,46 @@ export function SiteNavigation() {
   });
 
   return (
-    <MotionConfig reducedMotion="user">
-      <LayoutGroup>
-        <header
-          ref={headerRef}
-          {...headerPointerHandlers}
-          className="fixed inset-x-0 top-0 z-50"
+    <LayoutGroup>
+      <header
+        ref={headerRef}
+        {...headerPointerHandlers}
+        className="fixed inset-x-0 top-0 z-50"
+      >
+        <div
+          className={cn(
+            "border-b transition-[background-color,border-color] duration-300",
+            navigationBarSurfaceClassName(openMenu !== null, hasScrolled)
+          )}
         >
-          <div
-            className={cn(
-              "border-b transition-[background-color,border-color] duration-300",
-              navigationBarSurfaceClassName(openMenu !== null, hasScrolled)
-            )}
+          <nav
+            aria-label="Main"
+            className="page-container flex h-(--nav-height) items-center justify-between lg:grid lg:grid-cols-12 lg:gap-8"
           >
-            <nav
-              aria-label="Main"
-              className="page-container flex h-(--nav-height) items-center justify-between lg:grid lg:grid-cols-12 lg:gap-8"
-            >
-              <Logo size="lg" className="-ml-2 lg:col-span-3" />
-              <DesktopNavigation
-                activeNavigationLink={activeNavigationLink}
-                isServicesMenuOpen={openMenu === "services"}
-                servicesTriggerRef={servicesTriggerRef}
-                servicesTriggerHandlers={servicesTriggerHandlers}
-                onPageLinkPointerEnter={closeServicesWhenPageLinkHovered}
-                onNavigate={closeMenus}
-              />
-              <MobileMenuToggle
-                isOpen={openMenu === "mobile"}
-                onToggle={() => toggleMenu("mobile")}
-                toggleRef={mobileToggleRef}
-              />
-            </nav>
-          </div>
+            <Logo size="lg" className="-ml-2 lg:col-span-3" />
+            <DesktopNavigation
+              activeNavigationLink={activeNavigationLink}
+              isServicesMenuOpen={openMenu === "services"}
+              servicesTriggerRef={servicesTriggerRef}
+              servicesTriggerHandlers={servicesTriggerHandlers}
+              onPageLinkPointerEnter={closeServicesWhenPageLinkHovered}
+              onNavigate={closeMenus}
+            />
+            <MobileMenuToggle
+              isOpen={openMenu === "mobile"}
+              onToggle={() => toggleMenu("mobile")}
+              toggleRef={mobileToggleRef}
+            />
+          </nav>
+        </div>
 
-          <ServicesMenuPanel isOpen={openMenu === "services"} onNavigate={closeMenus} />
-          <MobileNavigationSheet
-            isOpen={openMenu === "mobile"}
-            activeNavigationLink={activeNavigationLink}
-            onNavigate={closeMenus}
-          />
-        </header>
-      </LayoutGroup>
-    </MotionConfig>
+        <ServicesMenuPanel isOpen={openMenu === "services"} onNavigate={closeMenus} />
+        <MobileNavigationSheet
+          isOpen={openMenu === "mobile"}
+          activeNavigationLink={activeNavigationLink}
+          onNavigate={closeMenus}
+        />
+      </header>
+    </LayoutGroup>
   );
 }

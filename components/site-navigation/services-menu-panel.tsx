@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { SERVICES } from "@/lib/data/services";
 import { SERVICES_MENU_PANEL_ID } from "./navigation-links";
 import { revealFromBarVariants } from "./navigation-motion";
@@ -9,11 +9,9 @@ import { ServiceMenuItem } from "./service-menu-item";
 
 export function ServicesMenuPanel({ isOpen, onNavigate }: { isOpen: boolean; onNavigate: () => void }) {
   const pathname = usePathname();
-  const prefersReducedMotion = useReducedMotion() ?? false;
   const panelVariants = revealFromBarVariants({
     revealSeconds: 0.24,
     exitSeconds: 0.15,
-    prefersReducedMotion,
   });
 
   return (

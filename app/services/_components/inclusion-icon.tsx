@@ -1,7 +1,7 @@
 "use client";
 
 import type { Ref } from "react";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import type { InclusionIconName } from "@/lib/data/services";
 import { easeOutExpo } from "@/lib/motion";
 import {
@@ -22,11 +22,9 @@ const toneClassName: Record<IconStrokeTone, string | undefined> = {
 function strokeDrawVariants({
   tone,
   delaySeconds,
-  prefersReducedMotion,
 }: {
   tone: IconStrokeTone;
   delaySeconds: number;
-  prefersReducedMotion: boolean;
 }): Variants {
   const isSignal = tone === "signal";
   const drawTiming = {
@@ -34,13 +32,6 @@ function strokeDrawVariants({
     ease: easeOutExpo,
   };
   const signalLag = isSignal ? signalLagSeconds : 0;
-
-  if (prefersReducedMotion) {
-    return {
-      unplotted: { pathLength: 1, opacity: 1 },
-      plotted: { pathLength: 1, opacity: 1, transition: { duration: 0 } },
-    };
-  }
 
   return {
     unplotted: { pathLength: 0, opacity: 0 },
@@ -61,8 +52,6 @@ export function InclusionIcon({
   delaySeconds: number;
   ref?: Ref<SVGSVGElement>;
 }) {
-  const prefersReducedMotion = Boolean(useReducedMotion());
-
   return (
     <svg
       ref={ref}
@@ -84,7 +73,6 @@ export function InclusionIcon({
           variants={strokeDrawVariants({
             tone: stroke.tone,
             delaySeconds,
-            prefersReducedMotion,
           })}
         />
       ))}

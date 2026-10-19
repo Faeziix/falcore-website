@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import { useAnimate, useReducedMotion } from "motion/react";
+import { useAnimate } from "motion/react";
 import { easeOutExpo } from "@/lib/motion";
 import {
   outlineDrawSeconds,
@@ -14,12 +14,11 @@ const signalStrokeSelector = '[data-icon-tone="signal"]';
 
 export function useIconRedraw() {
   const [iconScope, animate] = useAnimate<SVGSVGElement>();
-  const prefersReducedMotion = useReducedMotion();
   const isRedrawing = useRef(false);
 
   const redrawIcon = useCallback(async () => {
     const icon = iconScope.current;
-    if (prefersReducedMotion || isRedrawing.current || !icon) return;
+    if (isRedrawing.current || !icon) return;
 
     isRedrawing.current = true;
     const outlineStrokes = icon.querySelectorAll(outlineStrokeSelector);
@@ -38,7 +37,7 @@ export function useIconRedraw() {
       ),
     ]);
     isRedrawing.current = false;
-  }, [animate, iconScope, prefersReducedMotion]);
+  }, [animate, iconScope]);
 
   return { iconScope, redrawIcon };
 }

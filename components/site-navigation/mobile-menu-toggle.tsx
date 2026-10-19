@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { MOBILE_NAVIGATION_SHEET_ID } from "./navigation-links";
 
 const toggleLineClassName =
-  "absolute inset-x-0 h-0.5 bg-current transition-transform duration-300 ease-out-expo motion-reduce:transition-none";
+  "absolute inset-x-0 h-0.5 bg-current transition-transform duration-300 ease-out-expo";
 
 type MobileMenuToggleProps = {
   isOpen: boolean;

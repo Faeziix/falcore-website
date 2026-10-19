@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type LoopingVideoSources = {
@@ -23,8 +23,7 @@ export function LoopingVideo({
 }) {
   const videoReference = useRef<HTMLVideoElement>(null);
   const isNearViewport = useInView(videoReference, { margin: "200px 0px" });
-  const prefersReducedMotion = useReducedMotion();
-  const shouldPlay = isNearViewport && isActive && !prefersReducedMotion;
+  const shouldPlay = isNearViewport && isActive;
 
   useEffect(() => {
     const video = videoReference.current;

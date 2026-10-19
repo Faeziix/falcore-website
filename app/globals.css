@@ -222,19 +222,6 @@
     color: var(--primary-foreground);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
 }
 
 :root {
@@ -304,21 +291,3 @@
   to { transform: translate3d(0, 0, 0); }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .logo-marquee {
-    mask-image: none;
-  }
-  .logo-marquee-row {
-    animation: none;
-    width: 100%;
-  }
-  .logo-marquee-set {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-  }
-  .logo-marquee-set[aria-hidden],
-  .logo-marquee-item[data-duplicate] {
-    display: none;
-  }
-}
