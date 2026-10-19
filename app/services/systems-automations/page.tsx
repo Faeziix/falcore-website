@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
-import ServicePage from "@/components/service-page";
+import ServicePage from "../_components/service-page";
 import { getServiceBySlug } from "@/lib/data/services";
 import type { Metadata } from "next";
 
