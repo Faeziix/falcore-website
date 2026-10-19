@@ -6,3 +6,7 @@ export function sceneUnits(value: number) {
 }
 
 export type ScenePoint = { x: number; y: number };
+
+export function sceneStroke(width: number) {
+  return `calc(${width} * var(--scene-stroke-boost, 1))`;
+}

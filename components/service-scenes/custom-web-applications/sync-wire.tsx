@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useAnimationFrame } from "motion/react";
-import { sceneUnits } from "../scene-units";
+import { sceneStroke, sceneUnits } from "../scene-units";
 import { SYNC_PULSE_PERIOD_MILLISECONDS, SYNC_WIRE_POINTS } from "./custom-web-applications-story";
 import { ScenePlaneSvg } from "./scene-plane";
 import { stagePercentX, stagePercentY } from "./stage-percent";
@@ -55,7 +55,7 @@ export function SyncWire({ isPulsing }: { isPulsing: boolean }) {
   return (
     <>
       <ScenePlaneSvg>
-        <path d={SYNC_WIRE_PATH} fill="none" className="stroke-border-strong" strokeWidth={1} strokeLinecap="square" strokeLinejoin="miter" />
+        <path d={SYNC_WIRE_PATH} fill="none" className="stroke-border-strong" style={{ strokeWidth: sceneStroke(1) }} strokeLinecap="square" strokeLinejoin="miter" />
       </ScenePlaneSvg>
       <span
         className="absolute bg-border-strong"

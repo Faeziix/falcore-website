@@ -29,7 +29,7 @@ export function SceneStage({ label, figure, children, className }: SceneStagePro
       </span>
       <div
         aria-hidden
-        className="absolute top-1/2 left-0 -translate-y-1/2"
+        className="absolute top-1/2 left-0 -translate-y-1/2 [--scene-stroke-boost:1] @max-[720px]:[--scene-stroke-boost:1.15] @max-[560px]:[--scene-stroke-boost:1.6] @max-[400px]:[--scene-stroke-boost:2.2]"
         style={{ width: sceneUnits(SCENE_WIDTH), height: sceneUnits(SCENE_HEIGHT) }}
       >
         {children}

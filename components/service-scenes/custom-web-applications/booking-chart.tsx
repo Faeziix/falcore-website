@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ChartVertices } from "./chart-vertices";
 import { CHART, CHART_DRAWN_FRACTIONS, CHART_POINTS, EASE_OUT_EXPO, LINE_DRAW_SECONDS } from "./custom-web-applications-story";
+import { sceneStroke } from "../scene-units";
 import { ScenePlaneSvg } from "./scene-plane";
 
 const CHART_LINE_POINTS = CHART_POINTS.map((point) => `${point.x},${point.y}`).join(" ");
@@ -25,7 +26,7 @@ export function BookingChart({ drawnPointCount, isDimmed }: BookingChartProps) {
           y1={gridY}
           y2={gridY}
           className="stroke-border"
-          strokeWidth={1}
+          style={{ strokeWidth: sceneStroke(1) }}
           strokeLinecap="square"
           initial={false}
           animate={{ pathLength: isChartReady ? 1 : 0, opacity: isChartReady ? 1 : 0 }}
@@ -37,7 +38,7 @@ export function BookingChart({ drawnPointCount, isDimmed }: BookingChartProps) {
           points={CHART_LINE_POINTS}
           fill="none"
           className="stroke-primary"
-          strokeWidth={2}
+          style={{ strokeWidth: sceneStroke(2) }}
           strokeLinecap="square"
           strokeLinejoin="miter"
           initial={false}

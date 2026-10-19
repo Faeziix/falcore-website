@@ -16,7 +16,7 @@ export type ServiceSceneProps = { label: string; isActive?: boolean };
 
 export function AiEnablementScene({ label, isActive = true }: ServiceSceneProps) {
   const { sceneReference, isPlaying } = useScenePlayback(isActive);
-  const { storyBeat, phase, draftCount, quoteSheets } = useAgentStory(isPlaying);
+  const { phase, draftCount, quoteSheets } = useAgentStory(isPlaying);
   return (
     <div ref={sceneReference} className="size-full">
       <SceneStage label={label} figure="FIG 01 · AGENT">
@@ -27,7 +27,7 @@ export function AiEnablementScene({ label, isActive = true }: ServiceSceneProps)
         ))}
         <QuoteStack sheetCount={quoteSheets} isPlaying={isPlaying} />
         <ApprovalBadge phase={phase} isPlaying={isPlaying} />
-        <AgentCore tone={agentTone(phase)} storyBeat={storyBeat} isPlaying={isPlaying} />
+        <AgentCore tone={agentTone(phase)} isPlaying={isPlaying} />
         <AgentStatusChip phase={phase} draftCount={draftCount} isPlaying={isPlaying} />
       </SceneStage>
     </div>

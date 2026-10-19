@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { SCENE_HEIGHT, SCENE_WIDTH, sceneUnits, type ScenePoint } from "../scene-units";
+import { SCENE_HEIGHT, SCENE_WIDTH, sceneStroke, sceneUnits, type ScenePoint } from "../scene-units";
 import { APPS, JUNCTION, JUNCTION_SIZE, PORT_SIZE, WIRE_KEYS, WIRE_ROUTES, pointsToPath, type WireKey } from "./workflow-layout";
 import { WorkflowPulse } from "./workflow-pulse";
 import { EXPO_OUT } from "./workflow-story";
@@ -26,7 +26,7 @@ function LiveWireOverlay({ wireKey, isLive }: { wireKey: WireKey; isLive: boolea
     <motion.path
       d={pointsToPath(WIRE_ROUTES[wireKey])}
       className="fill-none stroke-primary"
-      strokeWidth={1.6}
+      style={{ strokeWidth: sceneStroke(1.6) }}
       strokeLinecap="square"
       strokeLinejoin="miter"
       initial={false}
@@ -52,7 +52,7 @@ export function WorkflowWires({ liveWire, hasTravellingPulse, isPlaying }: Workf
       style={{ width: sceneUnits(SCENE_WIDTH), height: sceneUnits(SCENE_HEIGHT) }}
     >
       {WIRE_KEYS.map((wireKey) => (
-        <path key={wireKey} d={pointsToPath(WIRE_ROUTES[wireKey])} className="fill-none stroke-border" strokeWidth={1.2} strokeLinecap="square" strokeLinejoin="miter" />
+        <path key={wireKey} d={pointsToPath(WIRE_ROUTES[wireKey])} className="fill-none stroke-border-strong" style={{ strokeWidth: sceneStroke(1.2) }} strokeLinecap="square" strokeLinejoin="miter" />
       ))}
       {WIRE_KEYS.map((wireKey) => (
         <LiveWireOverlay key={wireKey} wireKey={wireKey} isLive={liveWire === wireKey} />
@@ -66,9 +66,8 @@ export function WorkflowWires({ liveWire, hasTravellingPulse, isPlaying }: Workf
         y={JUNCTION.y - JUNCTION_SIZE / 2}
         width={JUNCTION_SIZE}
         height={JUNCTION_SIZE}
-        strokeWidth={1.2}
         className={isJunctionLive ? "fill-background stroke-primary" : "fill-background stroke-border-strong"}
-        style={{ transition: "stroke 300ms" }}
+        style={{ transition: "stroke 300ms", strokeWidth: sceneStroke(1.2) }}
       />
       <WorkflowPulse route={liveWire} isTravelling={hasTravellingPulse} isPlaying={isPlaying} />
     </svg>

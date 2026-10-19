@@ -12,7 +12,7 @@ Each service is illustrated by an animated object scene, built in code. They app
 
 | Service | Story |
 |---|---|
-| AI Enablement (`FIG 01 · AGENT`) | A task arrives at the agent. It reads Records, drafts 14 quotes in Documents (counter and growing sheet stack), waits in steel blue for the owner's OK on Email, then books calls in Calendar. Ends on "Goal met · 14 renewals" |
+| AI Enablement (`FIG 01 · AGENT`) | The agent tile carries the familiar AI sparkle (a large four-point star with a small one), which turns and breathes while the agent works and settles when it is done. A task arrives at the agent. It reads Records, drafts 14 quotes in Documents (counter and growing sheet stack), waits in steel blue for the owner's OK on Email, then books calls in Calendar. Ends on "Goal met · 14 renewals" |
 | Systems & Automations (`FIG 02 · WORKFLOW`) | A "New enquiry" form fills itself and submits. The router scores it ("Score 82 · high intent"), then the lead flows to CRM ("Contact added"), Calendar ("Slot held") and Email ("Welcome sent"). A run counter increments each loop |
 | Web Design (`FIG 03 · SITE`) | Layout guides flash in, the headline types, media wipes in, the cursor picks a typeface and a colour, clicks the button, and the chip goes from "Building" to "Live · loads in 0.8s · perf 100" |
 | Custom Web Applications (`FIG 04 · APP`) | KPIs count up, the chart draws point by point, a "New booking" toast slides in, team avatars appear and the view switches Admin → Staff → Client while the dashboard adapts, and the chip goes from "Syncing" to "Synced" |
@@ -25,7 +25,7 @@ Each service is illustrated by an animated object scene, built in code. They app
 |---|---|
 | `service-scene.tsx` | `<ServiceScene slug label isActive />` picks the scene by slug. `isActive` pauses playback (the nav plays a scene only while hovered) |
 | `scene-stage.tsx` | `SceneStage`: the stage (`role="img"`, `aria-label`, FIG label, backdrop gradient). Its children sit on a 640×360-unit plane, vertically centred, so HTML parts and `viewBox="0 0 640 360"` SVG wires share one coordinate system even when the container is not exactly 16:9 |
-| `scene-units.ts` | `SCENE_WIDTH`/`SCENE_HEIGHT` and `sceneUnits(n)` (`calc(n * var(--scene-unit))`, where the unit is 1/640 of the stage width), so scenes scale with their tile |
+| `scene-units.ts` | `SCENE_WIDTH`/`SCENE_HEIGHT` and `sceneUnits(n)` (`calc(n * var(--scene-unit))`, where the unit is 1/640 of the stage width), so scenes scale with their tile. `sceneStroke(n)` sets an SVG line width that `SceneStage` thickens on small stages (`--scene-stroke-boost`: 1.15 under 720px, 1.6 under 560px, 2.2 under 400px), so lines stay at least 1px in the nav panel and on phones |
 | `scene-parts.tsx` | `SceneObject` (square raised object, `isLive` gives a red edge), `raisedObjectStyle()`, `SceneChip`, `SceneLabel`, `SceneLed`, `SceneBar` |
 | `scene-loader.tsx` | `SceneLoader`: square 2×2 loader |
 | `use-scene-playback.ts` | `useScenePlayback(isActive)` (plays only near the viewport, when active and without reduced motion) and `useSceneBeat()` (story step index; resets to the start when playback stops) |
@@ -35,6 +35,7 @@ Rules:
 - Colours come from tokens only: token classes or the `--scene-*` variables in `app/globals.css` (`--scene-backdrop-*`, `--scene-object-top/bottom/edge/highlight/shadow`, `--scene-inset`). No hex values.
 - No ambient glow or coloured halos. The shared drop shadow under raised objects is the only shadow.
 - Discrete story steps use beats; continuous movement (pulses along wires, typing, counters) writes to refs or motion values, not React state every frame.
+- Every wire, grid line and port outline sets its width with `sceneStroke()`, never a plain `strokeWidth`, and never with `shapeRendering="crispEdges"`: a 1-unit line is under half a pixel in a 300px tile, and crisp-edge rendering drops it. Base wires use `stroke-border-strong`; `stroke-border` is too close to the backdrop to read at small sizes (keep it for chart grid lines only).
 - Markup must be deterministic (no `Math.random`/`Date` in render, rounded trig) to avoid hydration mismatches.
 - Each scene folder was built by its own agent and passed an independent visual and code review. Known minor follow-ups: small labels are hard to read on the phone tile (about 5 px), and colour cross-fades at hand-offs can briefly show two red elements.
 

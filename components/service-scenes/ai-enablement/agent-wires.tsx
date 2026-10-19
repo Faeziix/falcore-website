@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { SCENE_HEIGHT, SCENE_WIDTH, type ScenePoint } from "../scene-units";
+import { SCENE_HEIGHT, SCENE_WIDTH, sceneStroke, type ScenePoint } from "../scene-units";
 import { EASE_OUT_EXPO, INTAKE_WIRE, PULSE_SIZE, TOOLS, toolTone, type StoryPhase, type ToolTone } from "./agent-story";
 import { polylinePath } from "./polyline";
 import { useWirePulse } from "./use-wire-pulse";
@@ -21,12 +21,12 @@ const NODE_CLASS_BY_TONE: Record<ToolTone, string> = {
   done: "stroke-muted-foreground",
 };
 
-function WireBase({ points, tone }: { points: ScenePoint[]; tone: ToolTone }) {
+function WireBase({ points }: { points: ScenePoint[] }) {
   return (
     <path
       d={polylinePath(points)}
-      className={cn("fill-none transition-[stroke] duration-700", tone === "done" ? "stroke-border-strong" : "stroke-border")}
-      strokeWidth={1.2}
+      className="fill-none stroke-border-strong"
+      style={{ strokeWidth: sceneStroke(1.2) }}
     />
   );
 }
@@ -37,7 +37,7 @@ function WireTrace({ points, tone }: { points: ScenePoint[]; tone: ToolTone }) {
     <motion.path
       d={polylinePath(points)}
       className={cn("fill-none transition-[stroke] duration-300", TRACE_CLASS_BY_TONE[tone])}
-      strokeWidth={1.6}
+      style={{ strokeWidth: sceneStroke(1.6) }}
       strokeLinecap="square"
       strokeLinejoin="miter"
       initial={false}
@@ -58,9 +58,8 @@ function WireNode({ point, tone }: { point: ScenePoint; tone: ToolTone }) {
       y={point.y - 3}
       width={6}
       height={6}
-      strokeWidth={1.2}
       className={cn("transition-[stroke] duration-500", NODE_CLASS_BY_TONE[tone])}
-      style={{ fill: "var(--background)" }}
+      style={{ fill: "var(--background)", strokeWidth: sceneStroke(1.2) }}
     />
   );
 }
@@ -86,11 +85,10 @@ export function AgentWires({ phase, isPlaying }: { phase: StoryPhase; isPlaying:
       viewBox={`0 0 ${SCENE_WIDTH} ${SCENE_HEIGHT}`}
       preserveAspectRatio="none"
       className="absolute inset-0 size-full"
-      shapeRendering="crispEdges"
     >
-      <WireBase points={INTAKE_WIRE} tone={intakeTone} />
+      <WireBase points={INTAKE_WIRE} />
       {TOOLS.map((tool) => (
-        <WireBase key={tool.name} points={tool.wire} tone={toolTone(tool, phase)} />
+        <WireBase key={tool.name} points={tool.wire} />
       ))}
       <WireTrace points={INTAKE_WIRE} tone={intakeTone} />
       {TOOLS.map((tool) => (

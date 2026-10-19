@@ -2,61 +2,58 @@
 
 import { motion } from "motion/react";
 import { SceneObject } from "../scene-parts";
-import { AGENT_TILE, type AgentTone } from "./agent-story";
+import { AGENT_TILE, EASE_OUT_EXPO, type AgentTone } from "./agent-story";
 import { toneEdgeStyle } from "./tool-tile";
 
-const CLOCKWISE_RAYS = [
-  "M12 2 V5",
-  "M17.3 6.7 L19.1 4.9",
-  "M19 12 H22",
-  "M17.3 17.3 L19.1 19.1",
-  "M12 19 V22",
-  "M6.7 17.3 L4.9 19.1",
-  "M2 12 H5",
-  "M6.7 6.7 L4.9 4.9",
-];
-const RAY_STEP_SECONDS = 0.14;
+const MAIN_SPARKLE_PATH = "M10 6 C10 10.4 13.6 14 18 14 C13.6 14 10 17.6 10 22 C10 17.6 6.4 14 2 14 C6.4 14 10 10.4 10 6 Z";
+const SMALL_SPARKLE_PATH = "M18.5 2 C18.5 3.9 20.1 5.5 22 5.5 C20.1 5.5 18.5 7.1 18.5 9 C18.5 7.1 16.9 5.5 15 5.5 C16.9 5.5 18.5 3.9 18.5 2 Z";
+const WORKING_CYCLE_SECONDS = 1.6;
+const EASE_IN_OUT_QUART = [0.76, 0, 0.24, 1] as const;
+const SPIN_AROUND_OWN_CENTER = { transformBox: "fill-box", originX: 0.5, originY: 0.5 } as const;
 
-function AgentRay({ path, index, isThinking, isSettled }: { path: string; index: number; isThinking: boolean; isSettled: boolean }) {
+function MainSparkle({ isWorking }: { isWorking: boolean }) {
   return (
     <motion.path
-      d={path}
+      d={MAIN_SPARKLE_PATH}
+      style={SPIN_AROUND_OWN_CENTER}
       initial={false}
-      animate={{ opacity: isThinking ? [1, 0.2, 0.2] : isSettled ? 0.55 : 1 }}
+      animate={isWorking ? { rotate: [0, 90], scale: [1, 0.74, 1] } : { rotate: 0, scale: 1 }}
       transition={
-        isThinking
-          ? { duration: CLOCKWISE_RAYS.length * RAY_STEP_SECONDS, times: [0, 0.5, 1], repeat: Infinity, delay: index * RAY_STEP_SECONDS, ease: "linear" }
-          : { duration: 0.6 }
+        isWorking
+          ? { duration: WORKING_CYCLE_SECONDS, ease: EASE_IN_OUT_QUART, repeat: Infinity }
+          : { duration: 0.6, ease: EASE_OUT_EXPO }
       }
     />
   );
 }
 
-function AgentGlyph({ tone, storyBeat, isPlaying }: { tone: AgentTone; storyBeat: number; isPlaying: boolean }) {
-  const isThinking = isPlaying && tone !== "done";
-  const isCoreFilled = isPlaying ? tone === "done" || storyBeat % 2 === 0 : true;
+function SmallSparkle({ isWorking }: { isWorking: boolean }) {
   return (
-    <svg viewBox="0 0 24 24" className="size-[46%]" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="square" strokeLinejoin="miter">
-      {CLOCKWISE_RAYS.map((path, index) => (
-        <AgentRay key={path} path={path} index={index} isThinking={isThinking} isSettled={isPlaying && tone === "done"} />
-      ))}
-      <rect x={9} y={9} width={6} height={6} />
-      <motion.rect
-        x={10.6}
-        y={10.6}
-        width={2.8}
-        height={2.8}
-        stroke="none"
-        fill="currentColor"
-        initial={false}
-        animate={{ opacity: isCoreFilled ? 1 : 0 }}
-        transition={{ duration: 0.25, ease: "linear" }}
-      />
+    <motion.path
+      d={SMALL_SPARKLE_PATH}
+      style={SPIN_AROUND_OWN_CENTER}
+      initial={false}
+      animate={isWorking ? { scale: [1, 0.35, 1], opacity: [1, 0.35, 1] } : { scale: 1, opacity: 1 }}
+      transition={
+        isWorking
+          ? { duration: WORKING_CYCLE_SECONDS, ease: EASE_IN_OUT_QUART, repeat: Infinity, delay: WORKING_CYCLE_SECONDS / 2 }
+          : { duration: 0.6, ease: EASE_OUT_EXPO }
+      }
+    />
+  );
+}
+
+function AgentSparkle({ tone, isPlaying }: { tone: AgentTone; isPlaying: boolean }) {
+  const isWorking = isPlaying && tone !== "done";
+  return (
+    <svg viewBox="0 0 24 24" className="size-[58%] overflow-visible" fill="currentColor">
+      <MainSparkle isWorking={isWorking} />
+      <SmallSparkle isWorking={isWorking} />
     </svg>
   );
 }
 
-export function AgentCore({ tone, storyBeat, isPlaying }: { tone: AgentTone; storyBeat: number; isPlaying: boolean }) {
+export function AgentCore({ tone, isPlaying }: { tone: AgentTone; isPlaying: boolean }) {
   return (
     <SceneObject
       x={AGENT_TILE.x}
@@ -66,7 +63,7 @@ export function AgentCore({ tone, storyBeat, isPlaying }: { tone: AgentTone; sto
       className="grid place-items-center text-foreground transition-[box-shadow] duration-300"
       style={toneEdgeStyle(tone === "live" ? "live" : tone === "done" ? "idle" : "agent")}
     >
-      <AgentGlyph tone={tone} storyBeat={storyBeat} isPlaying={isPlaying} />
+      <AgentSparkle tone={tone} isPlaying={isPlaying} />
     </SceneObject>
   );
 }
