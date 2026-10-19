@@ -1,4 +1,7 @@
 import type { MetadataRoute } from "next";
+import { CASE_STUDIES, CASE_STUDY_INDEX_PATH, caseStudyPath } from "@/app/work/_lib/case-study-index";
+
+const SITE_ORIGIN = "https://falcoretech.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -32,6 +35,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: "https://falcoretech.com/services/systems-automations",
       lastModified: now,
     },
+    {
+      url: `${SITE_ORIGIN}${CASE_STUDY_INDEX_PATH}`,
+      lastModified: now,
+    },
+    ...CASE_STUDIES.map((caseStudy) => ({
+      url: `${SITE_ORIGIN}${caseStudyPath(caseStudy.slug)}`,
+      lastModified: now,
+    })),
     {
       url: "https://falcoretech.com/privacy",
       lastModified: new Date("2026-04-03"),

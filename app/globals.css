@@ -90,6 +90,13 @@
   --color-scene-object-bottom: var(--scene-object-bottom);
   --color-scene-object-edge: var(--scene-object-edge);
   --color-scene-inset: var(--scene-inset);
+  --color-case-paper: var(--case-paper);
+  --color-case-paper-raised: var(--case-paper-raised);
+  --color-case-ink: var(--case-ink);
+  --color-case-ink-soft: var(--case-ink-soft);
+  --color-case-rule: var(--case-rule);
+  --color-case-accent: var(--case-accent);
+  --font-case-display: var(--case-display-family);
 
   --font-display: var(--font-oxanium), "Oxanium", system-ui, sans-serif;
   --font-sans: var(--font-instrument-sans), "Instrument Sans", system-ui, sans-serif;
@@ -221,7 +228,6 @@
     background: var(--primary);
     color: var(--primary-foreground);
   }
-
 }
 
 :root {
@@ -235,6 +241,16 @@
   --logo-mark-opacity: 0.85;
   --logo-mark-hover-opacity: 1;
   --logo-marquee-duration: 48s;
+}
+
+:root {
+  --case-paper: var(--background);
+  --case-paper-raised: var(--surface);
+  --case-ink: var(--foreground);
+  --case-ink-soft: var(--foreground-soft);
+  --case-rule: var(--border);
+  --case-accent: var(--accent);
+  --case-display-family: var(--font-oxanium), "Oxanium", system-ui, sans-serif;
 }
 
 :root {
@@ -290,4 +306,3 @@
   from { transform: translate3d(-50%, 0, 0); }
   to { transform: translate3d(0, 0, 0); }
 }
-

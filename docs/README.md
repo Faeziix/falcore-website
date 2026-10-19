@@ -5,6 +5,7 @@ Read these before changing the site, and update them after.
 - [design-tokens.md](design-tokens.md) — color and theme tokens in `app/globals.css`
 - [interactions.md](interactions.md) — motion and interactive effects, including the hero background
 - [components.md](components.md) — component registry
+- [case-studies.md](case-studies.md) — the `/work` case study pages: frame, per-client theme tokens, page anatomy, capture tool
 - [portfolio-and-logos.md](portfolio-and-logos.md) — selected-work screenshots, client logo marquee, founder portrait
 - [ui-conventions.md](ui-conventions.md) — layout, typography, colour roles, motion and code organisation
 - [service-scenes.md](service-scenes.md) — the animated Clerk/Linear-style object scenes that illustrate each service (current)

@@ -1,0 +1,36 @@
+[data-case-study="timeless-touch-ceramics"] {
+  --timeless-touch-ceramics-palette-stone-50: #fafaf9;
+  --timeless-touch-ceramics-palette-stone-200: #e7e5e4;
+  --timeless-touch-ceramics-palette-stone-300: #d6d3d1;
+  --timeless-touch-ceramics-palette-stone-600: #57534e;
+  --timeless-touch-ceramics-palette-stone-950: #0c0a09;
+  --timeless-touch-ceramics-palette-gold-500: #ac7d55;
+  --timeless-touch-ceramics-palette-gold-700: #684a31;
+
+  --case-paper: var(--timeless-touch-ceramics-palette-stone-50);
+  --case-paper-raised: var(--timeless-touch-ceramics-palette-stone-200);
+  --case-ink: var(--timeless-touch-ceramics-palette-stone-950);
+  --case-ink-soft: var(--timeless-touch-ceramics-palette-stone-600);
+  --case-rule: var(--timeless-touch-ceramics-palette-stone-300);
+  --case-accent: var(--timeless-touch-ceramics-palette-gold-500);
+  --case-display-family: var(--font-timeless-touch-ceramics-display), "Geist", ui-sans-serif, system-ui,
+    sans-serif;
+
+  --timeless-touch-ceramics-accent-text: var(--timeless-touch-ceramics-palette-gold-700);
+  --timeless-touch-ceramics-slab-backing: var(--timeless-touch-ceramics-palette-stone-950);
+  --timeless-touch-ceramics-control-edge: var(--timeless-touch-ceramics-palette-stone-300);
+  --timeless-touch-ceramics-control-edge-hover: var(--timeless-touch-ceramics-palette-stone-950);
+}
+
+[data-case-study="timeless-touch-ceramics"] article {
+  --ring: var(--timeless-touch-ceramics-accent-text);
+  font-family: var(--case-display-family);
+}
+
+[data-case-study="timeless-touch-ceramics"] article :is(h1, h2) {
+  font-weight: 300;
+}
+
+[data-case-study="timeless-touch-ceramics"] article h2 {
+  letter-spacing: -0.04em;
+}

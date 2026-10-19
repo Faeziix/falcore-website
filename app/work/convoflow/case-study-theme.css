@@ -1,0 +1,112 @@
+[data-case-study="convoflow"] {
+  --convoflow-palette-paper: #fcfcfa;
+  --convoflow-palette-white: #ffffff;
+  --convoflow-palette-blush: #fff0f4;
+  --convoflow-palette-pink-100: #fee1ea;
+  --convoflow-palette-pink-300: #fda4c5;
+  --convoflow-palette-pink-500: #fc55a1;
+  --convoflow-palette-pink-600: #de1482;
+  --convoflow-palette-pink-700: #a90c62;
+  --convoflow-palette-ink: #0e0a07;
+  --convoflow-palette-stone-600: #57534d;
+  --convoflow-palette-stone-200: #e7e5e4;
+
+  --case-paper: var(--convoflow-palette-paper);
+  --case-paper-raised: var(--convoflow-palette-blush);
+  --case-ink: var(--convoflow-palette-ink);
+  --case-ink-soft: var(--convoflow-palette-stone-600);
+  --case-rule: var(--convoflow-palette-stone-200);
+  --case-accent: var(--convoflow-palette-pink-500);
+  --case-display-family: var(--font-convoflow-display), "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  --convoflow-link: var(--convoflow-palette-pink-600);
+  --convoflow-node-surface: var(--convoflow-palette-white);
+  --convoflow-node-edge: var(--convoflow-palette-stone-200);
+  --convoflow-node-arrived-edge: var(--convoflow-palette-pink-500);
+  --convoflow-icon-well: var(--convoflow-palette-pink-100);
+  --convoflow-icon-ink: var(--convoflow-palette-pink-600);
+  --convoflow-wire: color-mix(in srgb, var(--convoflow-palette-pink-300) 75%, transparent);
+  --convoflow-trail: var(--convoflow-palette-pink-500);
+  --convoflow-beam: var(--convoflow-palette-pink-600);
+  --convoflow-tick: var(--convoflow-palette-pink-500);
+  --convoflow-tick-ink: var(--convoflow-palette-white);
+  --convoflow-grid-line: var(--convoflow-palette-pink-100);
+  --convoflow-screen-edge: var(--convoflow-palette-stone-200);
+  --convoflow-grid-cell-width: 96px;
+  --convoflow-grid-cell-height: 64px;
+}
+
+[data-case-study="convoflow"] article {
+  --primary: var(--convoflow-palette-pink-600);
+  --primary-hover: var(--convoflow-palette-pink-700);
+  --primary-foreground: var(--convoflow-palette-white);
+  --ring: var(--convoflow-palette-pink-600);
+  font-family: var(--case-display-family);
+  font-feature-settings: normal;
+}
+
+@keyframes convoflow-beam-travel {
+  from {
+    stroke-dashoffset: var(--convoflow-beam-length);
+  }
+  to {
+    stroke-dashoffset: -1;
+  }
+}
+
+@keyframes convoflow-trail-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes convoflow-node-arrive {
+  from {
+    border-color: var(--convoflow-node-edge);
+  }
+  to {
+    border-color: var(--convoflow-node-arrived-edge);
+  }
+}
+
+@keyframes convoflow-tick-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[data-case-study="convoflow"] {
+  --convoflow-beam-length: 0.22;
+}
+
+.convoflow-beam-travel {
+  animation: convoflow-beam-travel var(--convoflow-travel-duration) linear var(--convoflow-travel-delay) both;
+}
+
+.convoflow-trail-draw {
+  animation: convoflow-trail-draw var(--convoflow-travel-duration) linear var(--convoflow-travel-delay) both;
+}
+
+.convoflow-node-arrive {
+  animation: convoflow-node-arrive 300ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) var(--convoflow-arrival-delay) both;
+}
+
+.convoflow-tick-pop {
+  animation: convoflow-tick-pop 450ms var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)) var(--convoflow-arrival-delay) both;
+}
+
+.convoflow-square-grid {
+  background-color: var(--case-paper-raised);
+  background-image:
+    linear-gradient(to right, var(--convoflow-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--convoflow-grid-line) 1px, transparent 1px);
+  background-size: var(--convoflow-grid-cell-width) var(--convoflow-grid-cell-height);
+}

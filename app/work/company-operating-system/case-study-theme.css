@@ -1,0 +1,35 @@
+[data-case-study="company-operating-system"] {
+  --company-operating-system-palette-void: #000000;
+  --company-operating-system-palette-graphite: #0a0a0a;
+  --company-operating-system-palette-seam: #181818;
+  --company-operating-system-palette-carbon: #1a1a1a;
+  --company-operating-system-palette-ash: #262626;
+  --company-operating-system-palette-white: #ffffff;
+  --company-operating-system-palette-silver: #a4a4a4;
+  --company-operating-system-palette-magenta: #f6339a;
+  --company-operating-system-palette-blush: #fdf2f8;
+
+  --case-paper: var(--company-operating-system-palette-void);
+  --case-paper-raised: var(--company-operating-system-palette-graphite);
+  --case-ink: var(--company-operating-system-palette-white);
+  --case-ink-soft: var(--company-operating-system-palette-silver);
+  --case-rule: var(--company-operating-system-palette-seam);
+  --case-accent: var(--company-operating-system-palette-magenta);
+  --case-display-family: var(--font-company-operating-system-display), "Geist", system-ui, sans-serif;
+
+  --company-operating-system-body-family: var(--font-company-operating-system-display), "Geist", system-ui, sans-serif;
+  --company-operating-system-mono-family: var(--font-company-operating-system-mono), "Geist Mono", ui-monospace, monospace;
+  --company-operating-system-on-accent: var(--company-operating-system-palette-blush);
+  --company-operating-system-card: var(--company-operating-system-palette-graphite);
+  --company-operating-system-card-active: var(--company-operating-system-palette-carbon);
+  --company-operating-system-card-edge: var(--company-operating-system-palette-seam);
+  --company-operating-system-card-edge-strong: var(--company-operating-system-palette-ash);
+  --company-operating-system-connector-track: var(--company-operating-system-palette-seam);
+  --company-operating-system-connector-settled: color-mix(in srgb, var(--company-operating-system-palette-magenta) 38%, transparent);
+  --company-operating-system-ui-radius: 10px;
+  --company-operating-system-bubble-radius: 14px;
+}
+
+[data-case-study="company-operating-system"] article {
+  font-family: var(--company-operating-system-body-family);
+}

@@ -1,0 +1,38 @@
+[data-case-study="diamaria"] {
+  --diamaria-palette-porcelain: #fafaf9;
+  --diamaria-palette-linen: #f3f2f0;
+  --diamaria-palette-hairline: #e4e3e1;
+  --diamaria-palette-graphite: #0e0d0b;
+  --diamaria-palette-smoke: #5c5b58;
+  --diamaria-palette-ash: #7b7a77;
+  --diamaria-palette-studio-white: #ffffff;
+  --diamaria-palette-raw-sweep: #bbc7d1;
+
+  --case-paper: var(--diamaria-palette-porcelain);
+  --case-paper-raised: var(--diamaria-palette-linen);
+  --case-ink: var(--diamaria-palette-graphite);
+  --case-ink-soft: var(--diamaria-palette-smoke);
+  --case-rule: var(--diamaria-palette-hairline);
+  --case-accent: var(--diamaria-palette-graphite);
+  --case-display-family: var(--font-diamaria-display), "Jost", "Futura", system-ui, sans-serif;
+
+  --diamaria-body-family: var(--font-diamaria-body), "Josefin Sans", "Futura", system-ui, sans-serif;
+  --diamaria-display-weight: 250;
+  --diamaria-ink-muted: var(--diamaria-palette-ash);
+  --diamaria-sweep: var(--diamaria-palette-raw-sweep);
+  --diamaria-packshot-ground: var(--diamaria-palette-studio-white);
+  --diamaria-loupe-rim: var(--diamaria-palette-graphite);
+  --diamaria-loupe-label: var(--diamaria-palette-graphite);
+  --diamaria-label-tracking: 0.2em;
+  --diamaria-chapter-space: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+[data-case-study="diamaria"] article {
+  --ring: var(--case-ink);
+  font-family: var(--diamaria-body-family);
+  font-weight: 300;
+}
+
+[data-case-study="diamaria"] article .font-case-display {
+  font-weight: var(--diamaria-display-weight);
+}

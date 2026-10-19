@@ -1,0 +1,78 @@
+[data-case-study="sanaa-ouahmane"] {
+  --sanaa-ouahmane-palette-ground: #ffffff;
+  --sanaa-ouahmane-palette-porcelain: #f7f7f7;
+  --sanaa-ouahmane-palette-neutral-950: #191616;
+  --sanaa-ouahmane-palette-neutral-650: #746b69;
+  --sanaa-ouahmane-palette-linen-100: #f5ecd7;
+  --sanaa-ouahmane-palette-linen-200: #dcceb2;
+  --sanaa-ouahmane-palette-linen-300: #bbad93;
+  --sanaa-ouahmane-palette-crimson-reserve: #58021d;
+  --sanaa-ouahmane-palette-mulberry-noir: #360010;
+  --sanaa-ouahmane-palette-terracotta-flame: #a83a05;
+  --sanaa-ouahmane-palette-graphite: #121212;
+  --sanaa-ouahmane-palette-graphite-lifted: #1c1b1b;
+
+  --case-paper: var(--sanaa-ouahmane-palette-ground);
+  --case-paper-raised: var(--sanaa-ouahmane-palette-porcelain);
+  --case-ink: var(--sanaa-ouahmane-palette-crimson-reserve);
+  --case-ink-soft: var(--sanaa-ouahmane-palette-neutral-650);
+  --case-rule: color-mix(in srgb, var(--sanaa-ouahmane-palette-linen-300) 55%, var(--sanaa-ouahmane-palette-ground));
+  --case-accent: var(--sanaa-ouahmane-palette-crimson-reserve);
+  --case-display-family: var(--font-sanaa-ouahmane-display), "Bodoni Moda", "Bodoni 72", Didot, "Times New Roman", serif;
+
+  --sanaa-ouahmane-body-family: var(--font-sanaa-ouahmane-body), "Zalando Sans", system-ui, sans-serif;
+  --sanaa-ouahmane-label-family: var(--font-sanaa-ouahmane-label), "Zalando Sans Expanded", system-ui, sans-serif;
+  --sanaa-ouahmane-body-ink: var(--sanaa-ouahmane-palette-neutral-950);
+  --sanaa-ouahmane-display-tracking: -0.032em;
+  --sanaa-ouahmane-display-optical-size: 14;
+  --sanaa-ouahmane-display-weight: 400;
+  --sanaa-ouahmane-label-tracking: 0.16em;
+
+  --sanaa-ouahmane-swatch-ground: var(--sanaa-ouahmane-palette-ground);
+  --sanaa-ouahmane-swatch-porcelain: var(--sanaa-ouahmane-palette-porcelain);
+  --sanaa-ouahmane-swatch-graphite: var(--sanaa-ouahmane-palette-graphite);
+  --sanaa-ouahmane-swatch-crimson: var(--sanaa-ouahmane-palette-crimson-reserve);
+  --sanaa-ouahmane-swatch-mulberry: var(--sanaa-ouahmane-palette-mulberry-noir);
+  --sanaa-ouahmane-swatch-terracotta: var(--sanaa-ouahmane-palette-terracotta-flame);
+  --sanaa-ouahmane-swatch-label-on-light: var(--sanaa-ouahmane-palette-neutral-650);
+  --sanaa-ouahmane-swatch-label-on-dark: var(--sanaa-ouahmane-palette-linen-200);
+
+  --sanaa-ouahmane-plate-graphite: var(--sanaa-ouahmane-palette-graphite);
+  --sanaa-ouahmane-plate-headline: var(--sanaa-ouahmane-palette-linen-200);
+  --sanaa-ouahmane-plate-ink: var(--sanaa-ouahmane-palette-porcelain);
+  --sanaa-ouahmane-plate-ink-dim: var(--sanaa-ouahmane-palette-linen-300);
+  --sanaa-ouahmane-plate-seam: color-mix(in srgb, var(--sanaa-ouahmane-palette-linen-300) 22%, transparent);
+  --sanaa-ouahmane-strike: var(--sanaa-ouahmane-palette-terracotta-flame);
+
+  --sanaa-ouahmane-switch-on: var(--sanaa-ouahmane-palette-crimson-reserve);
+  --sanaa-ouahmane-switch-knob: var(--sanaa-ouahmane-palette-ground);
+  --sanaa-ouahmane-switch-off-edge: var(--sanaa-ouahmane-palette-linen-300);
+
+  --sanaa-ouahmane-excerpt-resting-opacity: 0.1;
+  --sanaa-ouahmane-excerpt-resting-blur: 4px;
+}
+
+[data-case-study="sanaa-ouahmane"] article {
+  --ring: var(--sanaa-ouahmane-palette-crimson-reserve);
+  font-family: var(--sanaa-ouahmane-body-family);
+}
+
+[data-case-study="sanaa-ouahmane"] article :is(h1, h2, h3, .font-case-display) {
+  letter-spacing: var(--sanaa-ouahmane-display-tracking);
+  font-weight: var(--sanaa-ouahmane-display-weight);
+  font-variation-settings: "opsz" var(--sanaa-ouahmane-display-optical-size);
+}
+
+[data-case-study="sanaa-ouahmane"] article ::selection {
+  background: var(--sanaa-ouahmane-palette-crimson-reserve);
+  color: var(--sanaa-ouahmane-palette-porcelain);
+}
+
+[data-case-study="sanaa-ouahmane"] [data-surface="graphite"] {
+  --ring: var(--sanaa-ouahmane-palette-linen-200);
+}
+
+[data-case-study="sanaa-ouahmane"] [data-surface="graphite"] ::selection {
+  background: var(--sanaa-ouahmane-palette-linen-200);
+  color: var(--sanaa-ouahmane-palette-graphite);
+}

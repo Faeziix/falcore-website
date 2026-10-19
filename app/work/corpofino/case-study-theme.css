@@ -1,0 +1,82 @@
+[data-case-study="corpofino"] {
+  --corpofino-palette-cream: #f3efe9;
+  --corpofino-palette-card-white: #fdfcfa;
+  --corpofino-palette-charred-skin: #242120;
+  --corpofino-palette-golden-skin: #d58c6d;
+  --corpofino-palette-skin-on-skin: #b07d67;
+  --corpofino-palette-baby-skin: #f1b6af;
+  --corpofino-palette-linen-skin: #c7b89f;
+
+  --corpofino-ink-soft: color-mix(in srgb, var(--corpofino-palette-charred-skin) 72%, var(--corpofino-palette-cream));
+  --corpofino-copper-deep: color-mix(in oklch, var(--corpofino-palette-golden-skin) 52%, var(--corpofino-palette-charred-skin));
+  --corpofino-hairline: color-mix(in srgb, var(--corpofino-palette-charred-skin) 12%, transparent);
+  --corpofino-leader: color-mix(in srgb, var(--corpofino-palette-charred-skin) 32%, transparent);
+
+  --corpofino-tone-copper: var(--corpofino-palette-golden-skin);
+  --corpofino-tone-blush: var(--corpofino-palette-baby-skin);
+  --corpofino-tone-rose: var(--corpofino-palette-skin-on-skin);
+  --corpofino-tone-linen: var(--corpofino-palette-linen-skin);
+  --corpofino-tone-ink: var(--corpofino-palette-charred-skin);
+  --corpofino-tone-text-on-light: var(--corpofino-palette-charred-skin);
+  --corpofino-tone-text-on-ink: var(--corpofino-palette-cream);
+  --corpofino-strike: var(--corpofino-palette-golden-skin);
+  --corpofino-selection: var(--corpofino-palette-baby-skin);
+
+  --case-paper: var(--corpofino-palette-cream);
+  --case-paper-raised: var(--corpofino-palette-card-white);
+  --case-ink: var(--corpofino-palette-charred-skin);
+  --case-ink-soft: var(--corpofino-ink-soft);
+  --case-rule: var(--corpofino-hairline);
+  --case-accent: var(--corpofino-palette-golden-skin);
+  --case-display-family: var(--font-corpofino-display), "Manrope", system-ui, sans-serif;
+  --corpofino-arabic-family: var(--font-corpofino-arabic), "IBM Plex Sans Arabic", var(--case-display-family);
+}
+
+[data-case-study="corpofino"] > article {
+  --ring: var(--corpofino-palette-charred-skin);
+  font-family: var(--case-display-family);
+  font-weight: 300;
+}
+
+[data-case-study="corpofino"] > article h2 {
+  font-weight: 400;
+}
+
+[data-case-study="corpofino"] > article ::selection {
+  background: var(--corpofino-selection);
+  color: var(--corpofino-palette-charred-skin);
+}
+
+[data-case-study="corpofino"] [lang="ar"] {
+  font-family: var(--corpofino-arabic-family);
+  letter-spacing: 0;
+}
+
+::view-transition-group(corpofino-band-slimming),
+::view-transition-group(corpofino-band-skin-care),
+::view-transition-group(corpofino-band-beauty-care),
+::view-transition-group(corpofino-band-wellness),
+::view-transition-group(corpofino-band-nail-spa),
+::view-transition-group(corpofino-band-hair-spa) {
+  animation-duration: 700ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(corpofino-band-slimming),
+::view-transition-old(corpofino-band-skin-care),
+::view-transition-old(corpofino-band-beauty-care),
+::view-transition-old(corpofino-band-wellness),
+::view-transition-old(corpofino-band-nail-spa),
+::view-transition-old(corpofino-band-hair-spa) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(corpofino-band-slimming),
+::view-transition-new(corpofino-band-skin-care),
+::view-transition-new(corpofino-band-beauty-care),
+::view-transition-new(corpofino-band-wellness),
+::view-transition-new(corpofino-band-nail-spa),
+::view-transition-new(corpofino-band-hair-spa) {
+  animation: none;
+}
