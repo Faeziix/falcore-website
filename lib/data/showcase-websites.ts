@@ -15,7 +15,7 @@ export const DESKTOP_VIEWPORT = { width: 1280, height: 800 };
 export const MOBILE_VIEWPORT = { width: 414, height: 736 };
 
 export const SHOWCASE_SECTION_TITLE = "Selected websites";
-export const SHOWCASE_SECTION_INTRO = "Recent sites I designed and built.";
+export const SHOWCASE_SECTION_INTRO = "Recent sites I\u00A0designed and built.";
 
 export const SHOWCASE_SCREENSHOT_DIRECTORY = "showcase";
 

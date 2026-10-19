@@ -1,5 +1,7 @@
 "use client";
 
+import { useCallback } from "react";
+import { useReducedMotion } from "motion/react";
 import { ArrowUpRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import {
@@ -9,6 +11,8 @@ import {
   CarouselNext,
   CarouselPrevious,
   useCarousel,
+  useCarouselScrollTween,
+  type LoadedCarouselApi,
 } from "@/components/ui/carousel";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
@@ -17,6 +21,37 @@ import {
   SHOWCASE_SECTION_TITLE,
   type ShowcaseWebsite,
 } from "@/lib/data/showcase-websites";
+
+const DIMMED_CARD_OPACITY = 0.45;
+const SCREENSHOT_PARALLAX_SHIFT_PERCENT = 4.5;
+
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(max, Math.max(min, value));
+
+function useCardFocusTween() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const applyCardFocus = useCallback(
+    (api: LoadedCarouselApi, slideDistancesInCards: number[]) => {
+      api.slideNodes().forEach((slide, slideIndex) => {
+        const distance = clamp(slideDistancesInCards[slideIndex], -1, 1);
+        const closeness = 1 - Math.abs(distance);
+        slide.style.opacity = String(
+          DIMMED_CARD_OPACITY + (1 - DIMMED_CARD_OPACITY) * closeness
+        );
+        const parallaxLayer = slide.querySelector<HTMLElement>("[data-parallax-layer]");
+        if (parallaxLayer) {
+          parallaxLayer.style.transform = prefersReducedMotion
+            ? ""
+            : `translate3d(${distance * -SCREENSHOT_PARALLAX_SHIFT_PERCENT}%, 0, 0)`;
+        }
+      });
+    },
+    [prefersReducedMotion]
+  );
+
+  useCarouselScrollTween(applyCardFocus);
+}
 
 function ProjectCard({
   website,
@@ -31,19 +66,21 @@ function ProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       draggable={false}
-      className="group flex flex-1 flex-col border border-border bg-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+      className="group flex flex-1 flex-col border border-border bg-card transition-colors duration-300 hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:border-border-strong"
     >
-      <div className="relative aspect-9/16 border-b border-border bg-muted/10">
-        <Image
-          src={website.mobileThumbnailUrl}
-          alt={`Screenshot of ${website.title}`}
-          fill
-          draggable={false}
-          sizes="(max-width: 767px) 82vw, 320px"
-          quality={90}
-          className="object-cover object-top"
-          priority={isFirst}
-        />
+      <div className="relative aspect-9/16 overflow-clip border-b border-border bg-muted/10">
+        <div data-parallax-layer className="absolute inset-y-0 -left-[5%] w-[110%] will-change-transform">
+          <Image
+            src={website.mobileThumbnailUrl}
+            alt={`Screenshot of ${website.title}`}
+            fill
+            draggable={false}
+            sizes="(max-width: 767px) 90vw, 352px"
+            quality={90}
+            className="object-cover object-top"
+            priority={isFirst}
+          />
+        </div>
       </div>
       <div className="flex flex-1 items-start justify-between gap-4 px-5 pt-4 pb-5">
         <div className="min-w-0">
@@ -55,7 +92,7 @@ function ProjectCard({
         <ArrowUpRightIcon
           aria-hidden
           weight="bold"
-          className="mt-1 size-4 shrink-0 text-muted-foreground transition-colors group-active:text-foreground"
+          className="mt-1 size-4 shrink-0 text-muted-foreground transition-[color,translate] duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground group-focus-visible:text-foreground group-active:text-foreground motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
         />
       </div>
     </a>
@@ -63,7 +100,7 @@ function ProjectCard({
 }
 
 function ShowcaseSlides({ websites }: { websites: ShowcaseWebsite[] }) {
-  const { selectedIndex } = useCarousel();
+  useCardFocusTween();
 
   return (
     <CarouselContent viewportClassName="px-(--page-gutter)">
@@ -72,8 +109,8 @@ function ShowcaseSlides({ websites }: { websites: ShowcaseWebsite[] }) {
           key={website.id}
           aria-label={`${cardIndex + 1} of ${websites.length}: ${website.title}`}
           className={cn(
-            "basis-[min(82%,20rem)] transition-opacity duration-500 ease-out-expo motion-reduce:transition-none",
-            cardIndex === selectedIndex ? "opacity-100" : "opacity-45"
+            "basis-[min(82%,20rem)]",
+            cardIndex === 0 ? "opacity-100" : "opacity-45"
           )}
         >
           <ProjectCard website={website} isFirst={cardIndex === 0} />

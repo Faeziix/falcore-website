@@ -42,6 +42,46 @@ function useCarousel() {
   return carouselContext;
 }
 
+type LoadedCarouselApi = NonNullable<CarouselApi>;
+
+function measureSlideDistancesInCards(api: LoadedCarouselApi) {
+  const scrollProgress = api.scrollProgress();
+  const scrollSnaps = api.scrollSnapList();
+  const progressBetweenSnaps =
+    scrollSnaps.length > 1 ? 1 / (scrollSnaps.length - 1) : 1;
+  const slideRegistry = api.internalEngine().slideRegistry;
+  const slideDistances = api.slideNodes().map(() => 0);
+
+  scrollSnaps.forEach((scrollSnap, snapIndex) => {
+    const distanceInCards = (scrollSnap - scrollProgress) / progressBetweenSnaps;
+    slideRegistry[snapIndex].forEach((slideIndex) => {
+      slideDistances[slideIndex] = distanceInCards;
+    });
+  });
+
+  return slideDistances;
+}
+
+function useCarouselScrollTween(
+  applyTween: (api: LoadedCarouselApi, slideDistancesInCards: number[]) => void
+) {
+  const { api } = useCarousel();
+
+  React.useEffect(() => {
+    if (!api) return;
+    const tweenSlides = () => applyTween(api, measureSlideDistancesInCards(api));
+    tweenSlides();
+    api.on("scroll", tweenSlides);
+    api.on("reInit", tweenSlides);
+    api.on("slideFocus", tweenSlides);
+    return () => {
+      api.off("scroll", tweenSlides);
+      api.off("reInit", tweenSlides);
+      api.off("slideFocus", tweenSlides);
+    };
+  }, [api, applyTween]);
+}
+
 function Carousel({
   opts,
   className,
@@ -194,6 +234,8 @@ export {
   CarouselPrevious,
   CarouselNext,
   useCarousel,
+  useCarouselScrollTween,
   type CarouselApi,
+  type LoadedCarouselApi,
   type CarouselOptions,
 };
