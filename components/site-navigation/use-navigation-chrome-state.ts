@@ -4,27 +4,16 @@ import { useCallback, useEffect, useRef, useState, type RefObject } from "react"
 import { useMotionValueEvent, useScroll } from "motion/react";
 
 const SCROLL_DISTANCE_BEFORE_BAR_SURFACE = 24;
-const SCROLL_DISTANCE_BEFORE_BAR_CAN_HIDE = 320;
-const SCROLL_DELTA_THAT_COUNTS_AS_INTENT = 6;
 
 export function useScrollDrivenBarState() {
   const { scrollY } = useScroll();
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [isHiddenByScroll, setIsHiddenByScroll] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (scrollPosition) => {
-    const scrollDelta = scrollPosition - (scrollY.getPrevious() ?? scrollPosition);
     setHasScrolled(scrollPosition > SCROLL_DISTANCE_BEFORE_BAR_SURFACE);
-
-    if (scrollPosition < SCROLL_DISTANCE_BEFORE_BAR_CAN_HIDE) {
-      setIsHiddenByScroll(false);
-      return;
-    }
-    if (scrollDelta > SCROLL_DELTA_THAT_COUNTS_AS_INTENT) setIsHiddenByScroll(true);
-    if (scrollDelta < -SCROLL_DELTA_THAT_COUNTS_AS_INTENT) setIsHiddenByScroll(false);
   });
 
-  return { hasScrolled, isHiddenByScroll };
+  return { hasScrolled };
 }
 
 const HOVER_OPEN_DELAY_MS = 90;

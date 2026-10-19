@@ -33,7 +33,7 @@ export function SiteNavigation() {
   const servicesTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
 
-  const { hasScrolled, isHiddenByScroll } = useScrollDrivenBarState();
+  const { hasScrolled } = useScrollDrivenBarState();
   const activeNavigationLink = useActiveNavigationLink();
 
   if (pathname !== pathnameWhenMenuStateSet) {
@@ -66,8 +66,7 @@ export function SiteNavigation() {
         <header
           ref={headerRef}
           {...headerPointerHandlers}
-          data-hidden-by-scroll={isHiddenByScroll && openMenu === null}
-          className="fixed inset-x-0 top-0 z-50 transition-transform duration-300 ease-out-expo motion-reduce:transition-none data-[hidden-by-scroll=true]:not-has-focus-visible:-translate-y-full"
+          className="fixed inset-x-0 top-0 z-50"
         >
           <div
             className={cn(
