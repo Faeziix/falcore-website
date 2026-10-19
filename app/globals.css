@@ -148,3 +148,8 @@ html {
   background: var(--primary);
   color: var(--primary-foreground);
 }
+
+:root {
+  --wave-cta-dither-ink: var(--primary);
+  --wave-cta-dither-backdrop: transparent;
+}

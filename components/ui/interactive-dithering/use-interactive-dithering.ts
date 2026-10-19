@@ -3,7 +3,7 @@
 import { useEffect, type RefObject } from "react";
 import { createDitheringRenderer, type DitheringFrame } from "./create-dithering-renderer";
 import { createPointerField } from "./create-pointer-field";
-import { ditheringColorTokens, ditheringTuning } from "./dithering-tuning";
+import { ditheringPresets, ditheringTuning, type DitheringPresetName } from "./dithering-tuning";
 import { readCssColorToken } from "./read-css-color-token";
 
 const maxFrameDeltaSeconds = 0.1;
@@ -25,15 +25,21 @@ const stillFrame: DitheringFrame = {
 export function useInteractiveDithering(
   canvasRef: RefObject<HTMLCanvasElement | null>,
   isMotionReduced: boolean,
+  presetName: DitheringPresetName,
 ) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = createDitheringRenderer(canvas, {
-      ink: readCssColorToken(ditheringColorTokens.ink),
-      backdrop: readCssColorToken(ditheringColorTokens.backdrop),
-    });
+    const preset = ditheringPresets[presetName];
+    const renderer = createDitheringRenderer(
+      canvas,
+      {
+        ink: readCssColorToken(preset.colorTokens.ink),
+        backdrop: readCssColorToken(preset.colorTokens.backdrop),
+      },
+      preset,
+    );
     if (!renderer) return;
 
     const resizeObserver = new ResizeObserver(([entry]) => {
@@ -53,15 +59,14 @@ export function useInteractiveDithering(
     let animationFrameId = 0;
     let previousTimestamp: number | null = null;
     let patternTime = 0;
-    let timeScale: number = ditheringTuning.idleTimeScale;
+    let timeScale: number = preset.idleTimeScale;
 
     function renderNextFrame(timestamp: number) {
       const deltaSeconds = previousTimestamp === null ? 0 : Math.min(maxFrameDeltaSeconds, (timestamp - previousTimestamp) / 1000);
       previousTimestamp = timestamp;
 
       const { pointerPresence, stroke } = pointerField.advance(deltaSeconds);
-      const targetTimeScale =
-        ditheringTuning.idleTimeScale + (ditheringTuning.activeTimeScale - ditheringTuning.idleTimeScale) * pointerPresence;
+      const targetTimeScale = preset.idleTimeScale + (preset.activeTimeScale - preset.idleTimeScale) * pointerPresence;
       timeScale += (targetTimeScale - timeScale) * (1 - Math.exp(-ditheringTuning.timeScaleFollowRate * deltaSeconds));
       patternTime += deltaSeconds * timeScale;
 
@@ -93,5 +98,5 @@ export function useInteractiveDithering(
       pointerField.dispose();
       renderer.dispose();
     };
-  }, [canvasRef, isMotionReduced]);
+  }, [canvasRef, isMotionReduced, presetName]);
 }

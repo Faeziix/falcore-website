@@ -1,8 +1,8 @@
 import {
   fullscreenVertexShaderSource,
-  smokeDitheringFragmentShaderSource,
+  createSmokeDitheringFragmentShaderSource,
 } from "./dithering-shader-sources";
-import { ditheringTuning } from "./dithering-tuning";
+import { ditheringTuning, type DitheringPreset } from "./dithering-tuning";
 import { createSmokeFlowPass, type SmokeStroke } from "./create-smoke-flow-pass";
 import type { RgbaColor } from "./read-css-color-token";
 import { createFullscreenTriangle, linkProgram, readUniformLocations } from "./webgl-program";
@@ -29,7 +29,6 @@ const ditheringUniformNames = [
   "u_resolution",
   "u_pixelRatio",
   "u_cellSize",
-  "u_patternScale",
   "u_colorBack",
   "u_colorFront",
   "u_flow",
@@ -40,11 +39,12 @@ const flowTextureUnit = 0;
 export function createDitheringRenderer(
   canvas: HTMLCanvasElement,
   palette: DitheringPalette,
+  preset: DitheringPreset,
 ): DitheringRenderer | null {
   const gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: false, antialias: false });
   if (!gl) return null;
 
-  const program = linkProgram(gl, fullscreenVertexShaderSource, smokeDitheringFragmentShaderSource);
+  const program = linkProgram(gl, fullscreenVertexShaderSource, createSmokeDitheringFragmentShaderSource(preset));
   if (!program) return null;
 
   const fullscreenTriangle = createFullscreenTriangle(gl);
@@ -55,8 +55,7 @@ export function createDitheringRenderer(
   let pixelRatio = 1;
 
   gl.useProgram(program);
-  gl.uniform1f(uniforms.u_cellSize, ditheringTuning.cellSizeInCssPixels);
-  gl.uniform1f(uniforms.u_patternScale, ditheringTuning.patternScale);
+  gl.uniform1f(uniforms.u_cellSize, preset.cellSizeInCssPixels);
   gl.uniform4fv(uniforms.u_colorFront, palette.ink);
   gl.uniform4fv(uniforms.u_colorBack, palette.backdrop);
   gl.uniform1i(uniforms.u_flow, flowTextureUnit);

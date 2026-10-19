@@ -1,23 +1,12 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { DitheringShader } from "@/components/ui/dithering-shader";
+import { InteractiveDitheringBackground } from "@/components/ui/interactive-dithering";
 
 export function WaveCTABackground() {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-screen">
-      <DitheringShader
-        shape="wave"
-        type="8x8"
-        colorBack="#00000000"
-        colorFront="#e53935"
-        pxSize={3}
-        speed={0.6}
-        width={1400}
-        height={1200}
-        className="size-full"
-        style={{ width: "100%", height: "100%" }}
-      />
+    <div className="absolute inset-0 z-0 pointer-events-none opacity-30 mix-blend-screen">
+      <InteractiveDitheringBackground preset="waveCta" />
     </div>
   );
 }

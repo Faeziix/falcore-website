@@ -1,14 +1,18 @@
 export const ditheringTuning = {
-  cellSizeInCssPixels: 2,
-  patternScale: 0.6,
   maxDevicePixelRatio: 2,
-  idleTimeScale: 0.2,
-  activeTimeScale: 0.6,
   reducedMotionFrozenTime: 8,
   pointerFollowRate: 18,
   presenceFollowRate: 6,
   timeScaleFollowRate: 2,
   speedForFullSmokeInCssPixelsPerSecond: 900,
+} as const;
+
+export const warpPatternTuning = {
+  patternScale: 0.6,
+} as const;
+
+export const wavePatternTuning = {
+  shapeScale: 4,
 } as const;
 
 export const smokeFlowTuning = {
@@ -29,7 +33,35 @@ export const smokeFlowTuning = {
   smokeWispFrequencyPerCssPixel: 0.004,
 } as const;
 
-export const ditheringColorTokens = {
-  ink: "--hero-dither-ink",
-  backdrop: "--hero-dither-backdrop",
-} as const;
+export type DitheringPattern = "warp" | "wave";
+export type BayerMatrixSize = 4 | 8;
+
+export interface DitheringPreset {
+  pattern: DitheringPattern;
+  bayerMatrixSize: BayerMatrixSize;
+  cellSizeInCssPixels: number;
+  idleTimeScale: number;
+  activeTimeScale: number;
+  colorTokens: { ink: string; backdrop: string };
+}
+
+export const ditheringPresets = {
+  hero: {
+    pattern: "warp",
+    bayerMatrixSize: 4,
+    cellSizeInCssPixels: 2,
+    idleTimeScale: 0.2,
+    activeTimeScale: 0.6,
+    colorTokens: { ink: "--hero-dither-ink", backdrop: "--hero-dither-backdrop" },
+  },
+  waveCta: {
+    pattern: "wave",
+    bayerMatrixSize: 8,
+    cellSizeInCssPixels: 3,
+    idleTimeScale: 0.6,
+    activeTimeScale: 1.1,
+    colorTokens: { ink: "--wave-cta-dither-ink", backdrop: "--wave-cta-dither-backdrop" },
+  },
+} as const satisfies Record<string, DitheringPreset>;
+
+export type DitheringPresetName = keyof typeof ditheringPresets;

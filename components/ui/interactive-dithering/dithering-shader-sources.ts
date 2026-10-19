@@ -1,4 +1,11 @@
-import { smokeFlowTuning } from "./dithering-tuning";
+import {
+  smokeFlowTuning,
+  warpPatternTuning,
+  wavePatternTuning,
+  type BayerMatrixSize,
+  type DitheringPattern,
+  type DitheringPreset,
+} from "./dithering-tuning";
 
 const glslFloat = (value: number) => value.toFixed(4);
 
@@ -114,7 +121,64 @@ void main() {
 }
 `;
 
-export const smokeDitheringFragmentShaderSource = `#version 300 es
+const patternFieldSources: Record<DitheringPattern, string> = {
+  warp: `
+float patternField(vec2 cssPoint, vec2 cssResolution, float t) {
+  vec2 shapeUV = cssPoint / ${glslFloat(warpPatternTuning.patternScale)} * 0.003;
+  for (float i = 1.0; i < 6.0; i++) {
+    shapeUV.x += 0.6 / i * cos(i * 2.5 * shapeUV.y + t);
+    shapeUV.y += 0.6 / i * cos(i * 1.5 * shapeUV.x + t);
+  }
+  float shape = 0.15 / max(0.001, abs(sin(t - shapeUV.y - shapeUV.x)));
+  return smoothstep(0.02, 1.0, shape);
+}
+`,
+  wave: `
+float patternField(vec2 cssPoint, vec2 cssResolution, float t) {
+  vec2 shapeUV = cssPoint / cssResolution * ${glslFloat(wavePatternTuning.shapeScale)};
+  float swell = cos(0.5 * shapeUV.x - 2.0 * t) * sin(1.5 * shapeUV.x + t) * (0.75 + 0.25 * cos(3.0 * t));
+  return 1.0 - smoothstep(-1.0, 1.0, shapeUV.y + swell);
+}
+`,
+};
+
+const bayerThresholdSources: Record<BayerMatrixSize, string> = {
+  4: `
+const int bayerMatrix[16] = int[16](
+  0, 8, 2, 10,
+  12, 4, 14, 6,
+  3, 11, 1, 9,
+  15, 7, 13, 5
+);
+
+float bayerThreshold(vec2 cellCoordinate) {
+  ivec2 position = ivec2(mod(floor(cellCoordinate), 4.0));
+  return float(bayerMatrix[position.y * 4 + position.x]) / 16.0;
+}
+`,
+  8: `
+const int bayerMatrix[64] = int[64](
+  0, 32, 8, 40, 2, 34, 10, 42,
+  48, 16, 56, 24, 50, 18, 58, 26,
+  12, 44, 4, 36, 14, 46, 6, 38,
+  60, 28, 52, 20, 62, 30, 54, 22,
+  3, 35, 11, 43, 1, 33, 9, 41,
+  51, 19, 59, 27, 49, 17, 57, 25,
+  15, 47, 7, 39, 13, 45, 5, 37,
+  63, 31, 55, 23, 61, 29, 53, 21
+);
+
+float bayerThreshold(vec2 cellCoordinate) {
+  ivec2 position = ivec2(mod(floor(cellCoordinate), 8.0));
+  return float(bayerMatrix[position.y * 8 + position.x]) / 64.0;
+}
+`,
+};
+
+export const createSmokeDitheringFragmentShaderSource = ({
+  pattern,
+  bayerMatrixSize,
+}: Pick<DitheringPreset, "pattern" | "bayerMatrixSize">) => `#version 300 es
 precision highp float;
 
 #define WAVE_DISPLACEMENT ${glslFloat(smokeFlowTuning.waveDisplacementInCssPixels)}
@@ -125,7 +189,6 @@ uniform float u_time;
 uniform vec2 u_resolution;
 uniform float u_pixelRatio;
 uniform float u_cellSize;
-uniform float u_patternScale;
 uniform vec4 u_colorBack;
 uniform vec4 u_colorFront;
 uniform sampler2D u_flow;
@@ -134,27 +197,9 @@ out vec4 fragColor;
 
 ${simplexNoise}
 
-const int bayer4x4[16] = int[16](
-  0, 8, 2, 10,
-  12, 4, 14, 6,
-  3, 11, 1, 9,
-  15, 7, 13, 5
-);
+${bayerThresholdSources[bayerMatrixSize]}
 
-float bayerThreshold(vec2 cellCoordinate) {
-  ivec2 position = ivec2(mod(floor(cellCoordinate), 4.0));
-  return float(bayer4x4[position.y * 4 + position.x]) / 16.0;
-}
-
-float warpField(vec2 shapeUV, float t) {
-  shapeUV *= 0.003;
-  for (float i = 1.0; i < 6.0; i++) {
-    shapeUV.x += 0.6 / i * cos(i * 2.5 * shapeUV.y + t);
-    shapeUV.y += 0.6 / i * cos(i * 1.5 * shapeUV.x + t);
-  }
-  float shape = 0.15 / max(0.001, abs(sin(t - shapeUV.y - shapeUV.x)));
-  return smoothstep(0.02, 1.0, shape);
-}
+${patternFieldSources[pattern]}
 
 float smokeWisps(vec2 cssPoint, vec2 flowVelocity, float t) {
   vec2 wispPoint = cssPoint * SMOKE_WISP_FREQUENCY - flowVelocity * 0.25 + vec2(0.0, t * 0.6);
@@ -173,7 +218,7 @@ void main() {
   vec4 flow = texture(u_flow, (cellCenter + 0.5 * u_resolution) / u_resolution);
   vec2 waveOffset = flow.xy / (1.0 + length(flow.xy)) * WAVE_DISPLACEMENT;
 
-  float pattern = warpField((cellCenterInCss - waveOffset) / u_patternScale, t);
+  float pattern = patternField(cellCenterInCss - waveOffset, u_resolution / u_pixelRatio, t);
   float smoke = flow.z * smokeWisps(cellCenterInCss, flow.xy, t);
   float shape = pattern + SMOKE_INK * smoke;
   float ink = step(0.5, shape + bayerThreshold(cellCoordinate) - 0.5);
