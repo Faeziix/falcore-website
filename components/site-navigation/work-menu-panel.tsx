@@ -21,8 +21,8 @@ function WorkMenuContents({ onNavigate }: { onNavigate: () => void }) {
   const [previewedSlug, setPreviewedSlug] = useState(openCaseStudySlug ?? CASE_STUDIES[0].slug);
 
   return (
-    <div className="page-container grid grid-cols-12 gap-x-8 py-10">
-      <motion.div variants={settleIntoPlaceVariants} className="col-span-5 flex flex-col">
+    <div className="page-container grid grid-cols-12 gap-x-6 py-8 lg:gap-x-8 lg:py-10">
+      <motion.div variants={settleIntoPlaceVariants} className="col-span-6 flex flex-col lg:col-span-5">
         <ul className="flex flex-col">
           {CASE_STUDIES.map((caseStudy) => (
             <WorkMenuStudyLink
@@ -51,7 +51,7 @@ function WorkMenuContents({ onNavigate }: { onNavigate: () => void }) {
           </Link>
         </TextLink>
       </motion.div>
-      <motion.div variants={settleIntoPlaceVariants} className="col-span-7 lg:col-span-6 lg:col-start-7">
+      <motion.div variants={settleIntoPlaceVariants} className="col-span-6 lg:col-start-7">
         <WorkMenuPreview previewedSlug={previewedSlug} />
       </motion.div>
     </div>
@@ -73,7 +73,7 @@ export function WorkMenuPanel({ isOpen, onNavigate }: { isOpen: boolean; onNavig
           initial="hidden"
           animate="shown"
           exit="exit"
-          className="absolute inset-x-0 top-full hidden border-b border-border bg-background md:block"
+          className="absolute inset-x-0 top-full hidden border-b border-border bg-background lg:block"
         >
           <WorkMenuContents onNavigate={onNavigate} />
         </motion.div>

@@ -23,7 +23,7 @@ export function ServicesMenuPanel({ isOpen, onNavigate }: { isOpen: boolean; onN
           initial="hidden"
           animate="shown"
           exit="exit"
-          className="absolute inset-x-0 top-full hidden border-b border-border bg-background md:block"
+          className="absolute inset-x-0 top-full hidden border-b border-border bg-background lg:block"
         >
           <ul className="page-container grid grid-cols-2 gap-x-8 gap-y-10 py-10 lg:grid-cols-4">
             {SERVICES.map((service) => (

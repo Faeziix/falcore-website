@@ -146,7 +146,7 @@ export function MobileNavigationSheet({
           initial="hidden"
           animate="shown"
           exit="exit"
-          className="fixed inset-x-0 top-(--nav-height) bottom-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-background md:hidden"
+          className="fixed inset-x-0 top-(--nav-height) bottom-0 z-40 flex flex-col overflow-y-auto overscroll-contain bg-background lg:hidden"
         >
           <nav
             aria-label="Menu"

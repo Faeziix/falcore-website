@@ -89,7 +89,7 @@ export function DesktopNavigation({
   onNavigate,
 }: DesktopNavigationProps) {
   return (
-    <div className="hidden h-full items-center justify-between gap-10 md:flex lg:col-span-7 lg:col-start-6 lg:justify-end">
+    <div className="hidden h-full items-center justify-between gap-10 lg:flex lg:col-span-7 lg:col-start-6 lg:justify-end">
       <ul className="flex h-full items-stretch gap-8">
         <MenuTriggerItem
           label={SERVICES_NAVIGATION_LABEL}

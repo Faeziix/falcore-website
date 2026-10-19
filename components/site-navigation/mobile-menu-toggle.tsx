@@ -19,7 +19,7 @@ export function MobileMenuToggle({ isOpen, onToggle, toggleRef }: MobileMenuTogg
       aria-label={isOpen ? "Close menu" : "Open menu"}
       aria-expanded={isOpen}
       aria-controls={MOBILE_NAVIGATION_SHEET_ID}
-      className="-mr-2 flex size-11 items-center justify-center text-foreground md:hidden"
+      className="-mr-2 flex size-11 items-center justify-center text-foreground lg:hidden"
     >
       <span aria-hidden className="relative block h-3.5 w-5">
         <span className={cn(toggleLineClassName, "top-0", isOpen && "translate-y-1.5 rotate-45")} />
