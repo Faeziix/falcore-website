@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { LoopingVideo } from "@/components/ui/looping-video";
+import { ServiceBlueprint } from "@/components/service-blueprints/service-blueprint";
 import type { Service } from "@/lib/data/services";
 import { cn } from "@/lib/utils";
 import { settleIntoPlaceVariants } from "./navigation-motion";
@@ -17,10 +16,8 @@ type ServiceMenuItemProps = {
 
 export function ServiceMenuItem({ service, isCurrentPage, onNavigate }: ServiceMenuItemProps) {
   const [isPreviewPlaying, setIsPreviewPlaying] = useState(false);
-  const [hasRequestedPreview, setHasRequestedPreview] = useState(false);
 
   function startPreview() {
-    setHasRequestedPreview(true);
     setIsPreviewPlaying(true);
   }
 
@@ -40,26 +37,8 @@ export function ServiceMenuItem({ service, isCurrentPage, onNavigate }: ServiceM
         aria-current={isCurrentPage ? "page" : undefined}
         className="group block focus-visible:outline-offset-4"
       >
-        <div className="relative aspect-video bg-surface">
-          <Image
-            src={service.loop.poster}
-            alt=""
-            fill
-            loading="eager"
-            sizes="(min-width: 1400px) 320px, 25vw"
-            className="object-cover"
-          />
-          {hasRequestedPreview && (
-            <div
-              aria-hidden
-              className={cn(
-                "absolute inset-0 transition-opacity duration-300 ease-out-expo",
-                isPreviewPlaying ? "opacity-100" : "opacity-0"
-              )}
-            >
-              <LoopingVideo sources={service.loop} label={service.loopLabel} isActive={isPreviewPlaying} />
-            </div>
-          )}
+        <div aria-hidden className="relative aspect-video bg-surface">
+          <ServiceBlueprint slug={service.slug} label={service.blueprintLabel} isActive={isPreviewPlaying} />
         </div>
         <p
           className={cn(

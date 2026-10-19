@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LoopingVideo } from "@/components/ui/looping-video";
+import { ServiceBlueprint } from "@/components/service-blueprints/service-blueprint";
 import type { Service } from "@/lib/data/services";
 
 export function ServiceTile({ service }: { service: Service }) {
@@ -9,7 +9,7 @@ export function ServiceTile({ service }: { service: Service }) {
       className="group block focus-visible:outline-offset-8"
     >
       <div className="aspect-video overflow-clip bg-surface">
-        <LoopingVideo sources={service.loop} label={service.loopLabel} />
+        <ServiceBlueprint slug={service.slug} label={service.blueprintLabel} />
       </div>
       <h3 className="mt-6 text-display-sm font-medium text-foreground underline-offset-[0.2em] decoration-1 group-hover:underline">
         {service.title}

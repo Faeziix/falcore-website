@@ -7,5 +7,6 @@ Read these before changing the site, and update them after.
 - [components.md](components.md) — component registry
 - [portfolio-and-logos.md](portfolio-and-logos.md) — selected-work screenshots, client logo marquee, founder portrait
 - [ui-conventions.md](ui-conventions.md) — layout, typography, colour roles, motion and code organisation
-- [service-loops.md](service-loops.md) — how the service video loops are generated (Kling 720p) and wired
+- [service-blueprints.md](service-blueprints.md) — the animated blueprint sheets that illustrate each service (current)
+- [service-loops.md](service-loops.md) — the retired Kling video loops, kept for reference
 - [launchpad-screenshots.md](launchpad-screenshots.md) — how the XMA Launchpad screenshots were captured with demo data, and how to re-shoot them

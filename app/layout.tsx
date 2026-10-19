@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Oxanium, Source_Code_Pro } from "next/font/google";
+import { Instrument_Sans, Instrument_Serif, Oxanium, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import SchemaMarkup from "@/components/schema-markup";
 
@@ -11,6 +11,13 @@ const oxanium = Oxanium({
 const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
   subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
 });
 
 const sourceCodePro = Source_Code_Pro({
@@ -68,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${oxanium.variable} ${instrumentSans.variable} ${sourceCodePro.variable} dark antialiased`}
+      className={`${oxanium.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${sourceCodePro.variable} dark antialiased`}
     >
       <head>
         <SchemaMarkup />

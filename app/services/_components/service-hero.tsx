@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { LoopingVideo } from "@/components/ui/looping-video";
+import { BookCallButton } from "@/components/book-call-button";
+import { ServiceBlueprint } from "@/components/service-blueprints/service-blueprint";
 import { ViewfinderFrame } from "@/components/ui/viewfinder-frame";
 import { textLinkVariants } from "@/components/ui/text-link";
-import { BOOKING_URL, externalLinkProps } from "@/lib/site-config";
 import type { Service } from "@/lib/data/services";
 import { ServiceTitleReveal } from "./service-title-reveal";
 
@@ -45,17 +43,12 @@ export function ServiceHero({ service }: { service: Service }) {
           style={revealDelay(heroRevealDelayMilliseconds.bookingButton)}
           className="mt-9 motion-safe:animate-rise-in"
         >
-          <Button asChild size="lg" width="fullOnMobile">
-            <a href={BOOKING_URL} {...externalLinkProps}>
-              Book a free call
-              <ArrowUpRight aria-hidden className="size-4.5" />
-            </a>
-          </Button>
+          <BookCallButton size="lg" width="fullOnMobile" />
         </div>
       </div>
 
       <ViewfinderFrame reveal="onLoad" className="aspect-video lg:col-span-7">
-        <LoopingVideo sources={service.loop} label={service.loopLabel} />
+        <ServiceBlueprint slug={service.slug} label={service.blueprintLabel} />
       </ViewfinderFrame>
     </header>
   );

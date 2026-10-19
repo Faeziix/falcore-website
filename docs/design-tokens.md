@@ -18,6 +18,7 @@ Two layers:
 | `--palette-contrail` | `#e8eaec` | Text |
 | `--palette-falcon` / `-deep` | `#e53935` / `#c62828` | Brand red: actions and "live" signals only |
 | `--palette-steel` / `-bright` | `#7fa6c8` / `#a9c6df` | Information, visited states, focus ring |
+| `--palette-tarmac` | `#0f1012` | Darker-than-page paper inside blueprint sheets |
 
 2. **Semantic tokens** that components use through Tailwind (`bg-background`, `bg-surface`, `bg-surface-raised`, `text-foreground`, `text-foreground-soft`, `text-muted-foreground`, `border-border`, `border-border-strong`, `bg-primary`, `hover:bg-primary-hover`, `text-accent`, …).
 
@@ -28,6 +29,7 @@ Two layers:
 | Display (h1–h4) | Oxanium | `font-display` (applied to headings in the base layer) |
 | Body and UI | Instrument Sans | `font-sans` |
 | Data (timestamps, step numbers) | Source Code Pro | `font-mono`: only where the content really is data |
+| Blueprint web design headline only | Instrument Serif italic | `font-serif-display` |
 
 Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles), `text-display-md` (sub-features), `text-display-sm`, plus `text-lead` for intro paragraphs. These are registered with `tailwind-merge` in `lib/utils.ts`; add any new custom size there too, or `cn()` will drop it.
 
@@ -36,7 +38,7 @@ Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles
 - `page-container` utility: max width `--page-max-width` (1400px) with `--page-gutter`.
 - `section-spacing` utility: vertical `--section-space`.
 - `hairline-grid` utility: 64px line grid in `--border` (structural, not decorative).
-- Easing: `ease-out-expo`, `ease-in-out-quart` (in TS: `easeOutExpo` from `lib/motion.ts`). Keyframes: `animate-signal-pulse` (live indicators only); `animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe` and `animate-film-settle` (service hero load; always behind `motion-safe:`).
+- Easing: `ease-out-expo`, `ease-in-out-quart` (in TS: `easeOutExpo` from `lib/motion.ts`). Keyframes: `animate-signal-pulse` (live indicators only); `animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe` and `animate-film-settle` (service hero load; always behind `motion-safe:`); `animate-caret-blink` (the cursor in blueprint traces, behind `motion-safe:`).
 - Viewfinder: `--viewfinder-reveal-delay` (200ms), `--viewfinder-film-lag` (160ms), `--viewfinder-lock-travel` (14px, how far out the corners start), `--viewfinder-focus-travel` (3px, how far they tighten on hover).
 
 ## Effect tokens
@@ -44,6 +46,7 @@ Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles
 | Token | Value | Used by |
 |---|---|---|
 | `--hero-dither-ink` | `var(--primary)` | Ink colour of the interactive hero dithering |
+| `--blueprint-paper` (`fill-blueprint-paper`) | `var(--palette-tarmac)` | Panels, cards and layers inside service blueprint sheets |
 | `--hero-dither-backdrop` | `var(--palette-black)` | Backdrop of the hero dithering (blended with `mix-blend-screen`) |
 | `--wave-cta-dither-ink` | `var(--primary)` | Ink colour of the interactive wave behind the closing CTA and footer |
 | `--wave-cta-dither-backdrop` | `transparent` | Backdrop of that wave, transparent so the page background shows through |
