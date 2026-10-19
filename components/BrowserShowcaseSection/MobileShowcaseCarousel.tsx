@@ -9,8 +9,9 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
+  CarouselPositionSegments,
   CarouselPrevious,
-  useCarousel,
+  CarouselSelectedSlideAnnouncement,
   useCarouselScrollTween,
   type LoadedCarouselApi,
 } from "@/components/ui/carousel";
@@ -115,50 +116,13 @@ function ShowcaseSlides({ websites }: { websites: ShowcaseWebsite[] }) {
   );
 }
 
-function PositionSegments({ websites }: { websites: ShowcaseWebsite[] }) {
-  const { selectedIndex, scrollTo } = useCarousel();
-
-  return (
-    <div className="mt-4 flex gap-1.5 px-(--page-gutter)">
-      {websites.map((website, cardIndex) => {
-        const isCurrent = cardIndex === selectedIndex;
-        return (
-          <button
-            key={website.id}
-            type="button"
-            aria-label={`Show ${website.title}`}
-            aria-current={isCurrent || undefined}
-            onClick={() => scrollTo(cardIndex)}
-            className="flex h-11 flex-1 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-          >
-            <span
-              className={cn(
-                "block w-full transition-[height,background-color] duration-300 ease-out-expo",
-                isCurrent ? "h-0.5 bg-foreground" : "h-px bg-border-strong"
-              )}
-            />
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function SelectedWebsiteAnnouncement({ websites }: { websites: ShowcaseWebsite[] }) {
-  const { selectedIndex } = useCarousel();
-
-  return (
-    <p aria-live="polite" className="sr-only">
-      {selectedIndex + 1} of {websites.length}: {websites[selectedIndex]?.title}
-    </p>
-  );
-}
-
 export default function MobileShowcaseCarousel({
   websites,
 }: {
   websites: ShowcaseWebsite[];
 }) {
+  const websiteTitles = websites.map((website) => website.title);
+
   return (
     <Carousel aria-label={SHOWCASE_SECTION_TITLE} className="section-spacing">
       <SectionHeading
@@ -172,9 +136,9 @@ export default function MobileShowcaseCarousel({
         }
         className="mx-(--page-gutter) mb-10"
       />
-      <SelectedWebsiteAnnouncement websites={websites} />
+      <CarouselSelectedSlideAnnouncement slideLabels={websiteTitles} />
       <ShowcaseSlides websites={websites} />
-      <PositionSegments websites={websites} />
+      <CarouselPositionSegments slideLabels={websiteTitles} className="px-(--page-gutter)" />
     </Carousel>
   );
 }

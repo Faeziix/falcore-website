@@ -1,10 +1,22 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+
+const actionsRowVariants = cva("mt-6 flex gap-6", {
+  variants: {
+    actionsPlacement: {
+      beside: "items-end justify-between",
+      belowOnMobile: "flex-col sm:flex-row sm:items-end sm:justify-between",
+    },
+  },
+  defaultVariants: { actionsPlacement: "beside" },
+});
 
 export function SectionHeading({
   id,
   title,
   intro,
   actions,
+  actionsPlacement,
   className,
 }: {
   id?: string;
@@ -12,7 +24,7 @@ export function SectionHeading({
   intro: React.ReactNode;
   actions?: React.ReactNode;
   className?: string;
-}) {
+} & VariantProps<typeof actionsRowVariants>) {
   const introParagraph = (
     <p className="max-w-2xl text-balance text-lead text-foreground-soft">{intro}</p>
   );
@@ -23,7 +35,7 @@ export function SectionHeading({
         {title}
       </h2>
       {actions ? (
-        <div className="mt-6 flex items-end justify-between gap-6">
+        <div className={actionsRowVariants({ actionsPlacement })}>
           {introParagraph}
           <div className="shrink-0">{actions}</div>
         </div>

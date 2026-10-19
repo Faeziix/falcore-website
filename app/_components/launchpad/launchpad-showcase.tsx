@@ -11,11 +11,11 @@ export function LaunchpadShowcase() {
   const [activeFeatureId, setActiveFeatureId] = useState(features[0].id);
 
   return (
-    <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+    <div className="grid grid-cols-12 items-center gap-12">
       <div
         role="group"
         aria-label="Platform features"
-        className="order-2 flex flex-col gap-7 lg:order-1 lg:col-span-4"
+        className="col-span-4 flex flex-col gap-7"
       >
         {features.map((feature) => (
           <LaunchpadFeatureButton
@@ -29,7 +29,7 @@ export function LaunchpadShowcase() {
 
       <div
         id="launchpad-screenshot"
-        className="relative order-1 aspect-video overflow-clip border border-border bg-surface lg:order-2 lg:col-span-8"
+        className="relative col-span-8 aspect-video overflow-clip border border-border bg-surface"
       >
         {features.map((feature) => {
           const isActive = feature.id === activeFeatureId;
@@ -41,7 +41,7 @@ export function LaunchpadShowcase() {
               aria-hidden={!isActive}
               fill
               quality={90}
-              sizes="(max-width: 1024px) 100vw, (max-width: 1400px) 66vw, 920px"
+              sizes="(max-width: 1400px) 66vw, 920px"
               className={cn(
                 "object-cover object-top transition-opacity duration-700 ease-out-expo",
                 isActive ? "opacity-100" : "opacity-0"

@@ -4,6 +4,7 @@ export type LaunchpadFeature = {
   summary: string;
   screenshot: string;
   screenshotAlt: string;
+  mobileCropPosition: string;
 };
 
 export const LAUNCHPAD_SHOWCASE = {
@@ -19,6 +20,7 @@ export const LAUNCHPAD_SHOWCASE = {
         "Calls, meetings, chats and client files become one memory. Ask it anything, or let AI agents act on it, with a source for every answer.",
       screenshot: "/work/company-os/knowledge-assistant.webp",
       screenshotAlt: "AI assistant answering a question with sources from meetings, chat rooms, onboarding and the client record",
+      mobileCropPosition: "right top",
     },
     {
       id: "studio",
@@ -27,6 +29,7 @@ export const LAUNCHPAD_SHOWCASE = {
         "Ad films planned shot by shot. Ask the AI director for a change and it edits the shots, and you can undo it.",
       screenshot: "/work/company-os/v2/studio-director.webp",
       screenshotAlt: "AI studio with a 12-shot skincare film and the AI director summarising the three shots it changed",
+      mobileCropPosition: "90% top",
     },
     {
       id: "pipeline",
@@ -35,6 +38,7 @@ export const LAUNCHPAD_SHOWCASE = {
         "Leads from ads, websites and WhatsApp on one board, answered from one shared inbox.",
       screenshot: "/work/company-os/pipeline.webp",
       screenshotAlt: "CRM pipeline board with leads grouped by stage",
+      mobileCropPosition: "left top",
     },
     {
       id: "meetings",
@@ -43,6 +47,7 @@ export const LAUNCHPAD_SHOWCASE = {
         "Calls are recorded and summarised, and the to-dos are filed to the right client.",
       screenshot: "/work/company-os/meetings.webp",
       screenshotAlt: "Meeting page with a summary and action items",
+      mobileCropPosition: "15% top",
     },
   ] satisfies LaunchpadFeature[],
 };

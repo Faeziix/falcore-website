@@ -225,12 +225,59 @@ function CarouselNext({
   );
 }
 
+function CarouselPositionSegments({
+  slideLabels,
+  className,
+}: {
+  slideLabels: string[];
+  className?: string;
+}) {
+  const { selectedIndex, scrollTo } = useCarousel();
+
+  return (
+    <div className={cn("mt-4 flex gap-1.5", className)}>
+      {slideLabels.map((slideLabel, slideIndex) => {
+        const isCurrent = slideIndex === selectedIndex;
+        return (
+          <button
+            key={slideLabel}
+            type="button"
+            aria-label={`Show ${slideLabel}`}
+            aria-current={isCurrent || undefined}
+            onClick={() => scrollTo(slideIndex)}
+            className="flex h-11 flex-1 items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          >
+            <span
+              className={cn(
+                "block w-full transition-[height,background-color] duration-300 ease-out-expo",
+                isCurrent ? "h-0.5 bg-foreground" : "h-px bg-border-strong"
+              )}
+            />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function CarouselSelectedSlideAnnouncement({ slideLabels }: { slideLabels: string[] }) {
+  const { selectedIndex } = useCarousel();
+
+  return (
+    <p aria-live="polite" className="sr-only">
+      {selectedIndex + 1} of {slideLabels.length}: {slideLabels[selectedIndex]}
+    </p>
+  );
+}
+
 export {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselPositionSegments,
+  CarouselSelectedSlideAnnouncement,
   useCarousel,
   useCarouselScrollTween,
   type CarouselApi,
