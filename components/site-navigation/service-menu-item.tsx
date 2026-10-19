@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { ServiceBlueprint } from "@/components/service-blueprints/service-blueprint";
+import { ServiceScene } from "@/components/service-scenes/service-scene";
 import type { Service } from "@/lib/data/services";
 import { cn } from "@/lib/utils";
 import { settleIntoPlaceVariants } from "./navigation-motion";
@@ -38,7 +38,7 @@ export function ServiceMenuItem({ service, isCurrentPage, onNavigate }: ServiceM
         className="group block focus-visible:outline-offset-4"
       >
         <div aria-hidden className="relative aspect-video bg-surface">
-          <ServiceBlueprint slug={service.slug} label={service.blueprintLabel} isActive={isPreviewPlaying} />
+          <ServiceScene slug={service.slug} label={service.sceneLabel} isActive={isPreviewPlaying} />
         </div>
         <p
           className={cn(

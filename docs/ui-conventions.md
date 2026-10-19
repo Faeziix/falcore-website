@@ -4,7 +4,7 @@ How pages on this site are put together. Read this along with `design-tokens.md`
 
 ## Direction: "show the machinery"
 
-Falcore sells the systems that run a business behind the scenes. Graphics show one of those systems doing real work, such as the service blueprint sheets or the current XMA Launchpad screenshots, rather than abstract decoration. The audience is non-technical US business owners, so copy is plain and outcome-led with no stack names.
+Falcore sells the systems that run a business behind the scenes. Graphics show one of those systems doing real work, such as the service scenes or the current XMA Launchpad screenshots, rather than abstract decoration. The audience is non-technical US business owners, so copy is plain and outcome-led with no stack names.
 
 ## Restraint (the first rule)
 
@@ -15,7 +15,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - Wrap content in `page-container`, and space sections with `section-spacing`.
 - Sections are **left-aligned**. Start each one with `SectionHeading`: hairline rule, title, then a one-sentence intro directly under the title. Every section has an intro (the prop is required). Don't split title and intro into side-by-side columns; the user rejected that. Don't centre section headers. The closing `WaveCTA` is the one deliberate exception.
 - Structure comes from hairlines (`border-border`) and the 12-column grid, not cards with shadows. Square corners everywhere (`--radius: 0`).
-- Homepage media sits bare on `bg-surface` (or with a hairline border for UI screenshots). The service-page hero blueprint sits in a `ViewfinderFrame`.
+- Homepage media sits bare on `bg-surface` (or with a hairline border for UI screenshots). The service-page hero scene sits in a `ViewfinderFrame`.
 - Never put `overflow: hidden` on an ancestor of a sticky element (the services stage on desktop is sticky). Use `overflow-clip` when you need to clip.
 
 ## Typography
@@ -38,12 +38,12 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - The bar sits on the 12-column grid: the logo in columns 1–3, links and the CTA right-aligned in columns 6–12. They used to start at column 8 to line up with the hero buttons, but the "Book a consultation call" label doesn't fit there at any width (the container caps at 1400px). Re-measure the bar at 1024–1440px whenever the CTA label changes. It is `--nav-height` tall.
 - It's transparent at the top of the page, blurred `bg-background/85` with a hairline once scrolled, and solid while a menu is open.
 - The current page, or the homepage section in view (scroll-spy on `#services`, `#launchpad`, `#work`), gets a 2px steel underline about 2px under the label, not down on the bar's edge (the user found that gap too big). The underline slides between links with `layoutId`. Current routes use `aria-current="page"` and homepage sections use `"location"`.
-- "Services" is a button that opens a full-width panel with the four service blueprints (focus framing), titles and one-liners (data from `lib/data/services.ts`). It opens on hover, which the user asked for: after 90ms of hover intent, and it closes 220ms after the pointer leaves the header, or right away when another link is hovered (`use-services-menu-hover.ts`). A mouse click only ever opens it, so hovering and then clicking can't close it. On touch and keyboard the button toggles. Escape, an outside click or navigating also closes it, and Escape returns focus to the trigger.
+- "Services" is a button that opens a full-width panel with the four service scenes, titles and one-liners (data from `lib/data/services.ts`). It opens on hover, which the user asked for: after 90ms of hover intent, and it closes 220ms after the pointer leaves the header, or right away when another link is hovered (`use-services-menu-hover.ts`). A mouse click only ever opens it, so hovering and then clicking can't close it. On touch and keyboard the button toggles. Escape, an outside click or navigating also closes it, and Escape returns focus to the trigger.
 - Mobile uses a full-height sheet under the bar with Oxanium rows separated by hairlines. "Services" is a disclosure. The sheet ends with a full-width "Book a consultation call" and the contact email, and page scroll is locked while it's open.
 - The CTA is always "Book a consultation call" to `BOOKING_URL` (new tab, `ArrowUpRight`). It never goes to `/contact`.
 - Motion. Shared variants are in `navigation-motion.ts`, and every effect was checked with the find-animation-opportunities and emil-design-eng skills:
   - The services panel and the mobile sheet unroll from the bar with `clip-path` (240ms and 300ms, `ease-out-expo`). Their tiles and rows settle in 40ms apart (`translateY(8px)` plus opacity), and both close with a quicker fade (150ms and 180ms).
-  - Hovering or focusing a service tile plays that service's blueprint animation. At rest it shows the static sheet.
+  - Hovering or focusing a service tile plays that service's scene animation. At rest it shows the static scene.
   - Hover: a 1px `foreground-soft` underline, in the same spot as the active one, draws in from the left (`scaleX`, 300ms, `ease-out-expo`) and retracts to the right on leave. It stays drawn under "Services" while its panel is open. Press: links and the Services trigger scale to 0.97. That's all: the user wants simple, satisfying micro-interactions and "vehemently" rejected a dithered hover band as overdesigned.
   - The bar is fixed to the top and always visible. It never hides on scroll: the user asked for it to stay put.
   - The mobile Services list expands with height and opacity (250ms, closing in 180ms).
@@ -64,7 +64,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 
 - Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `app/_components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
 - Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close.
-- Every animation respects `prefers-reduced-motion` (`useReducedMotion`; blueprints show their static sheet).
+- Every animation respects `prefers-reduced-motion` (`useReducedMotion`; service scenes show their resting frame).
 - Animate transform and opacity only. Reach for `ease-out-expo`.
 
 ## Calls to action

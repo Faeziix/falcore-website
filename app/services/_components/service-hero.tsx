@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BookCallButton } from "@/components/book-call-button";
-import { ServiceBlueprint } from "@/components/service-blueprints/service-blueprint";
+import { ServiceScene } from "@/components/service-scenes/service-scene";
 import { ViewfinderFrame } from "@/components/ui/viewfinder-frame";
 import { textLinkVariants } from "@/components/ui/text-link";
 import type { Service } from "@/lib/data/services";
@@ -48,7 +48,7 @@ export function ServiceHero({ service }: { service: Service }) {
       </div>
 
       <ViewfinderFrame reveal="onLoad" className="aspect-video lg:col-span-7">
-        <ServiceBlueprint slug={service.slug} label={service.blueprintLabel} />
+        <ServiceScene slug={service.slug} label={service.sceneLabel} />
       </ViewfinderFrame>
     </header>
   );

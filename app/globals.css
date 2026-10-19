@@ -42,7 +42,14 @@
   --secondary-foreground: var(--foreground);
   --destructive: var(--palette-falcon);
   --destructive-foreground: var(--palette-white);
-  --blueprint-paper: var(--palette-tarmac);
+  --scene-backdrop-top: var(--palette-fuselage);
+  --scene-backdrop-bottom: var(--palette-hangar);
+  --scene-object-top: var(--palette-cockpit);
+  --scene-object-bottom: var(--palette-fuselage);
+  --scene-object-edge: var(--palette-rivet);
+  --scene-object-highlight: color-mix(in srgb, var(--palette-white) 7%, transparent);
+  --scene-object-shadow: color-mix(in srgb, var(--palette-black) 55%, transparent);
+  --scene-inset: var(--palette-tarmac);
 
   --radius: 0px;
   --page-gutter: clamp(1rem, 4vw, 2rem);
@@ -79,12 +86,14 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-blueprint-paper: var(--blueprint-paper);
+  --color-scene-object-top: var(--scene-object-top);
+  --color-scene-object-bottom: var(--scene-object-bottom);
+  --color-scene-object-edge: var(--scene-object-edge);
+  --color-scene-inset: var(--scene-inset);
 
   --font-display: var(--font-oxanium), "Oxanium", system-ui, sans-serif;
   --font-sans: var(--font-instrument-sans), "Instrument Sans", system-ui, sans-serif;
   --font-mono: var(--font-source-code-pro), "Source Code Pro", ui-monospace, monospace;
-  --font-serif-display: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
 
   --text-display-xl: clamp(2.125rem, 6.4vw + 0.6rem, 6.5rem);
   --text-display-xl--line-height: 0.98;
@@ -105,7 +114,6 @@
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   --animate-signal-pulse: signal-pulse 1.8s var(--ease-out-expo) infinite;
-  --animate-caret-blink: caret-blink 1.1s steps(1, end) infinite;
   --animate-rise-in: rise-in 900ms var(--ease-out-expo) backwards;
   --animate-mask-rise: mask-rise 1.1s var(--ease-out-expo) backwards;
   --animate-viewfinder-lock: viewfinder-lock 1s var(--ease-out-expo) var(--viewfinder-reveal-delay) backwards;
@@ -142,12 +150,6 @@
   @keyframes film-settle {
     from {
       transform: scale(1.12);
-    }
-  }
-
-  @keyframes caret-blink {
-    50% {
-      opacity: 0;
     }
   }
 

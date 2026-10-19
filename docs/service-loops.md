@@ -1,6 +1,6 @@
 # Service Video Loops (retired)
 
-> Retired on 2026-10-19. The site now uses the code-drawn sheets in `service-blueprints.md`. Nothing renders these videos any more; the files and scripts are kept until the user decides whether to delete them.
+> Retired on 2026-10-19. The site now uses the animated object scenes in `service-scenes.md`. Nothing renders these videos any more; the files and scripts are kept until the user decides whether to delete them.
 
 Each service has a 5-second seamless loop. It shows on the homepage services stage and in the service-page hero.
 

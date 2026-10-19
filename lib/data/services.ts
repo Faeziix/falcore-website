@@ -25,7 +25,7 @@ type ServiceEntry = {
   title: string;
   description: string;
   longDescription: string;
-  blueprintLabel: string;
+  sceneLabel: string;
   inclusions: { label: string; icon: InclusionIconName }[];
   useCases: { title: string; description: string }[];
   metaTitle: string;
@@ -42,8 +42,8 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "AI that answers, sorts and drafts inside the tools your team already uses.",
     longDescription:
       "Most businesses know AI can help — they just do not know where to start. We identify the repetitive, time-consuming parts of your operation and build AI-powered solutions that handle them. From customer-facing chatbots to internal workflow automation, we integrate AI into the tools you already use so your team works faster without changing how they work.",
-    blueprintLabel:
-      "Blueprint of an AI agent working through a goal: a plan, a plan-act-observe-check loop, the business tools it uses, and the renewal quotes it has written",
+    sceneLabel:
+      "An AI agent working through a task: it reads your records, drafts 14 renewal quotes, waits for your approval before emailing, then books the calls",
     inclusions: [
       { label: "AI-powered workflow automation", icon: "automatedWorkflow" },
       { label: "Custom chatbots & virtual assistants", icon: "chatAssistant" },
@@ -79,8 +79,8 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Your tools connected, so information moves on its own instead of by copy and paste.",
     longDescription:
       "Your team should not be copying data between spreadsheets, sending follow-up emails manually, or toggling between six different tools to complete one task. We map your workflows, identify the bottlenecks, and build automations that connect your CRM, email, scheduling, invoicing, and project management tools into one streamlined system.",
-    blueprintLabel:
-      "Blueprint of two automated workflows running across forms, CRM, calendar, email, accounting and team chat, with a live lead moving towards a booked call",
+    sceneLabel:
+      "A new enquiry filling in a form, getting scored, then flowing on its own into the CRM, the calendar and a welcome email",
     inclusions: [
       { label: "CRM setup & configuration", icon: "crmRecord" },
       { label: "Workflow automation across tools", icon: "toolLoop" },
@@ -116,8 +116,8 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Websites designed around your brand and your customers, built to turn visits into enquiries.",
     longDescription:
       "A good website is not just something that looks nice — it is a tool that earns trust, communicates value, and moves visitors toward action. We design every page with intention: clear messaging, intuitive navigation, and a visual identity that matches the quality of your business. No templates, no page builders, no compromise.",
-    blueprintLabel:
-      "Blueprint of a bold landing page design with its column grid, type guides and spacing measurements drawn over it",
+    sceneLabel:
+      "A website being designed: layout guides, a headline typing in, a typeface and colour being chosen, then the site going live",
     inclusions: [
       { label: "Custom UI/UX tailored to your brand", icon: "brandedInterface" },
       { label: "Mobile-first responsive layouts", icon: "responsiveScreens" },
@@ -153,8 +153,8 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       "Portals, dashboards and booking systems built around how your business actually runs.",
     longDescription:
       "Off-the-shelf software does not always fit. When your business needs a tool that does not exist — a client portal, an internal dashboard, a booking system, a membership platform — we build it from scratch. Every application is full-stack, production-grade, and designed around how your team actually works.",
-    blueprintLabel:
-      "Blueprint of a custom dashboard exploded into its interface, business logic and data layers",
+    sceneLabel:
+      "A custom dashboard updating live: bookings and revenue counting up, a chart drawing, and views changing for admin, staff and client roles",
     inclusions: [
       { label: "Client portals & membership platforms", icon: "memberPortal" },
       { label: "Internal dashboards & admin panels", icon: "adminDashboard" },
