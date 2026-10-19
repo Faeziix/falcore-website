@@ -65,5 +65,16 @@
 - ❌ Service inclusion icons redrew via `whileHover`, so leaving the cell early froze the icon half drawn; the user said the animation shouldn't depend on how long they hover → ✅ Hover-triggered draw animations are one-shot: start on pointer enter, always play to the end, and ignore re-entry until finished (`useIconRedraw` in `app/services/_components/`).
 - ❌ The calm homepage had booking buttons only in the hero and the closing CTA; the user said it "lacks in CTAs" → ✅ Restraint applies to copy, not to the path to booking. Close key sections with a `SectionCallToAction` (one short line + `BookCallButton`) and put a button under the founder bio. Placement rules are in `docs/ui-conventions.md` → Calls to action.
 
+- ✅ (2026-10-19) Case studies live at `/work/<slug>` (`docs/case-studies.md`): Falcore frame, client's own palette and display face inside via scoped `--case-*` tokens, one signature moment each. Homepage showcase cards and the operating-system section link to them; nav "Work" goes to `/work`.
+- ❌ Headless Chromium captures of Vercel-hosted client sites came back as "Vercel Security Checkpoint" → ✅ Send a real browser user agent and launch with `--disable-blink-features=AutomationControlled` (`scripts/capture-case-study-frames.ts` does this).
+- ❌ The homepage AI-studio screenshot (`generate.webp`) showed a real client's logo, product and AI spend → ✅ Every product image must be demo data; check each one by eye for client names, money and credits before it ships. Replaced with `public/work/company-os/v2/studio-director.webp`.
+- ❌ Research briefs credited Faez with work a second developer did (operating system Sales/finance/WhatsApp campaigns/Studio shot pipeline; Timeless Touch catalogue UI) → ✅ Case studies lead with Faez's own share and show a "Team" fact; never name collaborators. The Studio's base and preset images come from a licensed third-party app: never show or claim them.
+- ❌ Planned a before/after built on AI-extended portraits of a real person (Sanaa) → ✅ Only use the client's real, published photography of real people unless they have signed off on the synthetic versions.
+- ❌ The transparent-at-top header over light case-study paper made the logo and links unreadable → ✅ `SiteNavigation surface="solid"` on case studies.
+
+- ✅ (2026-10-19) XMA's main site is now XMA Media (xmamedia.ai), rebuilt in October 2026 with xma.ae and xmaboost.com on one shared kit. The XMA case study (slug `xma-agency`) and the showcase card feature XMA Media; xma.ae is only "where it started".
+- ❌ Playwright's bundled Chromium captured site videos as black boxes (no H.264) → ✅ `capture-case-study-frames.ts --system-chromium` (uses `/usr/bin/chromium`).
+- ❌ Deleted a study's old components before writing its new page, and the shared dev server showed a build error to the user → ✅ When rebuilding a route, write the new files first and remove the old ones last.
+
 ## Component Registry
 See `docs/components.md`.

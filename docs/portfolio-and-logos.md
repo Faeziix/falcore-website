@@ -3,7 +3,8 @@
 ## Selected work (`BrowserShowcaseSection`)
 
 - Data: `lib/data/showcase-websites.ts` (`SHOWCASE_WEBSITES`). The order there is the order on the site.
-- Current order: DiaMaria, XMA Agency, ConvoFlow, Timeless Touch Ceramics, Sanaa Ouahmane, Corpofino.
+- Current order: DiaMaria, XMA Media (xmamedia.ai, the agency's main site since October 2026; it replaced the xma.ae entry), ConvoFlow, Timeless Touch Ceramics, Sanaa Ouahmane, Corpofino.
+- Cards open the site's case study (`/work/<slug>`); the live URL lives on the case study's facts row and in the desktop address bar.
 - Removed on request: XMA Car Rental, eBox Pro, Uptown Car Rental. Don't add them back.
 - Screenshots are static files in `public/showcase/<id>-v<screenshotVersion>-desktop.jpg` (1280×800 viewport) and `-mobile.jpg` (414×736 viewport, 9:16), both captured at 2x. The mobile carousel cards are 9:16 too (`aspect-9/16`), so the whole phone screenshot shows uncropped. Nothing is fetched live (the old microlink.io URLs are gone, along with their `next.config.ts` remote pattern).
 
@@ -19,7 +20,7 @@ The script opens each URL in headless Chromium (Playwright) and waits 6s for int
 
 ### Adding a site
 
-1. Add an entry `{ id, title, summary, externalUrl }` to `showcaseEntries` in `lib/data/showcase-websites.ts`. `summary` is one short line saying what the business is (taken from the site's own title or meta description).
+1. Add an entry `{ id, title, summary, externalUrl, caseStudySlug }` to `showcaseEntries` in `lib/data/showcase-websites.ts`. `summary` is one short line saying what the business is (taken from the site's own title or meta description). Cards link to `/work/<caseStudySlug>`, so the site needs a case study first (see `case-studies.md`).
 2. Run the capture script with that id.
 
 ### Replacing a site's screenshot
