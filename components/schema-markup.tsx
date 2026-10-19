@@ -1,4 +1,5 @@
 import { FAQ_ITEMS } from "@/lib/data/faq";
+import { SITE_URL } from "@/lib/site-config";
 
 /**
  * Falcore — Schema.org structured data (JSON-LD)
@@ -16,7 +17,7 @@ import { FAQ_ITEMS } from "@/lib/data/faq";
  *   - Organization w/ reviews (review snippets + LLM entity signals)
  */
 
-const BASE_URL = "https://falcoretech.com";
+const BASE_URL = SITE_URL;
 
 // ─── Organization ────────────────────────────────────────────────────────────
 
@@ -151,7 +152,7 @@ const webDesignServiceSchema = {
 const webAppServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `${BASE_URL}/#service-web-applications`,
+  "@id": `${BASE_URL}/#service-custom-web-applications`,
   name: "Custom Web Applications",
   description:
     "Client portals, membership platforms, internal dashboards, booking systems — if your business needs it built, we build it.",
@@ -272,21 +273,20 @@ const reviewsSchema = {
 
 // ─── Schema list ──────────────────────────────────────────────────────────────
 
-const schemas = [
+const siteWideSchemas = [
   organizationSchema,
   webSiteSchema,
-  webPageSchema,
-  breadcrumbSchema,
   founderSchema,
   webDesignServiceSchema,
   webAppServiceSchema,
   aiEnablementServiceSchema,
   systemsServiceSchema,
-  faqSchema,
   reviewsSchema,
 ];
 
-export default function SchemaMarkup() {
+const homepageSchemas = [webPageSchema, breadcrumbSchema, faqSchema];
+
+export function JsonLdScripts({ schemas }: { schemas: object[] }) {
   return (
     <>
       {schemas.map((schema, index) => (
@@ -298,4 +298,12 @@ export default function SchemaMarkup() {
       ))}
     </>
   );
+}
+
+export function HomepageSchemaMarkup() {
+  return <JsonLdScripts schemas={homepageSchemas} />;
+}
+
+export default function SchemaMarkup() {
+  return <JsonLdScripts schemas={siteWideSchemas} />;
 }

@@ -21,7 +21,7 @@ export function ServiceHero({ service }: { service: Service }) {
     <header className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-8">
       <div className="lg:col-span-5">
         <Link
-          href="/#services"
+          href="/services"
           style={revealDelay(heroRevealDelayMilliseconds.backLink)}
           className={textLinkVariants({
             tone: "muted",
@@ -37,7 +37,7 @@ export function ServiceHero({ service }: { service: Service }) {
           style={revealDelay(heroRevealDelayMilliseconds.intro)}
           className="mt-6 text-lead text-foreground-soft animate-rise-in"
         >
-          {service.longDescription}
+          {service.lead}
         </p>
         <div
           style={revealDelay(heroRevealDelayMilliseconds.bookingButton)}

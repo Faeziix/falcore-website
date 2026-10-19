@@ -3,11 +3,13 @@ import ClientLogoSection from "@/components/ClientLogoSection";
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
 import AboutFounder from "@/components/about-founder";
 import FAQ from "@/components/faq";
+import { FAQ_ITEMS } from "@/lib/data/faq";
 import { PageClosing } from "@/components/page-closing";
+import { HomepageSchemaMarkup } from "@/components/schema-markup";
 import { HeroSection } from "./_components/hero/hero-section";
-import { ServicesSection } from "./_components/services/services-section";
+import { ServicesSection } from "@/components/services/services-section";
 import { LaunchpadSection } from "./_components/launchpad/launchpad-section";
-import { ProcessSection } from "./_components/process/process-section";
+import { ProcessSection } from "@/components/process/process-section";
 
 export default function Home() {
   return (
@@ -21,8 +23,9 @@ export default function Home() {
         <LaunchpadSection />
         <ProcessSection />
         <AboutFounder />
-        <FAQ />
+        <FAQ items={FAQ_ITEMS} />
       </main>
+      <HomepageSchemaMarkup />
       <PageClosing />
     </>
   );

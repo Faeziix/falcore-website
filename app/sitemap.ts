@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SERVICES } from "@/lib/data/services";
 import { CASE_STUDIES, CASE_STUDY_INDEX_PATH, caseStudyPath } from "@/app/work/_lib/case-study-index";
 
 const SITE_ORIGIN = "https://falcoretech.com";
@@ -20,21 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
     },
     {
-      url: "https://falcoretech.com/services/web-design",
+      url: `${SITE_ORIGIN}/services`,
       lastModified: now,
     },
-    {
-      url: "https://falcoretech.com/services/custom-web-applications",
+    ...SERVICES.map((service) => ({
+      url: `${SITE_ORIGIN}/services/${service.slug}`,
       lastModified: now,
-    },
-    {
-      url: "https://falcoretech.com/services/ai-enablement",
-      lastModified: now,
-    },
-    {
-      url: "https://falcoretech.com/services/systems-automations",
-      lastModified: now,
-    },
+    })),
     {
       url: `${SITE_ORIGIN}${CASE_STUDY_INDEX_PATH}`,
       lastModified: now,

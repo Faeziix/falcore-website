@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
-import { PROCESS_STEPS } from "@/app/_lib/process-steps";
+import { PROCESS_STEPS } from "@/lib/data/process-steps";
 import { useMediaQuery } from "@/lib/hooks/use-media-query";
 import { ProcessTimelineStep } from "./process-timeline-step";
 

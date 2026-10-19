@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FAQ_ITEMS } from "@/lib/data/faq";
+import type { FrequentlyAskedQuestion } from "@/lib/data/faq";
 
 function AccordionItem({
   itemId,
@@ -63,7 +63,16 @@ function AccordionItem({
   );
 }
 
-export default function FAQ() {
+const defaultFaqIntro =
+  "Something else on your mind? Ask it on the call. It’s free and there’s no pitch.";
+
+export default function FAQ({
+  items,
+  intro = defaultFaqIntro,
+}: {
+  items: FrequentlyAskedQuestion[];
+  intro?: string;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -73,13 +82,10 @@ export default function FAQ() {
           <h2 id="faq-heading" className="text-display-lg font-medium text-foreground">
             Common questions
           </h2>
-          <p className="mt-6 max-w-sm text-foreground-soft">
-            Something else on your mind? Ask it on the call. It&apos;s free and
-            there&apos;s no pitch.
-          </p>
+          <p className="mt-6 max-w-sm text-foreground-soft">{intro}</p>
         </div>
         <div className="border-t border-border lg:col-span-7">
-          {FAQ_ITEMS.map((item, index) => (
+          {items.map((item, index) => (
             <AccordionItem
               key={item.question}
               itemId={`faq-${index}`}

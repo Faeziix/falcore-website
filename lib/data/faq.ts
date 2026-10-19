@@ -1,4 +1,9 @@
-export const FAQ_ITEMS = [
+export type FrequentlyAskedQuestion = {
+  question: string;
+  answer: string;
+};
+
+export const FAQ_ITEMS: FrequentlyAskedQuestion[] = [
   {
     question: "What types of businesses do you work with?",
     answer:

@@ -58,11 +58,11 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - Service pages. Text never fades in on scroll; only hairlines draw.
   - Load: "All services" rises in, the title's words rise from a mask (70ms apart), then the intro and the booking button. The `ViewfinderFrame` corners close in from 14px outside the frame and lock on, then the film wipes in from the left while settling from 1.12 scale (`reveal="onLoad"`). It's all CSS keyframes (`animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe`, `animate-film-settle`), so the hero stays a server component. The delays live in `heroRevealDelayMilliseconds` and the `--viewfinder-*` variables.
   - Scroll: the "What's included" grid and "How businesses use this" rows are plotted like a blueprint. Each hairline draws once from the left or top as the list enters view (`PlottedLine`), staggered cell by cell. Each inclusion's icon then draws its outline and, 0.35s later, its red signal stroke (`pathLength`).
-  - Hover: the viewfinder corners tighten 3px and brighten, like a camera focusing. An inclusion cell tints to `surface/60`, its text brightens and its icon redraws (outline, then signal). The redraw is one-shot: it starts on pointer enter and always plays to the end, however briefly the pointer stays, and it won't restart until it has finished (`useIconRedraw` in `app/services/_components/`). Never tie a draw animation to hover state, because leaving early would freeze it half drawn. A use-case row draws a steel line along its top edge from the left (it retracts to the right), the same gesture as the nav underline, and its description brightens.
+  - Hover: the viewfinder corners tighten 3px and brighten, like a camera focusing. An inclusion cell tints to `surface/60`, its text brightens and its icon redraws (outline, then signal). The redraw is one-shot: it starts on pointer enter and always plays to the end, however briefly the pointer stays, and it won't restart until it has finished (`useIconRedraw` in `app/services/_components/`). Never tie a draw animation to hover state, because leaving early would freeze it half drawn. An example row draws a steel line along its top edge from the left (it retracts to the right), the same gesture as the nav underline, and its description brightens.
 
 ## Icons
 
-- Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `app/_components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
+- Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
 - Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close.
 - The site does not honour `prefers-reduced-motion` (the user's decision, 2026-10-19): every visitor gets the full motion. Don't add `useReducedMotion`, `motion-safe:`/`motion-reduce:` variants or reduced-motion media queries.
 - Anything that starts hidden in `initial` must always have an `animate` that reveals it. The server HTML carries the hidden state, and nothing else will undo it.
@@ -74,6 +74,7 @@ The only conversion goal is a booking. Every CTA is "Book a consultation call" v
 
 - Homepage placement: the hero, the end of the operating-system section ("Want a system like this running your business?"), the end of the process section ("Step one is a free 30-minute call."), under the founder bio, and the closing `WaveCTA`. The nav button is always there too.
 - A mid-page CTA is a `SectionCallToAction`: one short question or statement and the button, no extra copy, no hairline. It goes after the section's visual, never inside the heading.
+- Service-page placement: the hero, the end of "Built and running" ("Want something like this in your business?") and the closing `WaveCTA`. "What happens next" has no CTA there, because it follows the examples' CTA.
 - Don't put CTAs in two sections in a row unless one is the founder bio's button. Services tiles already link to their pages, and the FAQ leads straight into the closing CTA, so neither gets its own.
 
 ## Primitives
@@ -84,5 +85,13 @@ Use `Button` / `buttonVariants` and `TextLink` / `textLinkVariants` (CVA, shadcn
 
 - Homepage-only sections: `app/_components/<section>/`, with their data in `app/_lib/`.
 - Service-page parts: `app/services/_components/`.
+
+## Service pages
+
+- One idea per section, in this order: hero, What's included, (website showcase on Web Design), Built and running, What happens next, Other services, Common questions, closing CTA. Details in `components.md` → Service pages.
+- "Built and running" lists real work only: 3 to 5 rows of a short title and one plain sentence, linking to a case study where one exists. Never generic "how businesses use this" copy.
+- Examples from the company operating system claim only my own share: the knowledge base and its cited assistant, meeting recording and transcript sync, meetings linked to clients, tasks from meetings, the assistant that acts behind approve buttons, WhatsApp reply handling, and Meta conversion feedback. The other developer led sequences, campaigns, lead scoring, proposal timers, lead research, sales scripts and meeting notes, so those never appear as examples. Never name the product or the developer.
+- Numbers come from evidence (case-study outcome files, the system's own test notes, the portfolio notes), never from estimates. No client money or ad spend.
+- FAQs answer the objections a buyer has before booking (approval, ownership, tools, what happens after launch), in "I" voice, with no invented timelines or prices.
 - Shared design-system pieces: `components/ui/`. Shared data: `lib/data/`.
 - `cn()` in `lib/utils.ts` uses a `tailwind-merge` instance that knows the custom `text-display-*`/`text-lead` sizes. Register any new custom font size there.

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTransform, type MotionValue } from "motion/react";
-import type { ProcessStep } from "@/app/_lib/process-steps";
+import type { ProcessStep } from "@/lib/data/process-steps";
 import { ProcessStepIcon } from "./process-step-icons";
 import { useIconRedraw } from "./use-icon-redraw";
 

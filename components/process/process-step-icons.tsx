@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { motion, useTransform, type MotionValue } from "motion/react";
-import type { ProcessStepIconName } from "@/app/_lib/process-steps";
+import type { ProcessStepIconName } from "@/lib/data/process-steps";
 
 type IconDrawProgress = {
   outlineDrawProgress: MotionValue<number>;

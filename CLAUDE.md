@@ -9,6 +9,8 @@
 
 ## Architecture Decisions
 - Homepage sections live in `app/_components/`, with data in `app/_lib/`. Service-page parts live in `app/services/_components/`. Shared primitives (`Button`, `TextLink`, `SectionHeading`, `ViewfinderFrame`) are CVA/shadcn-style in `components/ui/`. Service illustrations are animated Clerk/Linear-style object scenes in `components/service-scenes/` (see `docs/service-scenes.md`); the blueprint sheets and video loops are retired.
+- Service pages are one dynamic route, `app/services/[slug]/page.tsx`, driven by `lib/data/services.ts` (lead, inclusions, real examples, FAQs); `/services` is the index. Sections shared by the homepage and service pages (`components/process/`, `components/services/`, `FAQ`) live in `components/`. Order and rules: `docs/components.md` and `docs/ui-conventions.md` → Service pages.
+- The root layout's JSON-LD is site-wide only. Page-specific schema (WebPage, breadcrumbs, FAQPage) belongs to its page, so no page carries two FAQPage blocks.
 - The site header is `SiteNavigation` (`components/site-navigation/`), used on every page. Its rules are in `docs/ui-conventions.md` → Navigation.
 - Dark-only token system: `--palette-*` primitives map to semantic tokens (`docs/design-tokens.md`).
 - The hero background is a custom WebGL2 shader (`components/ui/interactive-dithering/`), not `@paper-design/shaders-react`, because paper's shaders can't take pointer input. See `docs/interactions.md`.
@@ -76,6 +78,8 @@
 - ✅ (2026-10-19) XMA's main site is now XMA Media (xmamedia.ai), rebuilt in October 2026 with xma.ae and xmaboost.com on one shared kit. The XMA case study (slug `xma-agency`) and the showcase card feature XMA Media; xma.ae is only "where it started".
 - ❌ Playwright's bundled Chromium captured site videos as black boxes (no H.264) → ✅ `capture-case-study-frames.ts --system-chromium` (uses `/usr/bin/chromium`).
 - ❌ Deleted a study's old components before writing its new page, and the shared dev server showed a build error to the user → ✅ When rebuilding a route, write the new files first and remove the old ones last.
+
+- ❌ (2026-10-19) Service pages had generic "How businesses use this" rows, "we" copy and no proof → ✅ Each page has "Built and running": real examples from shipped work, linked to case studies. Operating-system examples claim only my share (knowledge base, cited assistant, meeting recording/linking/tasks, approval-gated assistant, WhatsApp reply handling, Meta conversion feedback). The other developer led sequences, campaigns, lead scoring, proposal timers, lead research, sales scripts and meeting notes: check `git log --format='%an' -- <path>` in the operating-system repo before crediting a feature.
 
 ## Component Registry
 See `docs/components.md`.

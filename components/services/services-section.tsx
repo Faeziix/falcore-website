@@ -1,6 +1,6 @@
 import { SERVICES } from "@/lib/data/services";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ServiceTile } from "./service-tile";
+import { ServiceTileGrid } from "./service-tile-grid";
 
 export function ServicesSection() {
   return (
@@ -11,11 +11,7 @@ export function ServicesSection() {
           title="What I build"
           intro="Each one is built around how your business already works."
         />
-        <div className="mt-14 grid gap-x-8 gap-y-16 md:grid-cols-2 lg:mt-20 lg:gap-x-12 lg:gap-y-20">
-          {SERVICES.map((service) => (
-            <ServiceTile key={service.slug} service={service} />
-          ))}
-        </div>
+        <ServiceTileGrid services={SERVICES} />
       </div>
     </section>
   );
