@@ -83,10 +83,10 @@ export default function AboutPage() {
             <div className="relative max-w-md mx-auto lg:mx-0">
               <div className="relative aspect-[3/4] overflow-hidden border border-border/50">
                 <Image
-                  src="/professional-portrait.png"
+                  src="/founder-portrait.jpg"
                   alt="Faez Ansari — Founder of Falcore, full-stack developer and systems builder"
-                  width={600}
-                  height={800}
+                  width={1200}
+                  height={1490}
                   className="w-full h-full object-cover"
                   sizes="(max-width: 1024px) 100vw, 448px"
                 />

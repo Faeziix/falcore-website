@@ -1,12 +1,14 @@
 import { SiteNavigation } from "@/components/site-navigation";
-import { HeroSection } from "@/components/ui/hero-dithering-card";
-import VerticalTabs from "@/components/ui/vertical-tabs";
+import ClientLogoSection from "@/components/ClientLogoSection";
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
-import HowItWorks from "@/components/ui/how-it-works";
-import FAQ from "@/components/faq";
 import AboutFounder from "@/components/about-founder";
+import FAQ from "@/components/faq";
 import { WaveCTA, WaveCTABackground } from "@/components/ui/wave-cta";
 import Footer from "@/components/footer";
+import { HeroSection } from "./_components/hero/hero-section";
+import { ServicesSection } from "./_components/services/services-section";
+import { LaunchpadSection } from "./_components/launchpad/launchpad-section";
+import { ProcessSection } from "./_components/process/process-section";
 
 export default function Home() {
   return (
@@ -14,13 +16,15 @@ export default function Home() {
       <SiteNavigation />
       <main>
         <HeroSection />
-        <VerticalTabs />
+        <ClientLogoSection />
+        <ServicesSection />
+        <LaunchpadSection />
         <BrowserShowcaseSection />
-        <HowItWorks />
+        <ProcessSection />
         <AboutFounder />
         <FAQ />
       </main>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-clip">
         <WaveCTABackground />
         <WaveCTA />
         <Footer />

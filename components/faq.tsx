@@ -2,54 +2,59 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { ChevronDown } from "lucide-react";
+import { Plus } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { FAQ_ITEMS } from "@/lib/data/faq";
 
 function AccordionItem({
+  itemId,
   question,
   answer,
   isOpen,
   onToggle,
 }: {
+  itemId: string;
   question: string;
   answer: string;
   isOpen: boolean;
   onToggle: () => void;
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <div className="border-b border-border/30">
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between py-6 text-left text-foreground transition-colors hover:text-accent"
-        aria-expanded={isOpen}
-      >
-        <span className="text-base md:text-lg font-medium pr-4">
-          {question}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={
-            shouldReduceMotion
-              ? { duration: 0 }
-              : { type: "spring", stiffness: 300, damping: 25 }
-          }
-          className="shrink-0"
+    <div className="border-b border-border">
+      <h3 className="font-sans">
+        <button
+          id={`${itemId}-trigger`}
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          aria-controls={`${itemId}-answer`}
+          className="flex w-full items-center justify-between gap-6 py-6 text-left text-foreground transition-colors duration-200 hover:text-accent"
         >
-          <ChevronDown className="size-5 text-muted-foreground" />
-        </motion.span>
-      </button>
+          <span className="text-base font-medium md:text-lg">{question}</span>
+          <Plus
+            aria-hidden
+            className={cn(
+              "size-5 shrink-0 text-muted-foreground transition-transform duration-300 ease-out-expo",
+              isOpen && "rotate-45 text-foreground"
+            )}
+          />
+        </button>
+      </h3>
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 1 } : { height: 0, opacity: 0 }}
+            id={`${itemId}-answer`}
+            role="region"
+            aria-labelledby={`${itemId}-trigger`}
+            initial={prefersReducedMotion ? { opacity: 1 } : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="overflow-hidden"
+            exit={prefersReducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-clip"
           >
-            <p className="pb-6 text-base text-muted-foreground leading-relaxed">
+            <p className="max-w-2xl pb-7 text-base leading-relaxed text-foreground-soft">
               {answer}
             </p>
           </motion.div>
@@ -60,44 +65,31 @@ function AccordionItem({
 }
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const shouldReduceMotion = useReducedMotion();
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 md:py-32">
-      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl">
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 md:mb-16"
-          >
-            <span className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-[0.3em] block mb-3">
-              FAQ
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-foreground">
-              Common questions
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            {FAQ_ITEMS.map((item, i) => (
-              <AccordionItem
-                key={i}
-                question={item.question}
-                answer={item.answer}
-                isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-              />
-            ))}
-          </motion.div>
+    <section id="faq" aria-labelledby="faq-heading" className="section-spacing">
+      <div className="page-container grid gap-10 border-t border-border pt-8 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-5">
+          <h2 id="faq-heading" className="text-display-lg font-medium text-foreground">
+            Common questions
+          </h2>
+          <p className="mt-6 max-w-sm text-foreground-soft">
+            Something else on your mind? Ask it on the call. It&apos;s free and
+            there&apos;s no pitch.
+          </p>
+        </div>
+        <div className="border-t border-border lg:col-span-7">
+          {FAQ_ITEMS.map((item, index) => (
+            <AccordionItem
+              key={item.question}
+              itemId={`faq-${index}`}
+              question={item.question}
+              answer={item.answer}
+              isOpen={openIndex === index}
+              onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+            />
+          ))}
         </div>
       </div>
     </section>
