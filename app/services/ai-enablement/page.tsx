@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Nav from "@/components/nav";
+import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import ServicePage from "@/components/service-page";
 import { getServiceBySlug } from "@/lib/data/services";
@@ -20,7 +20,7 @@ export default function AIEnablementPage() {
 
   return (
     <>
-      <Nav />
+      <SiteNavigation />
       <main className="pt-32 pb-24">
         <ServicePage service={service} />
 

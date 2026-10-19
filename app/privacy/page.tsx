@@ -1,4 +1,4 @@
-import Nav from "@/components/nav";
+import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <Nav />
+      <SiteNavigation />
       <main className="pt-32 pb-24">
         <div className="mx-auto w-full max-w-3xl px-6 lg:px-8">
           <h1 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground mb-8">

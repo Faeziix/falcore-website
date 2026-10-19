@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowRight, Code, Zap, Users, Shield } from "lucide-react";
-import Nav from "@/components/nav";
+import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import type { Metadata } from "next";
@@ -58,7 +58,7 @@ const technologies = [
 export default function AboutPage() {
   return (
     <>
-      <Nav />
+      <SiteNavigation />
       <main className="pt-32 pb-24">
         <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-8">
           {/* Hero */}

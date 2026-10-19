@@ -1,17 +1,32 @@
-export type Service = {
+import type { LoopingVideoSources } from "@/components/ui/looping-video";
+
+type ServiceEntry = {
   slug: string;
   title: string;
   description: string;
   longDescription: string;
   image: string;
   imageAlt: string;
+  loopLabel: string;
   bullets: string[];
   useCases: { title: string; description: string }[];
   metaTitle: string;
   metaDescription: string;
 };
 
-export const SERVICES: Service[] = [
+export type Service = ServiceEntry & { loop: LoopingVideoSources };
+
+const SERVICE_LOOP_DIRECTORY = "/services/loops";
+
+function buildServiceLoopSources(slug: string): LoopingVideoSources {
+  return {
+    mp4: `${SERVICE_LOOP_DIRECTORY}/${slug}.mp4`,
+    webm: `${SERVICE_LOOP_DIRECTORY}/${slug}.webm`,
+    poster: `${SERVICE_LOOP_DIRECTORY}/${slug}-poster.jpg`,
+  };
+}
+
+const SERVICE_ENTRIES: ServiceEntry[] = [
   {
     slug: "ai-enablement",
     title: "AI Enablement",
@@ -22,6 +37,8 @@ export const SERVICES: Service[] = [
     image: "/services/ai-enablement.jpg",
     imageAlt:
       "AI-powered workflow automation dashboard for business operations",
+    loopLabel:
+      "Scattered points of information being sorted into neat channels inside a glass slab",
     bullets: [
       "AI-powered workflow automation",
       "Custom chatbots & virtual assistants",
@@ -59,6 +76,8 @@ export const SERVICES: Service[] = [
       "Your team should not be copying data between spreadsheets, sending follow-up emails manually, or toggling between six different tools to complete one task. We map your workflows, identify the bottlenecks, and build automations that connect your CRM, email, scheduling, invoicing, and project management tools into one streamlined system.",
     image: "/services/system-automation.jpg",
     imageAlt: "CRM and business process automation system integration",
+    loopLabel:
+      "A precision machine moving blocks steadily around a conveyor loop",
     bullets: [
       "CRM setup & configuration",
       "Workflow automation across tools",
@@ -97,6 +116,8 @@ export const SERVICES: Service[] = [
     image: "/services/web-design.jpg",
     imageAlt:
       "Custom website design with brand-focused UI and responsive layout",
+    loopLabel:
+      "Layout blocks arranging themselves on a tablet, surrounded by wireframe sketches",
     bullets: [
       "Custom UI/UX tailored to your brand",
       "Mobile-first responsive layouts",
@@ -135,6 +156,8 @@ export const SERVICES: Service[] = [
     image: "/services/web-dev.jpg",
     imageAlt:
       "Full-stack web application with client portal and dashboard interface",
+    loopLabel:
+      "A control console showing a live dashboard of charts",
     bullets: [
       "Client portals & membership platforms",
       "Internal dashboards & admin panels",
@@ -164,6 +187,11 @@ export const SERVICES: Service[] = [
       "Client portals, dashboards, booking systems, and membership platforms — built full-stack with Next.js and TypeScript. Production-grade custom web apps by Falcore.",
   },
 ];
+
+export const SERVICES: Service[] = SERVICE_ENTRIES.map((entry) => ({
+  ...entry,
+  loop: buildServiceLoopSources(entry.slug),
+}));
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);

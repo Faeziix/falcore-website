@@ -1,4 +1,4 @@
-import Nav from "@/components/nav";
+import { SiteNavigation } from "@/components/site-navigation";
 import { HeroSection } from "@/components/ui/hero-dithering-card";
 import VerticalTabs from "@/components/ui/vertical-tabs";
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
@@ -11,7 +11,7 @@ import Footer from "@/components/footer";
 export default function Home() {
   return (
     <>
-      <Nav />
+      <SiteNavigation />
       <main>
         <HeroSection />
         <VerticalTabs />
