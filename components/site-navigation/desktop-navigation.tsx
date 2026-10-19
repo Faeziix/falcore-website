@@ -60,7 +60,7 @@ export function DesktopNavigation({
   const isServicesActive = activeLinkId === "services";
 
   return (
-    <div className="hidden h-full items-center justify-between gap-10 md:flex lg:col-span-5 lg:col-start-8">
+    <div className="hidden h-full items-center justify-between gap-10 md:flex lg:col-span-7 lg:col-start-6 lg:justify-end">
       <ul className="flex h-full items-stretch gap-8">
         <li onPointerEnter={servicesTriggerHandlers.onPointerEnter} className="relative flex">
           <button

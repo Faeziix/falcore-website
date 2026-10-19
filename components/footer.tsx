@@ -72,7 +72,7 @@ export default function Footer() {
               href="/contact"
               className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block"
             >
-              Book a Call
+              Book a consultation call
             </Link>
           </div>
         </div>

@@ -11,7 +11,7 @@ export function BookCallButton({ variant, size, width, className }: BookCallButt
   return (
     <Button asChild variant={variant} size={size} width={width} className={className}>
       <a href={BOOKING_URL} {...externalLinkProps}>
-        Book a free call
+        Book a consultation call
         <ArrowUpRight aria-hidden className={size === "lg" ? "size-4.5" : undefined} />
       </a>
     </Button>

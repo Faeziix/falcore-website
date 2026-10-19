@@ -40,7 +40,7 @@ export default function ContactPage() {
               {/* Book a Call — Primary CTA */}
               <div className="border border-border/50 p-8 md:p-10">
                 <h2 className="text-2xl md:text-3xl font-medium tracking-tight text-foreground mb-4">
-                  Book a free call
+                  Book a consultation call
                 </h2>
                 <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
                   Pick a time that works for you. We&apos;ll spend 30 minutes

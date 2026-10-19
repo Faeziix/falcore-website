@@ -189,7 +189,7 @@ export default function AboutPage() {
               rel="noopener noreferrer nofollow"
               className="group inline-flex h-14 items-center justify-center gap-3 bg-primary px-8 md:px-12 text-base font-medium text-primary-foreground transition-all duration-300 hover:bg-primary/90 active:scale-[0.98]"
             >
-              <span>Book a Free Call</span>
+              <span>Book a consultation call</span>
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>

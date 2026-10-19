@@ -17,8 +17,8 @@ export default function Home() {
         <HeroSection />
         <ClientLogoSection />
         <ServicesSection />
-        <LaunchpadSection />
         <BrowserShowcaseSection />
+        <LaunchpadSection />
         <ProcessSection />
         <AboutFounder />
         <FAQ />
