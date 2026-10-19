@@ -14,7 +14,7 @@ export function SectionHeading({
   className?: string;
 }) {
   const introParagraph = (
-    <p className="max-w-2xl text-pretty text-lead text-foreground-soft">{intro}</p>
+    <p className="max-w-2xl text-balance text-lead text-foreground-soft">{intro}</p>
   );
 
   return (
