@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback } from "react";
-import { ArrowUpRightIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Carousel,
   CarouselContent,
@@ -56,10 +57,9 @@ function ProjectCard({
   isFirst: boolean;
 }) {
   return (
-    <a
-      href={website.externalUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      href={website.caseStudyPath}
+      aria-label={`Read the ${website.title} case study`}
       draggable={false}
       className="group flex flex-1 flex-col border border-border bg-card transition-colors duration-300 hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:border-border-strong"
     >
@@ -84,13 +84,13 @@ function ProjectCard({
           </h3>
           <p className="mt-1 text-sm text-foreground-soft">{website.summary}</p>
         </div>
-        <ArrowUpRightIcon
+        <ArrowRightIcon
           aria-hidden
           weight="bold"
-          className="mt-1 size-4 shrink-0 text-muted-foreground transition-[color,translate] duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground group-focus-visible:text-foreground group-active:text-foreground"
+          className="mt-1 size-4 shrink-0 text-muted-foreground transition-[color,translate] duration-300 ease-out-expo group-hover:translate-x-0.5 group-hover:text-foreground group-focus-visible:text-foreground group-active:text-foreground"
         />
       </div>
-    </a>
+    </Link>
   );
 }
 

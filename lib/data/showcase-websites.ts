@@ -3,6 +3,7 @@ export type ShowcaseWebsite = {
   title: string;
   summary: string;
   externalUrl: string;
+  caseStudyPath: string;
   thumbnailUrl: string;
   mobileThumbnailUrl: string;
   width: number;
@@ -19,6 +20,8 @@ export const SHOWCASE_SECTION_INTRO = "Recent sites I\u00A0designed and built.";
 
 export const SHOWCASE_SCREENSHOT_DIRECTORY = "showcase";
 
+const CASE_STUDY_PATH_PREFIX = "/work";
+
 const screenshotPath = (
   id: string,
   screenshotVersion: number,
@@ -31,6 +34,7 @@ type ShowcaseEntry = {
   title: string;
   summary: string;
   externalUrl: string;
+  caseStudySlug: string;
   screenshotVersion?: number;
   mobileScreenshotVersion?: number;
 };
@@ -41,20 +45,23 @@ const showcaseEntries: ShowcaseEntry[] = [
     title: "DiaMaria",
     summary: "Bespoke diamond jewellery, Dubai",
     externalUrl: "https://www.diamaria.com",
+    caseStudySlug: "diamaria",
     mobileScreenshotVersion: 2,
   },
   {
     id: "xma",
-    title: "XMA Agency",
-    summary: "Growth agency for UAE businesses",
-    externalUrl: "https://www.xma.ae",
-    mobileScreenshotVersion: 2,
+    title: "XMA Media",
+    summary: "AI video and ad production, Dubai",
+    externalUrl: "https://www.xmamedia.ai",
+    caseStudySlug: "xma-agency",
+    screenshotVersion: 3,
   },
   {
     id: "convoflow",
     title: "ConvoFlow",
     summary: "AI lead qualification and booking",
     externalUrl: "https://www.convoflow.ae",
+    caseStudySlug: "convoflow",
     mobileScreenshotVersion: 2,
   },
   {
@@ -62,6 +69,7 @@ const showcaseEntries: ShowcaseEntry[] = [
     title: "Timeless Touch Ceramics",
     summary: "Porcelain surfaces manufacturer, Dubai",
     externalUrl: "https://www.timelesstouchceramics.com",
+    caseStudySlug: "timeless-touch-ceramics",
     screenshotVersion: 2,
     mobileScreenshotVersion: 3,
   },
@@ -70,6 +78,7 @@ const showcaseEntries: ShowcaseEntry[] = [
     title: "Sanaa Ouahmane",
     summary: "Author site for the book Inner Armor",
     externalUrl: "https://www.sanaaouahmane.com",
+    caseStudySlug: "sanaa-ouahmane",
     screenshotVersion: 2,
     mobileScreenshotVersion: 3,
   },
@@ -78,6 +87,7 @@ const showcaseEntries: ShowcaseEntry[] = [
     title: "Corpofino",
     summary: "Women’s spa and slimming lounge, Abu Dhabi",
     externalUrl: "https://corpofino-web.vercel.app/en",
+    caseStudySlug: "corpofino",
     mobileScreenshotVersion: 2,
   },
 ];
@@ -86,9 +96,11 @@ export const SHOWCASE_WEBSITES: ShowcaseWebsite[] = showcaseEntries.map(
   ({
     screenshotVersion = 1,
     mobileScreenshotVersion = screenshotVersion,
+    caseStudySlug,
     ...entry
   }) => ({
     ...entry,
+    caseStudyPath: `${CASE_STUDY_PATH_PREFIX}/${caseStudySlug}`,
     thumbnailUrl: screenshotPath(entry.id, screenshotVersion, "desktop"),
     mobileThumbnailUrl: screenshotPath(entry.id, mobileScreenshotVersion, "mobile"),
     width: DESKTOP_VIEWPORT.width,

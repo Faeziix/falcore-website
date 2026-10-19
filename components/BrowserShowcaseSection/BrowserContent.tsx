@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 import type { ShowcaseWebsite } from "./BrowserShowcaseClient";
 
@@ -25,19 +26,13 @@ const BrowserContent = ({
       aria-labelledby={`tab-${activeWebsite.id}`}
       className="relative aspect-[9/20] md:aspect-video bg-background overflow-hidden rounded-b-xl cursor-pointer group"
     >
-      <a
-        href={activeWebsite.externalUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(e) => {
-          e.preventDefault();
-          onContentClick?.();
-        }}
+      <Link
+        href={activeWebsite.caseStudyPath}
         className="absolute inset-0 z-20"
-        aria-label={`Visit ${activeWebsite.title}`}
+        aria-label={`Read the ${activeWebsite.title} case study`}
       >
-        <span className="sr-only">Visit {activeWebsite.title}</span>
-      </a>
+        <span className="sr-only">Read the {activeWebsite.title} case study</span>
+      </Link>
 
       <motion.div
         className="absolute inset-0 bg-transparent group-hover:bg-black/20 transition-colors duration-300 z-10 pointer-events-none"

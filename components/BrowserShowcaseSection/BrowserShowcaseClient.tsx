@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import BrowserChrome from "./BrowserChrome";
 import BrowserTabBar from "./BrowserTabBar";
 import BrowserAddressBar from "./BrowserAddressBar";
@@ -8,6 +10,7 @@ import BrowserContent from "./BrowserContent";
 import MobileShowcaseCarousel from "./MobileShowcaseCarousel";
 import ScrollReveal from "@/components/scroll-reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { TextLink } from "@/components/ui/text-link";
 
 export type { ShowcaseWebsite } from "@/lib/data/showcase-websites";
 import {
@@ -22,6 +25,7 @@ interface BrowserShowcaseClientProps {
 
 const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const router = useRouter();
 
   const activeWebsite = websites[activeIndex];
 
@@ -30,10 +34,10 @@ const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
   }, []);
 
   const handleVisit = useCallback(() => {
-    if (activeWebsite?.externalUrl) {
-      window.open(activeWebsite.externalUrl, "_blank", "noopener,noreferrer");
+    if (activeWebsite?.caseStudyPath) {
+      router.push(activeWebsite.caseStudyPath);
     }
-  }, [activeWebsite]);
+  }, [activeWebsite, router]);
 
   return (
     <div className="w-full">
@@ -48,6 +52,13 @@ const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
           <SectionHeading
             title={SHOWCASE_SECTION_TITLE}
             intro={SHOWCASE_SECTION_INTRO}
+            actions={
+              <TextLink asChild tone="foreground" underline="always">
+                <Link href={activeWebsite.caseStudyPath}>
+                  Read the {activeWebsite.title} case study
+                </Link>
+              </TextLink>
+            }
             className="mb-14"
           />
         </ScrollReveal>
