@@ -4,26 +4,21 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { PlottedLine, plotOnViewProps } from "@/components/ui/plotted-line";
 import { textLinkVariants } from "@/components/ui/text-link";
-import type { ServiceExample } from "@/lib/data/services";
+import { cn } from "@/lib/utils";
 
 const rowStaggerSeconds = 0.12;
 
-export type ServiceExampleWithCaseStudyLink = ServiceExample & {
-  caseStudyHref?: string;
+export type PlottedRow = {
+  title: string;
+  description: string;
+  link?: { href: string; label: string };
 };
 
-export function ExamplesList({
-  examples,
-}: {
-  examples: ServiceExampleWithCaseStudyLink[];
-}) {
+export function PlottedRowList({ rows, className }: { rows: PlottedRow[]; className?: string }) {
   return (
-    <motion.ul {...plotOnViewProps} className="relative mt-12">
-      {examples.map((example, index) => (
-        <li
-          key={example.title}
-          className="group relative grid gap-3 py-8 md:grid-cols-12 md:gap-8"
-        >
+    <motion.ul {...plotOnViewProps} className={cn("relative mt-12", className)}>
+      {rows.map((row, index) => (
+        <li key={row.title} className="group relative grid gap-3 py-8 md:grid-cols-12 md:gap-8">
           <PlottedLine
             orientation="horizontal"
             delaySeconds={index * rowStaggerSeconds}
@@ -33,16 +28,14 @@ export function ExamplesList({
             aria-hidden
             className="pointer-events-none absolute inset-x-0 top-0 z-20 h-px origin-right scale-x-0 bg-accent transition-[scale] duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100"
           />
-          <h3 className="font-display text-xl font-medium text-foreground md:col-span-5">
-            {example.title}
-          </h3>
+          <h3 className="font-display text-xl font-medium text-foreground md:col-span-5">{row.title}</h3>
           <div className="md:col-span-7">
             <p className="leading-relaxed text-foreground-soft transition-colors duration-500 ease-out-expo group-hover:text-foreground">
-              {example.description}
+              {row.description}
             </p>
-            {example.caseStudyHref && (
+            {row.link && (
               <Link
-                href={example.caseStudyHref}
+                href={row.link.href}
                 className={textLinkVariants({
                   tone: "muted",
                   size: "sm",
@@ -50,7 +43,7 @@ export function ExamplesList({
                   className: "mt-4",
                 })}
               >
-                Read the case study
+                {row.link.label}
               </Link>
             )}
           </div>
@@ -58,7 +51,7 @@ export function ExamplesList({
       ))}
       <PlottedLine
         orientation="horizontal"
-        delaySeconds={examples.length * rowStaggerSeconds}
+        delaySeconds={rows.length * rowStaggerSeconds}
         className="inset-x-0 bottom-0"
       />
     </motion.ul>

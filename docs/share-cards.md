@@ -25,6 +25,7 @@ Layout: falcon mark and the FALCORE wordmark (Oxanium 700) top left; the eyebrow
 | `work` | `/work` | Work / Websites, apps and AI systems, and what they changed. |
 | `about` | `/about` | About / You talk directly to the person who builds it. |
 | `contact` | `/contact` | Contact / Let's talk about your project. |
+| `blog` | `/blog` and every post (on the `work` plate) | Blog / Notes from the projects I build. |
 
 Case studies share a 1200×630 JPG cropped from their own `coverImage`: `public/og/work/<slug>.jpg`, made by the same `bun run share-cards` command with `sharp` (centre crop). The covers themselves are 2752px WebP, too big for some apps' previews. After changing a cover, re-run `bun run share-cards work/<slug>` and bump the revision.
 

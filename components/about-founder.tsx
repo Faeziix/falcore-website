@@ -19,8 +19,8 @@ export default function AboutFounder() {
               Meet Faez
             </h2>
             <p className="mt-6 text-lead text-foreground-soft">
-              I&apos;m a developer and systems builder based in the UAE, working
-              with businesses across the US. Years of agency work taught me what
+              I&apos;m a developer and systems builder based in Dubai, working
+              with businesses in the UAE and US. Years of agency work taught me what
               growing businesses need: someone who understands the problem,
               builds the right thing and ships it fast. When you work with
               Falcore, you work with me.

@@ -1,20 +1,51 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { BLOG_INDEX_PATH, hasPublishedBlogPosts } from "@/app/blog/_lib/blog-posts";
+import { CASE_STUDY_INDEX_PATH } from "@/app/work/_lib/case-study-index";
+import { SERVICES } from "@/lib/data/services";
+import {
+  CONTACT_EMAIL,
+  SERVED_MARKETS_SENTENCE,
+  SOCIAL_PROFILES,
+  externalLinkProps,
+} from "@/lib/site-config";
 import Logo from "./logo";
 
-const footerLinks = {
-  navigation: [
-    { label: "Services", href: "/#services" },
-    { label: "Work", href: "/#work" },
+type FooterLink = { label: string; href: string };
+
+function navigationLinks(): FooterLink[] {
+  return [
+    { label: "Services", href: "/services" },
+    { label: "Work", href: CASE_STUDY_INDEX_PATH },
+    ...(hasPublishedBlogPosts() ? [{ label: "Blog", href: BLOG_INDEX_PATH }] : []),
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
-  ],
-  services: [
-    { label: "Web Design", href: "/services/web-design" },
-    { label: "Custom Web Apps", href: "/services/custom-web-applications" },
-    { label: "AI Enablement", href: "/services/ai-enablement" },
-    { label: "Systems & Automations", href: "/services/systems-automations" },
-  ],
-};
+  ];
+}
+
+const serviceLinks: FooterLink[] = SERVICES.map((service) => ({
+  label: service.title,
+  href: `/services/${service.slug}`,
+}));
+
+const footerLinkClassName = "text-sm text-foreground/40 hover:text-foreground/80 transition-colors";
+
+function FooterLinkColumn({ heading, links }: { heading: string; links: FooterLink[] }) {
+  return (
+    <div>
+      <span className="text-sm font-semibold mb-4 text-foreground/70 block">{heading}</span>
+      <ul className="flex flex-col gap-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className={footerLinkClassName}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -26,54 +57,31 @@ export default function Footer() {
             <p className="text-foreground/50 text-sm mt-3 leading-relaxed">
               The technical arm your business is missing.
             </p>
+            <p className="text-foreground/40 text-sm mt-3 leading-relaxed">{SERVED_MARKETS_SENTENCE}</p>
           </div>
 
-          <div>
-            <span className="text-sm font-semibold mb-4 text-foreground/70 block">Navigate</span>
-            <ul className="flex flex-col gap-2.5">
-              {footerLinks.navigation.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-foreground/40 hover:text-foreground/80 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <span className="text-sm font-semibold mb-4 text-foreground/70 block">Services</span>
-            <ul className="flex flex-col gap-2.5">
-              {footerLinks.services.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-foreground/40 hover:text-foreground/80 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FooterLinkColumn heading="Navigate" links={navigationLinks()} />
+          <FooterLinkColumn heading="Services" links={serviceLinks} />
 
           <div>
             <span className="text-sm font-semibold mb-4 text-foreground/70 block">Get in Touch</span>
-            <a
-              href="mailto:contact@falcoretech.com"
-              className="block text-sm text-foreground/40 hover:text-foreground/80 transition-colors"
-            >
-              contact@falcoretech.com
-            </a>
-            <Link
-              href="/contact"
-              className="text-sm text-accent hover:text-accent/80 transition-colors mt-2 inline-block"
-            >
-              Book a consultation call
-            </Link>
+            <ul className="flex flex-col gap-2.5">
+              <li>
+                <a href={`mailto:${CONTACT_EMAIL}`} className={footerLinkClassName}>
+                  {CONTACT_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SOCIAL_PROFILES.linkedInCompany}
+                  {...externalLinkProps}
+                  className={`${footerLinkClassName} inline-flex items-center gap-1`}
+                >
+                  LinkedIn
+                  <ArrowUpRight aria-hidden className="size-3.5" />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 

@@ -13,7 +13,8 @@ The site chrome stays Falcore's (dark hangar background, Oxanium, hairlines, the
 | `app/work/page.tsx` | Index of all case studies (`CaseStudyIndexList`) |
 | `app/work/_lib/case-study-index.ts` | `CASE_STUDIES` (order on the site), `caseStudyPath`, `findCaseStudy`, `findNextCaseStudy` |
 | `app/work/_lib/case-study-types.ts` | `CaseStudySummary`, `CaseStudyImage`, `CaseStudyOutcome` |
-| `app/work/_lib/case-study-metadata.ts` | `buildCaseStudyMetadata(summary)` for each page's `metadata` |
+| `app/work/_lib/case-study-metadata.ts` | `buildCaseStudyMetadata(summary)` for each page's `metadata`: `seoTitle`, the headline as description, canonical, the `work/<slug>` share card and `og:type=article` dates |
+| `app/work/_lib/case-study-structured-data.ts` | The `Article` + breadcrumb JSON-LD, rendered by `CaseStudyLayout` for every study (see `seo.md`) |
 | `app/work/_components/` | Shared frame: `CaseStudyLayout`, `CaseStudyHero`, `CaseStudyChapter`, `CaseStudyFigure`, `CaseStudyOutcomes`, `NextCaseStudy`, `CaseStudyIndexList` |
 | `app/work/<slug>/page.tsx` | The case study. Short: it composes sections only |
 | `app/work/<slug>/_lib/case-study-summary.ts` | The summary used by the index, the hero and the next-study link |
@@ -45,7 +46,9 @@ A theme file defines its palette primitives first (`--diamaria-palette-*`) and m
 2. Three to five chapters (`CaseStudyChapter`): title, one or two sentences directly under it, one big visual. `tone` `paper` (default), `raised` or `hangar` (Falcore's dark, for system/technical moments).
 3. The signature moment, as its own chapter.
 4. `CaseStudyOutcomes`: only claims with evidence. No invented numbers.
-5. `NextCaseStudy` (added by `CaseStudyLayout`), then `PageClosing`.
+5. `CaseStudyServiceLinks` ("The service(s) behind this project", linking to the summary's `serviceSlugs`), then `NextCaseStudy`, both added by `CaseStudyLayout`, then `PageClosing`.
+
+Summary fields that drive search: `seoTitle` ("Client: what was built", at most 50 characters so "| Falcore" still fits in 60), `serviceSlugs` (the service pages this study proves), and `dates` (`publishedOn`/`updatedOn`; bump `updatedOn` only when the study's content really changes). The dates live in the structured data and the sitemap, not on the page.
 
 ## Rules
 

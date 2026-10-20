@@ -45,7 +45,7 @@ export function CaseStudyFigure({
         height={image.height}
         sizes={sizes}
         quality={SCREENSHOT_QUALITY}
-        priority={isPriority}
+        preload={isPriority}
         className={cn("h-auto w-full", imageClassName)}
       />
     </div>

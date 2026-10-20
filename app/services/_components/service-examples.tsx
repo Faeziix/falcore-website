@@ -1,15 +1,20 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SectionCallToAction } from "@/components/section-call-to-action";
+import { PlottedRowList, type PlottedRow } from "@/components/plotted-row-list";
 import { caseStudyPath } from "@/app/work/_lib/case-study-index";
 import type { Service } from "@/lib/data/services";
-import { ExamplesList } from "./examples-list";
+
+function exampleRows(service: Service): PlottedRow[] {
+  return service.examples.map((example) => ({
+    title: example.title,
+    description: example.description,
+    link: example.caseStudySlug
+      ? { href: caseStudyPath(example.caseStudySlug), label: "Read the case study" }
+      : undefined,
+  }));
+}
 
 export function ServiceExamples({ service }: { service: Service }) {
-  const examplesWithCaseStudyLinks = service.examples.map((example) => ({
-    ...example,
-    caseStudyHref: example.caseStudySlug && caseStudyPath(example.caseStudySlug),
-  }));
-
   return (
     <section aria-labelledby="examples-heading" className="pb-[var(--section-space)]">
       <SectionHeading
@@ -17,7 +22,7 @@ export function ServiceExamples({ service }: { service: Service }) {
         title="Built and running"
         intro="Real work I’ve shipped, in plain terms."
       />
-      <ExamplesList examples={examplesWithCaseStudyLinks} />
+      <PlottedRowList rows={exampleRows(service)} />
       <SectionCallToAction
         prompt="Want something like this in your business?"
         className="mt-16 lg:mt-20"

@@ -79,7 +79,6 @@ const BrowserContent = ({
                   fill
                   sizes="(max-width: 1400px) 100vw, 1400px"
                   className="object-cover object-top"
-                  priority={index === 0}
                 />
               </motion.div>
             ) : (

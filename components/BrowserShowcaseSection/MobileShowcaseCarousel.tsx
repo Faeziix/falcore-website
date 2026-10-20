@@ -50,13 +50,7 @@ function useCardFocusTween() {
   useCarouselScrollTween(applyCardFocus);
 }
 
-function ProjectCard({
-  website,
-  isFirst,
-}: {
-  website: ShowcaseWebsite;
-  isFirst: boolean;
-}) {
+function ProjectCard({ website }: { website: ShowcaseWebsite }) {
   return (
     <Link
       href={website.caseStudyPath}
@@ -74,7 +68,6 @@ function ProjectCard({
             sizes="(max-width: 767px) 90vw, 352px"
             quality={90}
             className="object-cover object-top"
-            priority={isFirst}
           />
         </div>
       </div>
@@ -109,7 +102,7 @@ function ShowcaseSlides({ websites }: { websites: ShowcaseWebsite[] }) {
             cardIndex === 0 ? "opacity-100" : "opacity-45"
           )}
         >
-          <ProjectCard website={website} isFirst={cardIndex === 0} />
+          <ProjectCard website={website} />
         </CarouselItem>
       ))}
     </CarouselContent>

@@ -1,7 +1,7 @@
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ProcessTimeline } from "@/components/process/process-timeline";
 
-export function ServiceProcess() {
+export function WhatHappensNext() {
   return (
     <section aria-labelledby="process-heading" className="pb-[var(--section-space)]">
       <SectionHeading

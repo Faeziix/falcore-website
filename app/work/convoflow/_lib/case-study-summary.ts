@@ -3,11 +3,14 @@ import type { CaseStudySummary } from "@/app/work/_lib/case-study-types";
 export const convoFlowCaseStudySummary: CaseStudySummary = {
   slug: "convoflow",
   clientName: "ConvoFlow",
+  seoTitle: "ConvoFlow: Lead Generation Website & CRM Forms",
   headline:
     "A website that shows cold ad traffic what ConvoFlow does, lets visitors try it, and sends every form straight to the client's CRM.",
   summary: "AI lead follow-up service, Dubai",
   year: "2025–26",
   services: ["Web design", "Development", "Lead capture"],
+  serviceSlugs: ["web-design", "systems-automations"],
+  dates: { publishedOn: "2026-10-19", updatedOn: "2026-10-19" },
   liveUrl: "https://www.convoflow.ae",
   coverImage: {
     src: "/work/convoflow/thumbnail-v1.webp",

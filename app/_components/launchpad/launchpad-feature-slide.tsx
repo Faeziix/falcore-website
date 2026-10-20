@@ -1,13 +1,7 @@
 import Image from "next/image";
 import type { LaunchpadFeature } from "@/app/_lib/launchpad-showcase";
 
-export function LaunchpadFeatureSlide({
-  feature,
-  isFirst,
-}: {
-  feature: LaunchpadFeature;
-  isFirst: boolean;
-}) {
+export function LaunchpadFeatureSlide({ feature }: { feature: LaunchpadFeature }) {
   return (
     <article className="flex flex-1 flex-col border border-border bg-card">
       <div className="relative aspect-4/3 overflow-clip border-b border-border bg-surface">
@@ -18,7 +12,6 @@ export function LaunchpadFeatureSlide({
           draggable={false}
           quality={90}
           sizes="(max-width: 1023px) 90vw, 480px"
-          priority={isFirst}
           className="object-cover"
           style={{ objectPosition: feature.mobileCropPosition }}
         />

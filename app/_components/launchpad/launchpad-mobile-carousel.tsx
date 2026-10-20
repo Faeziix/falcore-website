@@ -46,7 +46,7 @@ export function LaunchpadMobileCarousel({
             aria-label={`${featureIndex + 1} of ${features.length}: ${feature.name}`}
             className="basis-[min(86%,30rem)]"
           >
-            <LaunchpadFeatureSlide feature={feature} isFirst={featureIndex === 0} />
+            <LaunchpadFeatureSlide feature={feature} />
           </CarouselItem>
         ))}
       </CarouselContent>

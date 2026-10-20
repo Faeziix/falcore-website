@@ -1,4 +1,5 @@
 import type { FrequentlyAskedQuestion } from "@/lib/data/faq";
+import type { ContentDates } from "@/lib/data/page-dates";
 
 export type InclusionIconName =
   | "automatedWorkflow"
@@ -40,6 +41,7 @@ type ServiceEntry = {
   showsWebsiteShowcase?: boolean;
   metaTitle: string;
   metaDescription: string;
+  dates: ContentDates;
 };
 
 export type Service = ServiceEntry;
@@ -112,9 +114,10 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
           "With one repetitive job that eats your team’s time. We pick it together on the call, and a written plan sets out the scope, timeline and cost before any work starts.",
       },
     ],
-    metaTitle: "AI Enablement Services",
+    metaTitle: "AI Agents & AI Automation for Businesses",
     metaDescription:
-      "AI that does real work inside your business: answers with sources, tasks written from meetings and drafts you approve before they go out.",
+      "AI agents that do real work inside your business: answers with sources, tasks written from meetings and drafts you approve. For businesses in the UAE and US.",
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
   },
   {
     slug: "systems-automations",
@@ -182,9 +185,10 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
           "You do. They run on your own accounts, and you keep the logins, the code and the data.",
       },
     ],
-    metaTitle: "Systems & Automations Services",
+    metaTitle: "Business Automation, CRM & WhatsApp Integration",
     metaDescription:
-      "Connect your CRM, calendar, WhatsApp and inbox so leads, bookings and follow-ups move on their own. Workflow automation and CRM setup for growing businesses.",
+      "Connect your CRM, calendar, WhatsApp and inbox so leads, bookings and follow-ups move on their own. Workflow automation for businesses in the UAE and US.",
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
   },
   {
     slug: "web-design",
@@ -244,9 +248,10 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       },
     ],
     showsWebsiteShowcase: true,
-    metaTitle: "Web Design Services",
+    metaTitle: "Custom Web Design for UAE & US Businesses",
     metaDescription:
-      "Custom web design for businesses: brand-led, mobile-first pages built to turn visits into enquiries, on a site you can edit yourself.",
+      "Custom web design for businesses in the UAE and US: brand-led, mobile-first sites built to turn visits into enquiries, which you can edit yourself.",
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
   },
   {
     slug: "custom-web-applications",
@@ -306,6 +311,7 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
     metaTitle: "Custom Web Application Development",
     metaDescription:
       "Client portals, dashboards, booking systems and membership platforms built around how your business runs. You own the code and the data.",
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
   },
 ];
 

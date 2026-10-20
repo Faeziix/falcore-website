@@ -1,4 +1,6 @@
-export type NavigationLinkId = "services" | "work" | "about" | "contact";
+import { BLOG_INDEX_PATH, hasPublishedBlogPosts } from "@/app/blog/_lib/blog-posts";
+
+export type NavigationLinkId = "services" | "work" | "blog" | "about" | "contact";
 
 export type NavigationLink = {
   id: NavigationLinkId;
@@ -10,7 +12,10 @@ export const SERVICES_NAVIGATION_LABEL = "Services";
 export const WORK_NAVIGATION_LABEL = "Work";
 export const WORK_INDEX_LINK = { label: "All work", href: "/work" };
 
+const BLOG_NAVIGATION_LINK: NavigationLink = { id: "blog", label: "Blog", href: BLOG_INDEX_PATH };
+
 export const PAGE_NAVIGATION_LINKS: NavigationLink[] = [
+  ...(hasPublishedBlogPosts() ? [BLOG_NAVIGATION_LINK] : []),
   { id: "about", label: "About", href: "/about" },
   { id: "contact", label: "Contact", href: "/contact" },
 ];
@@ -24,6 +29,7 @@ export const NAVIGATION_LINK_BY_HOME_SECTION_ID: Record<string, NavigationLinkId
 const NAVIGATION_LINK_BY_ROUTE_PREFIX: [string, NavigationLinkId][] = [
   ["/services", "services"],
   ["/work", "work"],
+  [BLOG_INDEX_PATH, "blog"],
   ["/about", "about"],
   ["/contact", "contact"],
 ];

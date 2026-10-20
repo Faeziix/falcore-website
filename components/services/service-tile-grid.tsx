@@ -1,13 +1,15 @@
 import { cn } from "@/lib/utils";
 import type { Service } from "@/lib/data/services";
-import { ServiceTile } from "./service-tile";
+import { ServiceTile, type ServiceTileHeadingLevel } from "./service-tile";
 
 export function ServiceTileGrid({
   services,
   className,
+  tileHeadingLevel,
 }: {
   services: Service[];
   className?: string;
+  tileHeadingLevel?: ServiceTileHeadingLevel;
 }) {
   return (
     <div
@@ -17,7 +19,7 @@ export function ServiceTileGrid({
       )}
     >
       {services.map((service) => (
-        <ServiceTile key={service.slug} service={service} />
+        <ServiceTile key={service.slug} service={service} headingLevel={tileHeadingLevel} />
       ))}
     </div>
   );

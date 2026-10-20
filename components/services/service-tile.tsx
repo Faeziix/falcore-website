@@ -2,7 +2,17 @@ import Link from "next/link";
 import { ServiceScene } from "@/components/service-scenes/service-scene";
 import type { Service } from "@/lib/data/services";
 
-export function ServiceTile({ service }: { service: Service }) {
+export type ServiceTileHeadingLevel = "h2" | "h3";
+
+export function ServiceTile({
+  service,
+  headingLevel = "h3",
+}: {
+  service: Service;
+  headingLevel?: ServiceTileHeadingLevel;
+}) {
+  const TitleHeading = headingLevel;
+
   return (
     <Link
       href={`/services/${service.slug}`}
@@ -11,9 +21,9 @@ export function ServiceTile({ service }: { service: Service }) {
       <div className="aspect-video overflow-clip bg-surface">
         <ServiceScene slug={service.slug} label={service.sceneLabel} />
       </div>
-      <h3 className="mt-6 text-display-sm font-medium text-foreground underline-offset-[0.2em] decoration-1 group-hover:underline">
+      <TitleHeading className="mt-6 text-display-sm font-medium text-foreground underline-offset-[0.2em] decoration-1 group-hover:underline">
         {service.title}
-      </h3>
+      </TitleHeading>
       <p className="mt-3 max-w-md text-foreground-soft">{service.description}</p>
     </Link>
   );

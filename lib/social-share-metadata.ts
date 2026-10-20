@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ContentDates } from "@/lib/data/page-dates";
+import { absoluteUrl } from "@/lib/site-config";
 
 export type ShareCardImage = {
   url: string;
@@ -12,6 +14,7 @@ type SocialShareMetadataInput = {
   description: string;
   path: string;
   image: ShareCardImage;
+  articleDates?: ContentDates;
 };
 
 const GENERATED_SHARE_CARD_WIDTH = 1200;
@@ -32,16 +35,26 @@ export function buildSocialShareMetadata({
   description,
   path,
   image,
+  articleDates,
 }: SocialShareMetadataInput): Pick<Metadata, "openGraph" | "twitter"> {
+  const sharedOpenGraph = {
+    title,
+    description,
+    url: path,
+    siteName: "Falcore",
+    images: [image],
+  };
+
   return {
-    openGraph: {
-      title,
-      description,
-      url: path,
-      siteName: "Falcore",
-      type: "website",
-      images: [image],
-    },
+    openGraph: articleDates
+      ? {
+          ...sharedOpenGraph,
+          type: "article",
+          publishedTime: articleDates.publishedOn,
+          modifiedTime: articleDates.updatedOn,
+          authors: [absoluteUrl("/about")],
+        }
+      : { ...sharedOpenGraph, type: "website" },
     twitter: {
       card: "summary_large_image",
       title,

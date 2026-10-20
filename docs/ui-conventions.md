@@ -4,7 +4,7 @@ How pages on this site are put together. Read this along with `design-tokens.md`
 
 ## Direction: "show the machinery"
 
-Falcore sells the systems that run a business behind the scenes. Graphics show one of those systems doing real work, such as the service scenes or the current XMA Launchpad screenshots, rather than abstract decoration. The audience is non-technical US business owners, so copy is plain and outcome-led with no stack names.
+Falcore sells the systems that run a business behind the scenes. Graphics show one of those systems doing real work, such as the service scenes or the current XMA Launchpad screenshots, rather than abstract decoration. The audience is non-technical business owners in the UAE and US, so copy is plain and outcome-led with no stack names. Name both markets where it's natural ("Based in Dubai, working with clients in the UAE and US"); see `seo.md` → Markets.
 
 ## Restraint (the first rule)
 
@@ -40,6 +40,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - The current page, or the homepage section in view (scroll-spy on `#services`, `#launchpad`, `#work`), gets a 2px steel underline about 2px under the label, not down on the bar's edge (the user found that gap too big). The underline slides between links with `layoutId`. Current routes use `aria-current="page"` and homepage sections use `"location"`.
 - "Services" is a button that opens a full-width panel with the four service scenes, titles and one-liners (data from `lib/data/services.ts`). It opens on hover, which the user asked for: after 90ms of hover intent, and it closes 220ms after the pointer leaves the header, or right away when another link is hovered (`use-menu-hover.ts`, one instance per menu; hovering one trigger cancels the other's pending open). A mouse click only ever opens it, so hovering and then clicking can't close it. On touch and keyboard the button toggles. Escape, an outside click or navigating also closes it, and Escape returns focus to the trigger.
 - "Work" is the second menu, with the same hover, click and dismiss behaviour (`work-menu-panel.tsx`). Left: the case studies from `CASE_STUDIES` as Oxanium rows between hairlines, then an "All work" link. Right: a 16:9 preview of the hovered or focused study's cover, crossfading between studies, with its one-sentence headline under it. The previewed row turns `foreground` and shows its year; the study you're on is `accent`. It opens on the current study, or the first one.
+- "Blog" appears between Work and About only once a post is published (`hasPublishedBlogPosts()` in `navigation-links.ts`), and the footer follows the same rule. Re-measure the bar at 1024–1440px when it first appears.
 - Mobile uses a full-height sheet under the bar with Oxanium rows separated by hairlines. "Services" and "Work" are disclosures (`MobileMenuDisclosure`); Work lists every study plus "All work", and either one starts expanded when you're on one of its pages. The sheet ends with a full-width "Book a consultation call" and the contact email, and page scroll is locked while it's open.
 - The CTA is always "Book a consultation call" to `BOOKING_URL` (new tab, `ArrowUpRight`). It never goes to `/contact`.
 - Motion. Shared variants are in `navigation-motion.ts`, and every effect was checked with the find-animation-opportunities and emil-design-eng skills:
@@ -65,6 +66,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
 - Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close.
 - The site does not honour `prefers-reduced-motion` (the user's decision, 2026-10-19): every visitor gets the full motion. Don't add `useReducedMotion`, `motion-safe:`/`motion-reduce:` variants or reduced-motion media queries.
+- Entrances never start at `opacity: 0` on text or images that can be the largest thing above the fold: Chrome only records LCP once they're visible, which made the homepage's LCP 7.6 s. `rise-in` and the homepage hero start at `--entrance-start-opacity` (0.1). Headings can rise from a clipping mask (`mask-rise`). See `seo.md` → Speed.
 - Anything that starts hidden in `initial` must always have an `animate` that reveals it. The server HTML carries the hidden state, and nothing else will undo it.
 - Animate transform and opacity only. Reach for `ease-out-expo`.
 
@@ -74,6 +76,7 @@ The only conversion goal is a booking. Every CTA is "Book a consultation call" v
 
 - Homepage placement: the hero, the end of the operating-system section ("Want a system like this running your business?"), the end of the process section ("Step one is a free 30-minute call."), under the founder bio, and the closing `WaveCTA`. The nav button is always there too.
 - A mid-page CTA is a `SectionCallToAction`: one short question or statement and the button, no extra copy, no hairline. It goes after the section's visual, never inside the heading.
+- About and Contact: the hero button and the closing `WaveCTA` only. The footer has no booking link, because it sits right under the `WaveCTA`.
 - Service-page placement: the hero, the end of "Built and running" ("Want something like this in your business?") and the closing `WaveCTA`. "What happens next" has no CTA there, because it follows the examples' CTA.
 - Don't put CTAs in two sections in a row unless one is the founder bio's button. Services tiles already link to their pages, and the FAQ leads straight into the closing CTA, so neither gets its own.
 

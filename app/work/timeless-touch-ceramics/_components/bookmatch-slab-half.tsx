@@ -64,7 +64,7 @@ export function BookmatchSlabHalf({
           src={eliteNeroSlabImage.src}
           alt={eliteNeroSlabImage.alt}
           fill
-          priority
+          preload
           quality={SLAB_IMAGE_QUALITY}
           sizes="(min-width: 1400px) 700px, 50vw"
           className="object-cover object-center"

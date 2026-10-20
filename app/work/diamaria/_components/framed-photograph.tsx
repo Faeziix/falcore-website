@@ -46,7 +46,7 @@ export function FramedPhotograph({
         fill
         sizes={sizes}
         quality={PHOTOGRAPH_QUALITY}
-        priority={isPriority}
+        preload={isPriority}
         className={cn("object-cover", imageClassName)}
       />
     </div>

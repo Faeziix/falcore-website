@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { CONTACT_EMAIL } from "@/lib/site-config";
 import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
 
-const PRIVACY_DESCRIPTION = "Falcore privacy policy: how I collect, use and protect your data.";
+const PRIVACY_DESCRIPTION =
+  "Falcore privacy policy: what I collect when you book a call or email me, how I use it, and how to ask me to delete it.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",

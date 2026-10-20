@@ -27,7 +27,7 @@ export function CaseStudyIndexList() {
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 quality={90}
-                priority={caseStudyPosition < 2}
+                preload={caseStudyPosition < 2}
                 className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-[1.03]"
               />
             </div>

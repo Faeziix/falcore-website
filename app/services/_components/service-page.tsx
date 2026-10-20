@@ -1,12 +1,13 @@
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
 import FAQ from "@/components/faq";
+import { WhatHappensNext } from "@/components/process/what-happens-next";
 import type { Service } from "@/lib/data/services";
 import { OtherServices } from "./other-services";
 import { ServiceExamples } from "./service-examples";
 import { ServiceHero } from "./service-hero";
 import { ServiceInclusions } from "./service-inclusions";
-import { ServiceProcess } from "./service-process";
-import { ServiceStructuredData } from "./service-structured-data";
+import { JsonLd } from "@/lib/structured-data/json-ld";
+import { serviceStructuredDataNodes } from "../_lib/service-structured-data";
 
 export default function ServicePage({ service }: { service: Service }) {
   return (
@@ -18,11 +19,11 @@ export default function ServicePage({ service }: { service: Service }) {
       {service.showsWebsiteShowcase && <BrowserShowcaseSection spacing="followsSection" />}
       <div className="page-container">
         <ServiceExamples service={service} />
-        <ServiceProcess />
+        <WhatHappensNext />
         <OtherServices currentService={service} />
       </div>
       <FAQ items={service.faqs} />
-      <ServiceStructuredData service={service} />
+      <JsonLd nodes={serviceStructuredDataNodes(service)} />
     </>
   );
 }

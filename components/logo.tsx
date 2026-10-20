@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type LogoVariant = "full" | "icon";
 type LogoSize = "sm" | "md" | "lg";
@@ -21,10 +22,10 @@ export default function Logo({
   const s = sizes[size];
 
   return (
-    <a href="/" className={`flex items-center gap-0 ${className}`}>
+    <Link href="/" className={`flex items-center gap-0 ${className}`}>
       <Image
         src="/logo-transparent.png"
-        alt="Falcore"
+        alt={variant === "full" ? "" : "Falcore"}
         width={s.icon}
         height={s.icon}
         className="shrink-0"
@@ -36,6 +37,6 @@ export default function Logo({
           FALCORE
         </span>
       )}
-    </a>
+    </Link>
   );
 }

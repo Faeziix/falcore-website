@@ -7,10 +7,11 @@ import { BookCallButton } from "@/components/book-call-button";
 import { HeroHeadline } from "./hero-headline";
 
 const supportingContentDelaySeconds = 0.55;
+const entranceStartOpacity = 0.1;
 
 export function HeroSection() {
   const riseIn = (delay: number) => ({
-    initial: { opacity: 0, y: 24 },
+    initial: { opacity: entranceStartOpacity, y: 24 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] as const },
   });
@@ -46,8 +47,8 @@ export function HeroSection() {
             </div>
 
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Based in the UAE, working with US businesses. You talk directly
-              to the person who builds it.
+              Based in Dubai, working with businesses in the UAE and US. You
+              talk directly to the person who builds it.
             </p>
           </div>
         </motion.div>

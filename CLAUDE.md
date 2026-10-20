@@ -10,7 +10,8 @@
 ## Architecture Decisions
 - Homepage sections live in `app/_components/`, with data in `app/_lib/`. Service-page parts live in `app/services/_components/`. Shared primitives (`Button`, `TextLink`, `SectionHeading`, `ViewfinderFrame`) are CVA/shadcn-style in `components/ui/`. Service illustrations are animated Clerk/Linear-style object scenes in `components/service-scenes/` (see `docs/service-scenes.md`); the blueprint sheets and video loops are retired.
 - Service pages are one dynamic route, `app/services/[slug]/page.tsx`, driven by `lib/data/services.ts` (lead, inclusions, real examples, FAQs); `/services` is the index. Sections shared by the homepage and service pages (`components/process/`, `components/services/`, `FAQ`) live in `components/`. Order and rules: `docs/components.md` and `docs/ui-conventions.md` → Service pages.
-- The root layout's JSON-LD is site-wide only. Page-specific schema (WebPage, breadcrumbs, FAQPage) belongs to its page, so no page carries two FAQPage blocks.
+- The root layout's JSON-LD is site-wide only (Organization and the founder Person). Page-specific schema (WebPage, breadcrumbs, FAQPage, Service, Article) belongs to its page, built with the typed helpers in `lib/structured-data/` and rendered with `JsonLd`. Each entity has one `@id`; pages reference it instead of repeating it. Map in `docs/seo.md`.
+- `lib/indexable-pages.ts` is the one list of indexable pages; the sitemap and `/llms.txt` (a route, not a static file) both read it. Every page has real `publishedOn`/`updatedOn` dates.
 - The site header is `SiteNavigation` (`components/site-navigation/`), used on every page. Its rules are in `docs/ui-conventions.md` → Navigation.
 - Dark-only token system: `--palette-*` primitives map to semantic tokens (`docs/design-tokens.md`).
 - The hero background is a custom WebGL2 shader (`components/ui/interactive-dithering/`), not `@paper-design/shaders-react`, because paper's shaders can't take pointer input. See `docs/interactions.md`.
@@ -22,6 +23,9 @@
 - Follow `docs/ui-conventions.md` for layout, type, colour roles and motion.
 - Every booking CTA reads "Book a consultation call" (the user's wording, 2026-10-19), not "Book a free call". Change it in `BookCallButton` only, and render every booking button through that component.
 - Read `docs/` before changing anything, and update it afterwards.
+- (2026-10-20) The site targets **both the UAE and the US** from one English site: no country or city landing pages (doorway risk), no hreflang. Copy, titles and structured data say "based in Dubai, working with clients in the UAE and US". SEO rules live in `docs/seo.md`.
+- (2026-10-20) The user works fully remote, so no Google Business Profile (Google suspends online-only businesses).
+- (2026-10-20) The articles section is `/blog` (the user's choice over "Notes"). Only the infrastructure is built; the user writes the posts. Never draft or publish a post without being asked.
 - Colours come from tokens in `app/globals.css`, including shader colours, which are read with `readCssColorToken()`.
 
 ## Learnings & Corrections
@@ -88,6 +92,11 @@
 - ❌ (2026-10-20) Link previews showed "Image failed to load": the root metadata pointed at `/og-image.png`, which never existed, and pages that set `openGraph` dropped the image because Next merges metadata shallowly → ✅ Share cards live in `public/og/` and every page sets them through `buildSocialShareMetadata` (`docs/share-cards.md`). The title template doesn't reach `og:title`, so pass the full "… | Falcore" title. After changing metadata, curl the rendered page and check `og:image` returns 200.
 - ❌ (2026-10-20) Fully AI-rendered share cards redrew the falcon without its blue eye, and their copy couldn't be edited → ✅ Share cards are HTML (`scripts/share-cards/share-cards.html`) with the real logo file and site fonts over AI-generated text-free background plates, exported by `bun run share-cards`. Never let AI draw the logo or the copy in brand assets. Composite the real logo over AI backgrounds.
 - ✅ (2026-10-20) The main domain is **www.falcoretech.com** (the user's choice). Every absolute URL comes from `SITE_URL` in `lib/site-config.ts`; never hardcode the domain. Canonicals belong to each page (the homepage sets `/` in `app/page.tsx`), never to the root layout, or every page without its own canonical claims to be the homepage (that happened to `/privacy`).
+- ❌ (2026-10-20) The hero intro and service-page leads faded in from `opacity: 0`, so Chrome recorded LCP only after the fade: 7.6 s lab LCP on mobile → ✅ Entrances start at `--entrance-start-opacity` (0.1). Never start the LCP element fully transparent.
+- ❌ (2026-10-20) Sitemap `lastModified: new Date()` on every URL, so Google ignores the dates → ✅ Real `ContentDates` per page, bumped only for real content changes.
+- ✅ (2026-10-20) `experimental.inlineCss` was measured and left off (faster first paint, but +55 KB compressed HTML per page and navigation). Details in `docs/seo.md`.
+- ❌ `pkill -f "<pattern>"` inside a Bash call killed that same shell, because the pattern matched its own command line → ✅ Stop a server by the PID from `ss -ltnp | grep :<port>`.
+- ❌ A scratch copy with a symlinked `node_modules` panics Turbopack ("points out of the filesystem root") → ✅ Use `next dev --webpack` with the symlink, or `bun install` in the scratch copy (under a second) for a real Turbopack build.
 
 ## Component Registry
 See `docs/components.md`.
