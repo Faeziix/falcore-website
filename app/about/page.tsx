@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import type { Metadata } from "next";
 import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+import { SITE_URL } from "@/lib/site-config";
 
 const ABOUT_DESCRIPTION =
   "Meet Faez Ansari, the founder of Falcore — a developer and systems builder based in the UAE, helping US businesses with web design, custom apps, and automation.";
@@ -216,13 +217,13 @@ export default function AboutPage() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://falcoretech.com",
+                  item: SITE_URL,
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "About",
-                  item: "https://falcoretech.com/about",
+                  item: `${SITE_URL}/about`,
                 },
               ],
             }),

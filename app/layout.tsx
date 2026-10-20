@@ -3,6 +3,7 @@ import { Instrument_Sans, Oxanium, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import SchemaMarkup from "@/components/schema-markup";
 import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+import { SITE_URL } from "@/lib/site-config";
 
 const oxanium = Oxanium({
   variable: "--font-oxanium",
@@ -23,16 +24,13 @@ const SITE_DESCRIPTION =
   "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a consultation call.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://falcoretech.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default:
       "Falcore | Web Design, Custom Apps & AI for US Businesses",
     template: "%s | Falcore",
   },
   description: SITE_DESCRIPTION,
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,

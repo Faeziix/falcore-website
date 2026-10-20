@@ -87,6 +87,7 @@
 
 - ❌ (2026-10-20) Link previews showed "Image failed to load": the root metadata pointed at `/og-image.png`, which never existed, and pages that set `openGraph` dropped the image because Next merges metadata shallowly → ✅ Share cards live in `public/og/` and every page sets them through `buildSocialShareMetadata` (`docs/share-cards.md`). The title template doesn't reach `og:title`, so pass the full "… | Falcore" title. After changing metadata, curl the rendered page and check `og:image` returns 200.
 - ❌ (2026-10-20) Fully AI-rendered share cards redrew the falcon without its blue eye, and their copy couldn't be edited → ✅ Share cards are HTML (`scripts/share-cards/share-cards.html`) with the real logo file and site fonts over AI-generated text-free background plates, exported by `bun run share-cards`. Never let AI draw the logo or the copy in brand assets. Composite the real logo over AI backgrounds.
+- ✅ (2026-10-20) The main domain is **www.falcoretech.com** (the user's choice). Every absolute URL comes from `SITE_URL` in `lib/site-config.ts`; never hardcode the domain. Canonicals belong to each page (the homepage sets `/` in `app/page.tsx`), never to the root layout, or every page without its own canonical claims to be the homepage (that happened to `/privacy`).
 
 ## Component Registry
 See `docs/components.md`.

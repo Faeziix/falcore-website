@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SiteNavigation } from "@/components/site-navigation";
 import ClientLogoSection from "@/components/ClientLogoSection";
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
@@ -10,6 +11,10 @@ import { HeroSection } from "./_components/hero/hero-section";
 import { ServicesSection } from "@/components/services/services-section";
 import { LaunchpadSection } from "./_components/launchpad/launchpad-section";
 import { ProcessSection } from "@/components/process/process-section";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

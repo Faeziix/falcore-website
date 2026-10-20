@@ -3,6 +3,7 @@ import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
 import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+import { SITE_URL } from "@/lib/site-config";
 
 const CONTACT_DESCRIPTION =
   "Get in touch with Falcore. Book a consultation call to discuss your website, custom app, or automation project. Serving businesses across the United States.";
@@ -189,13 +190,13 @@ export default function ContactPage() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://falcoretech.com",
+                  item: SITE_URL,
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Contact",
-                  item: "https://falcoretech.com/contact",
+                  item: `${SITE_URL}/contact`,
                 },
               ],
             }),

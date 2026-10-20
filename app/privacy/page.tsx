@@ -1,11 +1,21 @@
 import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
+import { CONTACT_EMAIL } from "@/lib/site-config";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+
+const PRIVACY_DESCRIPTION = "Falcore privacy policy: how I collect, use and protect your data.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description:
-    "Falcore privacy policy — how we collect, use, and protect your data.",
+  description: PRIVACY_DESCRIPTION,
+  alternates: { canonical: "/privacy" },
+  ...buildSocialShareMetadata({
+    title: "Privacy Policy | Falcore",
+    description: PRIVACY_DESCRIPTION,
+    path: "/privacy",
+    image: generatedShareCard("default", "Falcore: the technical arm your business is missing"),
+  }),
 };
 
 export default function PrivacyPage() {
@@ -18,30 +28,30 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <p className="text-muted-foreground text-sm mb-12">
-            Last updated: April 3, 2026
+            Last updated: October 20, 2026
           </p>
 
           <div className="space-y-8 text-muted-foreground text-base leading-relaxed">
             <section>
               <h2 className="text-xl font-medium text-foreground mb-3">
-                Information We Collect
+                Information I Collect
               </h2>
               <p>
-                When you book a call through our scheduling tool (Calendly), we
+                When you book a call through my scheduling tool (Calendly), I
                 collect your name, email address, and any information you
-                provide in the booking form. We do not collect personal data
-                through our website beyond what you voluntarily submit.
+                provide in the booking form. I do not collect personal data
+                through this website beyond what you voluntarily submit.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-medium text-foreground mb-3">
-                How We Use Your Information
+                How I Use Your Information
               </h2>
               <p>
-                We use the information you provide solely to communicate with
-                you about our services, respond to your inquiries, and deliver
-                the work you hire us for. We do not sell, rent, or share your
+                I use the information you provide solely to communicate with
+                you about my services, respond to your inquiries, and deliver
+                the work you hire me for. I do not sell, rent, or share your
                 personal information with third parties.
               </p>
             </section>
@@ -51,7 +61,7 @@ export default function PrivacyPage() {
                 Third-Party Services
               </h2>
               <p>
-                Our website is hosted on Vercel. Scheduling is handled through
+                This website is hosted on Vercel. Scheduling is handled through
                 Calendly. These services may collect anonymous usage data in
                 accordance with their own privacy policies.
               </p>
@@ -62,9 +72,9 @@ export default function PrivacyPage() {
                 Cookies
               </h2>
               <p>
-                Our website does not use tracking cookies or analytics tools
+                This website does not use tracking cookies or analytics tools
                 that collect personal data. Essential cookies may be used by
-                our hosting provider for performance and security purposes.
+                the hosting provider for performance and security purposes.
               </p>
             </section>
 
@@ -73,9 +83,9 @@ export default function PrivacyPage() {
                 Data Retention
               </h2>
               <p>
-                We retain your contact information for as long as necessary to
-                provide our services or as required by law. You can request
-                deletion of your data at any time by contacting us.
+                I keep your contact information for as long as necessary to
+                provide my services or as required by law. You can ask me to
+                delete your data at any time.
               </p>
             </section>
 
@@ -84,13 +94,13 @@ export default function PrivacyPage() {
                 Contact
               </h2>
               <p>
-                If you have any questions about this privacy policy, contact us
+                If you have any questions about this privacy policy, email me
                 at{" "}
                 <a
-                  href="mailto:contact@falcoretech.com"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="text-accent hover:text-accent/80 transition-colors"
                 >
-                  contact@falcoretech.com
+                  {CONTACT_EMAIL}
                 </a>
                 .
               </p>

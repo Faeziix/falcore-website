@@ -1,4 +1,4 @@
-export const SITE_URL = "https://falcoretech.com";
+export const SITE_URL = "https://www.falcoretech.com";
 
 export const BOOKING_URL = "https://calendly.com/amirfaezansari/30min";
 

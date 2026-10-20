@@ -1,44 +1,43 @@
 import type { MetadataRoute } from "next";
 import { SERVICES } from "@/lib/data/services";
 import { CASE_STUDIES, CASE_STUDY_INDEX_PATH, caseStudyPath } from "@/app/work/_lib/case-study-index";
-
-const SITE_ORIGIN = "https://falcoretech.com";
+import { SITE_URL } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   return [
     {
-      url: "https://falcoretech.com",
+      url: SITE_URL,
       lastModified: now,
     },
     {
-      url: "https://falcoretech.com/about",
+      url: `${SITE_URL}/about`,
       lastModified: now,
     },
     {
-      url: "https://falcoretech.com/contact",
+      url: `${SITE_URL}/contact`,
       lastModified: now,
     },
     {
-      url: `${SITE_ORIGIN}/services`,
+      url: `${SITE_URL}/services`,
       lastModified: now,
     },
     ...SERVICES.map((service) => ({
-      url: `${SITE_ORIGIN}/services/${service.slug}`,
+      url: `${SITE_URL}/services/${service.slug}`,
       lastModified: now,
     })),
     {
-      url: `${SITE_ORIGIN}${CASE_STUDY_INDEX_PATH}`,
+      url: `${SITE_URL}${CASE_STUDY_INDEX_PATH}`,
       lastModified: now,
     },
     ...CASE_STUDIES.map((caseStudy) => ({
-      url: `${SITE_ORIGIN}${caseStudyPath(caseStudy.slug)}`,
+      url: `${SITE_URL}${caseStudyPath(caseStudy.slug)}`,
       lastModified: now,
     })),
     {
-      url: "https://falcoretech.com/privacy",
-      lastModified: new Date("2026-04-03"),
+      url: `${SITE_URL}/privacy`,
+      lastModified: new Date("2026-10-20"),
     },
   ];
 }
