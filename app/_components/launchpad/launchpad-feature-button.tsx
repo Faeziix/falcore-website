@@ -1,12 +1,15 @@
 import { cn } from "@/lib/utils";
+import { revealOrder } from "@/components/scroll-reveal/reveal-order";
 import type { LaunchpadFeature } from "@/app/_lib/launchpad-showcase";
 
 export function LaunchpadFeatureButton({
   feature,
   isActive,
   onSelect,
+  revealStep,
 }: {
   feature: LaunchpadFeature;
+  revealStep: number;
   isActive: boolean;
   onSelect: (featureId: string) => void;
 }) {
@@ -16,8 +19,9 @@ export function LaunchpadFeatureButton({
       aria-pressed={isActive}
       aria-controls="launchpad-screenshot"
       onClick={() => onSelect(feature.id)}
+      style={revealOrder(revealStep)}
       className={cn(
-        "group flex flex-col items-start justify-start border-l-2 py-1 pl-5 text-left transition-colors duration-500",
+        "reveal-rise group flex flex-col items-start justify-start border-l-2 py-1 pl-5 text-left transition-colors duration-500",
         isActive ? "border-primary" : "border-border"
       )}
     >

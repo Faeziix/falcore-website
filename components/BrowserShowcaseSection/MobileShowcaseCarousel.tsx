@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/carousel";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
+import { revealOrder } from "@/components/scroll-reveal/reveal-order";
 import {
   SHOWCASE_SECTION_INTRO,
   SHOWCASE_SECTION_TITLE,
@@ -50,13 +51,14 @@ function useCardFocusTween() {
   useCarouselScrollTween(applyCardFocus);
 }
 
-function ProjectCard({ website }: { website: ShowcaseWebsite }) {
+function ProjectCard({ website, revealStep }: { website: ShowcaseWebsite; revealStep: number }) {
   return (
     <Link
       href={website.caseStudyPath}
       aria-label={`Read the ${website.title} case study`}
       draggable={false}
-      className="group flex flex-1 flex-col border border-border bg-card transition-colors duration-300 hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:border-border-strong"
+      style={revealOrder(revealStep)}
+      className="reveal-rise group flex flex-1 flex-col border border-border bg-card transition-colors duration-300 hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground active:border-border-strong"
     >
       <div className="relative aspect-9/16 overflow-clip border-b border-border bg-muted/10">
         <div data-parallax-layer className="absolute inset-y-0 -left-[5%] w-[110%] will-change-transform">
@@ -102,7 +104,7 @@ function ShowcaseSlides({ websites }: { websites: ShowcaseWebsite[] }) {
             cardIndex === 0 ? "opacity-100" : "opacity-45"
           )}
         >
-          <ProjectCard website={website} />
+          <ProjectCard website={website} revealStep={cardIndex * 2} />
         </CarouselItem>
       ))}
     </CarouselContent>
@@ -130,7 +132,9 @@ export default function MobileShowcaseCarousel({
         className="mx-(--page-gutter) mb-10"
       />
       <CarouselSelectedSlideAnnouncement slideLabels={websiteTitles} />
-      <ShowcaseSlides websites={websites} />
+      <div data-reveal>
+        <ShowcaseSlides websites={websites} />
+      </div>
       <CarouselPositionSegments slideLabels={websiteTitles} className="px-(--page-gutter)" />
     </Carousel>
   );

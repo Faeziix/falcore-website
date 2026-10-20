@@ -15,6 +15,7 @@ import { HeroSection } from "./_components/hero/hero-section";
 import { ServicesSection } from "@/components/services/services-section";
 import { LaunchpadSection } from "./_components/launchpad/launchpad-section";
 import { ProcessSection } from "@/components/process/process-section";
+import { ScrollRevealScope } from "@/components/scroll-reveal/scroll-reveal-scope";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -33,18 +34,20 @@ export default function Home() {
   return (
     <>
       <SiteNavigation />
-      <main>
-        <HeroSection />
-        <ClientLogoSection />
-        <ServicesSection />
-        <BrowserShowcaseSection />
-        <LaunchpadSection />
-        <ProcessSection />
-        <AboutFounder />
-        <FAQ items={FAQ_ITEMS} />
-      </main>
+      <ScrollRevealScope>
+        <main>
+          <HeroSection />
+          <ClientLogoSection />
+          <ServicesSection />
+          <BrowserShowcaseSection />
+          <LaunchpadSection />
+          <ProcessSection />
+          <AboutFounder />
+          <FAQ items={FAQ_ITEMS} />
+        </main>
+        <PageClosing />
+      </ScrollRevealScope>
       <JsonLd nodes={homepageStructuredData} />
-      <PageClosing />
     </>
   );
 }

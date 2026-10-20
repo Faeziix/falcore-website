@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/carousel";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { LAUNCHPAD_SHOWCASE } from "@/app/_lib/launchpad-showcase";
+import { revealOrder } from "@/components/scroll-reveal/reveal-order";
 import { LaunchpadFeatureSlide } from "./launchpad-feature-slide";
 
 export function LaunchpadMobileCarousel({
@@ -39,17 +40,21 @@ export function LaunchpadMobileCarousel({
         className="mb-10"
       />
       <CarouselSelectedSlideAnnouncement slideLabels={featureNames} />
-      <CarouselContent viewportClassName="-mx-(--page-gutter) px-(--page-gutter)">
-        {features.map((feature, featureIndex) => (
-          <CarouselItem
-            key={feature.id}
-            aria-label={`${featureIndex + 1} of ${features.length}: ${feature.name}`}
-            className="basis-[min(86%,30rem)]"
-          >
-            <LaunchpadFeatureSlide feature={feature} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+      <div data-reveal>
+        <CarouselContent viewportClassName="-mx-(--page-gutter) px-(--page-gutter)">
+          {features.map((feature, featureIndex) => (
+            <CarouselItem
+              key={feature.id}
+              aria-label={`${featureIndex + 1} of ${features.length}: ${feature.name}`}
+              className="basis-[min(86%,30rem)]"
+            >
+              <div className="reveal-rise h-full" style={revealOrder(featureIndex * 2)}>
+                <LaunchpadFeatureSlide feature={feature} />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </div>
       <CarouselPositionSegments slideLabels={featureNames} />
     </Carousel>
   );

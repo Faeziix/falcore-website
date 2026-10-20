@@ -8,7 +8,7 @@ import BrowserTabBar from "./BrowserTabBar";
 import BrowserAddressBar from "./BrowserAddressBar";
 import BrowserContent from "./BrowserContent";
 import MobileShowcaseCarousel from "./MobileShowcaseCarousel";
-import ScrollReveal from "@/components/scroll-reveal";
+import { AcquireFrame } from "@/components/scroll-reveal/acquire-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TextLink } from "@/components/ui/text-link";
 
@@ -48,36 +48,36 @@ const BrowserShowcaseClient = ({ websites }: BrowserShowcaseClientProps) => {
 
       {/* Desktop: heading + tabbed browser mockup */}
       <div className="hidden md:block">
-        <ScrollReveal>
-          <SectionHeading
-            title={SHOWCASE_SECTION_TITLE}
-            intro={SHOWCASE_SECTION_INTRO}
-            actions={
-              <TextLink asChild tone="foreground" underline="always">
-                <Link href={activeWebsite.caseStudyPath}>
-                  Read the {activeWebsite.title} case study
-                </Link>
-              </TextLink>
-            }
-            className="mb-14"
-          />
-        </ScrollReveal>
+        <SectionHeading
+          title={SHOWCASE_SECTION_TITLE}
+          intro={SHOWCASE_SECTION_INTRO}
+          actions={
+            <TextLink asChild tone="foreground" underline="always">
+              <Link href={activeWebsite.caseStudyPath}>
+                Read the {activeWebsite.title} case study
+              </Link>
+            </TextLink>
+          }
+          className="mb-14"
+        />
 
-        <ScrollReveal delay={0.15}>
-          <BrowserChrome>
-            <BrowserTabBar
-              websites={websites}
-              activeIndex={activeIndex}
-              onTabChange={handleTabChange}
-            />
-            <BrowserAddressBar url={activeWebsite.externalUrl} />
-            <BrowserContent
-              websites={websites}
-              activeIndex={activeIndex}
-              onContentClick={handleVisit}
-            />
-          </BrowserChrome>
-        </ScrollReveal>
+        <div data-reveal>
+          <AcquireFrame>
+            <BrowserChrome>
+              <BrowserTabBar
+                websites={websites}
+                activeIndex={activeIndex}
+                onTabChange={handleTabChange}
+              />
+              <BrowserAddressBar url={activeWebsite.externalUrl} />
+              <BrowserContent
+                websites={websites}
+                activeIndex={activeIndex}
+                onContentClick={handleVisit}
+              />
+            </BrowserChrome>
+          </AcquireFrame>
+        </div>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export function LaunchpadSection() {
             intro={LAUNCHPAD_SHOWCASE.summary}
             actions={<CaseStudyLink />}
           />
-          <div className="mt-20">
+          <div data-reveal className="mt-20">
             <LaunchpadShowcase />
           </div>
         </div>

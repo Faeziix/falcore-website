@@ -1,0 +1,175 @@
+:root {
+  --reveal-stagger: 70ms;
+  --reveal-rise-duration: 1s;
+  --reveal-rise-travel: 28px;
+  --reveal-mask-duration: 1.1s;
+  --reveal-plot-duration: 1.3s;
+  --reveal-lock-duration: 1.6s;
+  --reveal-lock-travel: 28px;
+  --reveal-film-duration: 1.4s;
+  --reveal-settle-duration: 1.8s;
+  --reveal-settle-scale: 1.12;
+  --reveal-parallax-scale: 1.14;
+  --reveal-parallax-travel: 5%;
+}
+
+@keyframes reveal-plot-run {
+  from {
+    translate: -100% 0;
+  }
+}
+
+@keyframes reveal-signal-tip {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    translate: 0 var(--reveal-rise-travel);
+  }
+}
+
+@keyframes reveal-mask-rise {
+  from {
+    translate: 0 var(--reveal-mask-travel, 105%);
+  }
+}
+
+@keyframes reveal-lock-on {
+  0% {
+    opacity: 0;
+    translate: calc(var(--corner-x) * var(--reveal-lock-travel)) calc(var(--corner-y) * var(--reveal-lock-travel));
+  }
+  40% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  70% {
+    opacity: 1;
+    translate: 0 0;
+  }
+  100% {
+    opacity: 0;
+    translate: 0 0;
+  }
+}
+
+@keyframes reveal-film-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes reveal-film-settle {
+  from {
+    scale: var(--reveal-settle-scale);
+  }
+}
+
+@keyframes reveal-aperture {
+  from {
+    clip-path: inset(0 50% 0 50%);
+  }
+}
+
+@keyframes reveal-parallax-drift {
+  from {
+    translate: 0 calc(var(--reveal-parallax-travel) * -1);
+  }
+  to {
+    translate: 0 var(--reveal-parallax-travel);
+  }
+}
+
+.reveal-signal-tip,
+.reveal-lock-corner {
+  opacity: 0;
+}
+
+[data-reveal-scope] .reveal-plot-run {
+  animation: reveal-plot-run var(--reveal-plot-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-signal-tip {
+  animation: reveal-signal-tip var(--reveal-plot-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-rise {
+  animation: reveal-rise var(--reveal-rise-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-mask-rise {
+  animation: reveal-mask-rise var(--reveal-mask-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-lock-corner {
+  animation: reveal-lock-on var(--reveal-lock-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-film-wipe {
+  animation: reveal-film-wipe var(--reveal-film-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-film-settle {
+  animation: reveal-film-settle var(--reveal-settle-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope] .reveal-aperture {
+  animation: reveal-aperture var(--reveal-film-duration) var(--ease-out-expo) backwards;
+}
+
+[data-reveal-scope]
+  :is(
+    .reveal-plot-run,
+    .reveal-signal-tip,
+    .reveal-rise,
+    .reveal-mask-rise,
+    .reveal-lock-corner,
+    .reveal-film-wipe,
+    .reveal-film-settle,
+    .reveal-aperture
+  ) {
+  animation-delay: calc(var(--reveal-order, 0) * var(--reveal-stagger));
+  animation-play-state: paused;
+}
+
+[data-reveal-scope]
+  [data-revealed]
+  :is(
+    .reveal-plot-run,
+    .reveal-signal-tip,
+    .reveal-rise,
+    .reveal-mask-rise,
+    .reveal-lock-corner,
+    .reveal-film-wipe,
+    .reveal-film-settle,
+    .reveal-aperture
+  ),
+[data-reveal-scope]
+  [data-revealed]:is(
+    .reveal-plot-run,
+    .reveal-signal-tip,
+    .reveal-rise,
+    .reveal-mask-rise,
+    .reveal-lock-corner,
+    .reveal-film-wipe,
+    .reveal-film-settle,
+    .reveal-aperture
+  ) {
+  animation-play-state: running;
+}
+
+@supports (animation-timeline: view()) {
+  [data-reveal-scope] .reveal-parallax {
+    scale: var(--reveal-parallax-scale);
+    animation: reveal-parallax-drift linear both;
+    animation-timeline: view();
+  }
+}

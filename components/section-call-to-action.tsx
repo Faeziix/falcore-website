@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { BookCallButton } from "@/components/book-call-button";
+import { revealOrder } from "@/components/scroll-reveal/reveal-order";
 
 export function SectionCallToAction({
   prompt,
@@ -10,13 +11,18 @@ export function SectionCallToAction({
 }) {
   return (
     <div
+      data-reveal
       className={cn(
         "flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-10",
         className
       )}
     >
-      <p className="max-w-xl text-balance text-lead text-foreground">{prompt}</p>
-      <BookCallButton width="fullOnMobile" />
+      <p className="reveal-rise max-w-xl text-balance text-lead text-foreground" style={revealOrder(0)}>
+        {prompt}
+      </p>
+      <div className="reveal-rise" style={revealOrder(2)}>
+        <BookCallButton width="fullOnMobile" />
+      </div>
     </div>
   );
 }

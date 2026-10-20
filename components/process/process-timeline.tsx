@@ -21,6 +21,7 @@ export function ProcessTimeline() {
   return (
     <ol
       ref={timelineReference}
+      data-reveal
       className="relative grid gap-10 pl-8 md:grid-cols-5 md:gap-6 md:pt-10 md:pl-0"
     >
       <div

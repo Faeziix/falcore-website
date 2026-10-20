@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./scroll-reveal.css";
 
 :root {
   --palette-hangar: #15171a;

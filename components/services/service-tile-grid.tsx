@@ -2,6 +2,8 @@ import { cn } from "@/lib/utils";
 import type { Service } from "@/lib/data/services";
 import { ServiceTile, type ServiceTileHeadingLevel } from "./service-tile";
 
+const secondColumnRevealLagInSteps = 2;
+
 export function ServiceTileGrid({
   services,
   className,
@@ -18,8 +20,13 @@ export function ServiceTileGrid({
         className
       )}
     >
-      {services.map((service) => (
-        <ServiceTile key={service.slug} service={service} headingLevel={tileHeadingLevel} />
+      {services.map((service, serviceIndex) => (
+        <ServiceTile
+          key={service.slug}
+          service={service}
+          headingLevel={tileHeadingLevel}
+          revealOffset={(serviceIndex % 2) * secondColumnRevealLagInSteps}
+        />
       ))}
     </div>
   );

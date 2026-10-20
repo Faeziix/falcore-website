@@ -1,4 +1,5 @@
 import type { Article } from "schema-dts";
+import { serviceId } from "@/lib/structured-data/entity-ids";
 import { breadcrumbNode } from "@/lib/structured-data/page-nodes";
 import { founderAuthor, organizationReference } from "@/lib/structured-data/site-entities";
 import { absoluteUrl } from "@/lib/site-config";
@@ -26,7 +27,7 @@ function caseStudyArticleNode(caseStudy: CaseStudySummary): Article {
     author: founderAuthor,
     publisher: organizationReference,
     inLanguage: "en",
-    about: caseStudy.serviceSlugs.map((slug) => ({ "@id": `${absoluteUrl(`/services/${slug}`)}#service` })),
+    about: caseStudy.serviceSlugs.map((slug) => ({ "@id": serviceId(slug) })),
     keywords: caseStudy.services.join(", "),
     articleSection: "Case studies",
   };

@@ -4,6 +4,7 @@ import { useTransform, type MotionValue } from "motion/react";
 import type { ProcessStep } from "@/lib/data/process-steps";
 import { ProcessStepIcon } from "./process-step-icons";
 import { useIconRedraw } from "./use-icon-redraw";
+import { revealOrder } from "@/components/scroll-reveal/reveal-order";
 
 const SIGNAL_DRAW_SPAN = 0.12;
 
@@ -35,7 +36,7 @@ export function ProcessTimelineStep({
   );
 
   return (
-    <li className="relative">
+    <li className="reveal-rise relative" style={revealOrder(stepIndex * 2)}>
       <span
         aria-hidden
         className="absolute top-1.5 -left-8 size-[7px] border border-foreground/60 bg-background md:-top-10 md:left-0"

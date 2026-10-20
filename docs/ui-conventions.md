@@ -54,7 +54,14 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 
 ## Motion
 
-- One orchestrated load moment: the hero headline lines rise from a mask, then the intro and buttons. Sections do not fade up on scroll.
+- One orchestrated load moment: the hero headline lines rise from a mask, then the intro and buttons.
+- Homepage scroll reveals ("acquisition", the user's request on 2026-10-20, replacing the old "sections don't animate on scroll" rule): every section after the hero is picked up as it enters view, like a falcon's eye or a camera locking on. Never a generic fade-up.
+  - Plot: the section's top hairline draws in from the left (`PlotterHairline`), with a short red signal tip at the pen point that fades once the line lands. FAQ rows plot their own lines, without the tip.
+  - Type: heading words rise from a mask one after another (`MaskedWords`, 70ms apart); single-line titles rise as one line (`MaskedLine`). Intros, actions and buttons rise in after the title (`reveal-rise`).
+  - Media: four brackets close in from outside the frame, lock on and dissolve, then the film wipes in from the left and settles from 1.12 scale (`AcquireFrame`). Used on the service scenes, the desktop browser showcase, the operating-system screenshot and the founder portrait.
+  - Lists: feature buttons, process steps and carousel cards rise one after another; the logo marquee opens like an aperture from the centre.
+  - Scroll-linked: only the founder portrait drifts inside its frame (`reveal-parallax`, CSS `animation-timeline: view()`, no JS; browsers without scroll timelines show it still).
+  - How it works: `ScrollRevealScope` (homepage only, wraps `main` and `PageClosing`) runs one IntersectionObserver that sets `data-revealed` on each `[data-reveal]` trigger, once. Every animation is a CSS keyframe in `app/scroll-reveal.css`, paused until its trigger is revealed and staggered by `--reveal-order` × `--reveal-stagger`. Outside the scope (service pages, `/services`) the same shared components render static. Don't nest `[data-reveal]` triggers: an outer trigger would start the inner one's animations early.
 - Motion answers a person's action or shows a state change: the Launchpad screenshot crossfading when a feature is picked, the process line drawing, each process icon's red signal stroke drawing in as the line reaches it, and a process icon redrawing itself on hover.
 - Service pages. Text never fades in on scroll; only hairlines draw.
   - Load: "All services" rises in, the title's words rise from a mask (70ms apart), then the intro and the booking button. The `ViewfinderFrame` corners close in from 14px outside the frame and lock on, then the film wipes in from the left while settling from 1.12 scale (`reveal="onLoad"`). It's all CSS keyframes (`animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe`, `animate-film-settle`), so the hero stays a server component. The delays live in `heroRevealDelayMilliseconds` and the `--viewfinder-*` variables.
