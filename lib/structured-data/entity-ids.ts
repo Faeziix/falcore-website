@@ -11,3 +11,7 @@ export function webPageId(path: string) {
 export function breadcrumbId(path: string) {
   return `${absoluteUrl(path)}#breadcrumb`;
 }
+
+export function serviceId(serviceSlug: string) {
+  return `${absoluteUrl(`/services/${serviceSlug}`)}#service`;
+}
