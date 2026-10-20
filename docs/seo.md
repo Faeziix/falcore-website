@@ -101,14 +101,14 @@ AI search needs no special schema (Google says so explicitly), but consistent en
 ### Measuring AI visibility
 
 - **Google Search Console → Generative AI performance** (all sites since 2026-08-31): AI Overviews and AI Mode impressions by page and country.
-- **Bing Webmaster Tools → AI Performance**: citations in Copilot and Bing AI answers. Needs the Bing import (off-site checklist).
+- **Bing Webmaster Tools → AI Performance**: citations in Copilot and Bing AI answers.
 - **Vercel Web Analytics → Referrers**: visits from `chatgpt.com`, `perplexity.ai`, `copilot.microsoft.com`, `claude.ai` and `gemini.google.com`. ChatGPT also adds `utm_source=chatgpt.com`, but UTM reports need Web Analytics Plus.
 - **A monthly prompt panel**: ask ChatGPT, Perplexity, Claude, Copilot and Google AI Mode the same questions (e.g. "who builds AI automation for small businesses in Dubai", "n8n and CRM automation developer UAE", "custom web app developer for a US small business", "bilingual English Arabic website developer Dubai") and note whether Falcore is named or linked. Run each a few times; answers vary from run to run.
 
 ### Index state (2026-10-20)
 
 - Brave (Claude's likely source) had only the homepage, under an older title, plus spam pages from the domain's previous owner. The Wayback Machine shows about 280 URLs from a 2017–2018 WordPress news site and later spam on `falcoretech.com`. They all return 404 now, so engines drop them as they recrawl; nothing else to do.
-- A quick Bing `site:` search returned no pages, so Copilot (and the part of ChatGPT that uses Bing) can't cite the site yet. The Bing Webmaster Tools import is the most valuable open step.
+- A quick Bing `site:` search returned no pages. The site was added to Bing Webmaster Tools the same day (off-site checklist 3b), so pages should appear as Bing crawls the sitemap.
 
 ## Speed (Core Web Vitals)
 
@@ -135,7 +135,8 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 
 1. ✅ (2026-10-20) Vercel → Domains (personal account `faeziixs-projects`, project `falcore-website`): the apex → www redirect is a permanent 308. `falcore-website.vercel.app` also redirects 308 to www, so no copy of the site is served on another host.
 2. ✅ (2026-10-20) Cloudflare DNS: the `falcoretech.com` A record and the `www` CNAME are "DNS only" (grey cloud), set with the `cf` CLI. Cloudflare's proxy in front of Vercel blocked Vercel's DDoS and bot protection and injected the render-blocking Email Obfuscation script; Vercel already holds Let's Encrypt certificates for both names. Keep these records unproxied. Cloudflare stays the DNS host only (mail, Vercel verification and Google records live there too).
-3. ✅ (2026-10-20) Google Search Console: the `falcoretech.com` Domain property was already verified (the owner's Falcore Google account, not admin@xmaagency.com). Submitted `https://www.falcoretech.com/sitemap.xml` and requested indexing for home, the four service pages, About and Work. Before the fix, Google's crawl had marked www as "alternate page with proper canonical" because the old canonical pointed at the apex. Two 2018 sitemaps from the domain's previous owner are still listed there; they can be removed. Still open: import the site into Bing Webmaster Tools (sign in with the same Google account, then "Import from Google Search Console").
+3. ✅ (2026-10-20) Google Search Console: the `falcoretech.com` Domain property was already verified (the owner's Falcore Google account, not admin@xmaagency.com). Submitted `https://www.falcoretech.com/sitemap.xml` and requested indexing for home, the four service pages, About and Work. Before the fix, Google's crawl had marked www as "alternate page with proper canonical" because the old canonical pointed at the apex. Two 2018 sitemaps from the domain's previous owner are still listed there; they can be removed.
+3b. ✅ (2026-10-20) Bing Webmaster Tools: `https://www.falcoretech.com/` added and verified with the XML file method (`public/BingSiteAuth.xml`; keep it, deleting it unverifies the site), and `sitemap.xml` submitted. This feeds Copilot and Bing AI answers, and its AI Performance report shows their citations of the site.
 4. Profiles with the same name (Falcore), URL (www) and city (Dubai): LinkedIn company page, the founder's LinkedIn and Upwork (linking to the site), Clutch, GoodFirms. These are also the `sameAs` links in the structured data; add new ones to `SOCIAL_PROFILES`. Mentions of Falcore on other sites (client-site credits, directories, podcasts, genuine answers on Reddit or Indie Hackers) correlate with AI visibility more than anything left on the site. Never seed fake mentions or reviews.
 5. After each deploy that changes structured data: Rich Results Test and the Schema Markup Validator on home, one service page and one case study. Last run 2026-10-20: the validator found no errors on home, about, contact, /services, a service page and a case study, and IndexNow accepted all 17 URLs (HTTP 202).
 6. Check Search Console's Generative AI performance report and Bing's AI Performance report monthly, and run the prompt panel (see "Measuring AI visibility").
