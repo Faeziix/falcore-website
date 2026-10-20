@@ -35,13 +35,15 @@ Files:
 | `create-smoke-flow-pass.ts` | Ping-pong flow textures and framebuffers, flow step |
 | `create-dithering-renderer.ts` | Display program, resize, runs the flow step and then draws |
 | `create-pointer-field.ts` | Window pointer listeners, smoothing, stroke segment and velocity in canvas UV. Scrolling doesn't emit smoke |
-| `use-interactive-dithering.ts` | Wires everything, runs the rAF loop, pauses offscreen (IntersectionObserver) |
+| `use-interactive-dithering.ts` | Waits until the canvas is first visible and the browser is idle, then wires everything, runs the rAF loop and pauses offscreen (IntersectionObserver). On a software renderer it draws one still frame instead |
 | `index.tsx` | `<InteractiveDitheringBackground preset? />` |
 
 Rules:
 - Pointer state lives in plain objects updated per frame, not React state.
 - The canvas wrapper is `pointer-events-none`. Listeners sit on `window`, so smoke follows the cursor over the hero text and panels.
 - Device pixel ratio is capped at 2.
+- Performance (2026-10-20): the WebGL context isn't created at mount. It's created once the canvas first enters the viewport and `requestIdleCallback` fires (2 s timeout), so it never competes with hydration or LCP, and the footer wave costs nothing until someone scrolls to it. The canvas fades in (`data-dithering-ready`) on its first frame.
+- If the renderer is software (SwiftShader, llvmpipe, Microsoft Basic Render: `isSoftwareRendered` in `create-dithering-renderer.ts`), it draws a single still frame and never loops. Software WebGL reads every frame back on the main thread during compositor commit. On PageSpeed Insights, whose test machines have no GPU, that caused 15 s of Total Blocking Time on mobile. `failIfMajorPerformanceCaveat` doesn't catch SwiftShader-on-Vulkan, so the renderer name is checked instead.
 
 Verify visually with a Playwright script on the real GPU. Use `--use-gl=angle --use-angle=vulkan --enable-features=Vulkan --ignore-gpu-blocklist` for screenshots: with `--use-angle=gl` the contexts run but screenshots show grey placeholder canvases. SwiftShader's low frame rate makes fluid effects look wrong. Sweep the mouse, then screenshot during the sweep and at +400ms and +1200ms.
 
@@ -49,4 +51,6 @@ Verify visually with a Playwright script on the real GPU. Use `--use-gl=angle --
 
 - Motion (`framer-motion`) for React animation. Shared variants are in `lib/motion.ts`.
 - Animate only transform and opacity on DOM elements.
+- `<html>` is `position: relative` so Motion's `useScroll({ target })` (the process timeline) can measure against the page scroll container. Keep it non-static.
+- Smooth scrolling is set on `<html>` in `globals.css`; the root layout carries `data-scroll-behavior="smooth"` so Next turns it off during route changes. Keep the two together.
 - Never add ambient glow for decoration.

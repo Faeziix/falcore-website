@@ -19,6 +19,7 @@ export interface DitheringFrame {
 }
 
 export interface DitheringRenderer {
+  isSoftwareRendered: boolean;
   resize: (cssWidth: number, cssHeight: number) => void;
   render: (frame: DitheringFrame) => void;
   dispose: () => void;
@@ -35,6 +36,16 @@ const ditheringUniformNames = [
 ] as const;
 
 const flowTextureUnit = 0;
+
+const softwareRendererPattern = /swiftshader|llvmpipe|softpipe|software|basic render/i;
+
+function readRendererName(gl: WebGL2RenderingContext) {
+  const debugRendererInfo = gl.getExtension("WEBGL_debug_renderer_info");
+  const rendererName = debugRendererInfo
+    ? gl.getParameter(debugRendererInfo.UNMASKED_RENDERER_WEBGL)
+    : gl.getParameter(gl.RENDERER);
+  return typeof rendererName === "string" ? rendererName : "";
+}
 
 export function createDitheringRenderer(
   canvas: HTMLCanvasElement,
@@ -86,5 +97,5 @@ export function createDitheringRenderer(
     gl!.deleteProgram(program);
   }
 
-  return { resize, render, dispose };
+  return { isSoftwareRendered: softwareRendererPattern.test(readRendererName(gl)), resize, render, dispose };
 }

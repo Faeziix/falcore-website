@@ -95,6 +95,7 @@
 - ❌ (2026-10-20) The hero intro and service-page leads faded in from `opacity: 0`, so Chrome recorded LCP only after the fade: 7.6 s lab LCP on mobile → ✅ Entrances start at `--entrance-start-opacity` (0.1). Never start the LCP element fully transparent.
 - ❌ (2026-10-20) Sitemap `lastModified: new Date()` on every URL, so Google ignores the dates → ✅ Real `ContentDates` per page, bumped only for real content changes.
 - ✅ (2026-10-20) `experimental.inlineCss` was measured and left off (faster first paint, but +55 KB compressed HTML per page and navigation). Details in `docs/seo.md`.
+- ❌ (2026-10-20) PageSpeed mobile scored 37 with 15 s TBT: the hero shader started at mount and looped at 60 fps, and PSI's GPU-less machines run WebGL in SwiftShader, which blocks the main thread on every compositor commit → ✅ Shaders start only once visible and idle, and draw one still frame on software renderers (`docs/interactions.md`). To diagnose TBT, A/B on the live URL with Playwright `addInitScript` (e.g. stub `getContext("webgl2")`) and compare long tasks under 4× CPU throttle; `bunx lighthouse --save-assets` traces show the cost as `Commit`.
 - ❌ `pkill -f "<pattern>"` inside a Bash call killed that same shell, because the pattern matched its own command line → ✅ Stop a server by the PID from `ss -ltnp | grep :<port>`.
 - ❌ A scratch copy with a symlinked `node_modules` panics Turbopack ("points out of the filesystem root") → ✅ Use `next dev --webpack` with the symlink, or `bun install` in the scratch copy (under a second) for a real Turbopack build.
 

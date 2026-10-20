@@ -14,5 +14,8 @@ export function InteractiveDitheringBackground({ preset = "hero", className }: I
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useInteractiveDithering(canvasRef, preset);
 
-  return <canvas ref={canvasRef} aria-hidden className={cn("block size-full", className)} />;
+  return <canvas ref={canvasRef} aria-hidden className={cn(
+        "block size-full opacity-0 transition-opacity duration-1000 ease-out-expo data-dithering-ready:opacity-100",
+        className,
+      )} />;
 }
