@@ -102,7 +102,7 @@ Light-weight or bold client faces override the shared `font-medium` titles with 
 
 ## Thumbnails
 
-Each study's `coverImage` (used on `/work`, the next-study card, the nav's Work preview and the Open Graph image) is `public/work/<slug>/thumbnail-v<n>.webp`: the real site on a laptop (and phone) in a scene built from the client's own materials and palette, 2752×1536, q90. They are generated with the `gen` CLI (Nano Banana 2.1) from the real desktop and mobile captures, then picked by eye for screen fidelity:
+Each study's `coverImage` (used on `/work`, the next-study card, the nav's Work preview, and cropped to `public/og/work/<slug>.jpg` for the Open Graph image, see `share-cards.md`) is `public/work/<slug>/thumbnail-v<n>.webp`: the real site on a laptop (and phone) in a scene built from the client's own materials and palette, 2752×1536, q90. They are generated with the `gen` CLI (Nano Banana 2.1) from the real desktop and mobile captures, then picked by eye for screen fidelity:
 
 ```bash
 gen -m banana21 -s 2K -a 16:9 -n 2 -o <dir>/v1 -i public/showcase/<id>-vN-desktop.jpg -i public/showcase/<id>-vN-mobile.jpg "<scene prompt>"

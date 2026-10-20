@@ -9,7 +9,7 @@ The cards are HTML, so the copy can be changed without regenerating anything:
 - `scripts/share-cards/share-cards.html`: every card, 1200×630, with the copy in the `SHARE_CARDS` array at the bottom. Open it in a browser to preview them all. The text is also editable in place for a quick look, but those edits aren't saved.
 - `scripts/share-cards/backgrounds/<name>.jpg`: one AI-generated background plate per card (2400×1260, no text). A card uses the plate with its own name unless it sets `background: "<other plate>"`.
 - `scripts/share-cards/falcon-mark.png`: the real logo mark (blue eye included), trimmed from `public/logo-transparent.png`. Never let AI redraw the logo: it drops the eye.
-- `bun run share-cards` (`scripts/render-share-cards.ts`) screenshots each card with Playwright into `public/og/<name>.png` (lossless master, about 650 KB) and `public/og/<name>.jpg` (q90, about 130 KB). The site serves the JPG, since some apps (WhatsApp) skip large preview images. `bun run share-cards about contact` re-renders just those cards.
+- `bun run share-cards` (`scripts/render-share-cards.ts`) screenshots each card with Playwright into `public/og/<name>.png` (lossless master, about 650 KB) and `public/og/<name>.jpg` (q90, about 130 KB). The site serves the JPG, since some apps (WhatsApp) skip large preview images. `bun run share-cards about contact` re-renders just those cards. `work/<slug>` names re-crop a case-study cover.
 
 Card fields: `name` (output file and default plate), `eyebrow` (optional small uppercase label), `headline`, `headlineSize` (`"large"` for the homepage card, otherwise regular), `background` (optional plate name). Hyphenated words never break across lines.
 
@@ -26,7 +26,7 @@ Layout: falcon mark and the FALCORE wordmark (Oxanium 700) top left; the eyebrow
 | `about` | `/about` | About / You talk directly to the person who builds it. |
 | `contact` | `/contact` | Contact / Let's talk about your project. |
 
-Case studies use their own `coverImage` (`/work/<slug>/thumbnail-*.webp`) as the share image.
+Case studies share a 1200×630 JPG cropped from their own `coverImage`: `public/og/work/<slug>.jpg`, made by the same `bun run share-cards` command with `sharp` (centre crop). The covers themselves are 2752px WebP, too big for some apps' previews. After changing a cover, re-run `bun run share-cards work/<slug>` and bump the revision.
 
 ## Code
 
