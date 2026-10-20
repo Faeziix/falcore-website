@@ -4,6 +4,8 @@ export const BOOKING_URL = "https://calendly.com/amirfaezansari/30min";
 
 export const CONTACT_EMAIL = "contact@falcoretech.com";
 
+export const LEADSY_PIXEL_ID = "7VqVCQaJDcNf2Yve";
+
 export const BUSINESS_NAME = "Falcore";
 
 export const FOUNDER_NAME = "Faez Ansari";

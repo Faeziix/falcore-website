@@ -1,7 +1,8 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Instrument_Sans, Oxanium, Source_Code_Pro } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
+import { VisitorIdentificationTag } from "@/components/visitor-identification-tag";
 import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
 import {
   BUSINESS_NAME,
@@ -77,13 +78,8 @@ export default function RootLayout({
       </head>
       <body>
         {children}
-        <Script
-          id="vtag-ai-js"
-          src="https://r2.leadsy.ai/tag.js"
-          strategy="afterInteractive"
-          data-pid="7VqVCQaJDcNf2Yve"
-          data-version="062024"
-        />
+        <Analytics />
+        <VisitorIdentificationTag />
       </body>
     </html>
   );
