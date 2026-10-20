@@ -3,12 +3,21 @@ import { SiteNavigation } from "@/components/site-navigation";
 import { PageClosing } from "@/components/page-closing";
 import { CaseStudyIndexList } from "./_components/case-study-index-list";
 import { CASE_STUDY_INDEX_PATH } from "./_lib/case-study-index";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+
+const WORK_INDEX_DESCRIPTION =
+  "Case studies: the websites, apps and AI systems I designed and built for businesses in Dubai and beyond.";
 
 export const metadata: Metadata = {
   title: "Work",
-  description:
-    "Case studies: the websites, apps and AI systems I designed and built for businesses in Dubai and beyond.",
+  description: WORK_INDEX_DESCRIPTION,
   alternates: { canonical: CASE_STUDY_INDEX_PATH },
+  ...buildSocialShareMetadata({
+    title: "Work | Falcore",
+    description: WORK_INDEX_DESCRIPTION,
+    path: CASE_STUDY_INDEX_PATH,
+    image: generatedShareCard("work", "Falcore case studies: websites, apps and AI systems, and what they changed"),
+  }),
 };
 
 export default function WorkIndexPage() {

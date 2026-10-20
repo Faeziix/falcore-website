@@ -4,14 +4,23 @@ import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import { FeatureCard } from "@/components/ui/grid-feature-cards";
 import type { Metadata } from "next";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+
+const ABOUT_DESCRIPTION =
+  "Meet Faez Ansari, the founder of Falcore — a developer and systems builder based in the UAE, helping US businesses with web design, custom apps, and automation.";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description:
-    "Meet Faez Ansari, the founder of Falcore — a developer and systems builder based in the UAE, helping US businesses with web design, custom apps, and automation.",
+  description: ABOUT_DESCRIPTION,
   alternates: {
     canonical: "/about",
   },
+  ...buildSocialShareMetadata({
+    title: "About Falcore",
+    description: ABOUT_DESCRIPTION,
+    path: "/about",
+    image: generatedShareCard("about", "About Falcore: you talk directly to the person who builds it"),
+  }),
 };
 
 const values = [

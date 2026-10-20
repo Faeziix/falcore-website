@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteNavigation } from "@/components/site-navigation";
 import { PageClosing } from "@/components/page-closing";
 import { SERVICES, getServiceBySlug } from "@/lib/data/services";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
 import ServicePage from "../_components/service-page";
 
 type ServiceRouteProps = {
@@ -26,11 +27,12 @@ export async function generateMetadata({ params }: ServiceRouteProps): Promise<M
     title: service.metaTitle,
     description: service.metaDescription,
     alternates: { canonical: canonicalPath },
-    openGraph: {
-      title: service.metaTitle,
+    ...buildSocialShareMetadata({
+      title: `${service.metaTitle} | Falcore`,
       description: service.metaDescription,
-      url: canonicalPath,
-    },
+      path: canonicalPath,
+      image: generatedShareCard(service.slug, `${service.title} by Falcore`),
+    }),
   };
 }
 

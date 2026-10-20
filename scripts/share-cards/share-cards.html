@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Falcore share cards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400&family=Oxanium:wght@500;700&family=Source+Code+Pro:wght@500&display=block"
+    />
+    <style>
+      :root {
+        --palette-hangar: #15171a;
+        --palette-tarmac: #0f1012;
+        --palette-rivet: #33383f;
+        --palette-haze: #8d949c;
+        --palette-mist: #b9bec4;
+        --palette-contrail: #e8eaec;
+        --palette-falcon: #e53935;
+
+        --font-display: "Oxanium", system-ui, sans-serif;
+        --font-sans: "Instrument Sans", system-ui, sans-serif;
+        --font-mono: "Source Code Pro", ui-monospace, monospace;
+
+        --share-card-width: 1200px;
+        --share-card-height: 630px;
+        --share-card-gutter: 64px;
+        --share-card-background: #1e1b21;
+        --share-card-wordmark: var(--palette-contrail);
+        --share-card-eyebrow: color-mix(in srgb, var(--palette-falcon) 72%, var(--palette-hangar));
+        --share-card-headline: var(--palette-contrail);
+        --share-card-footer: var(--palette-haze);
+
+        --preview-page-background: var(--palette-tarmac);
+        --preview-label: var(--palette-mist);
+        --preview-card-outline: var(--palette-rivet);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        background: var(--preview-page-background);
+        color: var(--preview-label);
+        font-family: var(--font-sans);
+        padding: 48px 24px;
+      }
+
+      .preview-intro {
+        max-width: var(--share-card-width);
+        margin: 0 auto 40px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .preview-intro code {
+        font-family: var(--font-mono);
+        font-size: 13px;
+      }
+
+      .preview-list {
+        display: grid;
+        gap: 56px;
+        justify-content: center;
+      }
+
+      .preview-label {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+
+      .share-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: var(--share-card-width);
+        height: var(--share-card-height);
+        padding: 48px var(--share-card-gutter) 44px;
+        background-color: var(--share-card-background);
+        background-size: cover;
+        background-position: center;
+        outline: 1px solid var(--preview-card-outline);
+      }
+
+      .share-card-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .share-card-brand img {
+        height: 46px;
+        width: auto;
+      }
+
+      .share-card-wordmark {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 38px;
+        letter-spacing: -0.03em;
+        color: var(--share-card-wordmark);
+      }
+
+      .share-card-message {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-width: 800px;
+      }
+
+      .share-card-eyebrow {
+        font-family: var(--font-mono);
+        font-weight: 500;
+        font-size: 22px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--share-card-eyebrow);
+        margin-bottom: 14px;
+      }
+
+      .share-card-headline {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: 70px;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        color: var(--share-card-headline);
+        text-wrap: balance;
+      }
+
+      .share-card[data-headline-size="large"] .share-card-headline {
+        font-size: 88px;
+        line-height: 1.04;
+      }
+
+      .share-card-footer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .share-card-footer,
+      .share-card-service-list {
+        display: flex;
+        gap: 14px;
+        font-family: var(--font-sans);
+        font-size: 22px;
+        color: var(--share-card-footer);
+      }
+
+      [contenteditable]:focus {
+        outline: 1px dashed var(--palette-haze);
+        outline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="preview-intro">
+      Share cards for falcoretech.com. Edit the copy in <code>SHARE_CARDS</code> at the bottom of this file, then run
+      <code>bun scripts/render-share-cards.ts</code> to export them to <code>public/og/</code>. Text is also editable in
+      place here for a quick look, but those edits are not saved.
+    </p>
+    <main class="preview-list" id="share-card-list"></main>
+
+    <template id="share-card-template">
+      <section>
+        <p class="preview-label"></p>
+        <article class="share-card" data-share-card>
+          <header class="share-card-brand">
+            <img src="falcon-mark.png" alt="" />
+            <span class="share-card-wordmark">FALCORE</span>
+          </header>
+          <div class="share-card-message">
+            <p class="share-card-eyebrow" contenteditable="plaintext-only"></p>
+            <h1 class="share-card-headline" contenteditable="plaintext-only"></h1>
+          </div>
+          <footer class="share-card-footer">
+            <span class="share-card-service-list">
+              <span>Websites</span><span aria-hidden="true">·</span><span>Custom apps</span
+              ><span aria-hidden="true">·</span><span>AI systems</span>
+            </span>
+            <span>falcoretech.com</span>
+          </footer>
+        </article>
+      </section>
+    </template>
+
+    <script>
+      const SHARE_CARDS = [
+        {
+          name: "default",
+          headline: "The technical arm your business is missing.",
+          headlineSize: "large",
+        },
+        {
+          name: "services",
+          eyebrow: "Services",
+          headline: "Four ways I take manual work off your team.",
+        },
+        {
+          name: "ai-enablement",
+          eyebrow: "AI Enablement",
+          headline: "AI that does real work in your business.",
+        },
+        {
+          name: "systems-automations",
+          eyebrow: "Systems & Automations",
+          headline: "Your tools connected, so leads and follow-ups move on their own.",
+        },
+        {
+          name: "web-design",
+          eyebrow: "Web Design",
+          headline: "A site built to turn visits into enquiries.",
+        },
+        {
+          name: "custom-web-applications",
+          eyebrow: "Custom Web Applications",
+          headline: "Software built around how your business runs.",
+        },
+        {
+          name: "work",
+          eyebrow: "Work",
+          headline: "Websites, apps and AI systems, and what they changed.",
+        },
+        {
+          name: "about",
+          eyebrow: "About",
+          headline: "You talk directly to the person who builds it.",
+        },
+        {
+          name: "contact",
+          eyebrow: "Contact",
+          headline: "Let's talk about your project.",
+        },
+      ];
+
+      function keepHyphenatedWordsTogether(text) {
+        return text.split(/(\S+-\S+)/).map((textPart) => {
+          if (!textPart.includes("-")) return textPart;
+          const unbreakableWord = document.createElement("span");
+          unbreakableWord.style.whiteSpace = "nowrap";
+          unbreakableWord.textContent = textPart;
+          return unbreakableWord;
+        });
+      }
+
+      function renderShareCard({ name, eyebrow, headline, headlineSize = "regular", background = name }) {
+        const cardSection = document.getElementById("share-card-template").content.cloneNode(true);
+        const card = cardSection.querySelector("[data-share-card]");
+        card.dataset.shareCard = name;
+        card.dataset.headlineSize = headlineSize;
+        card.style.backgroundImage = `url("backgrounds/${background}.jpg")`;
+        cardSection.querySelector(".preview-label").textContent = `${name} · public/og/${name}.png`;
+        const eyebrowElement = cardSection.querySelector(".share-card-eyebrow");
+        if (eyebrow) eyebrowElement.textContent = eyebrow;
+        else eyebrowElement.remove();
+        cardSection.querySelector(".share-card-headline").append(...keepHyphenatedWordsTogether(headline));
+        return cardSection;
+      }
+
+      const shareCardList = document.getElementById("share-card-list");
+      SHARE_CARDS.forEach((shareCard) => shareCardList.append(renderShareCard(shareCard)));
+    </script>
+  </body>
+</html>

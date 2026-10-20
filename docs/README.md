@@ -10,6 +10,7 @@ Read these before changing the site, and update them after.
 - [ui-conventions.md](ui-conventions.md) — layout, typography, colour roles, motion and code organisation
 - [service-scenes.md](service-scenes.md) — the animated Clerk/Linear-style object scenes that illustrate each service (current)
 - [service-loops.md](service-loops.md) — the retired Kling video loops, kept for reference
+- [share-cards.md](share-cards.md) — Open Graph / Twitter images: the HTML template in `scripts/share-cards/`, `bun run share-cards`, and the `buildSocialShareMetadata` helper
 - [launchpad-screenshots.md](launchpad-screenshots.md) — how the XMA Launchpad screenshots were captured with demo data, and how to re-shoot them
 
 ## Testing on a phone

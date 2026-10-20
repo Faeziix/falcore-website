@@ -85,5 +85,8 @@
 - ❌ (2026-10-19) The site-wide JSON-LD carried three 5-star reviews from invented people, and the unused `testimonials.tsx` held the same quotes → ✅ Removed both. Never publish reviews, testimonials or ratings unless they come from real clients who agreed to be quoted. The homepage FAQ is now in "I" voice with no invented timelines.
 - ❌ The shared dev server (port 3001) sometimes stops picking up edits and keeps serving old HTML, even after a real Edit-tool change → ✅ Don't restart it. Verify server components in isolation by rendering them with `renderToStaticMarkup` in a small Bun script, and tell the user the dev server needs a manual restart to show the change.
 
+- ❌ (2026-10-20) Link previews showed "Image failed to load": the root metadata pointed at `/og-image.png`, which never existed, and pages that set `openGraph` dropped the image because Next merges metadata shallowly → ✅ Share cards live in `public/og/` and every page sets them through `buildSocialShareMetadata` (`docs/share-cards.md`). The title template doesn't reach `og:title`, so pass the full "… | Falcore" title. After changing metadata, curl the rendered page and check `og:image` returns 200.
+- ❌ (2026-10-20) Fully AI-rendered share cards redrew the falcon without its blue eye, and their copy couldn't be edited → ✅ Share cards are HTML (`scripts/share-cards/share-cards.html`) with the real logo file and site fonts over AI-generated text-free background plates, exported by `bun run share-cards`. Never let AI draw the logo or the copy in brand assets. Composite the real logo over AI backgrounds.
+
 ## Component Registry
 See `docs/components.md`.

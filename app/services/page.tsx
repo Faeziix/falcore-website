@@ -3,12 +3,21 @@ import { SiteNavigation } from "@/components/site-navigation";
 import { PageClosing } from "@/components/page-closing";
 import { ServiceTileGrid } from "@/components/services/service-tile-grid";
 import { SERVICES } from "@/lib/data/services";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+
+const SERVICES_INDEX_DESCRIPTION =
+  "AI that does real work, automations that connect your tools, websites that win enquiries and custom apps built around how your business runs.";
 
 export const metadata: Metadata = {
   title: "Services",
-  description:
-    "AI that does real work, automations that connect your tools, websites that win enquiries and custom apps built around how your business runs.",
+  description: SERVICES_INDEX_DESCRIPTION,
   alternates: { canonical: "/services" },
+  ...buildSocialShareMetadata({
+    title: "Services | Falcore",
+    description: SERVICES_INDEX_DESCRIPTION,
+    path: "/services",
+    image: generatedShareCard("services", "Falcore services: four ways I take manual work off your team"),
+  }),
 };
 
 export default function ServicesIndexPage() {

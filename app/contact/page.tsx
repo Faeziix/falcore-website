@@ -2,14 +2,23 @@ import { ArrowRight, Mail, MapPin, Clock } from "lucide-react";
 import { SiteNavigation } from "@/components/site-navigation";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
+
+const CONTACT_DESCRIPTION =
+  "Get in touch with Falcore. Book a consultation call to discuss your website, custom app, or automation project. Serving businesses across the United States.";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description:
-    "Get in touch with Falcore. Book a free 30-minute call to discuss your website, custom app, or automation project. Serving businesses across the United States.",
+  description: CONTACT_DESCRIPTION,
   alternates: {
     canonical: "/contact",
   },
+  ...buildSocialShareMetadata({
+    title: "Contact Falcore",
+    description: CONTACT_DESCRIPTION,
+    path: "/contact",
+    image: generatedShareCard("contact", "Contact Falcore: let's talk about your project"),
+  }),
 };
 
 export default function ContactPage() {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans, Oxanium, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 import SchemaMarkup from "@/components/schema-markup";
+import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share-metadata";
 
 const oxanium = Oxanium({
   variable: "--font-oxanium",
@@ -18,6 +19,9 @@ const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
 });
 
+const SITE_DESCRIPTION =
+  "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a consultation call.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://falcoretech.com"),
   title: {
@@ -25,8 +29,7 @@ export const metadata: Metadata = {
       "Falcore | Web Design, Custom Apps & AI for US Businesses",
     template: "%s | Falcore",
   },
-  description:
-    "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
+  description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/",
   },
@@ -34,29 +37,12 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  openGraph: {
+  ...buildSocialShareMetadata({
     title: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
-    description:
-      "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
-    url: "https://falcoretech.com",
-    siteName: "Falcore",
-    type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Falcore — Web Design, Custom Apps & AI Systems",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Falcore | Web Design, Custom Apps & AI Systems for US Businesses",
-    description:
-      "Falcore builds websites, custom web applications, AI-powered workflows, and business automations for US companies. Book a free 15-minute call.",
-    images: ["/og-image.png"],
-  },
+    description: SITE_DESCRIPTION,
+    path: "/",
+    image: generatedShareCard("default", "Falcore: the technical arm your business is missing"),
+  }),
   manifest: "/manifest.webmanifest",
 };
 
