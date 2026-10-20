@@ -18,5 +18,9 @@ const SERVICE_SCENES: Record<string, ServiceSceneComponent> = {
 export function ServiceScene({ slug, label, isActive = true }: { slug: string; label: string; isActive?: boolean }) {
   const Scene = SERVICE_SCENES[slug];
   if (!Scene) return null;
-  return <Scene label={label} isActive={isActive} />;
+  return (
+    <div data-nosnippet className="contents">
+      <Scene label={label} isActive={isActive} />
+    </div>
+  );
 }

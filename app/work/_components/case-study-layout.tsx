@@ -25,7 +25,7 @@ export function CaseStudyLayout({
       <SiteNavigation surface="solid" />
       <main data-case-study={slug} className={cn("bg-case-paper pt-28 text-case-ink md:pt-32", fontClassName)}>
         <article>{children}</article>
-        {caseStudy ? <CaseStudyServiceLinks serviceSlugs={caseStudy.serviceSlugs} /> : null}
+        {caseStudy ? <CaseStudyServiceLinks serviceSlugs={caseStudy.serviceSlugs} updatedOn={caseStudy.dates.updatedOn} /> : null}
         <NextCaseStudy currentSlug={slug} />
       </main>
       <PageClosing />

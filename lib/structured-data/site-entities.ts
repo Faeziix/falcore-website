@@ -10,7 +10,8 @@ import {
   SOCIAL_PROFILES,
   absoluteUrl,
 } from "@/lib/site-config";
-import { FOUNDER_ID, ORGANIZATION_ID, WEBSITE_ID } from "./entity-ids";
+import { SERVICES } from "@/lib/data/services";
+import { FOUNDER_ID, ORGANIZATION_ID, WEBSITE_ID, serviceId } from "./entity-ids";
 
 const SITE_DESCRIPTION =
   "Falcore builds websites, custom web applications, business automations and AI systems for businesses in the UAE and US.";
@@ -68,6 +69,14 @@ export const organizationNode: Organization = {
   address: businessAddress,
   areaServed: SERVED_COUNTRIES,
   knowsAbout: AREAS_OF_EXPERTISE,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Services",
+    itemListElement: SERVICES.map((service) => ({
+      "@type": "Offer",
+      itemOffered: { "@id": serviceId(service.slug) },
+    })),
+  },
   founder: founderReference,
   contactPoint: {
     "@type": "ContactPoint",

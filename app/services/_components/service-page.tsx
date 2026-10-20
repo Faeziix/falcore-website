@@ -1,5 +1,6 @@
 import BrowserShowcaseSection from "@/components/BrowserShowcaseSection";
 import FAQ from "@/components/faq";
+import { ContentUpdatedNote } from "@/components/content-updated-note";
 import { WhatHappensNext } from "@/components/process/what-happens-next";
 import type { Service } from "@/lib/data/services";
 import { OtherServices } from "./other-services";
@@ -23,6 +24,9 @@ export default function ServicePage({ service }: { service: Service }) {
         <OtherServices currentService={service} />
       </div>
       <FAQ items={service.faqs} />
+      <div className="page-container pb-16 md:pb-20">
+        <ContentUpdatedNote updatedOn={service.dates.updatedOn} />
+      </div>
       <JsonLd nodes={serviceStructuredDataNodes(service)} />
     </>
   );

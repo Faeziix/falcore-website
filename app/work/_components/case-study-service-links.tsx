@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContentUpdatedNote } from "@/components/content-updated-note";
 import { textLinkVariants } from "@/components/ui/text-link";
 import { getServiceBySlug, type Service } from "@/lib/data/services";
 
@@ -8,7 +9,7 @@ function servicesFromSlugs(serviceSlugs: string[]) {
     .filter((service): service is Service => Boolean(service));
 }
 
-export function CaseStudyServiceLinks({ serviceSlugs }: { serviceSlugs: string[] }) {
+export function CaseStudyServiceLinks({ serviceSlugs, updatedOn }: { serviceSlugs: string[]; updatedOn: string }) {
   const services = servicesFromSlugs(serviceSlugs);
   if (services.length === 0) return null;
 
@@ -35,6 +36,7 @@ export function CaseStudyServiceLinks({ serviceSlugs }: { serviceSlugs: string[]
               </li>
             ))}
           </ul>
+          <ContentUpdatedNote updatedOn={updatedOn} className="lg:col-span-9 lg:col-start-4" />
         </div>
       </div>
     </section>

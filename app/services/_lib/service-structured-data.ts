@@ -1,6 +1,7 @@
-import type { Service as ServiceNode } from "schema-dts";
+import type { Service as ServiceNode, WebPage } from "schema-dts";
 import type { Service } from "@/lib/data/services";
-import { breadcrumbNode, faqPageNode } from "@/lib/structured-data/page-nodes";
+import { breadcrumbId, serviceId } from "@/lib/structured-data/entity-ids";
+import { breadcrumbNode, faqPageNode, webPageFields } from "@/lib/structured-data/page-nodes";
 import { SERVED_COUNTRIES, organizationReference } from "@/lib/structured-data/site-entities";
 import { absoluteUrl } from "@/lib/site-config";
 
@@ -14,7 +15,7 @@ function serviceNode(service: Service): ServiceNode {
   const pageUrl = absoluteUrl(servicePath(service));
   return {
     "@type": "Service",
-    "@id": `${pageUrl}#service`,
+    "@id": serviceId(service.slug),
     name: service.title,
     serviceType: service.metaTitle,
     description: service.metaDescription,
@@ -29,9 +30,25 @@ function serviceNode(service: Service): ServiceNode {
   };
 }
 
+function servicePageNode(service: Service): WebPage {
+  const path = servicePath(service);
+  return {
+    "@type": "WebPage",
+    ...webPageFields({
+      path,
+      name: `${service.metaTitle} | Falcore`,
+      description: service.metaDescription,
+      dates: service.dates,
+    }),
+    breadcrumb: { "@id": breadcrumbId(path) },
+    mainEntity: { "@id": serviceId(service.slug) },
+  };
+}
+
 export function serviceStructuredDataNodes(service: Service) {
   const path = servicePath(service);
   return [
+    servicePageNode(service),
     serviceNode(service),
     breadcrumbNode(path, [
       { name: "Services", path: SERVICES_INDEX_PATH },

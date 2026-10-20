@@ -10,7 +10,8 @@
 | `ClientLogoSection` | `components/ClientLogoSection/` | Client logo marquee (two rows, original colours). See `portfolio-and-logos.md` |
 | `SiteNavigation` | `components/site-navigation/` | Fixed top bar on every page: Services panel, Work panel (case studies with a cover preview: `work-menu-panel.tsx`, `work-menu-study-link.tsx`, `work-menu-preview.tsx`), active-link tick, mobile sheet. `surface="solid"` on case studies. See `ui-conventions.md` → Navigation |
 | `MagneticButton` | `components/magnetic-button.tsx` | **Legacy**, only used by the unused `hero.tsx`/`cta.tsx`. Don't use in new work |
-| `Footer`, `FAQ`, `AboutFounder` | `components/` | Page chrome and sections. `FAQ` takes `items` (`FrequentlyAskedQuestion[]` from `lib/data/faq.ts`) and an optional `intro`; the homepage passes `FAQ_ITEMS`, service pages pass `service.faqs`. `AboutFounder` ends with a `BookCallButton` under the bio. `Footer` links (Services, Work, Blog once posts exist, About, Contact, the four services from `SERVICES`, email, LinkedIn) and shows `SERVED_MARKETS_SENTENCE`; it has no booking link because it sits under the `WaveCTA` |
+| `ContentUpdatedNote` | `components/content-updated-note.tsx` | "Last updated <date>" in muted small text with a `<time>`. Used under the service-page FAQ and in the case-study service links row; the date must be the page's `dateModified` |
+| `Footer`, `FAQ`, `AboutFounder` | `components/` | Page chrome and sections. `FAQ` takes `items` (`FrequentlyAskedQuestion[]` from `lib/data/faq.ts`) and an optional `intro`; the homepage passes `FAQ_ITEMS`, service pages pass `service.faqs`. Every answer is server-rendered; closed ones are collapsed to height 0 with `inert` and `aria-hidden`, never unmounted, so crawlers that don't run JavaScript still read them. `AboutFounder` ends with a `BookCallButton` under the bio. `Footer` links (Services, Work, Blog once posts exist, About, Contact, the four services from `SERVICES`, email, LinkedIn) and shows `SERVED_MARKETS_SENTENCE`; it has no booking link because it sits under the `WaveCTA` |
 | `JsonLd` | `lib/structured-data/json-ld.tsx` | Renders a list of `schema-dts` nodes as one escaped `@graph` script. Shared builders: `site-entities.ts` (Organization, founder, WebSite, references), `page-nodes.ts` (breadcrumb, WebPage, CollectionPage, FAQPage), `entity-ids.ts`. Page-specific graphs live next to their route in `_lib/`. No review blocks unless real clients agreed to be quoted. Map and rules: `seo.md` |
 | `PlottedRowList` | `components/plotted-row-list.tsx` | Rows of a title and one sentence, with an optional text link, between hairlines that plot in as the list enters view. Used by the service pages' "Built and running" and the About page |
 | `WhatHappensNext` | `components/process/what-happens-next.tsx` | "What happens next" section heading plus the shared `ProcessTimeline` with no CTA. Used by service pages and Contact |
@@ -68,8 +69,9 @@ All four pages come from one route, `app/services/[slug]/page.tsx` (`generateSta
 4. `ServiceExamples`: "Built and running", `PlottedRowList` rows (title, one sentence, an optional "Read the case study" link resolved from `caseStudySlug` on the server), then a `SectionCallToAction`.
 5. `WhatHappensNext`: "What happens next", the shared `ProcessTimeline` with no CTA.
 6. `OtherServices`: the other three tiles.
-7. `FAQ` with `service.faqs`, which leads into `PageClosing`.
-8. `JsonLd` with `serviceStructuredDataNodes(service)` (`app/services/_lib/service-structured-data.ts`): Service (`<page>#service`), BreadcrumbList (Home → Services → service) and FAQPage.
+7. `FAQ` with `service.faqs`.
+8. `ContentUpdatedNote` under the FAQ: "Last updated" from `service.dates.updatedOn`, the same date as the WebPage's `dateModified`. It leads into `PageClosing`.
+9. `JsonLd` with `serviceStructuredDataNodes(service)` (`app/services/_lib/service-structured-data.ts`): WebPage (`mainEntity` → the Service), Service (`<page>#service`), BreadcrumbList (Home → Services → service) and FAQPage.
 
 Sections after the inclusions use bottom padding only (`pb-[var(--section-space)]`), so stacked sections don't get double gaps. "Other services" has none, because the FAQ brings its own top padding.
 
@@ -81,7 +83,7 @@ Shared because the homepage tiles, the service-page hero and the nav services pa
 
 | Component | Path | Purpose |
 |---|---|---|
-| `ServiceScene` | `service-scene.tsx` | Picks the scene by service slug. `isActive` pauses playback |
+| `ServiceScene` | `service-scene.tsx` | Picks the scene by service slug. `isActive` pauses playback. Wraps the scene in a `data-nosnippet` `display: contents` div so Google doesn't quote the made-up interface numbers |
 | `SceneStage` | `scene-stage.tsx` | Stage with FIG label, backdrop and a 640×360-unit plane for children |
 | `SceneObject`, `SceneChip`, `SceneLabel`, `SceneLed`, `SceneBar`, `raisedObjectStyle` | `scene-parts.tsx` | Square raised objects, status chips, mono labels, LEDs and text bars |
 | `SceneLoader` | `scene-loader.tsx` | Square 2×2 loader |

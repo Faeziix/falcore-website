@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ANSWER_ENGINE_CRAWLERS } from "../lib/ai-crawlers";
 import { SITE_URL } from "../lib/site-config";
 
 type Severity = "error" | "warning";
@@ -20,6 +21,8 @@ type PageSnapshot = {
   headingOneCount: number;
   openGraphImage: string | null;
   jsonLdBlocks: string[];
+  robotsDirectives: string[];
+  visibleText: string;
   imagesWithoutAlt: string[];
   internalLinks: Set<string>;
 };
@@ -29,6 +32,7 @@ const SHARED_LASTMOD_MAXIMUM_SHARE = 0.5;
 const HTML_ENTITIES: Record<string, string> = { "&amp;": "&", "&quot;": '"', "&#x27;": "'", "&#39;": "'", "&lt;": "<", "&gt;": ">" };
 const DESCRIPTION_LENGTH_RANGE = { minimum: 70, maximum: 160 };
 const IGNORED_INTERNAL_LINK_PREFIXES = ["/_next/", "/cdn-cgi/"];
+const SNIPPET_LIMITING_DIRECTIVE = /\b(noindex|nosnippet|max-snippet:\s*\d+)\b/i;
 
 const baseUrl = (process.argv[2] ?? SITE_URL).replace(/\/$/, "");
 const canonicalOrigin = new URL(SITE_URL).origin;
@@ -43,7 +47,7 @@ function expectedJsonLdTypesForPath(path: string): string[] {
   if (path === "/about") return ["ProfilePage", "Person", "BreadcrumbList"];
   if (path === "/contact") return ["ContactPage", "BreadcrumbList"];
   if (["/services", "/work", "/blog"].includes(path)) return ["CollectionPage", "BreadcrumbList"];
-  if (path.startsWith("/services/")) return ["Service", "BreadcrumbList"];
+  if (path.startsWith("/services/")) return ["WebPage", "Service", "BreadcrumbList"];
   if (path.startsWith("/work/")) return ["Article", "BreadcrumbList"];
   if (path.startsWith("/blog/")) return ["BlogPosting", "BreadcrumbList"];
   return ["Organization"];
@@ -72,6 +76,15 @@ function decodeHtmlEntities(text: string) {
   return text.replace(/&(amp|quot|#x27|#39|lt|gt);/g, (entity) => HTML_ENTITIES[entity]);
 }
 
+function normaliseWhitespace(text: string) {
+  return text.replace(/\s+/g, " ").trim();
+}
+
+function readableTextOf(html: string) {
+  const withoutHiddenBlocks = html.replace(/<(script|style|svg|template)\b[\s\S]*?<\/\1>/gi, " ");
+  return normaliseWhitespace(decodeHtmlEntities(withoutHiddenBlocks.replace(/<[^>]+>/g, " ")));
+}
+
 function toBaseUrl(absoluteUrl: string) {
   const parsed = new URL(absoluteUrl, canonicalOrigin);
   return `${baseUrl}${parsed.pathname}${parsed.search}`;
@@ -96,6 +109,8 @@ async function snapshotPage(path: string): Promise<PageSnapshot> {
     headingOneCount: 0,
     openGraphImage: null,
     jsonLdBlocks: [],
+    robotsDirectives: [],
+    visibleText: readableTextOf(body),
     imagesWithoutAlt: [],
     internalLinks: new Set(),
   };
@@ -133,6 +148,12 @@ async function snapshotPage(path: string): Promise<PageSnapshot> {
     .on('meta[property="og:image"]', {
       element(element) {
         snapshot.openGraphImage ??= element.getAttribute("content");
+      },
+    })
+    .on('meta[name="robots"], meta[name="googlebot"]', {
+      element(element) {
+        const content = element.getAttribute("content");
+        if (content) snapshot.robotsDirectives.push(content);
       },
     })
     .on('link[rel="canonical"]', {
@@ -235,6 +256,20 @@ function auditStructuredData(snapshot: PageSnapshot) {
     nodesById.set(id, serialised);
     if (!id.startsWith(canonicalOrigin)) report(snapshot.path, "error", `JSON-LD @id ${id} is not on ${canonicalOrigin}`);
   }
+
+  auditAnswersRenderedInHtml(snapshot, nodes);
+}
+
+function auditAnswersRenderedInHtml(snapshot: PageSnapshot, nodes: JsonLdNode[]) {
+  const faqPages = nodes.filter((node) => typesOf(node).includes("FAQPage"));
+  const questions = faqPages.flatMap((faqPage) => (faqPage.mainEntity as JsonLdNode[] | undefined) ?? []);
+  for (const question of questions) {
+    const answerText = (question.acceptedAnswer as JsonLdNode | undefined)?.text;
+    if (typeof answerText !== "string") continue;
+    if (!snapshot.visibleText.includes(normaliseWhitespace(answerText))) {
+      report(snapshot.path, "error", `FAQ answer is in JSON-LD but not in the server HTML: "${question.name}"`);
+    }
+  }
 }
 
 function auditPage(snapshot: PageSnapshot) {
@@ -268,6 +303,10 @@ function auditPage(snapshot: PageSnapshot) {
   if (snapshot.headingOneCount !== 1) report(path, "error", `has ${snapshot.headingOneCount} <h1> elements`);
   if (!snapshot.openGraphImage) report(path, "error", "has no og:image");
   for (const source of snapshot.imagesWithoutAlt) report(path, "error", `image without alt: ${source}`);
+  for (const directives of snapshot.robotsDirectives) {
+    const limitingDirective = directives.match(SNIPPET_LIMITING_DIRECTIVE)?.[0];
+    if (limitingDirective) report(path, "error", `robots meta "${limitingDirective}" keeps the page out of AI Overviews and snippets`);
+  }
 
   auditStructuredData(snapshot);
 }
@@ -306,6 +345,38 @@ async function auditInternalLinks(snapshots: PageSnapshot[], sitemapPaths: Set<s
   }
 }
 
+function disallowedRootUserAgents(robotsText: string) {
+  const blockedAgents = new Set<string>();
+  for (const group of robotsText.split(/\n\s*\n/)) {
+    const agents = [...group.matchAll(/^user-agent:\s*(.+)$/gim)].map((match) => match[1].trim().toLowerCase());
+    if (/^disallow:\s*\/\s*$/im.test(group)) agents.forEach((agent) => blockedAgents.add(agent));
+  }
+  return blockedAgents;
+}
+
+async function auditAnswerEngineAccess() {
+  const { status, body } = await fetchText(`${baseUrl}/robots.txt`);
+  if (status !== 200) {
+    report("/robots.txt", "error", `returned HTTP ${status}`);
+    return;
+  }
+  const blockedAgents = disallowedRootUserAgents(body);
+  const namedAgents = new Set([...body.matchAll(/^user-agent:\s*(.+)$/gim)].map((match) => match[1].trim().toLowerCase()));
+  for (const crawler of ANSWER_ENGINE_CRAWLERS) {
+    const agent = crawler.toLowerCase();
+    const isBlocked = blockedAgents.has(agent) || (!namedAgents.has(agent) && blockedAgents.has("*"));
+    if (isBlocked) report("/robots.txt", "error", `blocks ${crawler}, which removes the site from that engine's answers`);
+  }
+  for (const crawler of ANSWER_ENGINE_CRAWLERS) {
+    const response = await axios.get(`${baseUrl}/`, {
+      headers: { "User-Agent": `Mozilla/5.0 (compatible; ${crawler}/1.0)` },
+      validateStatus: () => true,
+      maxRedirects: 0,
+    });
+    if (response.status !== 200) report("/", "error", `returned HTTP ${response.status} to the ${crawler} user agent`);
+  }
+}
+
 const { locations, lastModifiedDates } = await readSitemapEntries();
 const sitemapPaths = new Set(locations.map((location) => new URL(location).pathname.replace(/(.)\/$/, "$1")));
 
@@ -325,6 +396,7 @@ reportDuplicates(snapshots, "title", (snapshot) => snapshot.title);
 reportDuplicates(snapshots, "meta description", (snapshot) => snapshot.description);
 await auditOpenGraphImages(snapshots);
 await auditInternalLinks(snapshots, sitemapPaths);
+await auditAnswerEngineAccess();
 
 const errors = findings.filter((finding) => finding.severity === "error");
 const warnings = findings.filter((finding) => finding.severity === "warning");

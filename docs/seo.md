@@ -1,6 +1,6 @@
 # SEO
 
-How the site is set up for search engines and AI answer engines, and the rules for keeping it that way. Researched and implemented on 2026-10-20 (sources: Google Search Central, schema.org, web.dev, the Next.js 16 docs in `node_modules/next/dist/docs/`).
+How the site is set up for search engines and AI answer engines (GEO/AEO), and the rules for keeping it that way. Researched and implemented on 2026-10-20 (sources: Google Search Central, schema.org, web.dev, the Next.js 16 docs in `node_modules/next/dist/docs/`).
 
 ## Markets
 
@@ -36,12 +36,12 @@ All JSON-LD goes through `JsonLd` in `lib/structured-data/json-ld.tsx`, which re
 
 | Where | Nodes | Built in |
 |---|---|---|
-| Every page (root layout `<head>`) | `Organization` (`#organization`), `Person` (`#founder`) | `lib/structured-data/site-entities.ts` |
+| Every page (root layout `<head>`) | `Organization` (`#organization`, with `hasOfferCatalog` → the services), `Person` (`#founder`) | `lib/structured-data/site-entities.ts` |
 | Home | `WebSite`, `WebPage`, `FAQPage` | `app/page.tsx` |
 | About | `ProfilePage` → founder, `BreadcrumbList` | `app/about/_lib/about-structured-data.ts` |
 | Contact | `ContactPage`, `BreadcrumbList` | `app/contact/_lib/contact-structured-data.ts` |
 | `/services`, `/work`, `/blog` | `CollectionPage` + `ItemList`, `BreadcrumbList` | each index page / `app/blog/_lib/blog-structured-data.ts` |
-| Service page | `Service` (`<page>#service`), `BreadcrumbList`, `FAQPage` | `app/services/_lib/service-structured-data.ts` |
+| Service page | `WebPage` (`mainEntity` → the Service), `Service` (`<page>#service`), `BreadcrumbList`, `FAQPage` | `app/services/_lib/service-structured-data.ts` |
 | Case study | `Article` (author → `#founder`), `BreadcrumbList` | `app/work/_lib/case-study-structured-data.ts`, rendered by `CaseStudyLayout` |
 | Blog post | `BlogPosting`, `BreadcrumbList` | `app/blog/_lib/blog-structured-data.ts` |
 
@@ -58,11 +58,57 @@ Rules:
 - Bump `updatedOn` only when the main content, structured data or links change meaningfully. Google ignores `lastmod` from sites whose dates aren't consistently accurate, which is why the sitemap no longer stamps every page with the build time.
 - `lib/indexable-pages.ts` is the single list of indexable pages. `app/sitemap.ts` and `app/llms.txt/route.ts` both read it, so a new page or post appears in both.
 
-## robots.txt and AI crawlers
+## AI answer engines (GEO / AEO)
 
-`app/robots.ts` allows everything, explicitly lists the answer-engine crawlers (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Applebot) and the training crawlers the site allows (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended), and blocks CCBot. Blocking an answer-engine crawler removes the site from that engine's answers, so never block those.
+Researched 2026-10-20 from Google's AI features guide (updated 2026-07-10), the robots meta docs, OpenAI's, Anthropic's and Perplexity's crawler docs, Microsoft's October 2025 guidance on inclusion in AI answers, llmstxt.org, the GEO paper (Aggarwal et al., KDD 2024) and the 2026 GEO survey (arXiv 2607.14035). The short version: every engine cites from a normal search index, so GEO is SEO plus a few rules. No special file or markup earns citations.
 
-`/llms.txt` is generated from the site's data (services, case studies, posts, process, contact). Google ignores llms.txt and few crawlers fetch it, so it's a cheap extra, not a ranking lever.
+### Where each engine gets its pages
+
+| Engine | Retrieves from | What the site needs |
+|---|---|---|
+| Google AI Overviews and AI Mode | Google's index | Indexed and eligible for a snippet. No `nosnippet` or `max-snippet` limits (`nosnippet` also keeps a page out of AI Overviews). |
+| Microsoft Copilot, Bing AI answers | Bing's index | Bing Webmaster Tools and the sitemap; IndexNow speeds up recrawls. |
+| ChatGPT search | OpenAI's index plus partner indexes | Allow `OAI-SearchBot` (and `ChatGPT-User` for live fetches). |
+| Claude web search | Appears to use Brave's index | Allow `Claude-SearchBot` and `Claude-User`. Brave has no webmaster tools; it finds pages through links and visits. |
+| Perplexity | Its own index | Allow `PerplexityBot` and `Perplexity-User`. |
+
+### Rules
+
+- **Every answer must be in the server HTML.** GPTBot, ClaudeBot and PerplexityBot don't run JavaScript. Accordions, tabs and carousels must render all their text on the server and only hide it with CSS. The FAQ accordion did not (closed answers were mounted only on click) until 2026-10-20; it now renders every answer collapsed, with `inert` and `aria-hidden` while closed. `bun run seo:check` fails if a JSON-LD FAQ answer is missing from the HTML.
+- **Never block an answer-engine crawler.** The crawler lists live in `lib/ai-crawlers.ts`, used by `app/robots.ts` and by `seo:check`, which also requests the homepage with each crawler's user agent. Vercel's firewall and bot protection must keep letting verified bots through.
+- **No snippet limits.** The root layout sets `max-snippet: -1` and `max-image-preview: large`; `seo:check` fails on `noindex`, `nosnippet` or `max-snippet:N` in a robots meta tag.
+- **Decorative scene text is `data-nosnippet`.** The service scenes contain made-up interface numbers ("REVENUE $48k", "Score 82"). `ServiceScene` wraps them in a `data-nosnippet` `display: contents` element so Google doesn't quote them as facts.
+- **Visible dates match the structured data.** Service pages and case studies show "Last updated" (`ContentUpdatedNote`) from the same `ContentDates` as `dateModified`. Blog posts show it in `PostByline`. Bump dates only for real edits; engines favour fresh pages, but faked freshness is what made Google ignore sitemap dates.
+- **Specific claims over adjectives.** Numbers and named outcomes ("filed 34 of 43 meetings with none wrong") are what answer engines quote. In the GEO paper, adding statistics, quotations and cited sources helped the most, and keyword stuffing did worse than nothing. Later benchmarks found smaller gains, so this is good writing, not a trick.
+- **One idea per section with a descriptive heading** is the guidance from both Google and Microsoft; don't split pages into tiny chunks for AI.
+- **First-hand content is the main on-site lever.** Case studies and blog posts drawn from shipped work, with real numbers, are what no other site can say (see `blog.md`).
+
+### Structured data for entities
+
+AI search needs no special schema (Google says so explicitly), but consistent entities help engines tie Falcore, Faez Ansari and the services together:
+
+- The Organization lists the four services in `hasOfferCatalog` (by `@id`, `serviceId()` in `entity-ids.ts`), and `knowsAbout`.
+- Each service page has a `WebPage` (dates, breadcrumb, `mainEntity` → the Service), the `Service` and its `FAQPage`.
+- Case studies are `Article`s `about` the service `@id`s.
+- Skip `speakable` (news only), and never add a self-made Wikidata item (it won't meet notability and gets deleted).
+
+### robots.txt and llms.txt
+
+`app/robots.ts` allows everything, explicitly lists the answer-engine crawlers (OAI-SearchBot, ChatGPT-User, Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User, Applebot, Bingbot) and the training crawlers the site allows (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended), and blocks CCBot. Google-Extended doesn't affect AI Overviews; it only covers Gemini training and grounding outside Search. Cloudflare's `Content-Signal` robots.txt extension was considered and left out: no engine has committed to honouring it.
+
+`/llms.txt` is generated from the site's data (services, case studies, posts, process, the homepage FAQs, contact). Google ignores llms.txt and no AI search engine documents reading it; it's kept as a cheap aid for agents. `llms-full.txt` and per-page Markdown copies were considered and skipped for the same reason.
+
+### Measuring AI visibility
+
+- **Google Search Console → Generative AI performance** (all sites since 2026-08-31): AI Overviews and AI Mode impressions by page and country.
+- **Bing Webmaster Tools → AI Performance**: citations in Copilot and Bing AI answers. Needs the Bing import (off-site checklist).
+- **Vercel Web Analytics → Referrers**: visits from `chatgpt.com`, `perplexity.ai`, `copilot.microsoft.com`, `claude.ai` and `gemini.google.com`. ChatGPT also adds `utm_source=chatgpt.com`, but UTM reports need Web Analytics Plus.
+- **A monthly prompt panel**: ask ChatGPT, Perplexity, Claude, Copilot and Google AI Mode the same questions (e.g. "who builds AI automation for small businesses in Dubai", "n8n and CRM automation developer UAE", "custom web app developer for a US small business", "bilingual English Arabic website developer Dubai") and note whether Falcore is named or linked. Run each a few times; answers vary from run to run.
+
+### Index state (2026-10-20)
+
+- Brave (Claude's likely source) had only the homepage, under an older title, plus spam pages from the domain's previous owner. The Wayback Machine shows about 280 URLs from a 2017–2018 WordPress news site and later spam on `falcoretech.com`. They all return 404 now, so engines drop them as they recrawl; nothing else to do.
+- A quick Bing `site:` search returned no pages, so Copilot (and the part of ChatGPT that uses Bing) can't cite the site yet. The Bing Webmaster Tools import is the most valuable open step.
 
 ## Speed (Core Web Vitals)
 
@@ -82,7 +128,7 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 
 ## Tools
 
-- `bun run seo:check [baseUrl]` (`scripts/seo-check.ts`): crawls the sitemap and checks status codes, one self-referencing canonical on the www host, title and description presence, length and uniqueness, one `<h1>`, `og:image` responses, images without `alt`, broken internal links, orphan pages, sitemap dates, and that each page type carries its JSON-LD types without conflicting `@id`s. Defaults to the live site; pass `http://localhost:<port>` to check a local server. Exits non-zero on errors.
+- `bun run seo:check [baseUrl]` (`scripts/seo-check.ts`): crawls the sitemap and checks status codes, FAQ answers present in the server HTML, robots.txt and robots meta letting answer engines in (and the homepage answering each crawler's user agent), one self-referencing canonical on the www host, title and description presence, length and uniqueness, one `<h1>`, `og:image` responses, images without `alt`, broken internal links, orphan pages, sitemap dates, and that each page type carries its JSON-LD types without conflicting `@id`s. Defaults to the live site; pass `http://localhost:<port>` to check a local server. Exits non-zero on errors.
 - `bun run indexnow [paths…]` (`scripts/submit-indexnow.ts`): tells Bing, Yandex and other IndexNow engines about changed URLs (or the whole sitemap with no arguments). The key is the name of the 32-character `.txt` file in `public/` (the script reads it from there; keep exactly one). Run after a deploy, only for URLs that changed. Google doesn't use IndexNow.
 
 ## Off-site checklist (owner actions)
@@ -90,8 +136,9 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 1. ✅ (2026-10-20) Vercel → Domains (personal account `faeziixs-projects`, project `falcore-website`): the apex → www redirect is a permanent 308. `falcore-website.vercel.app` also redirects 308 to www, so no copy of the site is served on another host.
 2. ✅ (2026-10-20) Cloudflare DNS: the `falcoretech.com` A record and the `www` CNAME are "DNS only" (grey cloud), set with the `cf` CLI. Cloudflare's proxy in front of Vercel blocked Vercel's DDoS and bot protection and injected the render-blocking Email Obfuscation script; Vercel already holds Let's Encrypt certificates for both names. Keep these records unproxied. Cloudflare stays the DNS host only (mail, Vercel verification and Google records live there too).
 3. ✅ (2026-10-20) Google Search Console: the `falcoretech.com` Domain property was already verified (the owner's Falcore Google account, not admin@xmaagency.com). Submitted `https://www.falcoretech.com/sitemap.xml` and requested indexing for home, the four service pages, About and Work. Before the fix, Google's crawl had marked www as "alternate page with proper canonical" because the old canonical pointed at the apex. Two 2018 sitemaps from the domain's previous owner are still listed there; they can be removed. Still open: import the site into Bing Webmaster Tools (sign in with the same Google account, then "Import from Google Search Console").
-4. Profiles with the same name (Falcore), URL (www) and city (Dubai): LinkedIn company page, the founder's LinkedIn and Upwork (linking to the site), Clutch, GoodFirms. These are also the `sameAs` links in the structured data; add new ones to `SOCIAL_PROFILES`.
+4. Profiles with the same name (Falcore), URL (www) and city (Dubai): LinkedIn company page, the founder's LinkedIn and Upwork (linking to the site), Clutch, GoodFirms. These are also the `sameAs` links in the structured data; add new ones to `SOCIAL_PROFILES`. Mentions of Falcore on other sites (client-site credits, directories, podcasts, genuine answers on Reddit or Indie Hackers) correlate with AI visibility more than anything left on the site. Never seed fake mentions or reviews.
 5. After each deploy that changes structured data: Rich Results Test and the Schema Markup Validator on home, one service page and one case study. Last run 2026-10-20: the validator found no errors on home, about, contact, /services, a service page and a case study, and IndexNow accepted all 17 URLs (HTTP 202).
+6. Check Search Console's Generative AI performance report and Bing's AI Performance report monthly, and run the prompt panel (see "Measuring AI visibility").
 
 ## Content
 

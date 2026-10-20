@@ -1,3 +1,4 @@
+import { FAQ_ITEMS } from "@/lib/data/faq";
 import { PROCESS_STEPS } from "@/lib/data/process-steps";
 import { listIndexablePages, type IndexablePage, type IndexablePageGroup } from "@/lib/indexable-pages";
 import {
@@ -36,6 +37,7 @@ function buildLlmsText() {
     `${BUSINESS_NAME} is run by ${FOUNDER_NAME}, a full-stack developer and AI automation engineer. ${SERVED_MARKETS_SENTENCE} Clients work with him directly, own their code and data, and get a written plan with scope, timeline and cost before any work starts.`,
     ...groupedSections,
     ["## How a project runs", ...PROCESS_STEPS.map((step, index) => `${index + 1}. ${step.title}: ${step.description}`)].join("\n"),
+    ["## Common questions", ...FAQ_ITEMS.map((item) => `- ${item.question} ${item.answer}`)].join("\n"),
     ["## Pages", ...pages.filter((page) => page.group === "main").map(pageLink)].join("\n"),
     ["## Contact", `- Email: ${CONTACT_EMAIL}`, `- Book a consultation call: ${BOOKING_URL}`, `- Website: ${SITE_URL}`].join("\n"),
   ].join("\n\n");
