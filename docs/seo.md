@@ -81,11 +81,11 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 
 ## Off-site checklist (owner actions)
 
-1. Vercel → Domains: make the apex → www redirect permanent (308).
+1. ✅ (2026-10-20) Vercel → Domains (personal account `faeziixs-projects`, project `falcore-website`): the apex → www redirect is a permanent 308. Still open: `falcore-website.vercel.app` serves the site with a 200; set it to redirect 308 to www as well (its canonicals already point to www).
 2. Cloudflare → Scrape Shield: Email Obfuscation off.
 3. Google Search Console: a Domain property (DNS verification), submit `https://www.falcoretech.com/sitemap.xml`. Then import the site into Bing Webmaster Tools.
 4. Profiles with the same name (Falcore), URL (www) and city (Dubai): LinkedIn company page, the founder's LinkedIn and Upwork (linking to the site), Clutch, GoodFirms. These are also the `sameAs` links in the structured data; add new ones to `SOCIAL_PROFILES`.
-5. After each deploy that changes structured data: Rich Results Test and the Schema Markup Validator on home, one service page and one case study.
+5. After each deploy that changes structured data: Rich Results Test and the Schema Markup Validator on home, one service page and one case study. Last run 2026-10-20: the validator found no errors on home, about, contact, /services, a service page and a case study, and IndexNow accepted all 17 URLs (HTTP 202).
 
 ## Content
 
