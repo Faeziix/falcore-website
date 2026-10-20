@@ -70,7 +70,7 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 
 - **Never start the LCP text or image at `opacity: 0`.** Chrome ignores invisible paints, so a hero that fades in from 0 records LCP only when the fade ends (the homepage measured 7.6 s in the lab before the fix). Entrances start at `--entrance-start-opacity` (0.1) in CSS (`rise-in`) and `entranceStartOpacity` in the homepage hero, so LCP lands on the first paint (measured at first paint, about 2.0 s with DevTools throttling, on 2026-10-20). Masks that slide text up from a clip (`mask-rise`) are fine for headings.
 - `next/image`: `priority` is deprecated in Next 16. Use `preload` only for the image that is above the fold; below-the-fold images stay lazy.
-- Third-party scripts go through `next/script` (`afterInteractive` for the Leadsy tag), never a raw `<script>` in `<head>`.
+- Third-party scripts go through `next/script` (`afterInteractive`), never a raw `<script>` in `<head>`.
 - `experimental.inlineCss` was tested on 2026-10-20 and left off: it removed the render-blocking CSS request (LCP 2.0 → 1.2 s with DevTools throttling) but added about 55 KB of compressed HTML to every page and client-side navigation, and the simulated Lighthouse run got worse. Revisit if the CSS grows or field data shows slow first paints.
 - Cloudflare's Email Obfuscation injects a render-blocking `email-decode.min.js`. Keep it turned off.
 
@@ -78,8 +78,7 @@ Targets at the 75th percentile: LCP ≤ 2.5 s, INP ≤ 200 ms, CLS ≤ 0.1.
 
 - Real visitor counts come from **Vercel Web Analytics** (`<Analytics />` from `@vercel/analytics/next` in the root layout, added 2026-10-20). It counts page views from real browsers only, with no cookies, and the privacy page says so.
 - Cloudflare's dashboard is not a visitor count. "Requests" counts every asset and prefetch, and "Unique Visitors" counts distinct IPs per day, bots included. On 2026-10-20 about 54% of a day's requests came from the owner's own IP, about 10% from Anthropic's crawler (`216.73.216.x`) and about 4% from Googlebot (`66.249.64.x`). The steady ~200 "unique visitors" a day is mostly crawlers and scanners.
-- **Leadsy** (now Instantly's website visitor tool, built on RB2B) identifies the businesses behind visits (`VisitorIdentificationTag`). Its RB2B script carries an allowlist of customer domains and does nothing on a domain that isn't listed. On 2026-10-20 `falcoretech.com` was not on it, so the tag loaded but collected nothing; the domain has to be added and verified in the Instantly dashboard (open the site with `?testvtag=true` to verify). On a listed domain it sets `_reb2buid` (360 days), `_reb2bsessionID` (session) and `_reb2bgeo` (20 days) and looks up the IP's location through ip-api. `/privacy` lists all of this; update it if the tool or its cookies change.
-- To check whether the tag is live, load the site in Playwright and look for the `_reb2b*` cookies and a request to `pro.ip-api.com`. No cookies means the domain still isn't allowlisted.
+- **Leadsy** (Instantly's visitor-identification tag) was removed on 2026-10-20 at the user's request. It had never collected anything, because `falcoretech.com` was never added to the Instantly account, whose script runs only on allowlisted domains. The cookie consent banner built for it went with it. If identifying tracking comes back, it needs a consent banner (Decline as easy as Accept) and a `/privacy` update in the same change.
 
 ## Tools
 

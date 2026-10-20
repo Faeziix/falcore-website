@@ -18,7 +18,6 @@
 | `ContactHero` | `app/contact/_components/contact-hero.tsx` | The Contact page hero: title, lead, booking button, then the email / where I work / replies facts. Copy in `app/contact/_lib/contact-content.ts`. The page follows with `WhatHappensNext` |
 | Blog | `app/blog/` | `BlogPostList`, `PostByline`, `PostRelatedLinks`, `articleElements`/`ArticleImage` (MDX element styles, wired up by the root `mdx-components.tsx`). See `blog.md` |
 | `BookCallButton` | `components/book-call-button.tsx` | The one "Book a consultation call" button: `Button` + `BOOKING_URL` (new tab, `ArrowUpRight`). Takes `variant`, `size`, `width`, `className`. Used by the nav, hero, mid-page CTAs and `WaveCTA`. Use it for every booking button instead of rebuilding the anchor |
-| `VisitorIdentificationTag` | `components/visitor-identification-tag.tsx` | The Leadsy (Instantly) visitor tag, loaded `afterInteractive` from the root layout with `LEADSY_PIXEL_ID` from `lib/site-config.ts`. Anything it collects must be listed on `/privacy`. See `seo.md` → Traffic numbers |
 | `PolicySection` | `app/privacy/_components/policy-section.tsx` | One heading-plus-body section of the privacy policy |
 | `SectionCallToAction` | `components/section-call-to-action.tsx` | A section's closing booking row: one short `prompt` line on the left, `BookCallButton` on the right (stacked, full-width button on phones). Used at the end of the homepage's operating-system and process sections |
 

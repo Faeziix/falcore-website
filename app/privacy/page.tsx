@@ -6,7 +6,7 @@ import { buildSocialShareMetadata, generatedShareCard } from "@/lib/social-share
 import { PolicySection } from "./_components/policy-section";
 
 const PRIVACY_DESCRIPTION =
-  "Falcore privacy policy: what this website records when you visit, what I collect when you book a call or email me, and how to opt out or ask me to delete it.";
+  "Falcore privacy policy: what I collect when you book a call or email me, how page views are counted, and how to ask me to delete your data.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -64,75 +64,39 @@ export default function PrivacyPage() {
 
             <PolicySection heading="What This Website Records When You Visit">
               <p>
-                <span className="text-foreground">Page view counts.</span> I use
-                Vercel Web Analytics to count page views and see which pages
-                are read, where visitors come from and what kind of device they
-                use. It sets no cookies and does not identify you.
-              </p>
-              <p>
-                <span className="text-foreground">
-                  Business visitor identification.
-                </span>{" "}
-                I use Instantly&apos;s website visitor tool (installed as
-                Leadsy) to learn which businesses visit this site. It places
-                cookies in your browser, uses your IP address to estimate your
-                location, and may match your visit to your company and, in some
-                cases, to your professional profile. I may use what it finds to
-                contact businesses about my services.
+                I use Vercel Web Analytics to count page views and see which
+                pages are read, where visitors come from and what kind of device
+                they use. It sets no cookies and does not identify you.
               </p>
             </PolicySection>
 
             <PolicySection heading="Cookies">
               <p>
-                The visitor identification tool sets these cookies:
-              </p>
-              <ul className="list-disc space-y-1 pl-5">
-                <li>
-                  <code className="font-mono text-sm text-foreground">_reb2buid</code>{" "}
-                  recognises your browser on later visits (kept for about a
-                  year).
-                </li>
-                <li>
-                  <code className="font-mono text-sm text-foreground">_reb2bsessionID</code>{" "}
-                  groups the pages you view in one visit (deleted when you close
-                  your browser).
-                </li>
-                <li>
-                  <code className="font-mono text-sm text-foreground">_reb2bgeo</code>{" "}
-                  stores your estimated location (kept for 20 days).
-                </li>
-              </ul>
-              <p>
-                You can block or delete these cookies in your browser settings;
-                the site works the same without them. My hosting provider may
-                also use essential cookies for performance and security.
+                This website does not set tracking cookies. My hosting provider
+                may use essential cookies for performance and security.
               </p>
             </PolicySection>
 
             <PolicySection heading="How I Use Your Information">
               <p>
-                I use this information to reply to you, to understand how the
-                website is used, to find businesses that may need my help, and
-                to deliver the work you hire me for. I do not sell or rent your
-                personal information.
+                I use your information to reply to you, to understand how the
+                website is used, and to deliver the work you hire me for. I do
+                not sell, rent, or share your personal information.
               </p>
             </PolicySection>
 
             <PolicySection heading="Third-Party Services">
               <p>
                 This website is hosted on Vercel, which also provides the page
-                view counts. Scheduling is handled by Calendly, and business
-                visitor identification by Instantly and its data partners. Each
-                handles data under its own privacy policy.
+                view counts. Scheduling is handled by Calendly. Each handles
+                data under its own privacy policy.
               </p>
             </PolicySection>
 
             <PolicySection heading="Your Choices">
               <p>
-                You can opt out of visitor identification by blocking cookies
-                for this site or using a tracker blocker. You can also email me
-                at <ContactEmailLink /> to ask what I hold about you, to correct
-                it, or to have it deleted.
+                You can email me at <ContactEmailLink /> to ask what I hold
+                about you, to correct it, or to have it deleted.
               </p>
             </PolicySection>
 
