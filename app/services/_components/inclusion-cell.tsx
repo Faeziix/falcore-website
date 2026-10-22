@@ -3,7 +3,7 @@
 import { PlottedLine } from "@/components/ui/plotted-line";
 import type { Service } from "@/lib/data/services";
 import { InclusionIcon } from "./inclusion-icon";
-import { useIconRedraw } from "./use-icon-redraw";
+import { usePlottedIconRedraw } from "@/components/plotted-icon/use-plotted-icon-redraw";
 
 const iconLagSeconds = 0.2;
 
@@ -14,7 +14,7 @@ export function InclusionCell({
   inclusion: Service["inclusions"][number];
   delaySeconds: number;
 }) {
-  const { iconScope, redrawIcon } = useIconRedraw();
+  const { iconScope, redrawIcon } = usePlottedIconRedraw();
 
   return (
     <li

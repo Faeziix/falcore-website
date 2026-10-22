@@ -1,11 +1,5 @@
+import type { IconStroke } from "@/components/plotted-icon/plotted-stroke-icon";
 import type { InclusionIconName } from "@/lib/data/services";
-
-export type IconStrokeTone = "outline" | "detail" | "signal";
-
-export type IconStroke = {
-  d: string;
-  tone: IconStrokeTone;
-};
 
 const sparkAt = (centerX: number, centerY: number, radius: number) => {
   const shoulder = radius * 0.28;

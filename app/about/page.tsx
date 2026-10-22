@@ -8,6 +8,8 @@ import { aboutStructuredData } from "./_lib/about-structured-data";
 import { AboutHero } from "./_components/about-hero";
 import { WorkingPrinciples } from "./_components/working-principles";
 import { RecentWork } from "./_components/recent-work";
+import { ClientLogoBand } from "./_components/client-logo-band";
+import { StackToolLogos } from "./_components/stack-tool-logos";
 
 export const metadata: Metadata = {
   title: ABOUT_TITLE,
@@ -29,7 +31,11 @@ export default function AboutPage() {
       <main className="pt-28 md:pt-32">
         <div className="page-container">
           <AboutHero />
+        </div>
+        <ClientLogoBand />
+        <div className="page-container">
           <WorkingPrinciples />
+          <StackToolLogos />
           <RecentWork />
         </div>
       </main>

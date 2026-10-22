@@ -66,29 +66,29 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       {
         title: "Answers about any client, with sources",
         description:
-          "Ask a question and get an answer built from meetings, WhatsApp chats and onboarding notes, with every claim linked to where it came from.",
+          "Answers built from meetings, chats and notes, each claim linked to its source.",
         caseStudySlug: "company-operating-system",
       },
       {
         title: "Tasks written from every meeting",
         description:
-          "After a call, AI suggests tasks with the exact line from the transcript beside each one. A person accepts or dismisses them with a click.",
+          "After each call, AI suggests tasks quoting the transcript. A person approves them.",
       },
       {
         title: "Meetings filed to the right client",
         description:
-          "Tested on 43 meetings the team had filed by hand, it filed 34 on its own with none wrong, and it asks when it isn’t sure.",
+          "It filed 34 of 43 test meetings with none wrong, and asks when unsure.",
       },
       {
         title: "An assistant that acts with your approval",
         description:
-          "It can take more than 140 actions across the business, and every change shows an approve button before it happens.",
+          "Over 140 actions across the business, each one waiting for your approval.",
         caseStudySlug: "company-operating-system",
       },
       {
         title: "A product catalogue read by AI",
         description:
-          "AI read a ceramics catalogue and proposed 69 tiles with names and looks. I checked the list before anything went live.",
+          "AI read a ceramics catalogue and proposed 69 tiles. I checked them before launch.",
         caseStudySlug: "timeless-touch-ceramics",
       },
     ],
@@ -117,7 +117,7 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
     metaTitle: "AI Agents & AI Automation for Businesses",
     metaDescription:
       "AI agents that do real work inside your business: answers with sources, tasks written from meetings and drafts you approve. For businesses in the UAE and US.",
-    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-22" },
   },
   {
     slug: "systems-automations",
@@ -138,29 +138,29 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       {
         title: "Calls that file themselves",
         description:
-          "A recorder joins every booked meeting, and the transcript lands under the right client without anyone uploading it.",
+          "A recorder joins each meeting and files the transcript under the right client.",
         caseStudySlug: "company-operating-system",
       },
       {
         title: "Replies jump the queue",
         description:
-          "When a lead replies on WhatsApp, their follow-ups stop, they move to the top of the list and the sales team is alerted.",
+          "A WhatsApp reply stops the follow-ups, moves the lead up and alerts sales.",
       },
       {
         title: "Ads that learn which leads became sales",
         description:
-          "Every stage in the CRM goes back to Meta, so ad spend follows the leads that book meetings, not just the ones that fill in forms.",
+          "CRM stages flow back to Meta, so spend follows the leads that book meetings.",
       },
       {
         title: "Every form feeds the CRM",
         description:
-          "The booking popup, the contact form and the demo all send each enquiry straight into the client’s lead system.",
+          "The popup, contact form and demo send every enquiry straight to the CRM.",
         caseStudySlug: "convoflow",
       },
       {
         title: "Bookings, calls and WhatsApp in one place",
         description:
-          "A CRM, phone menu and WhatsApp automation for a Dubai airport baggage company, built in three weeks.",
+          "CRM, phone menu and WhatsApp for a Dubai baggage company, in three weeks.",
       },
     ],
     faqs: [
@@ -188,7 +188,7 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
     metaTitle: "Business Automation, CRM & WhatsApp Integration",
     metaDescription:
       "Connect your CRM, calendar, WhatsApp and inbox so leads, bookings and follow-ups move on their own. Workflow automation for businesses in the UAE and US.",
-    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-22" },
   },
   {
     slug: "web-design",
@@ -209,19 +209,19 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       {
         title: "A spa’s spreadsheets became a website",
         description:
-          "138 treatment pages in English and Arabic, built from the spa’s own spreadsheets with nothing retyped.",
+          "138 treatment pages in English and Arabic, built from the spa’s spreadsheets.",
         caseStudySlug: "corpofino",
       },
       {
         title: "An author’s site she edits herself",
         description:
-          "Six weeks after launch it was sending readers to Amazon, and she edits every page without help.",
+          "Sending readers to Amazon within six weeks, and she edits every page herself.",
         caseStudySlug: "sanaa-ouahmane",
       },
       {
         title: "A jewellery site with matched product images",
         description:
-          "I redesigned the site and turned one raw photo shoot into a full set of matching product images.",
+          "A redesign, plus one raw photo shoot turned into matching product images.",
         caseStudySlug: "diamaria",
       },
     ],
@@ -251,7 +251,7 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
     metaTitle: "Custom Web Design for UAE & US Businesses",
     metaDescription:
       "Custom web design for businesses in the UAE and US: brand-led, mobile-first sites built to turn visits into enquiries, which you can edit yourself.",
-    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-22" },
   },
   {
     slug: "custom-web-applications",
@@ -272,18 +272,18 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
       {
         title: "One system instead of a dozen tools",
         description:
-          "215 screens covering projects, meetings, sales and a portal where clients follow their own work.",
+          "215 screens for projects, meetings, sales and a client portal.",
         caseStudySlug: "company-operating-system",
       },
       {
         title: "A membership platform that cut software costs",
         description:
-          "Courses, events, payments and an editor for a coaching company, cutting its monthly platform bill by about 70%.",
+          "Courses, events and payments for a coaching company, cutting its platform bill by about 70%.",
       },
       {
         title: "An online showroom of 345 surfaces",
         description:
-          "A ceramics supplier’s PDF catalogues became a filterable showroom, edited in a studio built into the site.",
+          "PDF catalogues became a filterable showroom with its own built-in editor.",
         caseStudySlug: "timeless-touch-ceramics",
       },
     ],
@@ -311,7 +311,7 @@ const SERVICE_ENTRIES: ServiceEntry[] = [
     metaTitle: "Custom Web Application Development",
     metaDescription:
       "Client portals, dashboards, booking systems and membership platforms built around how your business runs. You own the code and the data.",
-    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-19" },
+    dates: { publishedOn: "2026-04-04", updatedOn: "2026-10-22" },
   },
 ];
 

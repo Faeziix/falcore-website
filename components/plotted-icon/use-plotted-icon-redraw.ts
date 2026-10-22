@@ -7,12 +7,12 @@ import {
   outlineDrawSeconds,
   signalDrawSeconds,
   signalLagSeconds,
-} from "./inclusion-icon";
+} from "./plotted-stroke-icon";
 
 const outlineStrokeSelector = '[data-icon-tone="outline"], [data-icon-tone="detail"]';
 const signalStrokeSelector = '[data-icon-tone="signal"]';
 
-export function useIconRedraw() {
+export function usePlottedIconRedraw() {
   const [iconScope, animate] = useAnimate<SVGSVGElement>();
   const isRedrawing = useRef(false);
 

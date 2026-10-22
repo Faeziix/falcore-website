@@ -17,6 +17,7 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 - Structure comes from hairlines (`border-border`) and the 12-column grid, not cards with shadows. Square corners everywhere (`--radius: 0`).
 - Homepage media sits bare on `bg-surface` (or with a hairline border for UI screenshots). The service-page hero scene sits in a `ViewfinderFrame`.
 - Never put `overflow: hidden` on an ancestor of a sticky element (the services stage on desktop is sticky). Use `overflow-clip` when you need to clip.
+- `html` and `body` have `overflow-x: clip` (`globals.css`). Scroll reveals start elements outside their frame (lock-on brackets 20px out, film settling from 1.12 scale, parallax), and without the clip each one widened the page mid-animation, so phones panned sideways. Keep it `clip`, never `hidden`, because `clip` makes no scroll container and sticky keeps working. `bun run overflow:check [baseUrl] [paths…]` samples every frame while it scrolls each page at 360–1440px and lists anything that sticks out (`OVERFLOW_WIDTHS=390`, `OVERFLOW_BROWSER=firefox` to narrow it).
 
 ## Typography
 
@@ -71,7 +72,9 @@ The user rejected a dense version of this page as messy and overwhelming. One id
 ## Icons
 
 - Section icons are drawn for this site, not taken from an icon library: a 40×40 viewBox, a 1.25 stroke, square caps and mitred joins (to match the square corners), and no fills. Base strokes use `currentColor` (`text-foreground-soft`), with secondary detail at 60% opacity. Each icon has exactly one `stroke-primary` "signal" detail, the part that carries the meaning. See `components/process/process-step-icons.tsx`. The service inclusion icons follow the same rules, written as stroke data (`tone`: `outline`, `detail` at 60% or `signal`) in `app/services/_lib/inclusion-icon-strokes.ts`. Add a new inclusion's icon there and its name to `InclusionIconName`.
-- Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close.
+- Drawn icons render through `PlottedStrokeIcon` (`components/plotted-icon/`); a new set only adds stroke data next to its route, like `app/about/_lib/working-principle-icon-strokes.ts`.
+- Icon libraries (lucide, phosphor, hugeicons) are for UI chrome only, such as arrows, menu and close, and the small inline glyphs beside a fact line (`AboutFactList` in the About hero).
+- Third-party tool logos come from `simple-icons` (real marks, one path each), drawn monochrome in `currentColor` (`text-muted-foreground`, brightening on hover). Only list tools actually used in shipped work.
 - The site does not honour `prefers-reduced-motion` (the user's decision, 2026-10-19): every visitor gets the full motion. Don't add `useReducedMotion`, `motion-safe:`/`motion-reduce:` variants or reduced-motion media queries.
 - Entrances never start at `opacity: 0` on text or images that can be the largest thing above the fold: Chrome only records LCP once they're visible, which made the homepage's LCP 7.6 s. `rise-in` and the homepage hero start at `--entrance-start-opacity` (0.1). Headings can rise from a clipping mask (`mask-rise`). See `seo.md` → Speed.
 - Anything that starts hidden in `initial` must always have an `animate` that reveals it. The server HTML carries the hidden state, and nothing else will undo it.
@@ -99,7 +102,7 @@ Use `Button` / `buttonVariants` and `TextLink` / `textLinkVariants` (CVA, shadcn
 ## Service pages
 
 - One idea per section, in this order: hero, What's included, (website showcase on Web Design), Built and running, What happens next, Other services, Common questions, closing CTA. Details in `components.md` → Service pages.
-- "Built and running" lists real work only: 3 to 5 rows of a short title and one plain sentence, linking to a case study where one exists. Never generic "how businesses use this" copy.
+- "Built and running" lists real work only: 3 to 5 rows of a short title and one plain sentence of about 10 to 14 words, linking to a case study where one exists. Never generic "how businesses use this" copy.
 - Examples from the company operating system claim only my own share: the knowledge base and its cited assistant, meeting recording and transcript sync, meetings linked to clients, tasks from meetings, the assistant that acts behind approve buttons, WhatsApp reply handling, and Meta conversion feedback. The other developer led sequences, campaigns, lead scoring, proposal timers, lead research, sales scripts and meeting notes, so those never appear as examples. Never name the product or the developer.
 - Numbers come from evidence (case-study outcome files, the system's own test notes, the portfolio notes), never from estimates. No client money or ad spend.
 - FAQs answer the objections a buyer has before booking (approval, ownership, tools, what happens after launch), in "I" voice, with no invented timelines or prices.

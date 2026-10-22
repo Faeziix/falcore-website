@@ -9,6 +9,7 @@
     "lint": "eslint",
     "share-cards": "bun scripts/render-share-cards.ts",
     "seo:check": "bun scripts/seo-check.ts",
+    "overflow:check": "bun scripts/overflow-check.ts",
     "indexnow": "bun scripts/submit-indexnow.ts"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "remark-gfm": "^4.0.1",
+    "simple-icons": "^16.35.0",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

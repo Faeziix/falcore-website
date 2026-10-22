@@ -1,6 +1,5 @@
 import { SectionHeading } from "@/components/ui/section-heading";
-import { PlottedRowList } from "@/components/plotted-row-list";
-import { WORKING_PRINCIPLES } from "../_lib/about-content";
+import { WorkingPrincipleGrid } from "./working-principle-grid";
 
 export function WorkingPrinciples() {
   return (
@@ -10,7 +9,7 @@ export function WorkingPrinciples() {
         title="How I work"
         intro="Four things you can count on, on every project."
       />
-      <PlottedRowList rows={WORKING_PRINCIPLES} />
+      <WorkingPrincipleGrid />
     </section>
   );
 }

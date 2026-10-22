@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { BookCallButton } from "@/components/book-call-button";
 import { FOUNDER_NAME } from "@/lib/site-config";
-import { ABOUT_BACKGROUND, ABOUT_LEAD } from "../_lib/about-content";
+import { ABOUT_LEAD } from "../_lib/about-content";
+import { AboutFactList } from "./about-fact-list";
 
 const heroRevealDelayMilliseconds = {
   name: 0,
   lead: 300,
-  background: 420,
+  facts: 420,
   bookingButton: 520,
   portrait: 200,
 };
@@ -33,12 +34,9 @@ export function AboutHero() {
         >
           {ABOUT_LEAD}
         </p>
-        <p
-          style={revealDelay(heroRevealDelayMilliseconds.background)}
-          className="mt-5 max-w-2xl leading-relaxed text-foreground-soft animate-rise-in"
-        >
-          {ABOUT_BACKGROUND}
-        </p>
+        <div style={revealDelay(heroRevealDelayMilliseconds.facts)} className="mt-6 animate-rise-in">
+          <AboutFactList />
+        </div>
         <div style={revealDelay(heroRevealDelayMilliseconds.bookingButton)} className="mt-9 animate-rise-in">
           <BookCallButton size="lg" width="fullOnMobile" />
         </div>
