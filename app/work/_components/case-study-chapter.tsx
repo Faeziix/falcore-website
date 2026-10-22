@@ -72,7 +72,7 @@ export function CaseStudyChapter({
     <section
       id={id}
       aria-labelledby={headingId}
-      className={cn(caseStudyChapterVariants({ tone }), "py-16 sm:py-20 md:section-spacing", className)}
+      className={cn(caseStudyChapterVariants({ tone }), "section-spacing", className)}
     >
       <div className="page-container">
         <div className={chapterRuleVariants({ tone })}>

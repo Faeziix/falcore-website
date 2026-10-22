@@ -33,9 +33,8 @@ export function HeroSection() {
           className="mt-[clamp(2.5rem,5vw,4.5rem)] grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-8"
         >
           <p className="max-w-xl text-lead text-foreground-soft lg:col-span-6">
-            I build websites, custom software and AI-powered systems that take
-            the busywork off your team. Leads answered in seconds, follow-ups
-            that never slip, invoices that chase themselves.
+            I build websites, software and AI systems that take the busywork off
+            your team.
           </p>
 
           <div className="flex flex-col gap-8 lg:col-span-5 lg:col-start-8">

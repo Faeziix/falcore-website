@@ -55,9 +55,21 @@
   --radius: 0px;
   --page-gutter: clamp(1rem, 4vw, 2rem);
   --page-max-width: 1400px;
-  --section-space: clamp(6rem, 12vw, 10rem);
+  --section-space: 4rem;
   --nav-height: 4rem;
   --entrance-start-opacity: 0.1;
+}
+
+@media (min-width: 40rem) {
+  :root {
+    --section-space: 5rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --section-space: clamp(6rem, 12vw, 10rem);
+  }
 }
 
 @theme inline {

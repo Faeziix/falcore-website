@@ -7,7 +7,7 @@ export function NextCaseStudy({ currentSlug }: { currentSlug: string }) {
 
   return (
     <section aria-label="Next case study" className="bg-background text-foreground">
-      <div className="page-container py-16 sm:py-20 md:section-spacing">
+      <div className="page-container section-spacing">
         <Link
           href={caseStudyPath(nextCaseStudy.slug)}
           className="group grid gap-8 border-t border-border pt-6 focus-visible:outline-offset-8 md:gap-10 md:pt-8 lg:grid-cols-12 lg:items-end lg:gap-8"

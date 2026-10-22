@@ -15,7 +15,7 @@ export function CaseStudyServiceLinks({ serviceSlugs, updatedOn }: { serviceSlug
 
   return (
     <section aria-label="Services behind this project" className="bg-background text-foreground">
-      <div className="page-container pt-16 sm:pt-20 md:pt-[var(--section-space)]">
+      <div className="page-container pt-(--section-space)">
         <div className="grid gap-4 border-t border-border pt-6 md:pt-8 lg:grid-cols-12 lg:gap-8">
           <p className="text-sm text-muted-foreground lg:col-span-3">
             {services.length === 1 ? "The service behind this project" : "The services behind this project"}

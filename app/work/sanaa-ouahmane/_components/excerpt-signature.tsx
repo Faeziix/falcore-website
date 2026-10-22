@@ -10,7 +10,7 @@ export function ExcerptSignature() {
       id={excerptSignatureCopy.id}
       aria-labelledby={headingId}
       data-surface="graphite"
-      className="py-16 sm:py-20 md:section-spacing bg-(--sanaa-ouahmane-plate-graphite) text-(--sanaa-ouahmane-plate-ink)"
+      className="section-spacing bg-(--sanaa-ouahmane-plate-graphite) text-(--sanaa-ouahmane-plate-ink)"
     >
       <div className="page-container">
         <div className="border-t border-(--sanaa-ouahmane-plate-seam) pt-6 md:pt-8">

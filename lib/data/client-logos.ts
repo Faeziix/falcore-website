@@ -14,7 +14,6 @@ export const CLIENT_LOGOS: ClientLogo[] = [
   { slug: "sanaa", name: "Sanaa Ouahmane", src: "/client-logos/on-dark/sanaa.png", width: 800, height: 217 },
   { slug: "corpofino", name: "Corpofino", src: "/client-logos/on-dark/corpofino.png", width: 800, height: 104 },
   { slug: "gulf-epco", name: "Gulf EPCO", src: "/client-logos/on-dark/gulf-epco.png", width: 800, height: 165 },
-  { slug: "baggage-taxi", name: "BaggageTAXI", src: "/client-logos/on-dark/baggage-taxi.png", width: 800, height: 138 },
   { slug: "dream-drives", name: "Dream Drives", src: "/client-logos/on-dark/dream-drives.png", width: 800, height: 664 },
   { slug: "kingdomcapital", name: "The Kingdom Capital", src: "/client-logos/on-dark/kingdomcapital.png", width: 800, height: 393 },
   { slug: "floarea", name: "Floarea", src: "/client-logos/on-dark/floarea.png", width: 800, height: 229 },

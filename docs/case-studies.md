@@ -67,7 +67,7 @@ Summary fields that drive search: `seoTitle` ("Client: what was built", at most 
 
 The shared frame is tuned for 320px phones up to 1024px tablets (checked in Chromium with touch emulation and in Firefox at 320, 375, 390, 414, 667×375, 768 and 1024):
 
-- Spacing. Chapters and the next-study card use `py-16 sm:py-20 md:section-spacing` (64px, then 80px, then the site's `--section-space` from 768px), not `section-spacing` alone, which left about 190px of empty paper between chapters on a phone. Heading-to-media is `mt-10 md:mt-14 lg:mt-20`; intros sit `mt-4` under the title on phones. `<main>` starts at `pt-28 md:pt-32`.
+- Spacing. Chapters and the next-study card use plain `section-spacing`. `--section-space` itself is 64px on phones and 80px from 640px (see `design-tokens.md`), so the old `py-16 sm:py-20 md:section-spacing` overrides are gone. Heading-to-media is `mt-10 md:mt-14 lg:mt-20`; intros sit `mt-4` under the title on phones. `<main>` starts at `pt-28 md:pt-32`.
 - Facts row. Below `sm` each fact is a hairline row with the label in a 5.5rem column and the value beside it, closed by a bottom rule. From `sm` it is two columns; from `md` one row when there are four facts, or three columns (then one row from `lg`) when a study has five (Team and Live site).
 - Live site hostnames break only before the domain (`LiveSiteLink`), never at a hyphen or mid-word. The link has a 44px tap area (`-my-3 py-3`, so the row height doesn't change).
 - `/work` rows show the cover first on phones and tablets, then the name, headline and services; from `lg` the text sits left of the cover.

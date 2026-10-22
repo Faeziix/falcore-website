@@ -44,7 +44,7 @@ export default function WorkIndexPage() {
       <JsonLd nodes={workIndexStructuredData} />
       <SiteNavigation />
       <main className="pt-28 md:pt-32">
-        <div className="page-container pb-16 sm:pb-20 md:pb-(--section-space)">
+        <div className="page-container pb-(--section-space)">
           <h1 className="max-w-5xl text-display-xl font-medium text-foreground animate-rise-in">
             Work
           </h1>

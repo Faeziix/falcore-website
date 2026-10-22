@@ -10,9 +10,11 @@ Falcore sells the systems that run a business behind the scenes. Graphics show o
 
 The user rejected a dense version of this page as messy and overwhelming. One idea per section. A heading, at most a sentence or two, and one strong visual. No bullet lists, figure rows, side notes or second columns of copy on the homepage. When in doubt, cut it and link to the detail page instead.
 
+The homepage hero intro is one sentence of about 15 words (the user called the old three-clause version "so much text", 2026-10-22). Don't add example lists after it.
+
 ## Layout
 
-- Wrap content in `page-container`, and space sections with `section-spacing`.
+- Wrap content in `page-container`, and space sections with `section-spacing` (or `pb-(--section-space)` for sections stacked under another one). The token is already smaller on phones, so don't tune section padding per breakpoint.
 - Sections are **left-aligned**. Start each one with `SectionHeading`: hairline rule, title, then a one-sentence intro directly under the title. Every section has an intro (the prop is required). Don't split title and intro into side-by-side columns; the user rejected that. Don't centre section headers. The closing `WaveCTA` is the one deliberate exception.
 - Structure comes from hairlines (`border-border`) and the 12-column grid, not cards with shadows. Square corners everywhere (`--radius: 0`).
 - Homepage media sits bare on `bg-surface` (or with a hairline border for UI screenshots). The service-page hero scene sits in a `ViewfinderFrame`.

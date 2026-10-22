@@ -35,7 +35,7 @@ Fluid display scale: `text-display-xl` (hero), `text-display-lg` (section titles
 ## Layout and motion tokens
 
 - `page-container` utility: max width `--page-max-width` (1400px) with `--page-gutter`.
-- `section-spacing` utility: vertical `--section-space`.
+- `section-spacing` utility: vertical `--section-space`. The token steps with the viewport: 4rem (64px) on phones, 5rem from `sm` (640px), then `clamp(6rem, 12vw, 10rem)` from `md` (768px). Two stacked sections meet with twice that, so phones get 128px between sections (it was 192px, which the user said was too much, 2026-10-22). Use the token as is; don't add per-breakpoint `py-*` overrides on top of it.
 - `hairline-grid` utility: 64px line grid in `--border` (structural, not decorative).
 - Easing: `ease-out-expo`, `ease-in-out-quart` (in TS: `easeOutExpo` from `lib/motion.ts`). Keyframes: `animate-signal-pulse` (live indicators only); `animate-rise-in`, `animate-mask-rise`, `animate-viewfinder-lock`, `animate-film-wipe` and `animate-film-settle` (service hero load).
 - Viewfinder: `--viewfinder-reveal-delay` (200ms), `--viewfinder-film-lag` (160ms), `--viewfinder-lock-travel` (14px, how far out the corners start), `--viewfinder-focus-travel` (3px, how far they tighten on hover).

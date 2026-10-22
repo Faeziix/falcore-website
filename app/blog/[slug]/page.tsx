@@ -54,7 +54,7 @@ export default async function BlogPostRoute({ params }: BlogPostRouteProps) {
       <JsonLd nodes={blogPostStructuredDataNodes(post)} />
       <SiteNavigation />
       <main className="pt-28 md:pt-32">
-        <article className="page-container pb-16 sm:pb-20 md:pb-(--section-space)">
+        <article className="page-container pb-(--section-space)">
           <div className="mx-auto max-w-3xl">
             <Link
               href={BLOG_INDEX_PATH}
